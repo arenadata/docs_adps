@@ -1,0 +1,472 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Установка сервера Ambari 2.2.1 &mdash; Arenadata 1.4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Arenadata 1.4 documentation" href="../index.html"/>
+        <link rel="up" title="Инструкция по установке кластера" href="../install.html"/>
+        <link rel="prev" title="Подготовка к установке кластера" href="prepare.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Arenadata
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Общий обзор</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../install.html">Инструкция по установке кластера</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="download.html">Загрузка дистрибутива кластера</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prepare.html">Подготовка к установке кластера</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Установка сервера Ambari 2.2.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#yum">Настройка репозитория YUM</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Настройка удаленного репозитория YUM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Настройка локального репозитория YUM</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Arenadata</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../install.html">Инструкция по установке кластера</a> &raquo;</li>
+        
+      <li>Установка сервера Ambari 2.2.1</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/install/install.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ambari-2-2-1">
+<h1>Установка сервера Ambari 2.2.1<a class="headerlink" href="#ambari-2-2-1" title="Permalink to this headline">¶</a></h1>
+<p>Установка сервера Ambari 2.2.1 проходит в несколько этапов:</p>
+<ul class="simple">
+<li>Настройка репозитория YUM (см. п. 1.1);</li>
+<li>Установка сервера Ambari (см. п. 2.2);</li>
+<li>Настройка сервера Ambari 2.2.1 (см. п. 2.3);</li>
+<li>Запуск сервера Ambari (см. п. 2.4).</li>
+</ul>
+<div class="section" id="yum">
+<h2>Настройка репозитория YUM<a class="headerlink" href="#yum" title="Permalink to this headline">¶</a></h2>
+<p>Установка сервера Ambari выполняется с помощью пакетного менеджера YUM
+из репозитория, содержащего соответствующий пакет. При этом
+допускается использование как удаленного репозитория, доступного через
+сеть Интернет, так и размещенного в локальной сети кластера (например,
+если из соображений безопасности доступ к сети Интернет ограничен).</p>
+<div class="section" id="id1">
+<h3>Настройка удаленного репозитория YUM<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Настройка удаленного репозитория не отличается от настройки любого
+дополнительного репозитория YUM. Для добавления репозитория необходимо
+выполнить от имени root команду:</p>
+<p>~&gt; yum-config-manager –-add-repo &lt;URL репозитория Ambari&gt;/ambary.repo</p>
+</div>
+<div class="section" id="id2">
+<h3>Настройка локального репозитория YUM<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Для настройки нового сервера репозитория YUM необходим веб-сервер
+httpd. Следует убедиться, что сервер httpd запускается на хосте,
+который служит в качестве репозитория YUM:</p>
+<p>~&gt; service httpd status</p>
+<p>В случае если сервер не запущен, необходимо его установить и
+запустить:</p>
+<p>~&gt; yum install httpd</p>
+<p>~&gt; service httpd start</p>
+<div class="section" id="id3">
+<h4>Создание промежуточного каталога<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<p>Для извлечения архивов для стеков Ambari и ADH рекомендуется
+использовать промежуточный каталог.</p>
+<p>Каждый архив представляет собой архивный репозиторий YUM и имеет
+скрипт setup_repo.sh, создающий ссылку из корня документа httpd server
+/var /www /html в каталог, из которого извлекается архив. Необходимо,
+чтобы промежуточный каталог и все верхнеуровневые каталоги были
+читаемыми и доступными пользователю, выполняющему процесс httpd
+(Apache), а лучше сделать их доступными для всех пользователей
+кластера:</p>
+<p>~&gt; mkdir /staging</p>
+<p>~&gt; chmod a+rx /staging</p>
+</div>
+<div class="section" id="ambari">
+<h4>Загрузка и распаковка архива Ambari<a class="headerlink" href="#ambari" title="Permalink to this headline">¶</a></h4>
+<p>Arenadata Ambari поставляется как архив репозитория YUM, который
+необходимо извлечь на сервер репозитория YUM.</p>
+<p>На узел, который используется в качестве репозитория YUM, необходимо
+загрузить архив Ambari 2.2.1 (см. п. 1) в ранее созданный
+промежуточный каталог (см. п. 2.1.2.1), или в каталоге
+/etc/yum.repos.d/ разместить repo-файл <a class="reference external" href="https://storage.googleapis.com">https://storage.googleapis.com</a>
+/arenadata-repo/ADH/1.4.0/centos7/ ambari.repo.</p>
+<p>Необходимо убедиться, что все родительские каталоги до промежуточного
+имеют доступ r + х для всех пользователей, поскольку данный каталог
+будет использоваться для создания локального репозитория YUM.</p>
+<p>После загрузки Ambari 2.2.1 необходимо извлечь архив в промежуточный
+каталог. Например:</p>
+<p>~&gt; tar -xzf /staging/AMBARI-2.2.*.tar -C /staging/</p>
+</div>
+<div class="section" id="id4">
+<h4>Настройка локального репозитория YUM<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<p>Для настройки локального репозитория YUM необходимо на хосте,
+используемом в качестве репозитория YUM, выполнить скрипт
+setup_repo.sh, входящий в состав архива Ambari:</p>
+<p>~&gt; /staging/AMBARI-2.2.1/setup_repo.sh</p>
+<p>В скрипте предполагается, что в корневом каталоге YUM репозитория веб-
+сервер устанавливает /var /www /html и создает ссылку ambari-&lt;версия&gt;,
+указывающую на извлеченный архив.</p>
+<p>Необходимо убедиться, что репозиторий YUM доступен на веб-сервере YUM:</p>
+<p>~&gt; curl <a class="reference external" href="http://localhost/AMBARI-2.2.1/repodata/repomd.xml">http://localhost/AMBARI-2.2.1/repodata/repomd.xml</a></p>
+<p>Скрипт также создает определенный репозиторий Ambari и помещает его в
+файл /etc/yum.repos.d/ambari.repo. Данный файл должен быть доступен на
+хосте администратора, где будет установлен сервер Ambari.</p>
+<p>Необходимо проверить наличие доступа к следующему URL-адресу с хоста
+администратора и с узлов кластера:</p>
+<p><a class="reference external" href="http:/">http:/</a>/&lt;yum.repo.fqdn&gt;/AMBARI-2.2.1</p>
+<ol class="arabic simple">
+<li><ol class="first arabic">
+<li>2.2.Установка сервера Ambari</li>
+</ol>
+</li>
+</ol>
+<p>Сервер Ambari устанавливается из RPM по команде YUM:</p>
+<p>~&gt; yum install ambari-server</p>
+<p>Данная команда устанавливает сервер Ambari, являющийся сервером веб-
+приложений, на порт 8080. Также устанавливает иснтанс сервера
+PostgreSQL на порт 5432.</p>
+<ol class="arabic simple">
+<li><ol class="first arabic">
+<li>2.3.Установка сервера Ambari 2.2.1</li>
+</ol>
+</li>
+</ol>
+<p>Сервер Ambari необходимо настроить для корректной работы.</p>
+<p>В случае если инстанс PostgreSQL настроен на порт по умолчанию,
+следует выполнить следующую команду:</p>
+<p>~&gt; ambari-server setup</p>
+<p>В процессе настройки необходимо указать или принять по умолчанию
+параметры:</p>
+<ul class="simple">
+<li>Учетная запись пользователя – для запуска Ambari-сервера можно
+выбрать любую учетную запись (необязательно выполнять вход от
+администратора). В случае если пользователя не существует, он
+создается автоматически;</li>
+<li>Java JDK – для загрузки Oracle JDK 1.7 необходимо ввести значение
+2 и принять лицензию Oracle JDK для загрузки файлов из Oracle. При
+этом установка JDK выполняется автоматически;</li>
+<li>База данных – выбор базы данных:</li>
+</ul>
+<p>Enter advanced database configuration</p>
+<p>В командной строке необходимо ответить y или n:</p>
+<ul class="simple">
+<li>n – для использования с Ambari стандартной встроенной базы данных
+PostgreSQL. По умолчанию для базы данных PostgreSQL устанавливается
+имя ambari и логин / пароль принимают значения ambari / bigdata.</li>
+<li>Y – при необходимости использования с Ambari уже существующей базы
+данных PostgreSQL, MySQL или Oracle вместо предлагаемой по умолчанию.
+Далее для выбранной базы данных необходимо указать параметры
+подключения (см. Приложение 1.).</li>
+</ul>
+<ol class="arabic simple">
+<li><ol class="first arabic">
+<li>2.4.Запуск сервера Ambari</li>
+</ol>
+</li>
+</ol>
+<p>После установки сервера Ambari запуск его осуществляется по команде:</p>
+<p>~&gt; ambari-server start</p>
+<p>Для проверки статуса сервера необходимо использовать команду:</p>
+<p>~&gt; ambari-server status</p>
+<p>Для остановки сервера необходимо использовать команду:</p>
+<p>~&gt; ambari-server stop</p>
+<p>Сервер Ambari доступен на порту 8080. По умолчанию для него
+установлена следующая учетная запись:</p>
+<p>User: admin</p>
+<p>Password: admin</p>
+<p>Для входа в веб-интерфейс Ambari необходимо в адресной строке браузера
+указать адрес сервера:</p>
+<p><a class="reference external" href="http:/">http:/</a>/&lt;адрес сервера&gt;:8080</p>
+<p>При этом запрашивается логин и пароль. После авторизации открывается
+веб-интерфейс Ambari (Рис. 3.).</p>
+<div class="figure" id="id5">
+<span id="install-img-3"></span><img alt="../_images/install_3.jpg" src="../_images/install_3.jpg" />
+<p class="caption"><span class="caption-text">Рис.3. Веб-интерфейс Ambari до настройки кластера</span></p>
+</div>
+<ol class="arabic simple">
+<li>2.Подготовка к установке основных компонентов ADH на кластер</li>
+</ol>
+<p>Основные компоненты ADH устанавливаются из репозиториев YUM, которые
+определяются при первичной настройке кластера. Как и в случае
+репозитория Ambari, допускается использование удаленных и локальных
+репозиториев.</p>
+<p>Удаленные репозитории уже заданы в Ambari как предлагаемые по
+умолчанию, для их настройки и использования не требуется
+дополнительных действий.</p>
+<p>Для настройки локальных репозиториев необходимо выполнить действия,
+аналогичные настройке локального репозитория Ambari:</p>
+<ul class="simple">
+<li>Загрузить и извлечь архивы стека ADH (см. п. 4.1);</li>
+<li>Настроить локальные репозитории YUM (см. п. 2.1).</li>
+</ul>
+<ol class="arabic simple">
+<li><ol class="first arabic">
+<li>4.1.Загрузка и извлечение архивов стека ADH</li>
+</ol>
+</li>
+</ol>
+<p>Архивы стека ADH необходимо установить на машине, где размещен
+репозиторий YUM. В случае если для сервера репозитория YUM
+используется выделенная машина, то архивы стека ADH следует установить
+на хосте администратора, использованном для установки сервера Ambari.</p>
+<p>Необходимо загрузить и распаковать следующие архивы в выделенном для
+них месте (при этом следует избегать использования каталога /tmp):</p>
+<ul class="simple">
+<li>ADH-1.4.0 – RPM-пакеты для сервисов Hadoop, таких как HDFS, YARN,
+Hbase, Hive, Zookeeper;</li>
+<li>ADH-UTILS-1.4.0 – дополнительные сервисы и библиотеки,
+используемые для мониторинга и оповещения серверов кластера.</li>
+</ul>
+<p>В случае если архивы загружены в каталог /tmp, то для их распаковки в
+каталоге, например, /staging необходимо выполнить следующую команду:</p>
+<p>~&gt; tar –xvf /tmp/{stack}.tar -C /staging/</p>
+<p>Для использования локальных репозиториев ADH и ADH UTILS необходимо
+выполнить настройки, описанные в п. 2.1.</p>
+<ol class="arabic simple">
+<li><ol class="first arabic">
+<li>2.1.Настройка локальных репозиториев YUM</li>
+</ol>
+</li>
+</ol>
+<p>Стек ADH поставляется в виде архива репозитория YUM, который
+необходимо развернуть на сервере репозитория YUM так, чтобы при этом
+он был доступен серверу Ambari и всем узлам кластера.</p>
+<p>Каждый репозиторий стека содержит скрипт setup_repo.sh, для которого
+необходимо выполнение следующих требований:</p>
+<ul class="simple">
+<li>Сервер репозитория YUM доступен всем узлам кластера;</li>
+<li>Корень сервера репозитория YUM находится в /var/www/html/.</li>
+</ul>
+<p>Скрипт каждого стека создает символическую ссылку в документе сервера
+репозитория YUM, указывающую на местоположение извлеченного архива
+стека, и создает файл с местоположением репозитория в каталоге
+/etc/yum.repos.d/ для того, чтобы YUM по команде мог найти
+репозиторий.</p>
+<p>Для каждого стека необходимо запустить скрипт установки локального
+репозитория:</p>
+<p>~&gt; /staging/{stack}/setup_repo.sh</p>
+<p>По завершению установки скрипт выводит URL-адрес репозитория. Данный
+URL потребуется при установке кластера ADH с использованием сервера
+Ambari (см. п. 1.1).</p>
+<p>В случае если сервер репозитория YUM установлен не на хосте
+администратора (где установлен сервер Ambari), необходимо скопировать
+созданные файлы определения местоположения репозитория из
+/etc/yum.repos.d/ на хост администратора /etc/yum.repos.d, где
+установлен сервер Ambari. Затем необходимо проверить правильность
+настройки репозитория, выполнив команду от узла администратора:</p>
+<p>~&gt; yum repolist</p>
+<p>При корректной настройке выдается список репозиториев стека.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="prepare.html" class="btn btn-neutral" title="Подготовка к установке кластера" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Arenadata.io.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

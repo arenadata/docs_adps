@@ -1,0 +1,573 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Инструкция по установке кластера &mdash; Arenadata 1.4 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Arenadata 1.4 documentation" href="index.html"/>
+        <link rel="next" title="Загрузка дистрибутива кластера" href="install/download.html"/>
+        <link rel="prev" title="Общий обзор" href="intro.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Arenadata
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Общий обзор</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Инструкция по установке кластера</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install/download.html">Загрузка дистрибутива кластера</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install/prepare.html">Подготовка к установке кластера</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install/install.html">Установка сервера Ambari 2.2.1</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Arenadata</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Инструкция по установке кластера</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/install.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>Инструкция по установке кластера<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>В инструкции приведены сведения необходимые для подготовки к установке
+кластера Arenadata Hadoop, к его настройке и запуску.</p>
+<p>Инструкция может быть полезна администраторам, программистам,
+разработчикам и сотрудникам подразделений информационных технологий,
+осуществляющих внедрение кластера.</p>
+<p>Контактная информация службы поддержки:</p>
+<p>E-mail: <a class="reference external" href="mailto:info&#37;&#52;&#48;arenadata&#46;io">info<span>&#64;</span>arenadata<span>&#46;</span>io</a></p>
+<p>Оглавление</p>
+<ol class="arabic simple">
+<li>Загрузка дистрибутива кластера 4</li>
+<li>Подготовка к установке кластера 6</li>
+</ol>
+<p>2.1. Совместимость стека 6</p>
+<p>2.2. Системные требования 6</p>
+<p>2.2.1. Требования к памяти 9</p>
+<p>2.2.2. Требования к объему пакета и количеству индексных дескрипторов
+9</p>
+<p>2.2.3. Проверка максимального количества открытых файловых
+дескрипторов 10</p>
+<p>2.3. Сбор информации 10</p>
+<p>2.4. Подготовка к установке Hadoop 11</p>
+<p>2.4.1. Настройка беспарольного SSH 11</p>
+<p>2.4.2. Настройка учетных записей пользователей 12</p>
+<p>2.4.3. Синхронизация часов на всех узлах кластера 13</p>
+<p>2.4.4. Настройка DNS и NSCD 13</p>
+<p>2.4.5. Настройка IPTables 15</p>
+<p>2.4.6. Настройка SELinux, PackageKit и Umask 15</p>
+<ol class="arabic simple" start="3">
+<li>Установка сервера Ambari 2.2.1 17</li>
+</ol>
+<p>3.1. Настройка репозитория YUM 17</p>
+<p>3.1.1. Настройка удаленного репозитория YUM 17</p>
+<p>3.1.2. Настройка локального репозитория YUM 17</p>
+<p>3.2. Установка сервера Ambari 19</p>
+<p>3.3. Установка сервера Ambari 2.2.1 19</p>
+<p>3.4. Запуск сервера Ambari 20</p>
+<ol class="arabic simple" start="4">
+<li>Подготовка к установке основных компонентов ADH на кластер 21</li>
+</ol>
+<p>4.1. Загрузка и извлечение архивов стека ADH 21</p>
+<p>4.2. Настройка локальных репозиториев YUM 21</p>
+<ol class="arabic simple" start="5">
+<li>Запуск мастера установки 23</li>
+</ol>
+<p>5.1. Изменение URL-адреса репозитория YUM 23</p>
+<p>5.2. Ввод имен хостов и SSH-ключа 24</p>
+<p>5.2.1. Ручная установка Ambari-агентов 24</p>
+<p>5.3. Выбор сервисов 25</p>
+<p>5.4. Назначение мастер-компонентов 25</p>
+<p>5.5. Назначение Slave и Client 26</p>
+<p>5.6. Дополнительные настройки сервисов 27</p>
+<p>5.7. Установка, запуск и тестирование 28</p>
+<ol class="arabic simple" start="6">
+<li>Панель кластера 30</li>
+</ol>
+<p>Приложение 1. Ручная настройка подключения к базе данных 31</p>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install/download.html">Загрузка дистрибутива кластера</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install/prepare.html">Подготовка к установке кластера</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install/prepare.html#id2">Совместимость стека</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install/prepare.html#id3">Системные требования</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install/prepare.html#id7">Сбор информации</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install/prepare.html#hadoop">Подготовка к установке Hadoop</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="install/install.html">Установка сервера Ambari 2.2.1</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install/install.html#yum">Настройка репозитория YUM</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<ol class="arabic simple">
+<li>3.Запуск мастера установки</li>
+</ol>
+<p>Для создания кластера необходимо после входа в Ambari запустить мастер
+установки, нажав в главной экранной форме кнопку Launch Install Wizard
+(см. Рис. 3.). Мастер установки проводит по шагам, необходимым для
+создания нового кластера ADH. Некоторые этапы установки требуют
+особого внимания:</p>
+<ul class="simple">
+<li>Изменение URL-адреса репозитория YUM (см. п. 1.1);</li>
+<li>Ввод имен хостов и SSH-ключа (см. п. 3.1);</li>
+<li>Ручная установка Ambari-агентов (см. п. 2.4.1);</li>
+<li>Выбор сервисов (см. п. 3.2);</li>
+<li>Назначение мастер-компонентов (см. п. 3.3);</li>
+<li>Назначение Slave и Client (см. п. 3.4);</li>
+<li>Дополнительные настройки сервисов (см. п. 2.5).</li>
+</ul>
+<ol class="arabic simple">
+<li><ol class="first arabic">
+<li>1.1.Изменение URL-адреса репозитория YUM</li>
+</ol>
+</li>
+</ol>
+<p>Для того чтобы открыть список репозиториев YUM необходимо в блоке
+Stacks установить флаг в поле ADH 1.4 и раскрыть блок Advanced
+Repository Options, при этом Ambari выберет RPM со стеком ADH (Рис.
+4.).</p>
+<div class="figure" id="id2">
+<span id="install-img-4"></span><img alt="_images/install_4.jpg" src="_images/install_4.jpg" />
+<p class="caption"><span class="caption-text">Рис.4. Выбор стека</span></p>
+</div>
+<p>Указанные значения URL необходимо заменить на URL-адреса ранее
+установленных репозиториев стека (см. п. 2.1).</p>
+<p>Следует заменить значение <a class="reference external" href="http://SET_REPO_URL">http://SET_REPO_URL</a> соответствующей ссылкой
+репозитория, которая была получена при запуске скрипта setup_repo.sh.
+Данный URL-адрес всегда можно уточнить в файле
+/etc/yum.repos.d/-.repo.</p>
+<p>Репозитории можно обновить после развертывания кластера через Ambari
+UI (Admin – Repositories).</p>
+<ol class="arabic simple">
+<li><ol class="first arabic">
+<li>3.1.Ввод имен хостов и SSH-ключа</li>
+</ol>
+</li>
+</ol>
+<p>В разделе Install Options следует указать имена доменов FQDN для
+хостов, которые будут содержать кластер. Можно использовать выражение
+диапазона с помощью квадратных скобок, например, host [01-10].domain
+описывает 10 хостов. В случае если применяется EC2, необходимо
+использовать имена внутренних частных DNS-узлов.</p>
+<p>Для автоматической регистрации Ambari-агентов на узлах кластера
+необходимо ввести закрытый ключ, который использовался для настройки
+беспарольного SSH для кластера. Можно выбрать данный файл или
+скопировать и вставить его содержимое в экранную форму (см. п. 1.1.1).</p>
+<ol class="arabic simple">
+<li><ol class="first arabic">
+<li><ol class="first arabic">
+<li>2.4.1.Ручная установка Ambari-агентов</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>В случае если нет возможности предоставить закрытый ключ беспарольного
+SSH (см. п. 3.1), следует произвести установку Ambari-агентов вручную.
+Для этого необходимо выполнить следующие шаги:</p>
+<ul class="simple">
+<li>Установить репозиторий Ambari, скопировав файл /etc/yum.repos.d/
+ambari.repo с сервера репозитория YUM на все узлы кластера;</li>
+<li>Установить Ambari-агент, выполнив команду:</li>
+</ul>
+<p>~&gt; yum install ambari-agent</p>
+<ul class="simple">
+<li>Изменить конфигурацию Ambari-агента /etc/ambari-agent/conf/
+ambari-agent.ini для определения его на сервере Ambari:</li>
+</ul>
+<p>[server]</p>
+<p>hostname={ambari.server.hostname}</p>
+<p>url_port=8440</p>
+<p>secured_url_port=8441</p>
+<ul class="simple">
+<li>Запустить Ambari-агент, выполнив команду:</li>
+</ul>
+<p>~&gt; ambari-agent start</p>
+<p>Ambari-агент зарегистрируется на сервере при его запуске.</p>
+<ol class="arabic simple">
+<li><ol class="first arabic">
+<li>3.2.Выбор сервисов</li>
+</ol>
+</li>
+</ol>
+<p>Необходимо выбрать сервисы ADH, которые следует установить. Сервисы
+необходимо выбрать на начальном этапе установки. При этом для любой
+инсталляции следует установить HDFS и Zookeeper, остальные сервисы
+возможно установить позднее (Рис. 5.).</p>
+<div class="figure" id="id3">
+<span id="install-img-5"></span><img alt="_images/install_5.jpg" src="_images/install_5.jpg" />
+<p class="caption"><span class="caption-text">Рис.5. Выбор сервисов</span></p>
+</div>
+<p>В случае если выбирается сервис Ambari Metrics, то для контроля
+кластера можно использовать Ambari. Если данный сервис не выбирается,
+выдается предупреждение, которое можно игнорировать в случае, если
+кластер планируется контролировать с помощью других инструментов. При
+этом Ambari Metrics можно будет добавить в кластер позднее.</p>
+<ol class="arabic simple">
+<li><ol class="first arabic">
+<li>3.3.Назначение мастер-компонентов</li>
+</ol>
+</li>
+</ol>
+<p>Необходимо назначить мастер-компоненты для узлов кластера (Рис. 6.).</p>
+<div class="figure" id="id4">
+<span id="install-img-6"></span><img alt="_images/install_6.jpg" src="_images/install_6.jpg" />
+<p class="caption"><span class="caption-text">Рис.6. Назначение мастер-компонентов</span></p>
+</div>
+<p>Данное ограничение объясняется тем, что оба сервиса будут пытаться
+использовать порт 5432. В случае абсолютной необходимости совместного
+размещения указанных компонентов на одном и том же хосте,
+предварительно следует переконфигурировать базу данных PostgreSQL на
+порт, отличный от 5432, и выбрать опцию Existing PostgreSQL Database
+для конфигурации Hive Metastore.</p>
+<ol class="arabic simple">
+<li><ol class="first arabic">
+<li>3.4.Назначение Slave и Client</li>
+</ol>
+</li>
+</ol>
+<p>Необходимо назначить сервисные компоненты Slave и Client для узлов
+кластера (Рис. 7.).</p>
+<div class="figure" id="id5">
+<span id="install-img-7"></span><img alt="_images/install_7.jpg" src="_images/install_7.jpg" />
+<p class="caption"><span class="caption-text">Рис.7. Назначение Slave и Client</span></p>
+</div>
+<p>В настоящее время полоса прокрутки панели пользовательского
+интерфейса, отображающей список услуг для каждого хоста, не
+отображается. Необходимо прокрутить главную область страницы вправо,
+чтобы убедиться, что все компоненты настроены правильно.</p>
+<ol class="arabic simple">
+<li><ol class="first arabic">
+<li>2.5.Дополнительные настройки сервисов</li>
+</ol>
+</li>
+</ol>
+<p>На экранной форме отображаются параметры конфигурации отдельных
+сервисов, автоматически сгенерированных установщиком Ambari на основе
+параметров кластера. Параметры каждого сервиса можно менять по своему
+усмотрению в зависимости от планируемого использования того или иного
+компонента кластера.</p>
+<p>В случае если для какого-либо обязательного параметра установщик не
+может предложить значение по умолчанию, перед продолжением установки
+данные параметры необходимо указать вручную (на Рис. 8. приведен
+пример, когда для компонента Hive необходимо указать пароль для
+внутренней базы данных Hive).</p>
+<div class="figure" id="id6">
+<span id="install-img-8"></span><img alt="_images/install_8.jpg" src="_images/install_8.jpg" />
+<p class="caption"><span class="caption-text">Рис.8. Дополнительные настройки сервисов</span></p>
+</div>
+<ol class="arabic simple">
+<li><ol class="first arabic">
+<li>2.6.Установка, запуск и тестирование</li>
+</ol>
+</li>
+</ol>
+<p>На экранной форме отображается ход развертывания кластера на каждом
+хосте (Рис. 9.).</p>
+<div class="figure" id="id7">
+<span id="install-img-9"></span><img alt="_images/install_9.jpg" src="_images/install_9.jpg" />
+<p class="caption"><span class="caption-text">Рис.9. Ход развертывания кластера</span></p>
+</div>
+<p>Каждый компонент, который разворачивается вместе с хостом,
+устанавливается, запускается и проходит простой тест для проверки
+работоспособности.</p>
+<p>При этом есть возможность просмотра подробной информации о завершенных
+и ожидающих задачах для каждого хоста (Рис. 10.). Для этого необходимо
+нажать ссылку в столбце Message (см. Рис. 9.).</p>
+<div class="figure" id="id8">
+<span id="install-img-10"></span><img alt="_images/install_10.jpg" src="_images/install_10.jpg" />
+<p class="caption"><span class="caption-text">Рис.10. Информация о задачах хоста</span></p>
+</div>
+<p>По завершению установки компонентов появляется сообщение Successfully
+installed and started the services, в котором необходимо нажать кнопку
+Next.</p>
+<p>Для окончания установки необходимо на странице Summary проверить
+список завершенных задач и нажать кнопку Complete. При этом
+открывается панель инструментов кластера.</p>
+<ol class="arabic simple">
+<li>4.Панель кластера</li>
+</ol>
+<p>Панель инструментов является центральным местом и отображает
+развернутые сервисы и их статус. Здесь можно добавлять новые сервисы
+или хосты, останавливать и запускать сервисы и компоненты,
+анализировать показатели мониторинга и выполнять конкретные действия
+сервиса (Рис. 11.).</p>
+<div class="figure" id="id9">
+<span id="install-img-11"></span><img alt="_images/install_11.png" src="_images/install_11.png" />
+<p class="caption"><span class="caption-text">Рис.11. Панель кластера</span></p>
+</div>
+<ol class="arabic simple">
+<li>Приложение 1.Ручная настройка подключения к базе данных</li>
+</ol>
+<p>Если в процессе настройки сервера Ambari (см. п. 2.3) необходимо
+отличное от используемого по умолчанию подключение к базе данных
+следует в командной строке нажать клавишу y:</p>
+<p>Enter advanced database configuration</p>
+<p>Если инстанс PostgreSQL настроен на порт, отличный от предлагаемого по
+умолчанию, для настройки Ambari необходимо выполнить следующие шаги:</p>
+<ul class="simple">
+<li>Открыть в текстовом редакторе конфигурационный файл PostgreSQL
+/var/lib/pgsql/data/pg_hba.conf. Чтобы позволить пользователю ambari
+подключиться к базе данных, необходимо в конце файла добавить
+следующие строки:</li>
+</ul>
+<p>local all ambari md5</p>
+<p>host all ambari 0.0.0.0/0 md5</p>
+<p>host all ambari ::/0 md5</p>
+<ul class="simple">
+<li>Чтобы подключить порт, выбранный не по умолчанию, следует открыть
+файл /etc/sysconfig/pgsql/postgresql и добавить в него строку с
+номером необходимого порта. Например, чтобы подключить порт 10432
+следует указать:</li>
+</ul>
+<p>PGPORT=10432</p>
+<ul class="simple">
+<li>Перезапустить базу данных PostgreSQL:</li>
+</ul>
+<p>~&gt; service postgresql restart</p>
+<ul class="simple">
+<li>Подключиться к базе данных под postgres (супер-пользователь) и
+выполнить следующие настройки:</li>
+</ul>
+<p>~&gt; psql -U postgres -p 10432;</p>
+<p>postgres=# CREATE DATABASE ambari;</p>
+<p>postgres=# CREATE USER ambari WITH ENCRYPTED PASSWORD ‘bigdata’;</p>
+<p>postgres=# c ambari</p>
+<p>ambari=# CREATE SCHEMA ambari AUTHORIZATION ambari;</p>
+<p>ambari=# ALTER SCHEMA ambari OWNER TO ambari;</p>
+<p>ambari=# ALTER ROLE ambari SET search_path to ‘ambari’,’public’;</p>
+<p>ambari=# q</p>
+<ul class="simple">
+<li>Выполнить команду установки Ambari:</li>
+</ul>
+<p>~&gt; ambari-server setup –database=postgres –databasehost=localhost
+–databaseport=10432 –databasename=ambari –databaseusername=ambari
+–databasepassword=bigdata</p>
+<ul class="simple">
+<li>Чтобы убедиться, что postgres подключен к хосту databasehost,
+необходимо использовать следующую команду:</li>
+</ul>
+<p>~&gt; netstat -anp | egrep &lt;port&gt;</p>
+<ul class="simple">
+<li>Выполнить файл Ambari-DDL-Postgres-CREATE.sql в PostgreSQL для
+завершения настройки:</li>
+</ul>
+<p>~&gt; psql -f /var/lib/ambari-server/resources/Ambari-DDL-Postgres-
+CREATE.sql -U ambari -p 10432 -d ambari</p>
+<ul class="simple">
+<li>При запросе пароля необходимо ввести значение bigdata.</li>
+</ul>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="install/download.html" class="btn btn-neutral float-right" title="Загрузка дистрибутива кластера" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="intro.html" class="btn btn-neutral" title="Общий обзор" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Arenadata.io.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
