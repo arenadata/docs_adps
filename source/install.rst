@@ -193,7 +193,7 @@ SSH, следует произвести установку Ambari-агенто�
 
 + Запустить Ambari-агент, выполнив команду:
 
-  ~> ambari-agent start
+    ~> ambari-agent start
 
 Ambari-агент зарегистрируется на сервере при его запуске.
 
@@ -233,6 +233,8 @@ Ambari-агент зарегистрируется на сервере при е
 
     Рис.6. Назначение мастер-компонентов
 
+
+ЕСЛИ HIVE METASTORE ИСПОЛЬЗУЕТ НОВУЮ БАЗУ ДАННЫХ POSTGRESQL, КОМПОНЕНТ HIVE METASTORE НЕ ДОЛЖЕН НАХОДИТЬСЯ НА ХОСТЕ AMBARI
 
 Данное ограничение объясняется тем, что оба сервиса будут пытаться
 использовать порт 5432. В случае абсолютной необходимости совместного
@@ -349,7 +351,7 @@ Next.
 отличное от используемого по умолчанию подключение к базе данных
 следует в командной строке нажать клавишу y:
 
-Enter advanced database configuration
+  Enter advanced database configuration
 
 Если инстанс PostgreSQL настроен на порт, отличный от предлагаемого по
 умолчанию, для настройки Ambari необходимо выполнить следующие шаги:
@@ -361,11 +363,11 @@ Enter advanced database configuration
   следующие строки:
 
 
-local all ambari md5
+    local all ambari md5
 
-host all ambari 0.0.0.0/0 md5
+    host all ambari 0.0.0.0/0 md5
 
-host all ambari ::/0 md5
+    host all ambari ::/0 md5
 
 
 + Чтобы подключить порт, выбранный не по умолчанию, следует открыть
@@ -374,57 +376,54 @@ host all ambari ::/0 md5
   следует указать:
 
 
-PGPORT=10432
+    PGPORT=10432
 
 
 + Перезапустить базу данных PostgreSQL:
 
 
-~> service postgresql restart
+    ~> service postgresql restart
 
 
 + Подключиться к базе данных под postgres (супер-пользователь) и
   выполнить следующие настройки:
 
 
-~> psql -U postgres -p 10432;
+    ~> psql -U postgres -p 10432;
 
-postgres=# CREATE DATABASE ambari;
+    postgres=# CREATE DATABASE ambari;
 
-postgres=# CREATE USER ambari WITH ENCRYPTED PASSWORD 'bigdata';
+    postgres=# CREATE USER ambari WITH ENCRYPTED PASSWORD 'bigdata';
 
-postgres=# \c ambari
+    postgres=# \c ambari
 
-ambari=# CREATE SCHEMA ambari AUTHORIZATION ambari;
+    ambari=# CREATE SCHEMA ambari AUTHORIZATION ambari;
 
-ambari=# ALTER SCHEMA ambari OWNER TO ambari;
+    ambari=# ALTER SCHEMA ambari OWNER TO ambari;
 
-ambari=# ALTER ROLE ambari SET search_path to 'ambari','public';
+    ambari=# ALTER ROLE ambari SET search_path to 'ambari','public';
 
-ambari=# \q
+    ambari=# \q
 
 
 + Выполнить команду установки Ambari:
 
 
-~> ambari-server setup --database=postgres --databasehost=localhost
---databaseport=10432 --databasename=ambari --databaseusername=ambari
---databasepassword=bigdata
+    ~> ambari-server setup --database=postgres --databasehost=localhost--databaseport=10432 --databasename=ambari --databaseusername=ambari--databasepassword=bigdata
 
 
 + Чтобы убедиться, что postgres подключен к хосту databasehost,
   необходимо использовать следующую команду:
 
 
-~> netstat -anp | egrep <port>
+    ~> netstat -anp | egrep <port>
 
 
 + Выполнить файл Ambari-DDL-Postgres-CREATE.sql в PostgreSQL для
   завершения настройки:
 
 
-~> psql -f /var/lib/ambari-server/resources/Ambari-DDL-Postgres-
-CREATE.sql -U ambari -p 10432 -d ambari
+    ~> psql -f /var/lib/ambari-server/resources/Ambari-DDL-Postgres-CREATE.sql -U ambari -p 10432 -d ambari
 
 
 + При запросе пароля необходимо ввести значение bigdata.
