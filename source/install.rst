@@ -177,26 +177,25 @@ SSH, следует произвести установку Ambari-агенто�
 + Установить Ambari-агент, выполнив команду:
 
 
-~> yum install ambari-agent
+  ~> yum install ambari-agent
 
 
 + Изменить конфигурацию Ambari-агента /etc/ambari-agent/conf/
   ambari-agent.ini для определения его на сервере Ambari:
 
 
-[server]
+  [server]
 
-hostname={ambari.server.hostname}
+  hostname={ambari.server.hostname}
 
-url_port=8440
+  url_port=8440
 
-secured_url_port=8441
+  secured_url_port=8441
 
 
 + Запустить Ambari-агент, выполнив команду:
 
-
-~> ambari-agent start
+  ~> ambari-agent start
 
 Ambari-агент зарегистрируется на сервере при его запуске.
 
