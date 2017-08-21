@@ -7,7 +7,6 @@
 .. _install-img-1:
 
 .. figure:: /imgs/install_pic1.*
-   :scale: 100 %
    :align: center
    
     Рис.1. Arenadata Store
