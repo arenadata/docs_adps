@@ -6,7 +6,7 @@
 
 .. _install-img-1:
 
-.. figure:: /imgs/install_1.*
+.. figure:: /imgs/install_pic1.*
 
     Рис.1. Arenadata Store
 
