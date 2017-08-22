@@ -54,7 +54,7 @@ Repository Options, при этом Ambari выберет RPM со стеком 
 
 .. figure:: imgs/install_4.*
    :align: center
-
+   
    Рис.4. Выбор стека
 
 
