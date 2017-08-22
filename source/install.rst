@@ -134,7 +134,7 @@ Ambari-агент зарегистрируется на сервере при е
 .. _install-img-5:
 
 .. figure:: imgs/install_5.*
-  :align: center
+   :align: center
    
    Рис.5. Выбор сервисов
 
@@ -155,7 +155,7 @@ Ambari-агент зарегистрируется на сервере при е
 .. _install-img-6:
 
 .. figure:: imgs/install_6.*
-  :align: center
+   :align: center
    
    Рис.6. Назначение мастер-компонентов
 
@@ -180,7 +180,7 @@ Ambari-агент зарегистрируется на сервере при е
 .. _install-img-7:
 
 .. figure:: imgs/install_7.*
-  :align: center
+   :align: center
    
    Рис.7. Назначение Slave и Client
 
@@ -210,7 +210,7 @@ Ambari-агент зарегистрируется на сервере при е
 .. _install-img-8:
 
 .. figure:: imgs/install_8.*
-  :align: center
+   :align: center
    
    Рис.8. Дополнительные настройки сервисов
 
@@ -225,7 +225,7 @@ Ambari-агент зарегистрируется на сервере при е
 .. _install-img-9:
 
 .. figure:: imgs/install_9.*
-  :align: center
+   :align: center
    
    Рис.9. Ход развертывания кластера
 
@@ -241,7 +241,7 @@ Ambari-агент зарегистрируется на сервере при е
 .. _install-img-10:
 
 .. figure:: imgs/install_10.*
-  :align: center
+   :align: center
    
    Рис.10. Информация о задачах хоста
 
@@ -268,7 +268,7 @@ Next.
 .. _install-img-11:
 
 .. figure:: imgs/install_11.*
-  :align: center    
+   :align: center    
    
    Рис.11. Панель кластера
 
