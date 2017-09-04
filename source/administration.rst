@@ -59,7 +59,7 @@ Apache Ambari – это система, которая помогает в уп
 
 .. _install-img-5:
 
-.. figure:: imgs/admin_pic.1.* admin_pic.1
+.. figure:: imgs/admin_pic.1.*
    :align: center
    
    Рис.1. Главная страница Ambari
