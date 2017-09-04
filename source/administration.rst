@@ -12,8 +12,8 @@ E-mail: info@arenadata.io
 
 
 
-.. contents:: Оглавление
-   :depth: 2
+.. contents:: Содержание
+   :depth: 3
 
    
 
