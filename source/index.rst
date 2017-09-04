@@ -12,6 +12,7 @@ Welcome to Arenadata's documentation!
 
    intro
    install
+   security
 
 Indices and tables
 ==================
