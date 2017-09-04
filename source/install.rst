@@ -20,6 +20,7 @@ E-mail: info@arenadata.io
    install/download
    install/prepare
    install/install
+   install/master
 
 
 
