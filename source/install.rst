@@ -21,6 +21,8 @@ E-mail: info@arenadata.io
    install/prepare
    install/install
    install/master
+   install/annex
+   install/cluster
 
 
 
