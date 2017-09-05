@@ -176,7 +176,7 @@
 *500 МБ* свободной. На любом узле можно проверить доступную память,
 выполнив команду:
 
-free –m
+:command:`free –m`
 
 В случае если планируется установить **Ambari Metrics Service** в кластер,
 для уточнения требований к ресурсам необходимо ознакомиться с разделом
@@ -438,16 +438,16 @@ SSH-соединение между хостом **Ambari Server** и всеми
 Для редактирования файла хоста необходимо используя текстовый редактор
 открыть файл *hosts* на каждом узле кластера:
 
-:command: vi /etc/hosts
+:command:`vi /etc/hosts`
 
 И добавить строку для каждого хоста, состоящую из IP-адреса и **FQDN**,
 например:
 
-:command: 1.2.3.4 <fully.qualified.domain.name>
+:command:`1.2.3.4 <fully.qualified.domain.name>`
 
-:command: 127.0.0.1 localhost.localdomain localhost
+:command:`127.0.0.1 localhost.localdomain localhost`
 
-:command: ::1 localhost6.localdomain6 localhost6
+:command:`::1 localhost6.localdomain6 localhost6`
 
 
 Проверка имени хоста
@@ -476,9 +476,9 @@ SSH-соединение между хостом **Ambari Server** и всеми
 
 Следует изменить свойство *HOSTNAME*, чтобы задать полное доменное имя:
 
-:command: NETWORKING=yes 
+:command:`NETWORKING=yes`
 
-:command: HOSTNAME=<fully.qualified.domain.name>
+:command:`HOSTNAME=<fully.qualified.domain.name>`
 
 
 Настройка IPTables
@@ -532,7 +532,7 @@ SSH-соединение между хостом **Ambari Server** и всеми
 */etc/yum/pluginconf.d/refresh-packagekit.conf* и выполнить следующее
 изменение:
 
-:command: enabled=0
+:command:`enabled=0`
 
 **PackageKit** в системах **SLES** по умолчанию не включен. В случае если
 **PackageKit** не был подключен принудительно, во время установки узла
@@ -549,8 +549,8 @@ SSH-соединение между хостом **Ambari Server** и всеми
 значение **UMASK** равное *022*, необходимо запустить команду в корне на
 всех хостах:
 
-:command: vi /etc/profile
+:command:`vi /etc/profile`
 
 Затем добавить следующую строку:
 
-:command: umask 022
+:command:`umask 022`
