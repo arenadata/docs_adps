@@ -24,7 +24,7 @@
 
 .. _admin_pic.1:
 
-.. figure:: source/imgs/admin_pic.1.*
+.. figure:: docs_adh/source/imgs/admin_pic.1.*
    :align: center
    
    Рис.1. Главная страница Ambari
