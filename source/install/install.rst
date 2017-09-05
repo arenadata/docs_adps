@@ -207,7 +207,7 @@ http://<адрес сервера>:8080
 При этом запрашивается логин и пароль. После авторизации открывается
 веб-интерфейс Ambari.
 
-.. _install-img-6:
+.. _install_pic6:
 
 .. figure:: /imgs/install_pic6.*
    :align: center
