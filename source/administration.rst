@@ -17,11 +17,10 @@ E-mail: info@arenadata.io
    :caption: Оглавление:
 
    administration/intro
-   administration/
-   administration/
-   administration/
-   administration/
-   administration/
+   administration/account
+   administration/cluster
+   administration/users&groups
+   
 
    
 
