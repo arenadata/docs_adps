@@ -15,9 +15,4 @@
    
    Рис.14. Панель кластера
 
-.. _install_pic14:
 
-.. figure:: imgs/install_pic14.*
-   :align: center
-   
-   Рис.14. Панель кластера
