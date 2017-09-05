@@ -209,7 +209,7 @@ http://<адрес сервера>:8080
 
 .. _install-img-6:
 
-.. figure:: /imgs/install_6.*
+.. figure:: /imgs/install_pic6.*
    :align: center
    
    Рис.6. Веб-интерфейс Ambari до настройки кластера
