@@ -12,8 +12,16 @@ E-mail: info@arenadata.io
 
 
 
-.. contents:: Содержание
-   :depth: 3
+.. toctree::
+   :maxdepth: 2
+   :caption: Оглавление:
+
+   administration/intro
+   administration/
+   administration/
+   administration/
+   administration/
+   administration/
 
    
 
