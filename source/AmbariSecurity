@@ -17,9 +17,9 @@ E-mail: info@arenadata.io
    :maxdepth: 2
    :caption: Оглавление:
 
-   AmbariSecurity/config
-   AmbariSecurity/options
-   AmbariSecurity/spnego
+   SecurityAmbari/config
+   SecurityAmbari/options
+   SecurityAmbari/spnego
    
 
 
