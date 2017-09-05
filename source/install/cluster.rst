@@ -8,7 +8,7 @@
 анализировать показатели мониторинга и выполнять конкретные действия
 сервиса.
 
-.. _install-img-14:
+.. _install_pic14:
 
 .. figure:: imgs/install_pic14.*
    :align: center    
