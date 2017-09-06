@@ -181,11 +181,11 @@ Kerberos имеет одинаковые временные метки, в та�
 
 +	RHEL / CentOS:
 
-:command:`yum install krb5-server krb5-libs krb5-workstation`
+  :command:`yum install krb5-server krb5-libs krb5-workstation`
 
 +	SLES:
 
-:command:`Zypper install krb5 krb5-server krb5-client`
+  :command:`Zypper install krb5 krb5-server krb5-client`
 
 2.	Используя текстовый редактор, открыть файл конфигурации сервера KDC, расположенный по умолчанию в *Vi /etc/krb5.conf*;
 
@@ -209,11 +209,11 @@ Kerberos имеет одинаковые временные метки, в та�
 
 +	RHEL / CentOS:
 
-:command:`Kdb5_util create -s`
+  :command:`Kdb5_util create -s`
 
 +	SLES:
 
-:command:`Kdb5_util create –s`
+  :command:`Kdb5_util create –s`
 
 
 Запуск KDC
@@ -223,41 +223,41 @@ Kerberos имеет одинаковые временные метки, в та�
 
 +	RHEL/CentOS 6:
 
-:command:`/etc/rc.d/init.d/krb5kdc start`
+  :command:`/etc/rc.d/init.d/krb5kdc start`
 
-:command:`/etc/rc.d/init.d/kadmin start`
+  :command:`/etc/rc.d/init.d/kadmin start`
 
 +	RHEL/CentOS 7:
 
-:command:`systemctl start krb5kdc`
+  :command:`systemctl start krb5kdc`
 
-:command:`systemctl start kadmin`
+  :command:`systemctl start kadmin`
 
 +	SLES 11:
 
-:command:`rckrb5kdc start`
+  :command:`rckrb5kdc start`
 
-:command:`rckadmind start`
+  :command:`rckadmind start`
 
 При установке и управлении собственным **MIT KDC** важно настроить сервер **KDC** на автоматический запуск при загрузке:
 
 +	RHEL/CentOS 6:
 
-:command:`chkconfig krb5kdc on`
+  :command:`chkconfig krb5kdc on`
 
-:command:`chkconfig kadmin on`
+  :command:`chkconfig kadmin on`
 
 +	RHEL/CentOS 7:
 
-:command:`systemctl enable krb5kdc`
+  :command:`systemctl enable krb5kdc`
 
-:command:`systemctl enable kadmin`
+  :command:`systemctl enable kadmin`
 
 +	SLES 11:
 
-:command:`chkconfig rckrb5kdc on`
+  :command:`chkconfig rckrb5kdc on`
 
-:command:`chkconfig rckadmind on`
+  :command:`chkconfig rckadmind on`
 
 
 Создание администратора Kerberos
@@ -336,7 +336,7 @@ Kerberos имеет одинаковые временные метки, в та�
 
 3.	На сервере Ambari и на каждом узле кластера добавить неограниченные права безопасности JCE:
   
-:command:`$JAVA_HOME/jre/lib/security/`
+  :command:`$JAVA_HOME/jre/lib/security/`
 
 Например, выполнить следующие действия для извлечения прав из JDK, установленном на вашем хосте:
 
