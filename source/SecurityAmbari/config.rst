@@ -191,15 +191,15 @@ Kerberos имеет одинаковые временные метки, в та�
 
 3.	Изменить раздел *[realms]* этого файла, заменив параметр *kerberos.example.com* для свойств *kdc* и *admin_server*, установленный по умолчанию с Fully Qualified Domain Name хоста сервера KDC, как показано в примере, где *kerberos.example.com* заменен на *my.kdc.server*:
 
-:command:`[realms]`
+  :command:`[realms]`
 
- :command:`EXAMPLE.COM = {`
+   :command:`EXAMPLE.COM = {`
  
-   :command:`kdc = my.kdc.server`
+     :command:`kdc = my.kdc.server`
    
-   :command:`admin_server = my.kdc.server`
+     :command:`admin_server = my.kdc.server`
    
-:command:`}` 
+  :command:`}` 
 
 
 Создание базы данных Kerberos
