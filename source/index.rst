@@ -14,6 +14,7 @@ Welcome to Arenadata's documentation!
    install
    administration
    security
+   AmbariSecurity
 
 Indices and tables
 ==================
