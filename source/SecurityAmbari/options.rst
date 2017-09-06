@@ -47,13 +47,14 @@
 
 1.	Место, где каталог ключей не существует, но в котором должен быть создан:
 
-:command:`mkdir /etc/ambari-server/keys`
+  :command:`mkdir /etc/ambari-server/keys`
 
-2.	:command:`$JAVA_HOME/bin/keytool -import -trustcacerts -alias root -file $PATH_TO_YOUR_LDAPS_CERT -keystore /etc/ambari-server/keys/ldaps-keystore.jks
+2.	
+  :command:`$JAVA_HOME/bin/keytool -import -trustcacerts -alias root -file $PATH_TO_YOUR_LDAPS_CERT -keystore /etc/ambari-server/keys/ldaps-keystore.jks
 
 3.	Задать пароль, который будет использоваться при настройке *ambari-server-ldap*, при появлении запроса:
 
-:command:`ambari-server setup-ldap`
+  :command:`ambari-server setup-ldap`
 
 4.	В запросе "Primary URL*" ввести URL-адрес и порт сервера. Требуются значения, отмеченные звездочкой.
 
@@ -67,58 +68,58 @@
 
 9.	В запросе "Group object class*" ввести класс объекта, используемый для групп.
 
-10.	В запросе "Group name attribute*" ввести атрибут имени группы.
+10. В запросе "Group name attribute*" ввести атрибут имени группы.
 
-11.	В запросе "Group member attribute*" ввести атрибут принадлежности к группе.
+11. В запросе "Group member attribute*" ввести атрибут принадлежности к группе.
 
-12.	В запросе "Distinguished name attribute*" ввести атрибут, используемый для *distinguished name*.
+12. В запросе "Distinguished name attribute*" ввести атрибут, используемый для *distinguished name*.
 
-13.	В запросе "Base DN*" ввести свое значение.
+13. В запросе "Base DN*" ввести свое значение.
 
-14.	В запросе "Referral method*" ввести *follow* или *ignore* передачи LDAP.
+14. В запросе "Referral method*" ввести *follow* или *ignore* передачи LDAP.
 
-15.	В запросе "Bind anonymously*" ввести свое значение.
+15. В запросе "Bind anonymously*" ввести свое значение.
 
-16.	В запросе "Manager DN*" ввести свое значение в том случае, если в запросе "Bind anonymously" установлено значение *false*.
+16. В запросе "Manager DN*" ввести свое значение в том случае, если в запросе "Bind anonymously" установлено значение *false*.
 
-17.	В запросе "Enter the Manager Password*" ввести пароль DN менеджера LDAP.
+17. В запросе "Enter the Manager Password*" ввести пароль DN менеджера LDAP.
 
-18.	Если на шаге 6 установлено значение *Use SSL = true*, появится следующий запрос:
+18. Если на шаге 6 установлено значение *Use SSL = true*, появится следующий запрос:
 
-:command:`Do you want to provide custom TrustStore for Ambari?`
+  :command:`Do you want to provide custom TrustStore for Ambari?`
 
 Возможны следующие варианты ответов:
 
-+	**Более безопасный вариант**. Если используется самоподписанный сертификат, который вы не хотите импортировать в существующее хранилище ключей JDK, следует ввести значение *y*.
++ **Более безопасный вариант**. Если используется самоподписанный сертификат, который вы не хотите импортировать в существующее хранилище ключей JDK, следует ввести значение *y*.
 
 Например, в случае, если вы хотите, чтобы данный сертификат использовался только Ambari, без других приложений, запущенных JDK на том же узле.
 
 Если выбирается эта опция, то появятся дополнительные запросы:
 
-  +	В запросе "TrustStore type" ввести *jks*;
+  + В запросе "TrustStore type" ввести *jks*;
 
-  +	В запросе "Path to TrustStore file" ввести */keys/ldaps-keystore.jks* (или фактический путь к файлу хранилища ключей);
+  + В запросе "Path to TrustStore file" ввести */keys/ldaps-keystore.jks* (или фактический путь к файлу хранилища ключей);
 
-  +	В запросе "Password for TrustStore" ввести пароль для хранилища ключей.
+  + В запросе "Password for TrustStore" ввести пароль для хранилища ключей.
 
 
 +	**Менее безопасный вариант**. Если используется самоподписанный сертификат, который вы хотите импортировать и хранить в существующем ключевом хранилище JDK, введите значение *n*.
 
-  +	Преобразовать сертификат SSL в формат *X.509*, если это необходимо, выполнив следующую команду, где *<slapd.crt>* – путь к сертификату *X.509*:
+  + Преобразовать сертификат SSL в формат *X.509*, если это необходимо, выполнив следующую команду, где *<slapd.crt>* – путь к сертификату *X.509*:
   
-:command:`openssl x509 -in slapd.pem -out <slapd.crt>`
+    :command:`openssl x509 -in slapd.pem -out <slapd.crt>`
 
-  +	Импортировать сертификат SSL в существующее хранилище ключей, например, хранилище сертификатов *jre* по умолчанию, используя следующую команду:
+  + Импортировать сертификат SSL в существующее хранилище ключей, например, хранилище сертификатов *jre* по умолчанию, используя следующую команду:
   
-:command:`/usr/jdk64/jdk1.7.0_45/bin/keytool -import -trustcacerts -file slapd.crt -keystore /usr/jdk64/jdk1.7.0_45/jre/lib/security/cacerts`
+    :command:`/usr/jdk64/jdk1.7.0_45/bin/keytool -import -trustcacerts -file slapd.crt -keystore /usr/jdk64/jdk1.7.0_45/jre/lib/security/cacerts`
 
 Где Ambari настроен для использования JDK 1.7, поэтому сертификат должен быть импортирован в хранилище ключей JDK 7.
 
-19.	Проверить все настройки, и если они верны, выбрать значение *y*.
+19. Проверить все настройки, и если они верны, выбрать значение *y*.
 
-20.	Запустить или перезапустить сервер:
+20. Запустить или перезапустить сервер:
 
-:command:`ambari-server restart`
+  :command:`ambari-server restart`
 
 
 Импортированным пользователям назначаются права пользователя **Ambari**. Они могут читать метрики, просматривать статус и конфигурацию сервисов, а так же просматривать информацию о задании. Чтобы пользователи могли запускать или останавливать сервисы, менять конфигурации и запускать *smoke tests*, им необходимо назначить права администратора **Ambari**. Для внесения данных изменений следует перейти по пунктам меню "Manage Ambari > Users > Edit".
@@ -317,7 +318,7 @@
 
 1.	На Ambari Server запустить команду настройки:
 
-:command:`ambari-server setup-security`
+  :command:`ambari-server setup-security`
 
 2.	При запросе "Choose one of the following options" выбрать вариант 2:
 
@@ -339,7 +340,7 @@
 
 5.	Запустить или перезапустить Ambari Server:
 
-:command:`ambari-server restart`
+  :command:`ambari-server restart`
 
 
 
@@ -363,15 +364,15 @@
 
 1.	На хосте Ambari в текстовом редакторе открыть файл */etc/ambari-server/conf/ambari.properties* и установить свойство:
 
-:command:`security.passwords.encryption.enabled=false`
+  :command:`security.passwords.encryption.enabled=false`
 
 2.	Удалить:
 
-:command:`/var/lib/ambari-server/keys/credentials.jceks`
+  :command:`/var/lib/ambari-server/keys/credentials.jceks`
 
 3.	Удалить:
 
-:command:`/var/lib/ambari-server/keys/master`
+  :command:`/var/lib/ambari-server/keys/master`
 
 4.	Сбросить пароль базы данных и, при необходимости, пароль LDAP. Запустить настройку "ambari-server" (см. раздел "Шифрование базы данных и паролей LDAP (опционально)") и "setup-ldap ambari-server" (см. раздел "Настройка Ambari для использования LDAP-сервера").
 
