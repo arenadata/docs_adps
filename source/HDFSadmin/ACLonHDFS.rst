@@ -19,8 +19,8 @@ ACL на HDFS
 
 :command:`<property>` |br|
     :command:`<name>dfs.namenode.acls.enabled</name>` |br|    
-    :command:`<value>true</value>` |br|    
-:command:`</property>`
+    :command:`<value>true</value>` |br|
+ :command:`</property>`
 
 Для включения **ACL** в **HDFS** необходимо в файле *hdfs-site.xml* установить свойству *dfs.namenode.acls.enabled* значение *true*.
 
