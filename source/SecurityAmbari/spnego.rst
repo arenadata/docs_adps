@@ -37,7 +37,7 @@
    "hadoop.http.authentication.signature.secret.file", "/etc/security/http_secret"
    "hadoop.http.authentication.type", "kerberos"
    "hadoop.http.authentication.kerberos.keytab", "/etc/security/keytabs/spnego.service.keytab"
-   "hadoop.http.authentication.kerberos.principal", "HTTP/_HOST@**EXAMPLE.COM**"
+   "hadoop.http.authentication.kerberos.principal", "~HTTP/_HOST@**EXAMPLE.COM**"
    "hadoop.http.filter.initializers", "org.apache.hadoop.security.AuthenticationFilterInitializer"
    "hadoop.http.authentication.cookie.domain", "**mycompany.local**"
    
