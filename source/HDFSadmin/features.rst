@@ -121,12 +121,12 @@ Hive Partitioned Tables
 В данном случае **Hive** содержит секционированную таблицу данных о продажах. Ключ раздела – *country*. **Hive** сохраняет секционированные таблицы с помощью отдельного подкаталога для каждого определенного значения ключа раздела, поэтому структура файловой системы в **HDFS** выглядит так:
 
 :command:`user` |br|  
-:command:``-- hive` |br| 
-    :command:``-- warehouse` |br| 
-        :command:``-- sales` |br| 
+:command:`-- hive` |br| 
+    :command:`-- warehouse` |br| 
+        :command:`-- sales` |br| 
             :command:`|-- country=CN` |br| 
             :command:`|-- country=GB` |br| 
-            :command:``-- country=US`
+            :command:`-- country=US`
 
 Группа *salesadmin* – это группа для всех этих файлов. Члены группы имеют доступ на чтение и запись ко всем файлам. Отдельные группы, зависящие от конкретной страны, могут запускать запросы на использование, которые только считывают данные для конкретной страны, например, *sales_CN*, *sales_GB* и *sales_US*. У этих групп нет доступа на запись.
 
@@ -189,11 +189,11 @@ ACL по умолчанию
 Этот пример можно решить, установив **ACL** в корневое дерево, с именованной пользовательской записью, которая удаляет весь доступ пользователя. Для этой файловой системы: 
 
 :command:`dir1` |br| 
-:command:``-- dir2` |br| 
-    :command:``-- dir3` |br| 
+:command:`-- dir2` |br| 
+    :command:`-- dir3` |br| 
         :command:`|-- file1` |br| 
         :command:`|-- file2` |br| 
-        :command:``-- file3` |br| 
+        :command:`-- file3` |br| 
 :command:`dir1`-- dir2`-- dir3|-- file1|-- file2`-- file3`
 
 Установка **ACL** на *dir2* блокирует доступ для Bruce к *dir3*, *file1*, *file2* и *file3*:
