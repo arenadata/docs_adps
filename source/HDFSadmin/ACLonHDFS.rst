@@ -1,6 +1,11 @@
 ACL на HDFS
 -----------
 
+.. |br| raw:: html
+
+   <br />
+
+
 В данном руководстве описывается использование **списков контроля доступа** (**ACL**) в **распределенной файловой системе Hadoop** 
 (**HDFS**). **ACL** расширяет модель разрешения **HDFS** для поддержки более детального доступа к файлам на основе произвольных 
 комбинаций пользователей и групп.
@@ -12,12 +17,9 @@ ACL на HDFS
 
 По умолчанию **ACL** отключены, и при этом **NameNode** отклоняет все попытки установить **ACL**. Например:
 
-:command:`<property>`
-
-    :command:`<name>dfs.namenode.acls.enabled</name>`
-    
-    :command:`<value>true</value>`
-    
+:command:`<property>` |br|
+    :command:`<name>dfs.namenode.acls.enabled</name>` |br|    
+    :command:`<value>true</value>` |br|    
 :command:`</property>`
 
 Для включения **ACL** в **HDFS** необходимо в файле *hdfs-site.xml* установить свойству *dfs.namenode.acls.enabled* значение *true*.
@@ -51,18 +53,12 @@ ACL на HDFS
 
 Например:
 
-:command:`hdfs dfs -setfacl -m user:hadoop:rw- /file`
-
-:command:`hdfs dfs -setfacl -x user:hadoop /file`
-
-:command:`hdfs dfs -setfacl -b /file`
-
-:command:`hdfs dfs -setfacl -k /dir`
-
-:command:`hdfs dfs -setfacl --set user::rw-,user:hadoop:rw-,group::r--,other::r-- /file`
-
-:command:`hdfs dfs -setfacl -R -m user:hadoop:r-x /dir`
-
+:command:`hdfs dfs -setfacl -m user:hadoop:rw- /file` |br|
+:command:`hdfs dfs -setfacl -x user:hadoop /file` |br|
+:command:`hdfs dfs -setfacl -b /file` |br|
+:command:`hdfs dfs -setfacl -k /dir`  |br|
+:command:`hdfs dfs -setfacl --set user::rw-,user:hadoop:rw-,group::r--,other::r-- /file`  |br| 
+:command:`hdfs dfs -setfacl -R -m user:hadoop:r-x /dir` |br|
 :command:`hdfs dfs -setfacl -m default:user:hadoop:r-x /dir`
 
 Код выхода:
@@ -85,8 +81,7 @@ ACL на HDFS
 
 Например:
 
-:command:`hdfs dfs -getfacl /file`
-
+:command:`hdfs dfs -getfacl /file` |br|
 :command:`hdfs dfs -getfacl -R /dir`
 
 Код выхода:
