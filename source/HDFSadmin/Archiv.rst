@@ -87,10 +87,10 @@
 
 Чтобы назначить **DataNode** как хранилище *ARCHIVE*, необходимо вставить *[ARCHIVE]* в начало пути локальной файловой системы. Например:
 
-:command:`<property> |br| 
-  :command:`<name>dfs.data.dir</name> |br| 
-  :command:`<value>[ARCHIVE]file:///grid/1/tmp/data_trunk</value> |br| 
-:command:`</property> 
+:command:`<property>` |br| 
+  :command:`<name>dfs.data.dir</name>` |br| 
+  :command:`<value>[ARCHIVE]file:///grid/1/tmp/data_trunk</value>` |br| 
+:command:`</property>` 
 
 3. Установка и получение политики хранения.
 
