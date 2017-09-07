@@ -87,9 +87,7 @@
   :command:`default:group:execs:r-x` |br|  
   :command:`default:mask::r-x` |br|  
   :command:`default:other::---` |br|
-  
   |br|
-
   :command:`# file: /monthly-sales-data/FEB` |br|  
   :command:`# owner: bruce` |br|  
   :command:`# group: sales` |br|  
