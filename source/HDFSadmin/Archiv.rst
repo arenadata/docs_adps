@@ -131,7 +131,7 @@
 
 Команда:
 
-:command:`hdfs mover [-p <files/dirs> | -f <local file name>] `
+:command:`hdfs mover [-p <files/dirs> | -f <local file name>]`
 
 Аргументы:
 
