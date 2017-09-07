@@ -8,7 +8,7 @@
 
    <br />
 
-До реализации **списков контроля доступа** (**ACL**) модель |br| разрешения **HDFS** была эквивалентна традиционным **UNIX-разрешениям**. В этой модели разрешения для каждого файла или каталога управляются набором из трех различных пользовательских классов: "Владелец", "Группа" и "Другие". Для каждого пользовательского класса существует три разрешения: чтение, запись и выполнение. Таким образом, для любого объекта файловой системы его разрешения могут быть закодированы в 3*3=9 бит. Когда пользователь пытается получить доступ к объекту файловой системы, **HDFS** применяет разрешения в соответствии с конкретным классом пользователя, применимым к нему. Если пользователь является владельцем, **HDFS** проверяет разрешения класса "Владелец". Если пользователь не является владельцем, но является членом группы объектов файловой системы, **HDFS** проверяет разрешения класса "Группа". В противном случае **HDFS** проверяет разрешения класса "Другие".
+До реализации **списков контроля доступа** (**ACL**) модель разрешения **HDFS** была эквивалентна традиционным **UNIX-разрешениям**. В этой модели разрешения для каждого файла или каталога управляются набором из трех различных пользовательских классов: "Владелец", "Группа" и "Другие". Для каждого пользовательского класса существует три разрешения: чтение, запись и выполнение. Таким образом, для любого объекта файловой системы его разрешения могут быть закодированы в 3*3=9 бит. Когда пользователь пытается получить доступ к объекту файловой системы, **HDFS** применяет разрешения в соответствии с конкретным классом пользователя, применимым к нему. Если пользователь является владельцем, **HDFS** проверяет разрешения класса "Владелец". Если пользователь не является владельцем, но является членом группы объектов файловой системы, **HDFS** проверяет разрешения класса "Группа". В противном случае **HDFS** проверяет разрешения класса "Другие".
 
 Эта модель может в достаточной степени удовлетворять большому количеству требований безопасности. Например, рассмотрим отдел продаж, который хотел бы, чтобы один пользователь – Брюс, менеджер отдела, – контролировал все изменения данных продаж. Другим сотрудникам отдела продаж необходимо просмотреть данные, но не следует изменять их. Все остальные компании (за пределами отдела продаж) не должны иметь возможность просматривать данные. Это требование может быть реализовано путем запуска *chmod 640* в файле со следующим результатом:
 
@@ -37,30 +37,20 @@
 
 +	Запустить *getfacl*, чтобы проверить результаты:
 
-  :command:`> hdfs dfs -getfacl /sales-data`
-
-  :command:`# file: /sales-data`
-
-  :command:`# owner: bruce`
-
-  :command:`# group: sales`
-
-  :command:`user::rw-`
-
-  :command:`group::r--`
-
-  :command:`group:execs:r--`
-
-  :command:`mask::r--`
-
+  :command:`> hdfs dfs -getfacl /sales-data` |br|
+  :command:`# file: /sales-data` |br|
+  :command:`# owner: bruce` |br|
+  :command:`# group: sales` |br|
+  :command:`user::rw-` |br|
+  :command:`group::r--` |br|
+  :command:`group:execs:r--` |br|
+  :command:`mask::r--` |br|
   :command:`other::---`
 
 +	Если запустить команду *ls*, можно увидеть, что перечисленные разрешения были добавлены с символом "+" для обозначения наличия ACL. Символ "+" добавляется к разрешениям любого файла или каталога с ACL.
 
-  :command:`> hdfs dfs -ls /sales-data`
-
-  :command:`Found 1 items`
-
+  :command:`> hdfs dfs -ls /sales-data` |br|
+  :command:`Found 1 items` |br|
   :command:`-rw-r-----+  3 bruce sales          0 2014-03-04 16:31 /sales-data`
 
 Новая запись **ACL** добавляется к существующим разрешениям, определенным в разрешенных битах. Как владелец файла, Брюс имеет полный контроль. Члены группы *sales* или *execs* имеют доступ на чтение. У остальных нет доступа. 
@@ -80,90 +70,54 @@
 
 +	Создать подкаталоги:
 
-  :command:`> hdfs dfs -mkdir /monthly-sales-data/JAN`
-
+  :command:`> hdfs dfs -mkdir /monthly-sales-data/JAN` |br|
   :command:`> hdfs dfs -mkdir /monthly-sales-data/FEB`
 
 +	Убедиться, что HDFS автоматически применил ACL по умолчанию в подкаталоги: 
 
-  :command:`> hdfs dfs -getfacl -R /monthly-sales-data`
+  :command:`> hdfs dfs -getfacl -R /monthly-sales-data` |br|
+  :command:`# file: /monthly-sales-data` |br|
+  :command:`# owner: bruce` |br|  
+  :command:`# group: sales` |br| 
+  :command:`user::rwx` |br|  
+  :command:`group::r-x` |br|  
+  :command:`other::---` |br|  
+  :command:`default:user::rwx` |br|  
+  :command:`default:group::r-x` |br|  
+  :command:`default:group:execs:r-x` |br|  
+  :command:`default:mask::r-x` |br|  
+  :command:`default:other::---` |br|
   
-  :command:`# file: /monthly-sales-data`
-  
-  :command:`# owner: bruce`
-  
-  :command:`# group: sales`
-  
-  :command:`user::rwx`
-  
-  :command:`group::r-x`
-  
-  :command:`other::---`
-  
-  :command:`default:user::rwx`
-  
-  :command:`default:group::r-x`
-  
-  :command:`default:group:execs:r-x`
-  
-  :command:`default:mask::r-x`
-  
-  :command:`default:other::---`
-  
-  .
+  |br|
 
-  :command:`# file: /monthly-sales-data/FEB`
+  :command:`# file: /monthly-sales-data/FEB` |br|  
+  :command:`# owner: bruce` |br|  
+  :command:`# group: sales` |br|  
+  :command:`user::rwx` |br|  
+  :command:`group::r-x` |br|  
+  :command:`group:execs:r-x` |br|  
+  :command:`mask::r-x` |br|  
+  :command:`other::---` |br|  
+  :command:`default:user::rwx` |br|  
+  :command:`default:group::r-x` |br|  
+  :command:`default:group:execs:r-x` |br|  
+  :command:`default:mask::r-x` |br|  
+  :command:`default:other::---` |br|
   
-  :command:`# owner: bruce`
-  
-  :command:`# group: sales`
-  
-  :command:`user::rwx`
-  
-  :command:`group::r-x`
-  
-  :command:`group:execs:r-x`
-  
-  :command:`mask::r-x`
-  
-  :command:`other::---`
-  
-  :command:`default:user::rwx`
-  
-  :command:`default:group::r-x`
-  
-  :command:`default:group:execs:r-x`
-  
-  :command:`default:mask::r-x`
-  
-  :command:`default:other::---`
-  
-  .
+  |br|
 
-  :command:`# file: /monthly-sales-data/JAN`
-  
-  :command:`# owner: bruce`
-  
-  :command:`# group: sales`
-  
-  :command:`user::rwx`
-  
-  :command:`group::r-x`
-  
-  :command:`group:execs:r-x`
-  
-  :command:`mask::r-x`
-  
-  :command:`other::---`
-  
-  :command:`default:user::rwx`
-  
-  :command:`default:group::r-x`
-  
-  :command:`default:group:execs:r-x`
-  
-  :command:`default:mask::r-x`
-  
+  :command:`# file: /monthly-sales-data/JAN` |br|  
+  :command:`# owner: bruce` |br|  
+  :command:`# group: sales` |br|  
+  :command:`user::rwx` |br|  
+  :command:`group::r-x` |br|  
+  :command:`group:execs:r-x` |br|  
+  :command:`mask::r-x` |br|  
+  :command:`other::---` |br|  
+  :command:`default:user::rwx` |br|  
+  :command:`default:group::r-x` |br|  
+  :command:`default:group:execs:r-x` |br|  
+  :command:`default:mask::r-x` |br|  
   :command:`default:other::---`
   
 **ACL по умолчанию** копируется из родительского каталога в дочерний файл или каталог при его создании. Последующие изменения **ACL по умолчанию** в родительском каталоге не изменяют **ACL** существующих дочерних элементов. 
