@@ -31,8 +31,8 @@
 
 Для решения одного из вопросов, затронутых в предыдущем разделе, установим **ACL**, который предоставляет доступ к данным о доступе к чтению членам группы *execs*. 
 
-+	Установить ACL: 
-
++	Установить ACL:  
+  
   :command:`> hdfs dfs -setfacl -m group:execs:r-- /sales-data`
 
 +	Запустить *getfacl*, чтобы проверить результаты:
@@ -103,9 +103,7 @@
   :command:`default:group:execs:r-x` |br|  
   :command:`default:mask::r-x` |br|  
   :command:`default:other::---` |br|
-  
   |br|
-
   :command:`# file: /monthly-sales-data/JAN` |br|  
   :command:`# owner: bruce` |br|  
   :command:`# group: sales` |br|  
@@ -135,32 +133,19 @@
 
 2. Запустить *getfacl* для проверки результатов:
 
-  :command:`> hdfs dfs -getfacl /monthly-sales-data`
-
-  :command:`# file: /monthly-sales-data`
-
-  :command:`# owner: bruce`
-
-  :command:`# group: sales`
-
-  :command:`user::rwx`
-
-  :command:`user:diana:---`
-
-  :command:`group::r-x`
-
-  :command:`mask::r-x`
-
-  :command:`other::---`
-
-  :command:`default:user::rwx`
-
-  :command:`default:group::r-x`
-
-  :command:`default:group:execs:r-x`
-
-  :command:`default:mask::r-x`
-
+  :command:`> hdfs dfs -getfacl /monthly-sales-data` |br|
+  :command:`# file: /monthly-sales-data` |br|
+  :command:`# owner: bruce` |br|
+  :command:`# group: sales` |br|
+  :command:`user::rwx` |br|
+  :command:`user:diana:---` |br|
+  :command:`group::r-x` |br|
+  :command:`mask::r-x` |br|
+  :command:`other::---` |br|
+  :command:`default:user::rwx` |br|
+  :command:`default:group::r-x` |br|
+  :command:`default:group:execs:r-x` |br|
+  :command:`default:mask::r-x` |br|
   :command:`default:other::---`
 
 Новая запись **ACL** добавляется к существующим разрешениям, определенным в **Permission Bits**. Брюс имеет полный контроль как владельц файла. Члены группы *sales* или *execs* имеют доступ на чтение. У остальных нет доступа.
