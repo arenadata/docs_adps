@@ -26,10 +26,10 @@
 
   :command:`chmod 440 /etc/security/http_secret`
 
-2. В Ambari Web перейти по вкладкам "Services > HDFS > Configs";
-3. Добавить или изменить свойства конфигурации в *Advanced core-site*, указанные в таблице 6.
+2. В Ambari Web перейти по вкладкам :menuselection:`Services --> HDFS  --> Configs`   "Services > HDFS > Configs";
+3. Добавить или изменить свойства конфигурации в *Advanced core-site*, приведенные |br| в таблице 6.
 
-.. csv-table:: Табл. 6. Табл. 6. Новые значения свойств конфигурации в Advanced core-site
+.. csv-table:: Табл. 6. Новые значения свойств конфигурации в Advanced core-site
    :header: "Свойство", "Новое значение"
    :widths: 25, 25
 
