@@ -119,10 +119,49 @@ Cache Pool
 
 
 
+Дополнительные свойства
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Следующие свойства не являются обязательными, но могут быть заданы в настройках:
+
++ *dfs.namenode.path.based.cache.refresh.interval.ms* число миллисекунд, которое NameNode использует между последующими повторными сканированиями кэша. По умолчанию этот параметр установлен на *300000*, что составляет пять минут. Пример:
+
+  :command:`<property>` |br| 
+      :command:`<name>dfs.namenode.path.based.cache.refresh.interval.ms</name>` |br| 
+      :command:`<value>300000</value>` |br| 
+   :command:`</property>`
+
++ *dfs.time.between.resending.caching.directives.ms* NameNode использует это значение как количество миллисекунд между повторным кэшированием директивов. Пример:
+
+  :command:`<property>` |br| 
+      :command:`<name>dfs.time.between.resending.caching.directives.ms</name>` |br| 
+      :command:`<value>300000</value>` |br| 
+   :command:`</property>`
+
++ *dfs.datanode.fsdatasetcache.max.threads.per.volume* DataNode использует это значение как максимальное количество потоков на единицу объема для кэширования новых данных. По умолчанию этот параметр имеет значение *4*. Пример:
+
+  :command:`<property>` |br| 
+      :command:`<name>dfs.datanode.fsdatasetcache.max.threads.per.volume</name>` |br| 
+      :command:`<value>4</value>` |br| 
+   :command:`</property>` 
+   
++ *dfs.cachereport.intervalMsec* DataNode использует это значение как число миллисекунд между отправкой отчета о состоянии кэша в NameNode. По умолчанию этот параметр установлен на *10000*, что составляет 10 секунд. Пример:   
+
+  :command:`<property>` |br| 
+      :command:`<name>dfs.cachereport.intervalMsec</name>` |br| 
+      :command:`<value>10000</value>` |br| 
+   :command:`</property>` 
+
++ *dfs.namenode.path.based.cache.block.map.allocation.percent* Процент Java heap, распределенный по картам кэшированных блоков. Карта кешированных блоков - это хеш-карта, которая использует связанное хэширование. Доступ к меньшим картам осуществляется медленнее, чем если количество кешированных блоков велико; большие карты потребляют больше памяти. Значение по умолчанию - *0,25* процента. Пример:
+
+  :command:`<property>` |br| 
+      :command:`<name>dfs.namenode.path.based.cache.block.map.allocation.percent</name>` |br| 
+      :command:`<value>0.25</value>` |br| 
+   :command:`</property>` 
 
 
-
-
+Ограничения ОС
+^^^^^^^^^^^^^^
 
 
 
