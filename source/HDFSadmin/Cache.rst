@@ -163,9 +163,18 @@ Cache Pool
 Ограничения ОС
 ^^^^^^^^^^^^^^
 
+Если выдается сообщение об ошибке *"Cannot start datanode because the configured max locked memory size... is more than the datanode's available RLIMIT_MEMLOCK ulimit"*, это означает, что операционная система накладывает более низкое ограничение на объем памяти, который можно заблокировать, чем настроено. Чтобы исправить это, необходимо настроить значение *ulimit -l*, с которым работает **DataNode**. Это значение обычно настраивается в файле */etc/security/limits.conf* (может варьироваться в зависимости от используемой ОС и дистрибутива).
 
+Вы узнаете, что значение настроено правильно, когда сможете запустить *ulimit-l* из оболочки и получить либо более высокое значение, чем настроенное, либо строку "unlimited", что указывает на отсутствие ограничения.
 
+.. important:: Для *ulimit -l* характерно выводить ограничение блокировки памяти в килобайтах (КБ), но при этом *dfs.datanode.max.locked.memory* должно быть указано в байтах.
 
+Например, значение *dfs.datanode.max.locked.memory* установлено в *128000* байт:
+
+:command:`<property>` |br| 
+    :command:`<name>dfs.datanode.max.locked.memory</name>` |br| 
+    :command:`<value>128000</value>` |br| 
+:command:`</property>` 
 
 
 
