@@ -236,6 +236,7 @@ modifyPool
 
 Функции команды *modifyPool* описаны в таблице 5. 
 
+
 .. csv-table:: Табл. 5. Функции команды removePool
    :header: "Функция", "Описание"
    :widths: 10, 30
