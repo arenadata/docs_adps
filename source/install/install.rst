@@ -93,7 +93,7 @@
 После загрузки **Ambari 2.5.1** необходимо извлечь архив в промежуточный
 каталог. Например:
 
-:command:`tar -xzf /staging/AMBARI-2.5.1.tar -C /staging/`
+:command:`tar -xvf /staging/AMBARI-2.5.1.tar -C /staging/`
 
 
 
