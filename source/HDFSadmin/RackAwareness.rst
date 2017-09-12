@@ -1,6 +1,11 @@
 Настройка Rack Awareness на ADH
 -------------------------------
 
+.. |br| raw:: html
+
+   <br />
+
+
 
 Для настройки **Rack Awareness** на кластере **ADH** необходимо использовать следующие настройки:
 
@@ -8,54 +13,54 @@
 1. Создание скрипта Rack Topology 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**Hadoop** использует скрипты топологии для определения местоположения стойки узлов. **Hadoop** применяет данную информацию для репликации данных блока в резервные стойки.
+**Hadoop** использует скрипты топологии для определения местоположения стойки узлов и применяет данную информацию для репликации данных блока в резервные стойки.
 
 + Создать сценарий топологии и файл данных. Сценарий топологии должен быть исполняемым. 
 
   **Пример сценария топологии**. Имя файла: *rack-topology.sh*:
   
-  #!/bin/bash
+  :command:`#!/bin/bash` |br| 
 
-  # Adjust/Add the property "net.topology.script.file.name"
-  # to core-site.xml with the "absolute" path the this
-  # file.  ENSURE the file is "executable".
+  :command:`# Adjust/Add the property "net.topology.script.file.name"` |br| 
+  :command:`# to core-site.xml with the "absolute" path the this` |br| 
+  :command:`# file.  ENSURE the file is "executable".` |br| 
   
-  # Supply appropriate rack prefix
-  RACK_PREFIX=default
+  :command:`# Supply appropriate rack prefix` |br| 
+  :command:`RACK_PREFIX=default` |br| 
   
-  # To test, supply a hostname as script input:
-  if [ $# -gt 0 ]; then
+  :command:`# To test, supply a hostname as script input:` |br| 
+  :command:`if [ $# -gt 0 ]; then` |br| 
   
-  CTL_FILE=${CTL_FILE:-"rack_topology.data"}
+  :command:`CTL_FILE=${CTL_FILE:-"rack_topology.data"}` |br| 
   
-  HADOOP_CONF=${HADOOP_CONF:-"/etc/hadoop/conf"} 
+  :command:`HADOOP_CONF=${HADOOP_CONF:-"/etc/hadoop/conf"}` |br|  
   
-  if [ ! -f ${HADOOP_CONF}/${CTL_FILE} ]; then
-    echo -n "/$RACK_PREFIX/rack "
-    exit 0
-  fi
+  :command:`if [ ! -f ${HADOOP_CONF}/${CTL_FILE} ]; then` |br| 
+    :command:`echo -n "/$RACK_PREFIX/rack "` |br| 
+    :command:`exit 0` |br| 
+  :command:`fi` |br| 
   
-  while [ $# -gt 0 ] ; do
-    nodeArg=$1
-    exec< ${HADOOP_CONF}/${CTL_FILE}
-    result=""
-    while read line ; do
-      ar=( $line )
-      if [ "${ar[0]}" = "$nodeArg" ] ; then
-        result="${ar[1]}"
-      fi
-    done
-    shift
-    if [ -z "$result" ] ; then
-      echo -n "/$RACK_PREFIX/rack "
-    else
-      echo -n "/$RACK_PREFIX/rack_$result "
-    fi
-  done
+  :command:`while [ $# -gt 0 ] ; do` |br| 
+    :command:`nodeArg=$1` |br| 
+    :command:`exec< ${HADOOP_CONF}/${CTL_FILE}` |br| 
+    :command:`result=""` |br| 
+    :command:`while read line ; do` |br| 
+      :command:`ar=( $line )` |br| 
+      :command:`if [ "${ar[0]}" = "$nodeArg" ] ; then` |br| 
+        :command:`result="${ar[1]}"` |br| 
+      :command:`fi` |br| 
+    :command:`done` |br| 
+    :command:`shift` |br| 
+    :command:`if [ -z "$result" ] ; then` |br| 
+      :command:`echo -n "/$RACK_PREFIX/rack "` |br| 
+    :command:`else` |br| 
+      :command:`echo -n "/$RACK_PREFIX/rack_$result "` |br| 
+    :command:`fi` |br| 
+  :command:`done` |br| 
   
-  else
-    echo -n "/$RACK_PREFIX/rack "
-  fi
+  :command:`else` |br| 
+    :command:`echo -n "/$RACK_PREFIX/rack "` |br| 
+  :command:`fi` |br| 
 
   **Пример файла данных топологии**. Имя файла: *rack_topology.data*:
   
