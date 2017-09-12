@@ -81,6 +81,26 @@
 
 
 
+
+
+ **Пример файла данных топологии**. Имя файла: *rack_topology.data*::
+  
+  # This file should be: 
+  #  - Placed in the /etc/hadoop/conf directory 
+  #    - On the Namenode (and backups IE: HA, Failover, etc)
+  #    - On the Job Tracker OR Resource Manager (and any Failover JT's/RM's)  
+  # This file should be placed in the /etc/hadoop/conf directory.
+  
+  # Add Hostnames to this file. Format <host ip> <rack_location> 
+  192.0.2.0 01
+  192.0.2.1 02 
+  192.0.2.2 03 
+|br|
++ Скопировать оба этих файла в каталог */ etc / hadoop / conf* на всех узлах кластера;
+
++ Запустить скрипт *rack-topology.sh*, чтобы убедиться, что он возвращает правильную информацию о стойке для каждого хоста.
+
+
 2. Добавление свойства Script Topology в core-site.xml
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
