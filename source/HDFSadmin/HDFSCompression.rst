@@ -22,7 +22,7 @@
   + Отредактировать файл *core-site.xml* на главной машине NameNode:
   
     :command:`<property>` |br| 
-      :command:`<name>io.compression.codecs</name> ` |br|   
+      :command:`<name>io.compression.codecs</name>` |br| 
       :command:`<value>org.apache.hadoop.io.compress.GzipCodec,org.apache.hadoop.io.` |br| 
       :command:`compress.DefaultCodec,com.hadoop.compression.lzo.LzoCodec,org.apache.` |br| 
       :command:`hadoop.io.compress.SnappyCodec</value>` |br| 
