@@ -25,9 +25,8 @@
     
     <property>
     <name>io.compression.codecs</name>    <value>org.apache.hadoop.io.compress.GzipCodec,org.apache.hadoop.io.compress.DefaultCodec,com.hadoop.compression.lzo.LzoCodec,org.apache.hadoop.io.compress.SnappyCodec</value>
-    <description>A list of the compression codec classes that can be used
-                 for compression/decompression.</description>
-  </property>
+    <description>A list of the compression codec classes that can be used for compression/decompression.</description>
+    </property>
     
 |br|
    + Изменить файл *mapred-site.xml* на главной машине JobTracker:
