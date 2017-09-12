@@ -64,16 +64,16 @@
 
   **Пример файла данных топологии**. Имя файла: *rack_topology.data*:
   
-  # This file should be:
-  #  - Placed in the /etc/hadoop/conf directory
-  #    - On the Namenode (and backups IE: HA, Failover, etc)
-  #    - On the Job Tracker OR Resource Manager (and any Failover JT's/RM's) 
-  # This file should be placed in the /etc/hadoop/conf directory.
+  :command:`# This file should be:` |br| 
+  :command:`#  - Placed in the /etc/hadoop/conf directory` |br| 
+  :command:`#    - On the Namenode (and backups IE: HA, Failover, etc)` |br| 
+  :command:`#    - On the Job Tracker OR Resource Manager (and any Failover JT's/RM's)` |br|  
+  :command:`# This file should be placed in the /etc/hadoop/conf directory.` |br| 
   
-  # Add Hostnames to this file. Format <host ip> <rack_location>
-  192.0.2.0 01
-  192.0.2.1 02
-  192.0.2.2 03
+  :command:`# Add Hostnames to this file. Format <host ip> <rack_location>` |br| 
+  :command:`192.0.2.0 01` |br| 
+  :command:`192.0.2.1 02` |br| 
+  :command:`192.0.2.2 03` |br| 
 
 + Скопировать оба этих файла в каталог */ etc / hadoop / conf* на всех узлах кластера;
 
