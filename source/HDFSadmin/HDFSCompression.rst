@@ -11,9 +11,8 @@
 
 Для **GzipCodec** необходимо выполнить следующие инструкции:
 
-+ Вариант I: использовать GzipCodec для одноразовых заданий:
-  ::
-  
++ Вариант I: использовать GzipCodec для одноразовых заданий::
+    
   hadoop jar hadoop-examples-1.1.0-SNAPSHOT.jar sort sbr"-Dmapred.compress.map.output=true" sbr"-Dmapred.map.output.compression.codec=org.apache.hadoop.io.compress.GzipCodec"sbr "-Dmapred.output.compress=true" sbr"-Dmapred.output.compression.codec=org.apache.hadoop.io.compress.GzipCodec"sbr -outKey org.apache.hadoop.io.Textsbr -outValue org.apache.hadoop.io.Text input output 
   
   |br|
@@ -34,21 +33,21 @@
     
 |br|
    + Изменить файл *mapred-site.xml* на главной машине JobTracker:
-    ::
+      ::
     
-    <property> 
-      <name>mapred.compress.map.output</name>
-      <value>true</value>
-    </property>`  
+      <property> 
+        <name>mapred.compress.map.output</name>
+        <value>true</value>
+      </property>  
     
- |br| ::
+      ::
  
       <property>  
         <name>mapred.map.output.compression.codec</name>
         <value>org.apache.hadoop.io.compress.GzipCodec</value>
       </property> 
       
- |br| ::
+      ::
  
       <property>
         <name>mapred.output.compression.type</name>      
@@ -57,12 +56,12 @@
       
 |br|
    + (Опционально) Задать следующие два параметра конфигурации для включения сжатия задания. Изменить файл *mapred-site.xml* на главной машине Resource Manager:
-    ::
+      ::
     
-    <property>      
-      <name>mapred.output.compress</name>
-      <value>true</value>
-    </property>   
+      <property>      
+        <name>mapred.output.compress</name>
+        <value>true</value>
+      </property>   
     
  |br| ::
  
