@@ -17,22 +17,23 @@
 
 + Создать сценарий топологии и файл данных. Сценарий топологии должен быть исполняемым. 
 
-  **Пример сценария топологии**. Имя файла: *rack-topology.sh*::
+  **Пример сценария топологии**. Имя файла: *rack-topology.sh*:
+  ::
   
-  #!/bin/bash |br| 
+  #!/bin/bash 
   # Adjust/Add the property "net.topology.script.file.name" 
   # to core-site.xml with the "absolute" path the this
-  # file.  ENSURE the file is "executable". |br| 
+  # file.  ENSURE the file is "executable".
   # Supply appropriate rack prefix
-  RACK_PREFIX=default |br| 
+  RACK_PREFIX=default 
   # To test, supply a hostname as script input:
-  if [ $# -gt 0 ]; then |br| 
-  CTL_FILE=${CTL_FILE:-"rack_topology.data"} |br| 
-  HADOOP_CONF=${HADOOP_CONF:-"/etc/hadoop/conf"}  |br| 
+  if [ $# -gt 0 ]; then 
+  CTL_FILE=${CTL_FILE:-"rack_topology.data"} 
+  HADOOP_CONF=${HADOOP_CONF:-"/etc/hadoop/conf"} 
   if [ ! -f ${HADOOP_CONF}/${CTL_FILE} ]; then
     echo -n "/$RACK_PREFIX/rack "
     exit 0
-  fi  |br| 
+  fi  
   while [ $# -gt 0 ] ; do 
     nodeArg=$1
     exec< ${HADOOP_CONF}/${CTL_FILE}
@@ -49,7 +50,7 @@
     else 
       echo -n "/$RACK_PREFIX/rack_$result "
     fi
-  done |br| 
+  done 
   else 
     echo -n "/$RACK_PREFIX/rack " 
   fi 
