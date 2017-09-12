@@ -29,9 +29,7 @@
       :command:`<description>A list of the compression codec classes that can be used` |br| 
       :command:`for compression/decompression.</description>` |br| 
     :command:`</property>` |br| 
-
 |br|
-
   + Изменить файл *mapred-site.xml* на главной машине JobTracker:
   
     :command:`<property>` |br| 
@@ -48,9 +46,7 @@
       :command:`<name>mapred.output.compression.type</name>` |br|         
       :command:`<value>BLOCK</value>` |br| 
     :command:`</property>` |br| 
-
 |br|
-
   + (Опционально) Задать следующие два параметра конфигурации для включения сжатия задания. Изменить файл *mapred-site.xml* на главной машине Resource Manager:
   
     :command:`<property>` |br|      
@@ -62,9 +58,7 @@
       :command:`<name>mapred.output.compression.codec</name>` |br| 
       :command:`<value>org.apache.hadoop.io.compress.GzipCodec</value>` |br|    
     :command:`</property>` |br| 
-
 |br|
-
   + Перезапустить кластер.   
 
 
