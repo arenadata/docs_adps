@@ -72,7 +72,7 @@
 
 
 Создание архива Hadoop
-~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^
 
 Инструмент архивации **Hadoop** вызывается следующей командой:
 
@@ -99,10 +99,47 @@
  hdfs dfs -mkdir /user/hadoop/dir2
 
 
+
 Просмотр файлов в архивах Hadoop
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Команда *hdfs dfs -ls* может использоваться для поиска файлов в архивах **Hadoop**. Используя пример архива */user/zoo/foo.har*, созданный в предыдущем разделе, необходимо использовать следующую команду для вывода списка файлов в архиве:
 
+:command:`hdfs dfs -ls har:///user/zoo/foo.har/`
+
+Результатом будет:
+::
+
+ har:///user/zoo/foo.har/dir1
+ har:///user/zoo/foo.har/dir2
+
+Данные архивы были созданы с помощью следующей команды:
+
+:command:`hadoop archive -archiveName foo.har -p /user/hadoop dir1 dir2 /user/zoo`
+
+Если изменить данную команду на:
+
+:command:`hadoop archive -archiveName foo.har -p /user/ hadoop/dir1 hadoop/dir2 /user/zoo`
+
+И затем выполнить следующую команду:
+
+:command:`hdfs dfs -ls -R har:///user/zoo/foo.har`
+
+То результатом будет:
+::
+ 
+ har:///user/zoo/foo.har/hadoop
+ har:///user/zoo/foo.har/hadoop/dir1
+ har:///user/zoo/foo.har/hadoop/dir2
+
+Следует оборатить внимание, что с измененным родительским аргументом файлы заархивированы относительно */user/*, а не */user/hadoop*.
+
+
+
+Hadoop Archives и MapReduce
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Чтобы использовать **архивы Hadoop** с **MapReduce**, необходимо ссылаться на файлы несколько иначе, чем на файловую систему по умолчанию. Если есть **архив Hadoop**, хранящийся в **HDFS** в */user/ zoo/foo.har*, следует указать каталог ввода как *har:///user/zoo/foo.har*, чтобы использовать его как **MapReduce**. Поскольку **архивы Hadoop** отображаются как файловая система, **MapReduce** может использовать все логические входные файлы в **архивы Hadoop** в качестве входных данных.
 
 
 
