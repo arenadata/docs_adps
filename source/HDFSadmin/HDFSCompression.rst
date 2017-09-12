@@ -27,8 +27,8 @@
     <description>A list of the compression codec classes that can be used for compression/decompression.</description>
     </property>
 
-|br|
-   + Изменить файл *mapred-site.xml* на главной машине JobTracker:
+
+  + Изменить файл *mapred-site.xml* на главной машине JobTracker:
       ::
       
        <property>
@@ -51,8 +51,8 @@
        </property>
  
       
-|br|
-   + (Опционально) Задать следующие два параметра конфигурации для включения сжатия задания. Изменить файл *mapred-site.xml* на главной машине Resource Manager:
+
+  + (Опционально) Задать следующие два параметра конфигурации для включения сжатия задания. Изменить файл *mapred-site.xml* на главной машине Resource Manager:
       ::
       
        <property>
@@ -68,8 +68,8 @@
        </property>
  
       
-|br|
-   + Перезапустить кластер.   
+
+  + Перезапустить кластер.   
 
 
    
