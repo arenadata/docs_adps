@@ -24,50 +24,52 @@
     ::
     
     <property>
-      <name>io.compression.codecs</name>
-<value>org.apache.hadoop.io.compress.GzipCodec,org.apache.hadoop.io.compress.DefaultCodec,com.hadoop.compression.lzo.LzoCodec,org.apache.hadoop.io.compress.SnappyCodec</value><description>A list of the compression codec classes that can be used for compression/decompression.</description>
-    </property>
+    <name>io.compression.codecs</name>    <value>org.apache.hadoop.io.compress.GzipCodec,org.apache.hadoop.io.compress.DefaultCodec,com.hadoop.compression.lzo.LzoCodec,org.apache.hadoop.io.compress.SnappyCodec</value>
+    <description>A list of the compression codec classes that can be used
+                 for compression/decompression.</description>
+  </property>
     
 |br|
    + Изменить файл *mapred-site.xml* на главной машине JobTracker:
-      
       ::
-    
+      
       <property>
         <name>mapred.compress.map.output</name>
         <value>true</value>
-      </property>  
+      </property>
     
       ::
- 
+      
       <property>
         <name>mapred.map.output.compression.codec</name>
         <value>org.apache.hadoop.io.compress.GzipCodec</value>
       </property> 
-      
-      ::
  
-      <property>
-        <name>mapred.output.compression.type</name>
-        <value>BLOCK</value>
-      </property>
+      ::
+      
+       <property>
+         <name>mapred.output.compression.type</name>
+         <value>BLOCK</value>
+       </property>
+ 
       
 |br|
    + (Опционально) Задать следующие два параметра конфигурации для включения сжатия задания. Изменить файл *mapred-site.xml* на главной машине Resource Manager:
       
       ::
-    
+      
       <property>
         <name>mapred.output.compress</name>
         <value>true</value>
-      </property>   
+      </property>
     
       ::
- 
+      
       <property>
         <name>mapred.output.compression.codec</name>
         <value>org.apache.hadoop.io.compress.GzipCodec</value>
       </property>
+ 
       
 |br|
    + Перезапустить кластер.   
