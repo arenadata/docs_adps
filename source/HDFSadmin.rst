@@ -27,4 +27,5 @@ E-mail: info@arenadata.io
    HDFSadmin/RackAwareness
    HDFSadmin/HDFSArchives
    HDFSadmin/JMXMetrics
+   HDFSadmin/Memory
 
