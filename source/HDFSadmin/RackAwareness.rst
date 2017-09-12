@@ -90,10 +90,28 @@
 2. Добавление свойства Script Topology в core-site.xml
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
++ Остановить HDFS;
++ Добавить в *core-site.xml* следующее свойство:
+  ::
+  
+   <property>
+     <name>net.topology.script.file.name</name> 
+     <value>/etc/hadoop/conf/rack-topology.sh</value>
+   </property>
+  
+  По умолчанию скрипт топологии обрабатывает до 100 заявок за запрос. Можно указать другое количество заявок в свойстве *net.topology.script.number.args*. Например:
+  ::
+  
+   <property> 
+     <name>net.topology.script.number.args</name> 
+     <value>75</value>
+   </property>
   
   
-  
-  
+3. Перезапуск HDFS и MapReduce
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
   
   
   
