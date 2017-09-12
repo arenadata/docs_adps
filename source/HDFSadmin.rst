@@ -25,4 +25,5 @@ E-mail: info@arenadata.io
    HDFSadmin/Cache 
    HDFSadmin/HDFSCompression
    HDFSadmin/RackAwareness
+   HDFSadmin/HDFSArchives
 
