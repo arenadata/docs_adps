@@ -92,6 +92,8 @@
   #    - On the Job Tracker OR Resource Manager (and any Failover JT's/RM's)  
   # This file should be placed in the /etc/hadoop/conf directory.
   
+  ::
+  
   # Add Hostnames to this file. Format <host ip> <rack_location> 
   192.0.2.0 01
   192.0.2.1 02 
