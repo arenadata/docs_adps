@@ -19,27 +19,20 @@
 
   **Пример сценария топологии**. Имя файла: *rack-topology.sh*::
   
-  #!/bin/bash
-
+  #!/bin/bash |br|
   # Adjust/Add the property "net.topology.script.file.name" 
   # to core-site.xml with the "absolute" path the this
-  # file.  ENSURE the file is "executable".
-  
+  # file.  ENSURE the file is "executable". |br|
   # Supply appropriate rack prefix
-  RACK_PREFIX=default
-  
+  RACK_PREFIX=default |br|
   # To test, supply a hostname as script input:
-  if [ $# -gt 0 ]; then
-  
-  CTL_FILE=${CTL_FILE:-"rack_topology.data"}
-  
-  HADOOP_CONF=${HADOOP_CONF:-"/etc/hadoop/conf"}  
-  
+  if [ $# -gt 0 ]; then |br|
+  CTL_FILE=${CTL_FILE:-"rack_topology.data"} |br|
+  HADOOP_CONF=${HADOOP_CONF:-"/etc/hadoop/conf"} |br|
   if [ ! -f ${HADOOP_CONF}/${CTL_FILE} ]; then
     echo -n "/$RACK_PREFIX/rack "
     exit 0
-  fi 
-  
+  fi |br| 
   while [ $# -gt 0 ] ; do 
     nodeArg=$1
     exec< ${HADOOP_CONF}/${CTL_FILE}
@@ -56,8 +49,7 @@
     else 
       echo -n "/$RACK_PREFIX/rack_$result "
     fi
-  done
-  
+  done |br|
   else 
     echo -n "/$RACK_PREFIX/rack " 
   fi 
