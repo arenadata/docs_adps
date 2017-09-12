@@ -20,6 +20,7 @@
 + Вариант II: включить GzipCodec в качестве сжатия по умолчанию:  
 
   + Отредактировать файл *core-site.xml* на главной машине NameNode:
+    
     ::
     
     <property>
@@ -33,6 +34,7 @@
     
 |br|
    + Изменить файл *mapred-site.xml* на главной машине JobTracker:
+      
       ::
     
       <property> 
@@ -47,7 +49,7 @@
         <value>org.apache.hadoop.io.compress.GzipCodec</value>
       </property> 
       
-      ::
+|br|  ::
  
       <property>
         <name>mapred.output.compression.type</name>      
@@ -56,6 +58,7 @@
       
 |br|
    + (Опционально) Задать следующие два параметра конфигурации для включения сжатия задания. Изменить файл *mapred-site.xml* на главной машине Resource Manager:
+      
       ::
     
       <property>      
