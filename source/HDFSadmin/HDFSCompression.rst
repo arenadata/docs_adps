@@ -38,13 +38,15 @@
       <value>true</value>
     </property>`  
     
- |br|
+ |br| ::
+ 
       <property>  
         <name>mapred.map.output.compression.codec</name>
         <value>org.apache.hadoop.io.compress.GzipCodec</value>
       </property> 
       
- |br|  
+ |br|  ::
+ 
       <property>
         <name>mapred.output.compression.type</name>      
         <value>BLOCK</value>
@@ -58,7 +60,8 @@
       <value>true</value>
     </property>   
     
- |br|
+ |br| ::
+ 
       <property>    
         <name>mapred.output.compression.codec</name> 
         <value>org.apache.hadoop.io.compress.GzipCodec</value>    
