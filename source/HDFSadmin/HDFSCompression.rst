@@ -37,15 +37,15 @@
       :command:`<value>true</value>` |br| 
     :command:`</property>`  
  |br|
-    :command:`<property>` |br|     
-      :command:`<name>mapred.map.output.compression.codec</name>` |br| 
-      :command:`<value>org.apache.hadoop.io.compress.GzipCodec</value>` |br| 
-    :command:`</property>` 
+      :command:`<property>` |br|     
+        :command:`<name>mapred.map.output.compression.codec</name>` |br| 
+        :command:`<value>org.apache.hadoop.io.compress.GzipCodec</value>` |br| 
+      :command:`</property>` 
 |br|  
-    :command:`<property>` |br| 
-      :command:`<name>mapred.output.compression.type</name>` |br|         
-      :command:`<value>BLOCK</value>` |br| 
-    :command:`</property>` |br| 
+      :command:`<property>` |br| 
+        :command:`<name>mapred.output.compression.type</name>` |br|         
+        :command:`<value>BLOCK</value>` |br| 
+      :command:`</property>` |br| 
 |br|
    + (Опционально) Задать следующие два параметра конфигурации для включения сжатия задания. Изменить файл *mapred-site.xml* на главной машине Resource Manager:
   
@@ -54,10 +54,10 @@
       :command:`<value>true</value>` |br|    
     :command:`</property>`     
 |br|
-    :command:`<property>` |br|      
-      :command:`<name>mapred.output.compression.codec</name>` |br| 
-      :command:`<value>org.apache.hadoop.io.compress.GzipCodec</value>` |br|    
-    :command:`</property>` |br| 
+      :command:`<property>` |br|      
+        :command:`<name>mapred.output.compression.codec</name>` |br| 
+        :command:`<value>org.apache.hadoop.io.compress.GzipCodec</value>` |br|    
+      :command:`</property>` |br| 
 |br|
    + Перезапустить кластер.   
 
