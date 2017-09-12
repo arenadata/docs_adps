@@ -22,38 +22,31 @@
   ::
   
   #!/bin/bash 
-  
   ::
   
   # Adjust/Add the property "net.topology.script.file.name" 
   # to core-site.xml with the "absolute" path the this
   # file.  ENSURE the file is "executable". 
-  
   :: 
   
   # Supply appropriate rack prefix
   RACK_PREFIX=default
-  
   ::
   
   # To test, supply a hostname as script input:
   if [ $# -gt 0 ]; then
-  
   ::
   
   CTL_FILE=${CTL_FILE:-"rack_topology.data"} 
-  
   ::
   
   HADOOP_CONF=${HADOOP_CONF:-"/etc/hadoop/conf"} 
-  
   ::
   
   if [ ! -f ${HADOOP_CONF}/${CTL_FILE} ]; then
     echo -n "/$RACK_PREFIX/rack "
     exit 0
   fi 
-  
   ::
   
   while [ $# -gt 0 ] ; do 
@@ -73,7 +66,6 @@
       echo -n "/$RACK_PREFIX/rack_$result "
     fi
   done
-  
   ::
   
   else 
@@ -83,7 +75,6 @@
 
 
  **Пример файла данных топологии**. Имя файла: *rack_topology.data*
-  
   ::
   
   # This file should be: 
@@ -91,7 +82,6 @@
   #    - On the Namenode (and backups IE: HA, Failover, etc)
   #    - On the Job Tracker OR Resource Manager (and any Failover JT's/RM's)  
   # This file should be placed in the /etc/hadoop/conf directory.
-  
   ::
   
   # Add Hostnames to this file. Format <host ip> <rack_location> 
