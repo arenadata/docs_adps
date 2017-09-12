@@ -70,55 +70,15 @@
   + Отредактировать файл *core-site.xml* на главной машине NameNode:
   
   |br|
-   + Изменить файл *mapred-site.xml* на главной машине JobTracker:
+  + Изменить файл *mapred-site.xml* на главной машине JobTracker:
    
    |br|
-   + (Опционально) Задать следующие два параметра конфигурации для включения сжатия задания. Изменить файл *mapred-site.xml* на главной машине Resource Manager:
+  + (Опционально) Задать следующие два параметра конфигурации для включения сжатия задания. Изменить файл *mapred-site.xml* на главной машине Resource Manager:
    
    |br|
-   + Перезапустить кластер.   
+  + Перезапустить кластер.   
    
   
-    :command:`<property>` |br| 
-      :command:`<name>io.compression.codecs</name>` |br| 
-      :command:`<value>org.apache.hadoop.io.compress.GzipCodec,org.apache.hadoop.io.` |br| 
-      :command:`compress.DefaultCodec,com.hadoop.compression.lzo.LzoCodec,org.apache.` |br| 
-      :command:`hadoop.io.compress.SnappyCodec</value>` |br| 
-      :command:`<description>A list of the compression codec classes that can be used` |br| 
-      :command:`for compression/decompression.</description>` |br| 
-    :command:`</property>` |br| 
-|br|
-   + Изменить файл *mapred-site.xml* на главной машине JobTracker:
-  
-    :command:`<property>` |br| 
-      :command:`<name>mapred.compress.map.output</name>` |br| 
-      :command:`<value>true</value>` |br| 
-    :command:`</property>`  
- |br|
-      :command:`<property>` |br|     
-        :command:`<name>mapred.map.output.compression.codec</name>` |br| 
-        :command:`<value>org.apache.hadoop.io.compress.GzipCodec</value>` |br| 
-      :command:`</property>` 
-|br|  
-      :command:`<property>` |br| 
-        :command:`<name>mapred.output.compression.type</name>` |br|         
-        :command:`<value>BLOCK</value>` |br| 
-      :command:`</property>` |br| 
-|br|
-   + (Опционально) Задать следующие два параметра конфигурации для включения сжатия задания. Изменить файл *mapred-site.xml* на главной машине Resource Manager:
-  
-    :command:`<property>` |br|      
-      :command:`<name>mapred.output.compress</name>` |br| 
-      :command:`<value>true</value>` |br|    
-    :command:`</property>`     
-|br|
-      :command:`<property>` |br|      
-        :command:`<name>mapred.output.compression.codec</name>` |br| 
-        :command:`<value>org.apache.hadoop.io.compress.GzipCodec</value>` |br|    
-      :command:`</property>` |br| 
-|br|
-   + Перезапустить кластер.   
-
 
 
 
