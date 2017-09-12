@@ -28,9 +28,9 @@ API-интерфейсы JMX Metrics для HDFS Daemons
 ::
  
  export HADOOP_NAMENODE_OPTS="-Dcom.sun.management.jmxremote
--Dcom.sun.management.jmxremote.password.file=$HADOOP_CONF_DIR/jmxremote.password
--Dcom.sun.management.jmxremote.ssl=false
--Dcom.sun.management.jmxremote.port=8004 $HADOOP_NAMENODE_OPTS"
+ -Dcom.sun.management.jmxremote.password.file=$HADOOP_CONF_DIR/jmxremote.password
+ -Dcom.sun.management.jmxremote.ssl=false
+ -Dcom.sun.management.jmxremote.port=8004 $HADOOP_NAMENODE_OPTS"
 
 Подробности о связанных настройках можно найти здесь (http://docs.oracle.com/javase/7/docs/technotes/guides/management/agent.html). Также можно использовать инструмент *jmxquery* (https://code.google.com/p/jmxquery/) для извлечения информации через **JMX**.
 
