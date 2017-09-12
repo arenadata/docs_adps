@@ -21,73 +21,72 @@
   
   ::
   
-  #!/bin/bash 
+   #!/bin/bash 
   ::
   
-  # Adjust/Add the property "net.topology.script.file.name" 
-  # to core-site.xml with the "absolute" path the this
-  # file.  ENSURE the file is "executable". 
+   # Adjust/Add the property "net.topology.script.file.name" 
+   # to core-site.xml with the "absolute" path the this
+   # file.  ENSURE the file is "executable". 
   :: 
   
-  # Supply appropriate rack prefix
-  RACK_PREFIX=default
+   # Supply appropriate rack prefix
+   RACK_PREFIX=default
   ::
   
-  # To test, supply a hostname as script input:
-  if [ $# -gt 0 ]; then
+   # To test, supply a hostname as script input:
+   if [ $# -gt 0 ]; then
   ::
   
-  CTL_FILE=${CTL_FILE:-"rack_topology.data"} 
+   CTL_FILE=${CTL_FILE:-"rack_topology.data"} 
   ::
   
-  HADOOP_CONF=${HADOOP_CONF:-"/etc/hadoop/conf"} 
+   HADOOP_CONF=${HADOOP_CONF:-"/etc/hadoop/conf"} 
   ::
   
-  if [ ! -f ${HADOOP_CONF}/${CTL_FILE} ]; then
-    echo -n "/$RACK_PREFIX/rack "
-    exit 0
-  fi 
+   if [ ! -f ${HADOOP_CONF}/${CTL_FILE} ]; then
+     echo -n "/$RACK_PREFIX/rack "
+     exit 0
+   fi 
   ::
   
-  while [ $# -gt 0 ] ; do 
-    nodeArg=$1
-    exec< ${HADOOP_CONF}/${CTL_FILE}
-    result="" 
-    while read line ; do
-      ar=( $line )
-      if [ "${ar[0]}" = "$nodeArg" ] ; then
-        result="${ar[1]}"
-      fi
-    done 
-    shift
-    if [ -z "$result" ] ; then 
-      echo -n "/$RACK_PREFIX/rack " 
-    else 
-      echo -n "/$RACK_PREFIX/rack_$result "
-    fi
-  done
+   while [ $# -gt 0 ] ; do 
+     nodeArg=$1
+     exec< ${HADOOP_CONF}/${CTL_FILE}
+     result="" 
+     while read line ; do
+       ar=( $line )
+       if [ "${ar[0]}" = "$nodeArg" ] ; then
+         result="${ar[1]}"
+       fi
+     done 
+     shift
+     if [ -z "$result" ] ; then 
+       echo -n "/$RACK_PREFIX/rack " 
+     else 
+       echo -n "/$RACK_PREFIX/rack_$result "
+     fi
+   done
   ::
   
-  else 
-    echo -n "/$RACK_PREFIX/rack " 
-  fi 
+   else 
+     echo -n "/$RACK_PREFIX/rack " 
+   fi 
 
 
 
  **Пример файла данных топологии**. Имя файла: *rack_topology.data*
   ::
   
-  # This file should be: 
-  #  - Placed in the /etc/hadoop/conf directory 
-  #    - On the Namenode (and backups IE: HA, Failover, etc)
-  #    - On the Job Tracker OR Resource Manager (and any Failover JT's/RM's)  
-  # This file should be placed in the /etc/hadoop/conf directory.
-  ::
+   # This file should be: 
+   #  - Placed in the /etc/hadoop/conf directory 
+   #    - On the Namenode (and backups IE: HA, Failover, etc)
+   #    - On the Job Tracker OR Resource Manager (and any Failover JT's/RM's)  
+   # This file should be placed in the /etc/hadoop/conf directory.
   
-  # Add Hostnames to this file. Format <host ip> <rack_location> 
-  192.0.2.0 01
-  192.0.2.1 02 
-  192.0.2.2 03 
+   # Add Hostnames to this file. Format <host ip> <rack_location> 
+   192.0.2.0 01
+   192.0.2.1 02 
+   192.0.2.2 03 
 
 + Скопировать оба этих файла в каталог */ etc / hadoop / conf* на всех узлах кластера;
 
