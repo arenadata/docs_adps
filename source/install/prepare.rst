@@ -338,23 +338,23 @@ SSH-соединение между хостом **Ambari Server** и всеми
 
 + Создать публичный и приватный ключи SSH на хосте сервера Ambari:
 
-  :command:`ssh-keygen` 
+    :command:`ssh-keygen` 
   
 + При запросе пароля для приватного ключа необходимо не задавая значения (поле для ввода пароля оставить пустым) нажать клавишу *Enter*;
 + Скопировать публичный ключ SSH (*id_rsa.pub*) в учетную запись *root* на все узлы кластера:
 
-  :command:`ssh-copy-id root@<remote.target.host>` 
+    :command:`ssh-copy-id root@<remote.target.host>` 
   
   где *<remote.target.host>* – значение имени каждого хоста в кластере;
 
   В случае если во время первого подключения отображается предупреждающее сообщение, необходимо ответить *yes*:
 
-  :command:`Are you sure you want to continue connecting (yes/no)?` 
+    :command:`Are you sure you want to continue connecting (yes/no)?` 
   
 + Убедиться, что с сервера Ambari выполняется подключение к каждому
   хосту в кластере с помощью SSH без пароля:
 
-  :command:`ssh root@<remote.target.host>` 
+    :command:`ssh root@<remote.target.host>` 
   
 + (Опционально) Сохранить копию приватного ключа SSH на компьютере, с которого
   планируется запуск веб-мастера установки Ambari Install Wizard.
