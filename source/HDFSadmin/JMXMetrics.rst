@@ -11,11 +11,11 @@ API-интерфейсы JMX Metrics для HDFS Daemons
 
 Например, для доступа к **NameNode JMX** необходимо использовать следующий формат команды:
 
-:command:`curl -i http://localhost:50070/jmx`
+  :command:`curl -i http://localhost:50070/jmx`
 
 Для извлечения только определенного ключа можно использовать параметр *qry*:
 
-:command:`curl -i http://localhost:50070/jmx?qry=Hadoop:service=NameNode,name=NameNodeInfo`
+  :command:`curl -i http://localhost:50070/jmx?qry=Hadoop:service=NameNode,name=NameNodeInfo`
 
 
 
@@ -36,7 +36,7 @@ API-интерфейсы JMX Metrics для HDFS Daemons
 
 **Hadoop** также имеет встроенный инструмент запросов **JMX** *jmxget*. Например:
 
-:command:`hdfs jmxget -server localhost -port 8004 -service NameNode`
+  :command:`hdfs jmxget -server localhost -port 8004 -service NameNode`
 
 .. important:: Инструмент *jmxget* требует, чтобы аутентификация была отключена, так как она не принимает имя пользователя и пароль
 
