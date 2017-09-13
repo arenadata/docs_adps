@@ -79,24 +79,26 @@
 Свойство *dfs.name.dir* определяет, где в локальной файловой системе **DataNode** должен хранить свои блоки.
 
 Чтобы назначить **DataNode** как хранилище *DISK*, необходимо использовать путь к локальной файловой системе, как обычно. Поскольку *DISK* является типом памяти по умолчанию, больше ничего не требуется. Например:
+::
 
-:command:`<property>` |br| 
-  :command:`<name>dfs.data.dir</name>` |br| 
-  :command:`<value>file:///grid/1/tmp/data_trunk</value>` |br| 
-:command:`</property>`
+ <property>
+   <name>dfs.data.dir</name> 
+   <value>file:///grid/1/tmp/data_trunk</value>
+ </property>
 
 Чтобы назначить **DataNode** как хранилище *ARCHIVE*, необходимо вставить *[ARCHIVE]* в начало пути локальной файловой системы. Например:
+::
 
-:command:`<property>` |br| 
-  :command:`<name>dfs.data.dir</name>` |br| 
-  :command:`<value>[ARCHIVE]file:///grid/1/tmp/data_trunk</value>` |br| 
-:command:`</property>` 
+ <property> 
+   <name>dfs.data.dir</name>
+   <value>[ARCHIVE]file:///grid/1/tmp/data_trunk</value> 
+ </property>
 
 3. Установка и получение политики хранения.
 
 Необходимо установить политику хранения файла или каталога. Команда:
 
-:command:`hdfs dfsadmin -setStoragePolicy <path> <policyName>`
+  :command:`hdfs dfsadmin -setStoragePolicy <path> <policyName>`
 
 Аргументы:
 
@@ -105,11 +107,11 @@
 
 Например:
 
-:command:`hdfs dfsadmin -setStoragePolicy /cold1 COLD`
+  :command:`hdfs dfsadmin -setStoragePolicy /cold1 COLD`
 
 Получение политики хранения файла или каталога осуществляется по команде:
 
-:command:`hdfs dfsadmin -getStoragePolicy <path>`
+  :command:`hdfs dfsadmin -getStoragePolicy <path>`
 
 Аргументы:
 
@@ -117,7 +119,7 @@
 
 Например:
 
-:command:`hdfs dfsadmin -getStoragePolicy /cold1`
+  :command:`hdfs dfsadmin -getStoragePolicy /cold1`
 
 4.	Запуск DataNode.
 
@@ -131,7 +133,7 @@
 
 Команда:
 
-:command:`hdfs mover [-p <files/dirs> | -f <local file name>]`
+  :command:`hdfs mover [-p <files/dirs> | -f <local file name>]`
 
 Аргументы:
 
@@ -142,7 +144,7 @@
 
 Пример:
 
-:command:`hdfs mover /cold1/testfile`
+  :command:`hdfs mover /cold1/testfile`
 
 
 
