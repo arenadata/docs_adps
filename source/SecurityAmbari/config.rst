@@ -181,25 +181,22 @@ Kerberos имеет одинаковые временные метки, в та�
 
 +	RHEL / CentOS:
 
-  :command:`yum install krb5-server krb5-libs krb5-workstation`
+    :command:`yum install krb5-server krb5-libs krb5-workstation`
 
 +	SLES:
 
-  :command:`Zypper install krb5 krb5-server krb5-client`
+    :command:`Zypper install krb5 krb5-server krb5-client`
 
-2.	Используя текстовый редактор, открыть файл конфигурации сервера KDC, расположенный по умолчанию в *Vi /etc/krb5.conf*;
+2.	Используя текстовый редактор, открыть файл конфигурации сервера KDC, расположенный по умолчанию в *Vi/etc/krb5.conf*;
 
 3.	Изменить раздел *[realms]* этого файла, заменив параметр *kerberos.example.com* для свойств *kdc* и *admin_server*, установленный по умолчанию с Fully Qualified Domain Name хоста сервера KDC, как показано в примере, где *kerberos.example.com* заменен на *my.kdc.server*:
+  ::
 
-  :command:`[realms]`
-
-   :command:`EXAMPLE.COM = {`
- 
-     :command:`kdc = my.kdc.server`
-   
-     :command:`admin_server = my.kdc.server`
-   
-  :command:`}` 
+   [realms]
+    EXAMPLE.COM = {
+      kdc = my.kdc.server
+      admin_server = my.kdc.server
+   }
 
 
 Создание базы данных Kerberos
@@ -209,11 +206,11 @@ Kerberos имеет одинаковые временные метки, в та�
 
 +	RHEL / CentOS:
 
-  :command:`Kdb5_util create -s`
+    :command:`Kdb5_util create -s`
 
 +	SLES:
 
-  :command:`Kdb5_util create –s`
+    :command:`Kdb5_util create –s`
 
 
 Запуск KDC
@@ -222,42 +219,42 @@ Kerberos имеет одинаковые временные метки, в та�
 Для запуска сервера **KDC** и сервера администратора **KDC** необходимо выполнить команды:
 
 +	RHEL/CentOS 6:
+   ::
 
-  :command:`/etc/rc.d/init.d/krb5kdc start`
-
-  :command:`/etc/rc.d/init.d/kadmin start`
+    /etc/rc.d/init.d/krb5kdc start
+    /etc/rc.d/init.d/kadmin start
 
 +	RHEL/CentOS 7:
+   ::
 
-  :command:`systemctl start krb5kdc`
-
-  :command:`systemctl start kadmin`
+    systemctl start krb5kdc
+    systemctl start kadmin
 
 +	SLES 11:
+   ::
 
-  :command:`rckrb5kdc start`
-
-  :command:`rckadmind start`
+    rckrb5kdc start
+    rckadmind start
 
 При установке и управлении собственным **MIT KDC** важно настроить сервер **KDC** на автоматический запуск при загрузке:
 
 +	RHEL/CentOS 6:
+   ::
 
-  :command:`chkconfig krb5kdc on`
-
-  :command:`chkconfig kadmin on`
+    chkconfig krb5kdc on
+    chkconfig kadmin on
 
 +	RHEL/CentOS 7:
+   ::
 
-  :command:`systemctl enable krb5kdc`
-
-  :command:`systemctl enable kadmin`
+    systemctl enable krb5kdc
+    systemctl enable kadmin
 
 +	SLES 11:
+   ::
 
-  :command:`chkconfig rckrb5kdc on`
-
-  :command:`chkconfig rckadmind on`
+    chkconfig rckrb5kdc on
+    chkconfig rckadmind on
 
 
 Создание администратора Kerberos
@@ -273,35 +270,35 @@ Kerberos имеет одинаковые временные метки, в та�
 
 1.	Создать администратора KDC, путем создания принципала администратора:
 
-  :command:`Kadmin.local -q "addprinc admin / admin"`
+    :command:`Kadmin.local -q "addprinc admin / admin"`
 
 2.	Убедиться, что созданный администратор имеет права в ACL KDC. Открыть файл ACL KDC, используя текстовый редактор:
 
 +	RHEL / CentOS:
 
-  :command:`Vi /var/kerberos/krb5kdc/kadm5.acl`
+    :command:`Vi /var/kerberos/krb5kdc/kadm5.acl`
 
 +	SLES:
 
-  :command:`Vi /var/lib/kerberos/krb5kdc/kadm5.acl`
+    :command:`Vi /var/lib/kerberos/krb5kdc/kadm5.acl`
 
 3.	Убедиться, что файл ACL KDC содержит запись, позволяющую принципалу администратора управлять KDC в вашей конкретной сфере. При использовании сферы, отличной от *EXAMPLE.COM*, необходимо убедиться, что есть запись для вашей сферы. Например, для принципала *admin/admin@HADOOP.COM* следующая запись:
 
-  :command:`*/admin@HADOOP.COM *`
+    :command:`*/admin@HADOOP.COM *`
 
 4.	После редактирования и сохранения файла *kadm5.acl* необходимо перезапустить процесс *kadmin*:
 
 +	RHEL/CentOS 6:
 
-  :command:`/etc/rc.d/init.d/kadmin restart`
+    :command:`/etc/rc.d/init.d/kadmin restart`
 
 +	RHEL/CentOS 7:
 
-  :command:`systemctl restart kadmin`
+    :command:`systemctl restart kadmin`
 
 +	SLES 11:
 
-  :command:`rckadmind restart`
+    :command:`rckadmind restart`
 
 
 
@@ -336,11 +333,11 @@ Kerberos имеет одинаковые временные метки, в та�
 
 3.	На сервере Ambari и на каждом узле кластера добавить неограниченные права безопасности JCE:
   
-  :command:`$JAVA_HOME/jre/lib/security/`
+    :command:`$JAVA_HOME/jre/lib/security/`
 
 Например, выполнить следующие действия для извлечения прав из JDK, установленном на вашем хосте:
 
-:command:`unzip -o -j -q jce_policy-8.zip -d /usr/jdk64/jdk1.8.0_40/jre/lib/security/`
+  :command:`unzip -o -j -q jce_policy-8.zip -d /usr/jdk64/jdk1.8.0_40/jre/lib/security/`
 
 4.	Перезапустить сервер Ambari;
 
@@ -383,7 +380,7 @@ Kerberos имеет одинаковые временные метки, в та�
 
 +	В поле "Домены" указать список шаблонов для сопоставления хостов в кластере с соответствующей сферой. Например, если хосты имеют общий домен в своем "FQDN", таком как *host1.mycompany.local* и *host2.mycompany.local*, необходимо установить следующее:
 
-  :command:`.mycompany.local,mycompany.local`
+    :command:`.mycompany.local,mycompany.local`
 
 +	Чтобы управлять клиентом Kerberos *krb5.conf* вручную (вместо управления им Ambari), развернуть раздел "Advanced krb5-conf" и снять флажок "Manage". При этом *krb5.conf* должен быть настроен на каждом хосте.
 
@@ -397,7 +394,7 @@ Kerberos имеет одинаковые временные метки, в та�
 
 +	Если необходимо настроить атрибуты для принципалов, которые Ambari создает при использовании Active Directory, следует обратиться к разделу "Настройка шаблона атрибута" для получения дополнительной информации. При использовании MIT KDC можно передать параметры атрибута в разделе "Advanced kerberos-env". Например, можно установить параметры, относящиеся к *pre-auth* или *max* и обновить их:
 
-  :command:`-requires_preauth -maxrenewlife "7 days"`
+    :command:`-requires_preauth -maxrenewlife "7 days"`
 
 7.	Продолжить установку;
 
