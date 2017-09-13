@@ -12,7 +12,7 @@
 
 Эта модель может в достаточной степени удовлетворять большому количеству требований безопасности. Например, рассмотрим отдел продаж, который хотел бы, чтобы один пользователь – Брюс, менеджер отдела, – контролировал все изменения данных продаж. Другим сотрудникам отдела продаж необходимо просмотреть данные, но не следует изменять их. Все остальные компании (за пределами отдела продаж) не должны иметь возможность просматривать данные. Это требование может быть реализовано путем запуска *chmod 640* в файле со следующим результатом:
 
-:command:`-rw-r-----1 brucesales22K Nov 18 10:55 sales-data`
+  :command:`-rw-r-----1 brucesales22K Nov 18 10:55 sales-data`
 
 Только Брюс может изменить файл, только члены группы продаж могут прочитать файл, и никто другой не может получить доступ к файлу каким-либо образом.
 
@@ -33,25 +33,27 @@
 
 +	Установить ACL:  
   
-  :command:`> hdfs dfs -setfacl -m group:execs:r-- /sales-data`
+    :command:`> hdfs dfs -setfacl -m group:execs:r-- /sales-data`
 
 +	Запустить *getfacl*, чтобы проверить результаты:
-
-  :command:`> hdfs dfs -getfacl /sales-data` |br|
-  :command:`# file: /sales-data` |br|
-  :command:`# owner: bruce` |br|
-  :command:`# group: sales` |br|
-  :command:`user::rw-` |br|
-  :command:`group::r--` |br|
-  :command:`group:execs:r--` |br|
-  :command:`mask::r--` |br|
-  :command:`other::---`
+   ::
+   
+    > hdfs dfs -getfacl /sales-data
+    # file: /sales-data
+    # owner: bruce
+    # group: sales
+    user::rw-
+    group::r--
+    group:execs:r--
+    mask::r--
+    other::---
 
 +	Если запустить команду *ls*, можно увидеть, что перечисленные разрешения были добавлены с символом "+" для обозначения наличия ACL. Символ "+" добавляется к разрешениям любого файла или каталога с ACL.
-
-  :command:`> hdfs dfs -ls /sales-data` |br|
-  :command:`Found 1 items` |br|
-  :command:`-rw-r-----+  3 bruce sales          0 2014-03-04 16:31 /sales-data`
+   ::
+   
+    > hdfs dfs -ls /sales-data
+    Found 1 items
+    -rw-r-----+  3 bruce sales          0 2014-03-04 16:31 /sales-data
 
 Новая запись **ACL** добавляется к существующим разрешениям, определенным в разрешенных битах. Как владелец файла, Брюс имеет полный контроль. Члены группы *sales* или *execs* имеют доступ на чтение. У остальных нет доступа. 
 
@@ -66,55 +68,56 @@
 
 +	Установить ACL по умолчанию в родительский каталог:
 
-  :command:`> hdfs dfs -setfacl -m default:group:execs:r-x /monthly-sales-data`
+    :command:`> hdfs dfs -setfacl -m default:group:execs:r-x /monthly-sales-data`
 
 +	Создать подкаталоги:
 
-  :command:`> hdfs dfs -mkdir /monthly-sales-data/JAN` |br|
-  :command:`> hdfs dfs -mkdir /monthly-sales-data/FEB`
+    :command:`> hdfs dfs -mkdir /monthly-sales-data/JAN` |br|
+    :command:`> hdfs dfs -mkdir /monthly-sales-data/FEB`
 
 +	Убедиться, что HDFS автоматически применил ACL по умолчанию в подкаталоги: 
-
-  :command:`> hdfs dfs -getfacl -R /monthly-sales-data` |br|
-  :command:`# file: /monthly-sales-data` |br|
-  :command:`# owner: bruce` |br|  
-  :command:`# group: sales` |br| 
-  :command:`user::rwx` |br|  
-  :command:`group::r-x` |br|  
-  :command:`other::---` |br|  
-  :command:`default:user::rwx` |br|  
-  :command:`default:group::r-x` |br|  
-  :command:`default:group:execs:r-x` |br|  
-  :command:`default:mask::r-x` |br|  
-  :command:`default:other::---` |br|
-  |br|
-  :command:`# file: /monthly-sales-data/FEB` |br|  
-  :command:`# owner: bruce` |br|  
-  :command:`# group: sales` |br|  
-  :command:`user::rwx` |br|  
-  :command:`group::r-x` |br|  
-  :command:`group:execs:r-x` |br|  
-  :command:`mask::r-x` |br|  
-  :command:`other::---` |br|  
-  :command:`default:user::rwx` |br|  
-  :command:`default:group::r-x` |br|  
-  :command:`default:group:execs:r-x` |br|  
-  :command:`default:mask::r-x` |br|  
-  :command:`default:other::---` |br|
-  |br|
-  :command:`# file: /monthly-sales-data/JAN` |br|  
-  :command:`# owner: bruce` |br|  
-  :command:`# group: sales` |br|  
-  :command:`user::rwx` |br|  
-  :command:`group::r-x` |br|  
-  :command:`group:execs:r-x` |br|  
-  :command:`mask::r-x` |br|  
-  :command:`other::---` |br|  
-  :command:`default:user::rwx` |br|  
-  :command:`default:group::r-x` |br|  
-  :command:`default:group:execs:r-x` |br|  
-  :command:`default:mask::r-x` |br|  
-  :command:`default:other::---`
+   ::
+   
+    > hdfs dfs -getfacl -R /monthly-sales-data
+    # file: /monthly-sales-data
+    # owner: bruce
+    # group: sales
+    user::rwx 
+    group::r-x 
+    other::---
+    default:user::rwx
+    default:group::r-x
+    default:group:execs:r-x  
+    default:mask::r-x 
+    default:other::---
+    
+    # file: /monthly-sales-data/FEB  
+    # owner: bruce 
+    # group: sales  
+    user::rwx
+    group::r-x
+    group:execs:r-x
+    mask::r-x
+    other::---
+    default:user::rwx
+    default:group::r-x 
+    default:group:execs:r-x  
+    default:mask::r-x 
+    default:other::---
+    
+    # file: /monthly-sales-data/JAN  
+    # owner: bruce  
+    # group: sales 
+    user::rwx  
+    group::r-x  
+    group:execs:r-x
+    mask::r-x 
+    other::--- 
+    default:user::rwx 
+    default:group::r-x 
+    default:group:execs:r-x  
+    default:mask::r-x  
+    default:other::---
   
 **ACL по умолчанию** копируется из родительского каталога в дочерний файл или каталог при его создании. Последующие изменения **ACL по умолчанию** в родительском каталоге не изменяют **ACL** существующих дочерних элементов. 
 
@@ -127,24 +130,25 @@
 
 1. Добавить запись ACL для блокировки всего доступа пользователя Диана к "monthly-sales-data":
 
-  :command:`> hdfs dfs -setfacl -m user:diana:--- /monthly-sales-data`
+    :command:`> hdfs dfs -setfacl -m user:diana:--- /monthly-sales-data`
 
 2. Запустить *getfacl* для проверки результатов:
-
-  :command:`> hdfs dfs -getfacl /monthly-sales-data` |br|
-  :command:`# file: /monthly-sales-data` |br|
-  :command:`# owner: bruce` |br|
-  :command:`# group: sales` |br|
-  :command:`user::rwx` |br|
-  :command:`user:diana:---` |br|
-  :command:`group::r-x` |br|
-  :command:`mask::r-x` |br|
-  :command:`other::---` |br|
-  :command:`default:user::rwx` |br|
-  :command:`default:group::r-x` |br|
-  :command:`default:group:execs:r-x` |br|
-  :command:`default:mask::r-x` |br|
-  :command:`default:other::---`
+   ::
+   
+    > hdfs dfs -getfacl /monthly-sales-data
+    # file: /monthly-sales-data
+    # owner: bruce
+    # group: sales
+    user::rwx
+    user:diana:---
+    group::r-x
+    mask::r-x
+    other::---
+    default:user::rwx
+    default:group::r-x
+    default:group:execs:r-x
+    default:mask::r-x
+    default:other::---
 
 Новая запись **ACL** добавляется к существующим разрешениям, определенным в **Permission Bits**. Брюс имеет полный контроль как владельц файла. Члены группы *sales* или *execs* имеют доступ на чтение. У остальных нет доступа.
 
