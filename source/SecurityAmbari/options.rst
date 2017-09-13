@@ -9,7 +9,7 @@
 
 Также необходимо синхронизировать пользователей и группы **LDAP** с базой данных **Ambari**, чтобы иметь возможность управлять их авторизацией и правами (см. раздел "Синхронизация пользователей и групп LDAP").
 
-При синхронизации пользователей и групп **LDAP** **Ambari** использует элементы поиска **LDAP** для синхронизации большого количества объектов **LDAP**. Большинство современных серверов **LDAP** поддерживают этот элемент управления. Но для неподдерживающих серверов, например, **Oracle Directory Server Enterprise Edition 11g**, **Ambari** вводит параметр конфигурации для отключения разбивки на страницы. Чтобы отключить элементы управления разбивкой на страницы, необходимо установить значение *false* свойству *authentication.ldap.pagination.enabled* в файле */ etc / ambari-server / conf / ambari-properties*. Это ограничит максимальное количество объектов, которые могут быть импортированы в любой момент времени до максимального предела результатов на сервере **LDAP**. Чтобы избежать этого, необходимо импортировать пользователей и группы, используя параметры *-sers* и *-groups*, как описано в разделе "Определенный набор пользователей и групп".
+При синхронизации пользователей и групп **LDAP** **Ambari** использует элементы поиска **LDAP** для синхронизации большого количества объектов **LDAP**. Большинство современных серверов **LDAP** поддерживают этот элемент управления. Но для неподдерживающих серверов, например, **Oracle Directory Server Enterprise Edition 11g**, **Ambari** вводит параметр конфигурации для отключения разбивки на страницы. Чтобы отключить элементы управления разбивкой на страницы, необходимо установить значение *false* свойству *authentication.ldap.pagination.enabled* в файле */etc/ambari-server/conf/ambari-properties*. Это ограничит максимальное количество объектов, которые могут быть импортированы в любой момент времени до максимального предела результатов на сервере **LDAP**. Чтобы избежать этого, необходимо импортировать пользователей и группы, используя параметры *-sers* и *-groups*, как описано в разделе "Определенный набор пользователей и групп".
 
 
 Настройка аутентификации пользователя LDAP
@@ -47,14 +47,15 @@
 
 1.	Место, где каталог ключей не существует, но в котором должен быть создан:
 
-  :command:`mkdir /etc/ambari-server/keys`
+    :command:`mkdir /etc/ambari-server/keys`
 
-2.	
-  :command:`$JAVA_HOME/bin/keytool -import -trustcacerts -alias root -file $PATH_TO_YOUR_LDAPS_CERT -keystore /etc/ambari-server/keys/ldaps-keystore.jks
+2.	::
+
+    $JAVA_HOME/bin/keytool -import -trustcacerts -alias root -file $PATH_TO_YOUR_LDAPS_CERT -keystore /etc/ambari-server/keys/ldaps-keystore.jks
 
 3.	Задать пароль, который будет использоваться при настройке *ambari-server-ldap*, при появлении запроса:
 
-  :command:`ambari-server setup-ldap`
+    :command:`ambari-server setup-ldap`
 
 4.	В запросе "Primary URL*" ввести URL-адрес и порт сервера. Требуются значения, отмеченные звездочкой.
 
@@ -107,11 +108,11 @@
 
   + Преобразовать сертификат SSL в формат *X.509*, если это необходимо, выполнив следующую команду, где *<slapd.crt>* – путь к сертификату *X.509*:
   
-    :command:`openssl x509 -in slapd.pem -out <slapd.crt>`
+      :command:`openssl x509 -in slapd.pem -out <slapd.crt>`
 
   + Импортировать сертификат SSL в существующее хранилище ключей, например, хранилище сертификатов *jre* по умолчанию, используя следующую команду:
   
-    :command:`/usr/jdk64/jdk1.7.0_45/bin/keytool -import -trustcacerts -file slapd.crt -keystore /usr/jdk64/jdk1.7.0_45/jre/lib/security/cacerts`
+      :command:`/usr/jdk64/jdk1.7.0_45/bin/keytool -import -trustcacerts -file slapd.crt -keystore /usr/jdk64/jdk1.7.0_45/jre/lib/security/cacerts`
 
 Где Ambari настроен для использования JDK 1.7, поэтому сертификат должен быть импортирован в хранилище ключей JDK 7.
 
@@ -147,7 +148,7 @@
 
 Для синхронизации **LDAP** необходимо запустить команду и ответить на запрос:
 
-:command:`ambari-server sync-ldap [option]`
+  :command:`ambari-server sync-ldap [option]`
 
 .. important:: Для выполнения операции необходимо запустить сервер Ambari
 
@@ -173,7 +174,7 @@
 
 Для синхронизации определенного набора пользователей и групп из **LDAP** в **Ambari** необходимо использовать параметр:
 
-:command:`ambari-server sync-ldap --users users.txt --groups groups.txt`
+  :command:`ambari-server sync-ldap --users users.txt --groups groups.txt`
 
 Далее следует предоставить текстовый файл пользователей и групп, разделенных запятыми. Записи в каждом из этих файлов должны основываться на значениях атрибутов в **LDAP**, выбранных во время установки. Для файла *users.txt* должен использоваться атрибут "User name attribute", а для файла *groups.txt* – "Group name attribute". Эта команда найдет, импортирует и синхронизирует соответствующие объекты **LDAP** с **Ambari**.
 
@@ -186,7 +187,7 @@
 
 После синхронизации определенного набора пользователей и групп, следующий параметр используется для синхронизации только тех объектов, которые находятся в **Ambari** с **LDAP**: 
 
-:command:`ambari-server sync-ldap --existing`
+  :command:`ambari-server sync-ldap --existing`
 
 Несуществующие в **LDAP** пользователи удаляются из **Ambari**, а членство в группе **Ambari** обновляется до соответствия **LDAP** (членство в группе определяется с помощью атрибута "groupMembershipAttr", указанного во время настройки **LDAP**).
 
@@ -196,7 +197,7 @@
 
 В случае необходимости синхронизации всех пользователей и групп с **LDAP** в **Ambari** используется следующий параметр:
 
-:command:`ambari-server sync-ldap --all`
+  :command:`ambari-server sync-ldap --all`
 
 Это действие импортирует все объекты с соответствующими классами пользователей и групп **LDAP** в **Ambari**.
 
@@ -218,17 +219,17 @@
 
 Для настройки запуска **Ambari Server** от пользователя (без прав *root*) во время процесса настройки ambari-сервера необходимо выбрать значение y при запросе: 
 
-:command:`Customize user account for ambari-server daemon?`
+  :command:`Customize user account for ambari-server daemon?`
 
 В процессе установки предлагается использовать для пользователя, не являющегося *root*, *Ambari Server*, например: *ambari*.
 
 Пользователь без прав *root*, который выбран для запуска сервера **Ambari**, должен входить в группу **Hadoop**. Эта группа должна соответствовать учетным записям службы **Hadoop**, указанным на вкладке :menuselection:`"Customize Services --> Misc tab"` во время этапа настройки мастера установки. Имя группы, задающееся по умолчанию – *hadoop*. Если во время установки кластера название группы было изменено, необходимо убедиться, что пользователь, не являющийся пользователем *root*, входит в данную группу. 
 
 Если **Ambari Server** работает как пользователь без прав *root*, например, *ambari*, и планируется использовать **Ambari Views**, необходимо добавить следующие свойства в :menuselection:`"Services --> HDFS --> Configs --> Advanced core-site"`:
+::
 
-:command:`hadoop.proxyuser.ambari.groups=*`
-
-:command:`hadoop.proxyuser.ambari.hosts=*`
+ hadoop.proxyuser.ambari.groups=*
+ hadoop.proxyuser.ambari.hosts=*
 
 
 
@@ -239,7 +240,7 @@
 
 Необходимо изменить в файле */etc/ambari-agent/conf/ambari-agent.ini* свойство *run_as_user*:
 
-:command:`run_as_user=ambari`
+  :command:`run_as_user=ambari`
 
 Далее для старта работы от пользователя без полномочий *root* необходимо перезапустить **Ambari Agent**.
 
@@ -247,7 +248,7 @@
 
 В последующюих разделах описано как следует настраивать *sudo*, чтобы позволить **Ambari** запускаться от пользователя без прав *root*. Каждый из разделов включает определенные записи *sudo*, которые необходимо поместить в */ etc / sudoers* и запустить команду: 
 
-:command:`visudo`
+  :command:`visudo`
 
 
 
@@ -255,12 +256,12 @@
 ``````````````````````````
 
 Данный раздел содержит команды "su" и соответствующие учетные записи сервиса **Hadoop**, которые настраиваются при установке:
+::
 
-:command:`# Ambari Customizable Users`
+ # Ambari Customizable Users
+ ambari ALL=(ALL) NOPASSWD:SETENV: /bin/su hdfs *,/bin/su ambari-qa *,/bin/su ranger *,/bin/su zookeeper *,/bin/su knox *,/bin/su ams *,/bin/su hbase *,/bin/su spark *,/bin/su hive *,/bin/su hcat *,/bin/su mapred *,/bin/su oozie *,/bin/su tez *,/bin/su atlas *,/bin/su yarn *,/bin/su kms *
 
-:command:`ambari ALL=(ALL) NOPASSWD:SETENV: /bin/su hdfs *,/bin/su ambari-qa *,/bin/su ranger *,/bin/su zookeeper *,/bin/su knox *,/bin/su ams *,/bin/su hbase *,/bin/su spark *,/bin/su hive *,/bin/su hcat *,/bin/su mapred *,/bin/su oozie *,/bin/su tez *,/bin/su atlas *,/bin/su yarn *,/bin/su kms *`
-
-Учетные записи пользователей должны соответствовать учетным записям серверов, указанным на вкладке :menuselection:`"Customize Services --> Misc tab"` во время этапа настройки мастера установки. Например, если **YARN** настроен для запуска как *xyz_yarn*, необходимо изменить команду *su* на */ bin / su xyz_yarn*.
+Учетные записи пользователей должны соответствовать учетным записям серверов, указанным на вкладке :menuselection:`"Customize Services --> Misc tab"` во время этапа настройки мастера установки. Например, если **YARN** настроен для запуска как *xyz_yarn*, необходимо изменить команду *su* на */bin/su xyz_yarn*.
 
 
 
@@ -268,10 +269,10 @@
 ````````````````````````````
 
 Данный раздел содержит команды "su" для системных учетных записей, которые нельзя изменить, и которые требуются только в том случае, если используется **MySQL**, установленный и управляемый **Ambari** для **Hive Metastore**. Если используется существующая база данных **MySQL**, **PostgreSQL** или **Oracle** для **Hive Metastore**, включать данные команды нет необходимости.
+::
 
-:command:`# Ambari Non-Customizable Users`
-
-:command:`ambari ALL=(ALL) NOPASSWD:SETENV: /bin/su mysql *`
+ # Ambari Non-Customizable Users
+ ambari ALL=(ALL) NOPASSWD:SETENV: /bin/su mysql *
 
 
 
@@ -279,14 +280,15 @@
 ```````
 
 Команды, которые должны входить в стандартные операции агента:
+::
 
-:command:`# Ambari Commands`
+ # Ambari Commands
+ ambari ALL=(ALL) NOPASSWD:SETENV: /usr/bin/yum,/usr/bin/zypper,/usr/bin/apt-get, /bin/mkdir, /usr/bin/test, /bin/ln, /bin/chown, /bin/chmod, /bin/chgrp, /usr/sbin/groupadd, /usr/sbin/groupmod, /usr/sbin/useradd, /usr/sbin/usermod, /bin/cp, /usr/sbin/setenforce, /usr/bin/test, /usr/bin/stat, /bin/mv, /bin/sed, /bin/rm, /bin/kill, /bin/readlink, /usr/bin/pgrep, /bin/cat, /usr/bin/unzip, /bin/tar, /usr/bin/tee, /bin/touch, /usr/bin/distro-select, /usr/bin/conf-select, /usr/phd/current/hadoop-client/sbin/hadoop-daemon.sh, /usr/lib/hadoop/bin/hadoop-daemon.sh, /usr/lib/hadoop/sbin/hadoop-daemon.sh, /sbin/chkconfig gmond off, /sbin/chkconfig gmetad off, /etc/init.d/httpd *, /sbin/service phd-gmetad start, /sbin/service phd-gmond start, /usr/sbin/gmond, /usr/sbin/update-rc.d ganglia-monitor *, /usr/sbin/update-rc.d gmetad *, /etc/init.d/apache2 *, /usr/sbin/service phd-gmond *, /usr/sbin/service phd-gmetad *, /sbin/service mysqld *, /usr/bin/python2.6 /var/lib/ambari-agent/data/tmp/validateKnoxStatus.py *, /usr/phd/current/knox-server/bin/knoxcli.sh *
 
-:command:`ambari ALL=(ALL) NOPASSWD:SETENV: /usr/bin/yum,/usr/bin/zypper,/usr/bin/apt-get, /bin/mkdir, /usr/bin/test, /bin/ln, /bin/chown, /bin/chmod, /bin/chgrp, /usr/sbin/groupadd, /usr/sbin/groupmod, /usr/sbin/useradd, /usr/sbin/usermod, /bin/cp, /usr/sbin/setenforce, /usr/bin/test, /usr/bin/stat, /bin/mv, /bin/sed, /bin/rm, /bin/kill, /bin/readlink, /usr/bin/pgrep, /bin/cat, /usr/bin/unzip, /bin/tar, /usr/bin/tee, /bin/touch, /usr/bin/distro-select, /usr/bin/conf-select, /usr/phd/current/hadoop-client/sbin/hadoop-daemon.sh, /usr/lib/hadoop/bin/hadoop-daemon.sh, /usr/lib/hadoop/sbin/hadoop-daemon.sh, /sbin/chkconfig gmond off, /sbin/chkconfig gmetad off, /etc/init.d/httpd *, /sbin/service phd-gmetad start, /sbin/service phd-gmond start, /usr/sbin/gmond, /usr/sbin/update-rc.d ganglia-monitor *, /usr/sbin/update-rc.d gmetad *, /etc/init.d/apache2 *, /usr/sbin/service phd-gmond *, /usr/sbin/service phd-gmetad *, /sbin/service mysqld *, /usr/bin/python2.6 /var/lib/ambari-agent/data/tmp/validateKnoxStatus.py *, /usr/phd/current/knox-server/bin/knoxcli.sh *`
+::
 
-:command:`# Ambari Ranger Commands`
-
-:command:`ambari ALL=(ALL) NOPASSWD:SETENV: /usr/phd/*/ranger-usersync/setup.sh, /usr/bin/ranger-usersync-stop, /usr/bin/ranger-usersync-start, /usr/phd/*/ranger-admin/setup.sh *, /usr/phd/*/ranger-knox-plugin/disable-knox-plugin.sh *, /usr/phd/*/ranger-hbase-plugin/disable-hbase-plugin.sh *, /usr/phd/*/ranger-hdfs-plugin/disable-hdfs-plugin.sh *,  /usr/phd/current/ranger-admin/ranger_credential_helper.py, /usr/phd/current/ranger-kms/ranger_credential_helper.py`
+ # Ambari Ranger Commands
+ ambari ALL=(ALL) NOPASSWD:SETENV: /usr/phd/*/ranger-usersync/setup.sh, /usr/bin/ranger-usersync-stop, /usr/bin/ranger-usersync-start, /usr/phd/*/ranger-admin/setup.sh *, /usr/phd/*/ranger-knox-plugin/disable-knox-plugin.sh *, /usr/phd/*/ranger-hbase-plugin/disable-hbase-plugin.sh *, /usr/phd/*/ranger-hdfs-plugin/disable-hdfs-plugin.sh *,  /usr/phd/current/ranger-admin/ranger_credential_helper.py, /usr/phd/current/ranger-kms/ranger_credential_helper.py
 
 .. important:: Не изменяйте списки команд, только имена пользователей могут быть изменены в разделе «Customizable Users»
 
@@ -298,12 +300,11 @@
 ``````````````````````````
 
 Некоторые версии *sudo* имеют конфигурацию по умолчанию, которая предотвращает вызов *sudo* из не интерактивной оболочки. Чтобы агент выполнял команды не интерактивно, некоторые значения по умолчанию необходимо перенастроить.
+::
 
-:command:`Defaults exempt_group = ambari`
-
-:command:`Defaults !env_reset,env_delete-=PATH`
-
-:command:`Defaults: ambari !requiretty`
+ Defaults exempt_group = ambari
+ Defaults !env_reset,env_delete-=PATH
+ Defaults: ambari !requiretty
 
 Для повторной итерации необходимо выполнить данную конфигурацию *sudo* на каждом узле кластера. Чтобы убедиться, что конфигурация выполнена правильно, следует выполнить "su" для пользователя *ambari* и запустить *sudo -l*. Там можно проверить, нет ли предупреждений, и убедиться, что результат конфигурации соответствует только что примененному.
 
@@ -318,7 +319,7 @@
 
 1.	На Ambari Server запустить команду настройки:
 
-  :command:`ambari-server setup-security`
+    :command:`ambari-server setup-security`
 
 2.	При запросе "Choose one of the following options" выбрать вариант 2:
 
@@ -340,7 +341,7 @@
 
 5.	Запустить или перезапустить Ambari Server:
 
-  :command:`ambari-server restart`
+    :command:`ambari-server restart`
 
 
 
@@ -364,15 +365,15 @@
 
 1.	На хосте Ambari в текстовом редакторе открыть файл */etc/ambari-server/conf/ambari.properties* и установить свойство:
 
-  :command:`security.passwords.encryption.enabled=false`
+    :command:`security.passwords.encryption.enabled=false`
 
 2.	Удалить:
 
-  :command:`/var/lib/ambari-server/keys/credentials.jceks`
+    :command:`/var/lib/ambari-server/keys/credentials.jceks`
 
 3.	Удалить:
 
-  :command:`/var/lib/ambari-server/keys/master`
+    :command:`/var/lib/ambari-server/keys/master`
 
 4.	Сбросить пароль базы данных и, при необходимости, пароль LDAP. Запустить настройку "ambari-server" (см. раздел "Шифрование базы данных и паролей LDAP (опционально)") и "setup-ldap ambari-server" (см. раздел "Настройка Ambari для использования LDAP-сервера").
 
@@ -383,7 +384,7 @@
 
 В случае если текущий мастер-ключ известен, для его изменения необходимо повторно запустить команду настройки шифрования и следовать инструкциям:
 
-:command:`ambari-server setup-security`
+  :command:`ambari-server setup-security`
 
 1.	Из предложенных вариантов выбрать значение *2*:
 
@@ -403,11 +404,11 @@
 
 2.	Произвести настройку мастер-ключа (как описано в начале текущего раздела):
 
-  :command:`ambari-server setup-security`
+    :command:`ambari-server setup-security`
 
 3.	Запустить или перезапустить Ambari Server:
 
-  :command:`ambari-server restart`
+    :command:`ambari-server restart`
 
 
 
@@ -421,28 +422,28 @@
 1.	Войти на хост Ambari Server;
 
 2.	Найти сертификат. Если создается временный самоподписанный сертификат, использовать его в качестве примера:
-
-  :command:`openssl genrsa -out $wserver.key 2048`
-
-  :command:`openssl req -new -key $wserver.key -out $wserver.csr`
-
-  :command:`openssl x509 -req -days 365 -in $wserver.csr -signkey $wserver.key -out $wserver.crt`
+   ::
+   
+    openssl genrsa -out $wserver.key 2048
+    openssl req -new -key $wserver.key -out $wserver.csr
+    openssl x509 -req -days 365 -in $wserver.csr -signkey $wserver.key -out $wserver.crt
 
 Где *$wserver* – имя хоста сервера Ambari.
 
 Используемый сертификат должен быть PEM-закодирован, а не DER-закодирован. Если использовать DER-закодированный сертификат, выдается следующая ошибка:
+::
 
-:command:`unable to load certificate 140109766494024:error:0906D06C:PEM routines:PEM_read_bio:no start line:pem_lib.c :698:Expecting: TRUSTED CERTIFICATE`
+ unable to load certificate 140109766494024:error:0906D06C:PEM routines:PEM_read_bio:no start line:pem_lib.c :698:Expecting: TRUSTED CERTIFICATE
 
 Для конвертации DER-закодированного сертификата в PEM-закодированный необходимо использовать следующую команду:
 
-:command:`openssl x509 -in cert.crt -inform der -outform pem -out cert.pem`
+  :command:`openssl x509 -in cert.crt -inform der -outform pem -out cert.pem`
 
 Где *cert.crt* – DER-закодированный сертификат и *cert.pem* – итоговый PEM-кодированный сертификат.
 
 3.	Запустить специальную команду настройки и ответить на запросы:
 
-  :command:`ambari-server setup-security`
+    :command:`ambari-server setup-security`
 
 +	Выбрать значение *1* для включения HTTPS для сервера Ambari;
 +	На запрос "Do you want to configure HTTPS?" ответить *y*;
@@ -451,7 +452,7 @@
 +	Ввести пароль для закрытого ключа;
 +	Запустить или перезапустить сервер:
 
-  :command:`ambari-server restart`
+    :command:`ambari-server restart`
 
 
 
@@ -464,30 +465,30 @@
 
 1.	Создать принципала в KDC для сервера Ambari. Например, используя *kadmin*:
 
-  :command:`addprinc -randkey ambari-server@EXAMPLE.COM`
+    :command:`addprinc -randkey ambari-server@EXAMPLE.COM`
 
 2.	Создать *keytab* для этого принципала:
 
-  :command:`xst -k ambari.server.keytab ambari-server@EXAMPLE.COM`
+    :command:`xst -k ambari.server.keytab ambari-server@EXAMPLE.COM`
 
 3.	Поместить *keytab* на хост сервера Ambari. Обязательно установить права для файлов, чтобы запускающий Ambari Server пользователь, мог получить доступ к файлу *keytab*:
 
-  :command:`/etc/security/keytabs/ambari.server.keytab`
+    :command:`/etc/security/keytabs/ambari.server.keytab`
 
 4.	Остановить сервер Ambari:
 
-  :command:`ambari-server stop`
+    :command:`ambari-server stop`
 
 5.	Запустить команду *setup-security*:
 
-  :command:`ambari-server setup-security`
+    :command:`ambari-server setup-security`
 
 6.	Выбрать *3* для настройки Ambari kerberos JAAS;
 7.	Ввести имя принципала Kerberos для сервера Ambari, созданного на 1 шаге;
 8.	Ввести путь к *keytab* для принципала Ambari;
 9.	Перезапустить сервер Ambari:
 
-  :command:`ambari-server restart`
+    :command:`ambari-server restart`
 
 
 
@@ -508,7 +509,7 @@
 
 3.	Запустить или перезапустить Ambari Server:
 
-  :command:`ambari -server restart`
+    :command:`ambari -server restart`
 
 4.	Выполнить настройку безопасности и выбрать пункт *5* для импорта сертификата в *truststore*.
 
@@ -526,11 +527,11 @@
 1.	На хосте сервера Ambari в текстовом редакторе открыть файл */etc/ambari-server/conf/ambari.properties*;
 2.	Добавить следующее свойство:
 
-  :command:`security.server.two_way_ssl = true`
+    :command:`security.server.two_way_ssl = true`
 
 3.	Запустить или перезапустить Ambari Server:
 
-  :command:`ambari -server restart`
+    :command:`ambari -server restart`
 
 Сертификаты агента автоматически загружаются во время регистрации агента.
 
@@ -543,11 +544,11 @@
 
 Чтобы отключить определенные шифры, необходимо добавить список следующего формата в *ambari.properties* (при указании нескольких шифров, следует отделять каждый шифр с помощью нижнего подчеркивания):
 
-:command:`security.server.disabled.ciphers=TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA`
+  :command:`security.server.disabled.ciphers=TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA`
 
 Чтобы отключить определенные протоколы, необходимо добавить список следующего формата в *ambari.properties* (при указании нескольких протоколов, следует отделять каждый протокол с помощью вертикальной черты):
 
-:command:`security.server.disabled.protocols=SSL|SSLv2|SSLv3`
+  :command:`security.server.disabled.protocols=SSL|SSLv2|SSLv3`
 
 
 
