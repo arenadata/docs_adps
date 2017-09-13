@@ -467,10 +467,10 @@ SSH-соединение между хостом **Ambari Server** и всеми
 :command:`vi/etc/sysconfig/network`
 
 Следует изменить свойство *HOSTNAME*, чтобы задать полное доменное имя:
- ::
+::
  
-  NETWORKING=yes
-  HOSTNAME=<fully.qualified.domain.name>
+ NETWORKING=yes
+ HOSTNAME=<fully.qualified.domain.name>
 
 
 
