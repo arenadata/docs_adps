@@ -50,11 +50,11 @@
 
 Например, следующая команда для копирования файла **HDFS** в локальный каталог:
 
-:command:`hdfs dfs –get hdfs://namenode/foo/file-1 localdir`
+  :command:`hdfs dfs –get hdfs://namenode/foo/file-1 localdir`
 
 Предположим, что **Архив Hadoop** *bar.har* создан из каталога *foo*. С помощью **HAR** команда для копирования исходного файла становится следующей:
 
-:command:`hdfs dfs –get har://namenode/bar.har/foo/file-1 localdir`
+  :command:`hdfs dfs –get har://namenode/bar.har/foo/file-1 localdir`
 
 Пользователям следует изменить пути URI. Но при этом пользователи могут создать символическую ссылку (из *hdfs://namenode/foo* для *har://namenode/bar.har/foo* в примере выше), и тогда изменять URI не будет необходимости. В любом случае, *HarFileSystem* вызывается автоматически для обеспечения доступа к файлам в **HAR**. Из-за этого прозрачного слоя **HAR** совместим с **API Hadoop**, **MapReduce**, интерфейсом командной строки **оболочки FS** и приложениями более высокого уровня, такими как **Pig**, **Zebra**, **Streaming**, **Pipes** и **DistCp**.
 
@@ -65,7 +65,7 @@
 
 **Архивы Hadoop** могут быть созданы с использованием инструмента архивации **Hadoop**. Инструмент архивации использует **MapReduce** для эффективного параллельного создания **архивов Hadoop**. Инструмент вызывается с помощью команды:
 
-:command:`hadoop archive -archiveName name -p <parent> <src>* <dest>`
+  :command:`hadoop archive -archiveName name -p <parent> <src>* <dest>`
 
 Список файлов генерируется путем рекурсивного перемещения исходных каталогов, а затем список разбивается на карту входящих задач. Каждая задача создает файл (около 2 ГБ, настраивается) из подмножества исходных файлов и выводит метаданные. Наконец, reduce task собирает метаданные и генерирует индексные файлы.
 
@@ -76,11 +76,11 @@
 
 Инструмент архивации **Hadoop** вызывается следующей командой:
 
-:command:`hadoop archive -archiveName name -p <parent> <src>* <dest>`
+  :command:`hadoop archive -archiveName name -p <parent> <src>* <dest>`
 
 Где *-archiveName* - это имя создающегося архива. В имени архива должно быть указано расширение *.har*. Аргумент *<parent>* используется для указания относительного пути к папке, в которой файлы будут архивироваться в **HAR**. Например:
 
-:command:`hadoop archive -archiveName foo.har -p /user/hadoop dir1 dir2 /user/zoo`
+  :command:`hadoop archive -archiveName foo.har -p /user/hadoop dir1 dir2 /user/zoo`
 
 В данном примере создается архив с использованием */user/hadoop* в качестве каталога архива. Каталоги */user/hadoop/dir1* и */user/hadoop/dir2* будут заархивированы в архиве */user/zoo/foo.har*.
 
@@ -88,7 +88,7 @@
 
 Хотя команда архивации **Hadoop** может быть запущена из файловой системы хоста, файл архива создается в **HDFS** из существующих каталогов. Если ссылаться на каталог в файловой системе хоста, а не на **HDFS**, выдается следующая ошибка:
 
-:command:`The resolved paths set is empty. Please check whether the srcPaths exist, where srcPaths = [</directory/path>]`
+  :command:`The resolved paths set is empty. Please check whether the srcPaths exist, where srcPaths = [</directory/path>]`
 
 Для создания каталогов **HDFS**, используемых в предыдущем примере, необходимо выполнить следующую команду:
 ::
@@ -105,7 +105,7 @@
 
 Команда *hdfs dfs -ls* может использоваться для поиска файлов в архивах **Hadoop**. Используя пример архива */user/zoo/foo.har*, созданный в предыдущем разделе, необходимо использовать следующую команду для вывода списка файлов в архиве:
 
-:command:`hdfs dfs -ls har:///user/zoo/foo.har/`
+  :command:`hdfs dfs -ls har:///user/zoo/foo.har/`
 
 Результатом будет:
 ::
@@ -115,15 +115,15 @@
 
 Данные архивы были созданы с помощью следующей команды:
 
-:command:`hadoop archive -archiveName foo.har -p /user/hadoop dir1 dir2 /user/zoo`
+  :command:`hadoop archive -archiveName foo.har -p /user/hadoop dir1 dir2 /user/zoo`
 
 Если изменить данную команду на:
 
-:command:`hadoop archive -archiveName foo.har -p /user/ hadoop/dir1 hadoop/dir2 /user/zoo`
+  :command:`hadoop archive -archiveName foo.har -p /user/ hadoop/dir1 hadoop/dir2 /user/zoo`
 
 И затем выполнить следующую команду:
 
-:command:`hdfs dfs -ls -R har:///user/zoo/foo.har`
+  :command:`hdfs dfs -ls -R har:///user/zoo/foo.har`
 
 То результатом будет:
 ::
