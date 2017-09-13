@@ -1,6 +1,10 @@
 Подготовка к установке кластера
 ===============================
 
+.. |br| raw:: html
+
+   <br />
+
 
 В разделе "Подготовка к установке кластера" приведена информация и
 даны материалы, которые необходимо подготовить для установки кластера
@@ -265,8 +269,7 @@
 максимального открытых файловых дескрипторов, необходимо выполнить
 следующие команды на каждом хосте:
 
-:command:`ulimit -Sn`
-
+:command:`ulimit -Sn`  |br| 
 :command:`ulimit -Hn`
 
 Если значение максимального количества открытых файловых дескрипторов
@@ -336,7 +339,7 @@ SSH-соединение между хостом **Ambari Server** и всеми
 + Создать публичный и приватный ключи SSH на хосте сервера Ambari:
 
   :command:`ssh-keygen`
-
+ |br| 
 + При запросе пароля для приватного ключа необходимо не задавая значения (поле для ввода пароля оставить пустым) нажать клавишу *Enter*;
 + Скопировать публичный ключ SSH (*id_rsa.pub*) в учетную запись *root* на все узлы кластера:
 
@@ -347,12 +350,12 @@ SSH-соединение между хостом **Ambari Server** и всеми
   В случае если во время первого подключения отображается предупреждающее сообщение, необходимо ответить *yes*:
 
   :command:`Are you sure you want to continue connecting (yes/no)?`
-
+ |br| 
 + Убедиться, что с сервера Ambari выполняется подключение к каждому
   хосту в кластере с помощью SSH без пароля:
 
   :command:`ssh root@<remote.target.host>`
-
+ |br| 
 + (Опционально) Сохранить копию приватного ключа SSH на компьютере, с которого
   планируется запуск веб-мастера установки Ambari Install Wizard.
 
@@ -428,16 +431,15 @@ SSH-соединение между хостом **Ambari Server** и всеми
 Для редактирования файла хоста необходимо используя текстовый редактор
 открыть файл *hosts* на каждом узле кластера:
 
-:command:`vi /etc/hosts`
+:command:`vi/etc/hosts`
 
 И добавить строку для каждого хоста, состоящую из IP-адреса и **FQDN**,
 например:
+ ::
 
-:command:`1.2.3.4 <fully.qualified.domain.name>`
-
-:command:`127.0.0.1 localhost.localdomain localhost`
-
-:command:`::1 localhost6.localdomain6 localhost6`
+  1.2.3.4 <fully.qualified.domain.name>
+  127.0.0.1 localhost.localdomain localhost
+  ::1 localhost6.localdomain6 localhost6
 
 
 Проверка имени хоста
@@ -462,13 +464,13 @@ SSH-соединение между хостом **Ambari Server** и всеми
 сети на каждом узле и установить ему требуемую конфигурацию сети для
 каждого узла:
 
-:command:`vi /etc/sysconfig/network`
+:command:`vi/etc/sysconfig/network`
 
 Следует изменить свойство *HOSTNAME*, чтобы задать полное доменное имя:
-
-:command:`NETWORKING=yes`
-
-:command:`HOSTNAME=<fully.qualified.domain.name>`
+ ::
+ 
+  NETWORKING=yes
+  HOSTNAME=<fully.qualified.domain.name>
 
 
 
@@ -480,10 +482,10 @@ SSH-соединение между хостом **Ambari Server** и всеми
 Самый простой способ сделать это – временно отключить **IPTables**:
 
 + RHEL/CentOS 7:
-
-  :command:`systemctl disable firewalld`
-
-  :command:`systemctl stop firewalld`
+  ::
+  
+   systemctl disable firewalld
+   systemctl stop firewalld
 
 
 По завершению установки следует перезапустить **IPTables**.
@@ -528,7 +530,7 @@ SSH-соединение между хостом **Ambari Server** и всеми
 значение **UMASK** равное *022*, необходимо запустить команду в корне на
 всех хостах:
 
-:command:`vi /etc/profile`
+:command:`vi/etc/profile`
 
 Затем добавить следующую строку:
 
