@@ -28,4 +28,5 @@ E-mail: info@arenadata.io
    HDFSadmin/HDFSArchives
    HDFSadmin/JMXMetrics
    HDFSadmin/Memory
+   HDFSadmin/DataNodesNon-root
 
