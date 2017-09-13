@@ -34,13 +34,13 @@
   следует указать:
 
 
-  :command:`PGPORT=10432`
+    :command:`PGPORT=10432`
     
 
 + Перезапустить базу данных PostgreSQL:
 
 
-  :command:`service postgresql restart`
+    :command:`service postgresql restart`
     
 
 + Подключиться к базе данных под *postgres* (супер-пользователь) и
@@ -66,7 +66,7 @@
 + Чтобы убедиться, что *postgres* подключен к хосту *databasehost*,
   необходимо использовать следующую команду:
 
-  :command:`netstat -anp | egrep <port>`
+    :command:`netstat -anp | egrep <port>`
     
 + Выполнить файл *Ambari-DDL-Postgres-CREATE.sql* в PostgreSQL для завершения настройки:
   ::
