@@ -68,9 +68,8 @@
 
     :command:`netstat -anp | egrep <port>`
     
-+ Выполнить файл *Ambari-DDL-Postgres-CREATE.sql* в PostgreSQL для
-  завершения настройки:
-    ::
++ Выполнить файл *Ambari-DDL-Postgres-CREATE.sql* в PostgreSQL для завершения настройки:
+   ::
 
     psql -f /var/lib/ambari-server/resources/Ambari-DDL-Postgres-CREATE.sql -U ambari -p 10432 -d ambari
     
