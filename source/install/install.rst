@@ -37,7 +37,7 @@
 дополнительного репозитория **YUM**. Для добавления репозитория необходимо
 выполнить от имени *root* команду:
 
-:command:`yum-config-manager –-add-repo <URL репозитория Ambari>/ambary.repo`
+  :command:`yum-config-manager –-add-repo <URL репозитория Ambari>/ambary.repo`
 
 
 Настройка локального репозитория YUM
@@ -52,8 +52,8 @@
 В случае если сервер не запущен, необходимо его установить и
 запустить:
 
-:command:`yum install httpd`  |br| 
-:command:`systemctl start httpd`
+  :command:`yum install httpd`  |br| 
+  :command:`systemctl start httpd`
 
 
 
@@ -71,8 +71,8 @@
 (**apache**), а лучше сделать их доступными для всех пользователей
 кластера:
 
-:command:`mkdir /staging`  |br| 
-:command:`chmod a+rx /staging`
+  :command:`mkdir /staging`  |br| 
+  :command:`chmod a+rx /staging`
 
 .. important:: Не используйте каталог */TMP* в качестве промежуточного, так как файлы могут быть удалены в любое время
 
@@ -94,7 +94,7 @@
 После загрузки **Ambari 2.5.1** необходимо извлечь архив в промежуточный
 каталог. Например:
 
-:command:`tar -xvf /staging/AMBARI-2.5.1.tar -C /staging/`
+  :command:`tar -xvf /staging/AMBARI-2.5.1.tar -C /staging/`
 
 
 
@@ -105,14 +105,14 @@
 используемом в качестве репозитория **YUM**, выполнить скрипт
 *setup_repo.sh*, входящий в состав архива **Ambari**:
 
-:command:`/staging/AMBARI-2.5.1/setup_repo.sh`
+  :command:`/staging/AMBARI-2.5.1/setup_repo.sh`
 
 В скрипте предполагается, что в корневом каталоге **YUM** репозитория веб-сервер устанавливает */var /www /html* и создает ссылку *ambari-<версия>*,
 указывающую на извлеченный архив.
 
 Необходимо убедиться, что репозиторий **YUM** доступен на веб-сервере **YUM**:
 
-:command:`curl http://localhost/AMBARI-2.5.1/repodata/repomd.xml`
+  :command:`curl http://localhost/AMBARI-2.5.1/repodata/repomd.xml`
 
 Скрипт также создает определенный репозиторий **Ambari** и помещает его в
 файл */etc/yum.repos.d/ambari.repo*. Данный файл должен быть доступен на
@@ -123,7 +123,7 @@
 Необходимо проверить наличие доступа к следующему URL-адресу с хоста
 администратора и с узлов кластера:
 
-:command:`http://<yum.repo.host.fqdn>/AMBARI-2.5.1`
+  :command:`http://<yum.repo.host.fqdn>/AMBARI-2.5.1`
 
 
 
@@ -132,7 +132,7 @@
 
 Сервер **Ambari** устанавливается из RPM-пакета по команде **YUM**:
 
-:command:`yum install ambari-server`
+  :command:`yum install ambari-server`
 
 Данная команда устанавливает сервер **Ambari**, являющийся сервером веб-
 приложений, на порт *8080*. Также устанавливает инстанс сервера
@@ -148,7 +148,7 @@
 В случае если инстанс **PostgreSQL** настроен на порт по умолчанию,
 следует выполнить следующую команду:
 
-:command:`ambari-server setup`
+  :command:`ambari-server setup`
 
 В процессе настройки необходимо указать или принять по умолчанию
 параметры:
@@ -179,15 +179,15 @@
 
 После установки сервера **Ambari** запуск его осуществляется по команде:
 
-:command:`ambari-server start`
+  :command:`ambari-server start`
 
 Для проверки статуса сервера необходимо использовать команду:
 
-:command:`ambari-server status`
+  :command:`ambari-server status`
 
 Для остановки сервера необходимо использовать команду:
 
-:command:`ambari-server stop`
+  :command:`ambari-server stop`
 
 Сервер **Ambari** доступен на порту *8080*. По умолчанию для него
 установлена следующая учетная запись:
@@ -200,7 +200,7 @@
 Для входа в веб-интерфейс **Ambari** необходимо в адресной строке браузера
 указать адрес сервера:
 
-:command:`http://<адрес сервера>:8080`
+  :command:`http://<адрес сервера>:8080`
 
 При этом запрашивается логин и пароль. После авторизации открывается веб-интерфейс **Ambari** (:ref:`Рис.6.<install_pic6>`).
 
@@ -257,7 +257,7 @@
 В случае если архивы загружены в каталог */tmp*, то для их распаковки в
 каталоге, например, */staging* необходимо выполнить следующую команду:
 
-:command:`tar –xvf /tmp/{stack}.tar -C /staging/`
+  :command:`tar –xvf /tmp/{stack}.tar -C /staging/`
 
 Для использования локальных репозиториев **ADH** и **ADH UTILS** необходимо
 выполнить настройки, описанные в пункте "Настройка локальных репозиториев YUM".
@@ -288,7 +288,7 @@
 Для каждого стека необходимо запустить скрипт установки локального
 репозитория:
 
-:command:`/staging/{stack}/setup_repo.sh`
+  :command:`/staging/{stack}/setup_repo.sh`
 
 По завершению установки скрипт выводит URL-адрес репозитория. Данный
 URL потребуется при установке кластера **ADH** с использованием сервера
@@ -301,8 +301,8 @@ URL потребуется при установке кластера **ADH** с
 установлен сервер **Ambari**. Затем необходимо проверить правильность
 настройки репозитория, выполнив две команды от узла администратора:
 
-:command:`yum clean all` |br| 
-:command:`yum repolist`
+  :command:`yum clean all` |br| 
+  :command:`yum repolist`
 
 При корректной настройке выдается список репозиториев стека.
 
