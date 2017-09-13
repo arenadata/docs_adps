@@ -49,7 +49,8 @@
 
     :command:`mkdir /etc/ambari-server/keys`
 
-2.	::
+2.	
+   ::
 
     $JAVA_HOME/bin/keytool -import -trustcacerts -alias root -file $PATH_TO_YOUR_LDAPS_CERT -keystore /etc/ambari-server/keys/ldaps-keystore.jks
 
