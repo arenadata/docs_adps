@@ -123,12 +123,12 @@ Hive Partitioned Tables
 ::
 
  user
- -- hive
-     -- warehouse 
-         -- sales 
+ `-- hive
+     `-- warehouse 
+         `-- sales 
              |-- country=CN 
              |-- country=GB
-             -- country=US
+             `-- country=US
 
 Группа *salesadmin* – это группа для всех этих файлов. Члены группы имеют доступ на чтение и запись ко всем файлам. Отдельные группы, зависящие от конкретной страны, могут запускать запросы на использование, которые только считывают данные для конкретной страны, например, *sales_CN*, *sales_GB* и *sales_US*. У этих групп нет доступа на запись.
 
@@ -195,12 +195,13 @@ ACL по умолчанию
 ::
 
  dir1
- -- dir2
-     -- dir3
+ `-- dir2
+     `-- dir3
          |-- file1
          |-- file2
-         -- file3
- dir1-- dir2-- dir3|-- file1|-- file2-- file3
+         `-- file3
+ 
+ dir1`-- dir2`-- dir3|-- file1|-- file2`-- file3
 
 Установка **ACL** на *dir2* блокирует доступ для Bruce к *dir3*, *file1*, *file2* и *file3*:
 
