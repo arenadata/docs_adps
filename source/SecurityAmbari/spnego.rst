@@ -19,12 +19,11 @@
 Для настройки HTTP-аутентификации для **HDFS**, **YARN**, **MapReduce2**, **HBase** и **Oozie** необходимо выполнить следующие действия:
 
 1. Создать секретный ключ, используемый для подписания токенов аутентификации. Этот файл должен содержать случайные данные и размещаться на каждом узле кластера. Он также должен принадлежать пользователям и группам *hdfs*, входящим в группу *hadoop*. Права должны быть установлены на *440*. Например:
+  ::
 
-  :command:`dd if=/dev/urandom of=/etc/security/http_secret bs=1024 count=1`
-
-  :command:`chown hdfs:hadoop /etc/security/http_secret`
-
-  :command:`chmod 440 /etc/security/http_secret`
+   dd if=/dev/urandom of=/etc/security/http_secret bs=1024 count=1
+   chown hdfs:hadoop /etc/security/http_secret
+   chmod 440 /etc/security/http_secret
 
 2. В Ambari Web перейти по вкладкам :menuselection:`"Services --> HDFS  --> Configs"`;
 3. Добавить или изменить свойства конфигурации в *Advanced core-site*, приведенные в таблице 6.
