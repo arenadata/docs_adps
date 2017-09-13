@@ -21,11 +21,11 @@
   */var/lib/pgsql/data/pg_hba.conf*. Чтобы позволить пользователю *ambari*
   подключиться к базе данных, необходимо в конце файла добавить
   следующие строки:
+    ::
 
-
-    :command:`local all ambari md5`  |br| 
-    :command:`host all ambari 0.0.0.0/0 md5` |br| 
-    :command:`host all ambari ::/0 md5`
+     local all ambari md5
+     host all ambari 0.0.0.0/0 md5
+     host all ambari ::/0 md5
     
 
 + Чтобы подключить порт, выбранный не по умолчанию, следует открыть
@@ -45,16 +45,16 @@
 
 + Подключиться к базе данных под *postgres* (супер-пользователь) и
   выполнить следующие настройки:
+    ::
 
-
-    :command:`psql -U postgres -p 10432;` |br| 
-    :command:`postgres=# CREATE DATABASE ambari;` |br| 
-    :command:`postgres=# CREATE USER ambari WITH ENCRYPTED PASSWORD 'bigdata';` |br| 
-    :command:`postgres=# \c ambari;` |br| 
-    :command:`ambari=# CREATE SCHEMA ambari AUTHORIZATION ambari;` |br| 
-    :command:`ambari=# ALTER SCHEMA ambari OWNER TO ambari;` |br| 
-    :command:`ambari=# ALTER ROLE ambari SET search_path to 'ambari','public';` |br| 
-    :command:`ambari=# \q`
+     psql -U postgres -p 10432;
+     postgres=# CREATE DATABASE ambari; 
+     postgres=# CREATE USER ambari WITH ENCRYPTED PASSWORD 'bigdata'; 
+     postgres=# \c ambari;
+     ambari=# CREATE SCHEMA ambari AUTHORIZATION ambari;
+     ambari=# ALTER SCHEMA ambari OWNER TO ambari;
+     ambari=# ALTER ROLE ambari SET search_path to 'ambari','public';
+     ambari=# \q
     
    
 + Выполнить команду установки Ambari:
