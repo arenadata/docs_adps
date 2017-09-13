@@ -21,11 +21,11 @@
   */var/lib/pgsql/data/pg_hba.conf*. Чтобы позволить пользователю *ambari*
   подключиться к базе данных, необходимо в конце файла добавить
   следующие строки:
-    ::
+  ::
 
-     local all ambari md5
-     host all ambari 0.0.0.0/0 md5
-     host all ambari ::/0 md5
+   local all ambari md5
+   host all ambari 0.0.0.0/0 md5
+   host all ambari ::/0 md5
     
 
 + Чтобы подключить порт, выбранный не по умолчанию, следует открыть
@@ -34,27 +34,27 @@
   следует указать:
 
 
-    :command:`PGPORT=10432`
+  :command:`PGPORT=10432`
     
 
 + Перезапустить базу данных PostgreSQL:
 
 
-    :command:`service postgresql restart`
+  :command:`service postgresql restart`
     
 
 + Подключиться к базе данных под *postgres* (супер-пользователь) и
   выполнить следующие настройки:
-    ::
+  ::
 
-     psql -U postgres -p 10432;
-     postgres=# CREATE DATABASE ambari; 
-     postgres=# CREATE USER ambari WITH ENCRYPTED PASSWORD 'bigdata'; 
-     postgres=# \c ambari;
-     ambari=# CREATE SCHEMA ambari AUTHORIZATION ambari;
-     ambari=# ALTER SCHEMA ambari OWNER TO ambari;
-     ambari=# ALTER ROLE ambari SET search_path to 'ambari','public';
-     ambari=# \q
+   psql -U postgres -p 10432;
+   postgres=# CREATE DATABASE ambari; 
+   postgres=# CREATE USER ambari WITH ENCRYPTED PASSWORD 'bigdata'; 
+   postgres=# \c ambari;
+   ambari=# CREATE SCHEMA ambari AUTHORIZATION ambari;
+   ambari=# ALTER SCHEMA ambari OWNER TO ambari;
+   ambari=# ALTER ROLE ambari SET search_path to 'ambari','public';
+   ambari=# \q
     
    
 + Выполнить команду установки Ambari:
@@ -66,7 +66,7 @@
 + Чтобы убедиться, что *postgres* подключен к хосту *databasehost*,
   необходимо использовать следующую команду:
 
-    :command:`netstat -anp | egrep <port>`
+  :command:`netstat -anp | egrep <port>`
     
 + Выполнить файл *Ambari-DDL-Postgres-CREATE.sql* в PostgreSQL для завершения настройки:
   ::
