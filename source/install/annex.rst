@@ -58,9 +58,9 @@
     
    
 + Выполнить команду установки Ambari:
-    ::
+  ::
 
-     ambari-server setup --database=postgres --databasehost=localhost--databaseport=10432 --databasename=ambari --databaseusername=ambari--databasepassword=bigdata
+   ambari-server setup --database=postgres --databasehost=localhost--databaseport=10432 --databasename=ambari --databaseusername=ambari--databasepassword=bigdata
     
 
 + Чтобы убедиться, что *postgres* подключен к хосту *databasehost*,
@@ -69,9 +69,9 @@
     :command:`netstat -anp | egrep <port>`
     
 + Выполнить файл *Ambari-DDL-Postgres-CREATE.sql* в PostgreSQL для завершения настройки:
-   ::
+  ::
 
-    psql -f /var/lib/ambari-server/resources/Ambari-DDL-Postgres-CREATE.sql -U ambari -p 10432 -d ambari
+   psql -f /var/lib/ambari-server/resources/Ambari-DDL-Postgres-CREATE.sql -U ambari -p 10432 -d ambari
     
 
 + При запросе пароля необходимо ввести значение *bigdata*.
