@@ -111,11 +111,12 @@ Cache Pool
 + *dfs.datanode.max.locked.memory*. Это свойство определяет максимальный объем памяти (в байтах), который будет использовать DataNode для кеширования. Также необходимо увеличить размер "заблокированного объема памяти" *ulimit* (*ulimit -l*) пользователя DataNode, чтобы превысить этот параметр (более подробно описано в следующем разделе "Дополнительные свойства"). При настройке данного значения необходимо помнить, что пространство в памяти также понадобится и для других целей, таких как JNM и DataNode, а также страниц кеша операционной системы. 
 
 Пример:
+::
 
-:command:`<property>`  |br| 
-    :command:`<name>dfs.datanode.max.locked.memory</name>`  |br| 
-    :command:`<value>268435456</value>`  |br| 
-  :command:`</property>`
+ <property>
+     <name>dfs.datanode.max.locked.memory</name>
+     <value>268435456</value>
+   </property>
 
 
 
@@ -125,39 +126,44 @@ Cache Pool
 Следующие свойства не являются обязательными, но могут быть заданы в настройках:
 
 + *dfs.namenode.path.based.cache.refresh.interval.ms* число миллисекунд, которое NameNode использует между последующими повторными сканированиями кэша. По умолчанию этот параметр установлен на *300000*, что составляет пять минут. Пример:
-
-  :command:`<property>` |br| 
-      :command:`<name>dfs.namenode.path.based.cache.refresh.interval.ms</name>` |br| 
-      :command:`<value>300000</value>` |br| 
-   :command:`</property>`
+  ::
+   
+   <property>
+       <name>dfs.namenode.path.based.cache.refresh.interval.ms</name>
+       <value>300000</value>
+    </property>
 
 + *dfs.time.between.resending.caching.directives.ms* NameNode использует это значение как количество миллисекунд между повторным кэшированием директивов. Пример:
-
-  :command:`<property>` |br| 
-      :command:`<name>dfs.time.between.resending.caching.directives.ms</name>` |br| 
-      :command:`<value>300000</value>` |br| 
-   :command:`</property>`
+  ::
+  
+   <property>
+       <name>dfs.time.between.resending.caching.directives.ms</name>
+       <value>300000</value>
+    </property>
 
 + *dfs.datanode.fsdatasetcache.max.threads.per.volume* DataNode использует это значение как максимальное количество потоков на единицу объема для кэширования новых данных. По умолчанию этот параметр имеет значение *4*. Пример:
-
-  :command:`<property>` |br| 
-      :command:`<name>dfs.datanode.fsdatasetcache.max.threads.per.volume</name>` |br| 
-      :command:`<value>4</value>` |br| 
-   :command:`</property>` 
+  ::
+  
+   <property> 
+       <name>dfs.datanode.fsdatasetcache.max.threads.per.volume</name>
+       <value>4</value>
+    </property>
    
 + *dfs.cachereport.intervalMsec* DataNode использует это значение как число миллисекунд между отправкой отчета о состоянии кэша в NameNode. По умолчанию этот параметр установлен на *10000*, что составляет 10 секунд. Пример:   
-
-  :command:`<property>` |br| 
-      :command:`<name>dfs.cachereport.intervalMsec</name>` |br| 
-      :command:`<value>10000</value>` |br| 
-   :command:`</property>` 
+  ::
+  
+   <property>
+       <name>dfs.cachereport.intervalMsec</name>
+       <value>10000</value>
+    </property>
 
 + *dfs.namenode.path.based.cache.block.map.allocation.percent* Процент Java heap, распределенный по картам кэшированных блоков. Карта кешированных блоков - это хеш-карта, которая использует связанное хэширование. Доступ к меньшим картам осуществляется медленнее, чем если количество кешированных блоков велико; большие карты потребляют больше памяти. Значение по умолчанию - *0,25* процента. Пример:
-
-  :command:`<property>` |br| 
-      :command:`<name>dfs.namenode.path.based.cache.block.map.allocation.percent</name>` |br| 
-      :command:`<value>0.25</value>` |br| 
-   :command:`</property>` 
+  ::
+  
+   <property> 
+       <name>dfs.namenode.path.based.cache.block.map.allocation.percent</name>
+       <value>0.25</value>
+    </property>
 
 
 Ограничения ОС
@@ -170,15 +176,16 @@ Cache Pool
 .. important:: Для *ulimit -l* характерно выводить ограничение блокировки памяти в килобайтах (КБ), но при этом *dfs.datanode.max.locked.memory* должно быть указано в байтах.
 
 Например, значение *dfs.datanode.max.locked.memory* установлено в *128000* байт:
+::
 
-:command:`<property>` |br| 
-    :command:`<name>dfs.datanode.max.locked.memory</name>` |br| 
-    :command:`<value>128000</value>` |br| 
-:command:`</property>` 
+ <property> 
+     <name>dfs.datanode.max.locked.memory</name> 
+     <value>128000</value>
+ </property>
 
 Лучше установить *memlock* (максимальное адресное пространство с закрытой памятью) на несколько большее значение. Например, чтобы установить *memlock* на *130 KB* (*130 000 байт*) для пользователя *hdfs*, необходимо добавить следующую строку в */etc/security/limits.conf*:
 
-:command:`hdfs             -       memlock         130`
+  :command:`hdfs             -       memlock         130`
 
 .. important:: Информация в данном разделе не применяется к развертыванию в Windows. Windows не имеет прямого эквивалента *ulimit -l*.
 
@@ -205,9 +212,10 @@ addPool
 ~~~~~~~
 
 Команда добавления нового **Cache Pool**:
+::
 
-:command:`hdfs cacheadmin -addPool <name> [-owner <owner>] [-group <group>]` |br| 
-:command:`[-mode <mode>] [-limit <limit>] [-maxTtl <maxTtl>]`
+ hdfs cacheadmin -addPool <name> [-owner <owner>] [-group <group>] 
+ [-mode <mode>] [-limit <limit>] [-maxTtl <maxTtl>]
 
 
 Функции команды *addPool* описаны в таблице 4. 
@@ -229,9 +237,10 @@ modifyPool
 ~~~~~~~~~~
 
 Команда изменения метаданных существующего **Cache Pool**:
+::
 
-:command:`hdfs cacheadmin -modifyPool <name> [-owner <owner>] [-group <group>]` |br| 
-:command:`[-mode <mode>] [-limit <limit>] [-maxTtl <maxTtl>]`
+ hdfs cacheadmin -modifyPool <name> [-owner <owner>] [-group <group>] 
+ [-mode <mode>] [-limit <limit>] [-maxTtl <maxTtl>]
 
 
 Функции команды *modifyPool* описаны в таблице 5. 
@@ -253,8 +262,9 @@ removePool
 ~~~~~~~~~~
 
 Команда удаления **Cache Pool**. Также удаляет пути, связанные с ним:
+::
 
-:command:`hdfs cacheadmin -removePool <name>`
+ hdfs cacheadmin -removePool <name>
 
 Функции команды *removePool* описаны в таблице 6. 
 
@@ -270,8 +280,9 @@ listPools
 ~~~~~~~~~
 
 Команда отображает информацию об одном или нескольких **Cache Pool**, например, имя, владельца, группу, разрешения и прочее:
+::
 
-:command:`hdfs cacheadmin -listPools [-stats] [<name>]`
+ hdfs cacheadmin -listPools [-stats] [<name>]
 
 Функции команды *listPools* описаны в таблице 7. 
 
@@ -288,8 +299,9 @@ help
 ~~~~
 
 Отображает подробную информацию о команде:
+::
 
-:command:`hdfs cacheadmin -help <command-name>`
+ hdfs cacheadmin -help <command-name>
 
 Функции команды *help* описаны в таблице 8. 
 
@@ -309,9 +321,10 @@ addDirective
 ~~~~~~~~~~~~
 
 Команда добавления нового **Cache Directive**:
+::
 
-:command:`hdfs cacheadmin -addDirective -path <path> -pool <pool-name> [-force]` |br| 
-:command:`[-replication <replication>] [-ttl <time-to-live>]`
+ hdfs cacheadmin -addDirective -path <path> -pool <pool-name> [-force]
+ [-replication <replication>] [-ttl <time-to-live>]
 
 Функции команды *addDirective* описаны в таблице 9. 
 
@@ -332,8 +345,9 @@ removeDirective
 ~~~~~~~~~~~~~~~
 
 Команда удаления **Cache Directive**:
+::
 
-:command:`hdfs cacheadmin -removeDirective <id>`
+ hdfs cacheadmin -removeDirective <id>
 
 Функции команды *removeDirective* описаны в таблице 10. 
 
@@ -349,8 +363,9 @@ removeDirectives
 ~~~~~~~~~~~~~~~~
 
 Команда удаления всех **Cache Directives** по указанному пути:
+::
 
-:command:`hdfs cacheadmin -removeDirectives <path>`
+ hdfs cacheadmin -removeDirectives <path>
 
 Функции команды *removeDirectives* описаны в таблице 11. 
 
@@ -366,8 +381,9 @@ listDirectives
 ~~~~~~~~~~~~~~
 
 Команда возврата списка **Cache Directives**:
+::
 
-:command:`hdfs cacheadmin -listDirectives [-stats] [-path <path>] [-pool <pool>]`
+ hdfs cacheadmin -listDirectives [-stats] [-path <path>] [-pool <pool>]
 
 Функции команды *listDirectives* описаны в таблице 12. 
 
