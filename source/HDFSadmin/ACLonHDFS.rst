@@ -16,11 +16,12 @@ ACL на HDFS
 ^^^^^^^^^^^^^^^^^^^^^
 
 По умолчанию **ACL** отключены, и при этом **NameNode** отклоняет все попытки установить **ACL**. Например:
+:: 
 
-:command:`<property>` |br|
-    :command:`<name>dfs.namenode.acls.enabled</name>` |br|    
-    :command:`<value>true</value>`   
-:command:`</property>` 
+  <property>
+      <name>dfs.namenode.acls.enabled</name>   
+      <value>true</value> 
+  </property>
 
 Для включения **ACL** в **HDFS** необходимо в файле *hdfs-site.xml* установить свойству *dfs.namenode.acls.enabled* значение *true*.
 
@@ -33,7 +34,7 @@ ACL на HDFS
 
 +	**Setfacl.** Устанавливает ACL для файлов и каталогов. Применение:
 
-  :command:`-setfacl [-bkR] {-m|-x} <acl_spec> <path> -setfacl --set <acl_spec> <path>`
+    :command:`-setfacl [-bkR] {-m|-x} <acl_spec> <path> -setfacl --set <acl_spec> <path>`
 
 Функции команды приведены в таблице 1.
 
@@ -52,14 +53,15 @@ ACL на HDFS
 
 
 Например:
+::
 
-:command:`hdfs dfs -setfacl -m user:hadoop:rw- /file` |br|
-:command:`hdfs dfs -setfacl -x user:hadoop /file` |br|
-:command:`hdfs dfs -setfacl -b /file` |br|
-:command:`hdfs dfs -setfacl -k /dir`  |br|
-:command:`hdfs dfs -setfacl --set user::rw-,user:hadoop:rw-,group::r--,other::r-- /file`  |br| 
-:command:`hdfs dfs -setfacl -R -m user:hadoop:r-x /dir` |br|
-:command:`hdfs dfs -setfacl -m default:user:hadoop:r-x /dir`
+  hdfs dfs -setfacl -m user:hadoop:rw- /file
+  hdfs dfs -setfacl -x user:hadoop /file
+  hdfs dfs -setfacl -b /file
+  hdfs dfs -setfacl -k /dir
+  hdfs dfs -setfacl --set user::rw-,user:hadoop:rw-,group::r--,other::r-- /file 
+  hdfs dfs -setfacl -R -m user:hadoop:r-x /dir
+  hdfs dfs -setfacl -m default:user:hadoop:r-x /dir
 
 Код выхода:
 
@@ -68,7 +70,7 @@ ACL на HDFS
 
 +	**Getfacl.** Отображает ACL файлов и каталогов. Если каталог имеет ACL по умолчанию, *getfacl* также его отображает. Применение:
 
-  :command:`-getfacl [-R] <path>`
+    :command:`-getfacl [-R] <path>`
 
 Функции команды приведены в таблице 2.
 
@@ -80,9 +82,10 @@ ACL на HDFS
    "<path>", "Путь к файлу или директории списка"
 
 Например:
+::
 
-:command:`hdfs dfs -getfacl /file` |br|
-:command:`hdfs dfs -getfacl -R /dir`
+  hdfs dfs -getfacl /file
+  hdfs dfs -getfacl -R /dir
 
 Код выхода:
 
