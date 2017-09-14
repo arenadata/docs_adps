@@ -64,7 +64,7 @@
 Есть возможность загрузить следующие компоненты дистрибутива:
 
 + *Arenadata Ambari* – средство развертывания, настройки и мониторинга сервисов;
-+ *Arenadata Hadoop 1.4* – RPM-пакеты для сервисов Hadoop, таких как HDFS, YARN, Hbase, Hive, Zookeeper;
++ *Arenadata Hadoop 1.4* – RPM-пакеты для сервисов :term:Hadoop, таких как HDFS, YARN, Hbase, Hive, Zookeeper;
 + *Arenadata Hadoop Utils 1.4* – дополнительные сервисы и библиотеки, используемые для мониторинга и оповещения серверов кластера.
 
 
