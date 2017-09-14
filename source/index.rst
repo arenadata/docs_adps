@@ -16,6 +16,7 @@ Welcome to Arenadata's documentation!
    security
    SecurityAmbari
    HDFSadmin
+   Glossary
 
 Indices and tables
 ==================
