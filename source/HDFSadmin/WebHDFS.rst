@@ -42,8 +42,8 @@
        <value>/etc/security/spnego.service.keytab</value>
      </property>
       
-     где *Fully_Qualified_Domain_Name* - хост, на котором развертывается NameNode; |br| 
-     *Realm_Name* - название сферы Kerberos.
+    где *Fully_Qualified_Domain_Name* - хост, на котором развертывается NameNode; |br| 
+    *Realm_Name* - название сферы Kerberos.
 
 + Перезапустить сервисы NameNode и DataNode с помощью соответствующих команд.
 
