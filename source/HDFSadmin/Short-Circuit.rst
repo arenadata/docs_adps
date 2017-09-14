@@ -22,10 +22,10 @@
    :header: "Свойство", "Значение", "Описание"
    :widths: 15, 10, 25
 
-   "dfs.client.read.shortcircuit", "true", "При значении "true" включается режим локального чтения данных"
+   "dfs.client.read.shortcircuit", "true", "При значении *true* включается режим локального чтения данных"
    "dfs.domain.socket.path", "/var/lib/hadoop-hdfs/ dn_socket", "Путь к сокету домена. В сообщениях при локальном чтении данных используется сокет домена UNIX. Это особый путь в файловой системе, позволяющий связываться клиенту и DataNodes. Необходимо установить путь к этому сокету. DataNode должен иметь возможность создать этот путь. С другой стороны, создание этого пути не должно быть возможным для любого пользователя, кроме пользователя hdfs или root. По этой причине часто используются пути в /var/run или /var/lib."
-   "dfs.client.domain.socket.data.traffic", "false", "Контролирует, будет ли обычный трафик данных передаваться через сокет домена UNIX. Функция не была сертифицирована релизами ADH, поэтому рекомендуется установить значение "false""
-   "dfs.client.use.legacy.blockreader.local", "false", "Установка значения "false" указывает, что используется новая версия локального чтения (на основе HDFS-347). Эта версия поддерживается и рекомендуется для использования с ADH. Значение "true" означает, что используется старый режим локального чтения"
+   "dfs.client.domain.socket.data.traffic", "false", "Контролирует, будет ли обычный трафик данных передаваться через сокет домена UNIX. Функция не была сертифицирована релизами ADH, поэтому рекомендуется установить значение *false*"
+   "dfs.client.use.legacy.blockreader.local", "false", "Установка значения *false* указывает, что используется новая версия локального чтения (на основе HDFS-347). Эта версия поддерживается и рекомендуется для использования с ADH. Значение *true* означает, что используется старый режим локального чтения"
    "dfs.datanode.hdfs-blocks-metadata.enabled", "true", "Логический тип данных, который обеспечивает поддержку на стороне сервера DataNode для экспериментального DistributedFileSystem#getFileVBlockStorageLocations API"
    "dfs.client.file-block-storage-locations.timeout", "60", "Таймаут для параллельных RPC, сделанных в DistributedFileSystem#getFileBlockStorageLocations (в секундах). Это свойство устарело, но по-прежнему поддерживается для обратной совместимости"
    "dfs.client.file-block-storage-locations.timeout.millis", "60000", "Таймаут для параллельных RPC, сделанных в DistributedFileSystem#getFileBlockStorageLocations (в миллисекундах). Это свойство заменяет dfs.client.file-block-storage-locations.timeout и предлагает более точный уровень детализации"
@@ -81,7 +81,7 @@ XML для вышеуказанных записей:
     <name>dfs.client.read.shortcircuit.streams.cache.expiry.ms</name>
     <value>300000</value>
   </property>
-</configuration>
+ </configuration>
 
 
 
