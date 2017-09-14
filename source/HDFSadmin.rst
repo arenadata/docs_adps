@@ -30,4 +30,5 @@ E-mail: info@arenadata.io
    HDFSadmin/Memory
    HDFSadmin/DataNodesNon-root
    HDFSadmin/Short-Circuit
+   HDFSadmin/WebHDFS
 
