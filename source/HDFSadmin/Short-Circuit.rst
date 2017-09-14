@@ -5,6 +5,14 @@
 
 
 
+Необходимые компоненты
+^^^^^^^^^^^^^^^^^^^^^^
+
+Для настройки локального чтения данных необходимо включить *libhadoop.so*. Подробные сведения о включении библиотеки см. в `"Native Libraries" <http://hadoop.apache.org/docs/r2.3.0/hadoop-project-dist/hadoop-common/NativeLibraries.html>`_. 
+
+
+.._`"Native Libraries"`:http://hadoop.apache.org/docs/r2.3.0/hadoop-project-dist/hadoop-common/NativeLibraries.html
+
 
 
 
