@@ -10,7 +10,7 @@
       after the parsing stage, so that successive runs only need to read
       and parse new and changed documents.
       
-    Arenadata Unified Data Platform
-       Универсальная платформа данных – это интегрированный набор компонентов 
-       корпоративного уровня на базе решений с открытым исходным кодом.   
+   Arenadata Unified Data Platform
+      Универсальная платформа данных – это интегрированный набор компонентов 
+      корпоративного уровня на базе решений с открытым исходным кодом.   
 
