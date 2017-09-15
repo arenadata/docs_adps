@@ -187,7 +187,7 @@
 
 В случае если планируется установить **Ambari Metrics Service** в кластер,
 для уточнения требований к ресурсам необходимо ознакомиться с разделом
-_`"Параметры настройки Ambari Metrics" <https://pivotalhd.docs.pivotal.io/docs/reference-guide-ambari-2.1.2.html#ch_amb_ref_configuring_ambari_metrics>`_ в Справочном руководстве **Ambari**. В общем случае хосту, на котором планируется запускать **Ambari Metrics Collector**, необходимо иметь доступную память и дисковое пространство в
+`"Параметры настройки Ambari Metrics" <https://pivotalhd.docs.pivotal.io/docs/reference-guide-ambari-2.1.2.html#ch_amb_ref_configuring_ambari_metrics>`_ в Справочном руководстве **Ambari**. В общем случае хосту, на котором планируется запускать **Ambari Metrics Collector**, необходимо иметь доступную память и дисковое пространство в
 зависимости от размера кластера (Таблица 2.).
 
 .. list-table:: Табл. 2. Требования к объему памяти в зависимости от размера кластера
