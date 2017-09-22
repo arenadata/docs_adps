@@ -3,12 +3,9 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Arenadata's documentation!
-=====================================
-
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Оглавление:
 
    intro
    install
@@ -18,9 +15,7 @@ Welcome to Arenadata's documentation!
    HDFSadmin
    Glossary
 
-Indices and tables
-==================
+Алфавитный справочник
+=====================
 
 * :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
