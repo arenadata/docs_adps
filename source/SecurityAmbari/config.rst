@@ -75,15 +75,15 @@
    
    Рис.1. Права доступа к кластеру
 
-Пример условного обозначения имени принципалов и *Keytabs* приведен в таблице 1.
+Пример условного обозначения имени принципалов и *Keytabs* приведен в таблице.
 
 
-.. csv-table:: Табл. 1. Условное обозначение имени принципалов и Keytabs
+.. csv-table:: Условное обозначение имени принципалов и Keytabs
    :header: " ", "Условное обозначение", "Пример"
    :widths: 10, 20, 20
 
-   "Principals", "$service_component_name/$FQDN@EXAMPLE.COM", "nn/c6401.ambari.apache.org@EXAMPLE.COM"
-   "Keytabs", "$service_component_abbreviation.service.keytab", "/etc/security/keytabs/nn.service.keytab"
+   "Principals", "$service_component_name/$FQDN |br| @EXAMPLE.COM", "nn/c6401.ambari.apache.org@EXAMPLE.COM"
+   "Keytabs", "$service_component_abbreviation. |br| service.keytab", "/etc/security/keytabs/nn.service.keytab"
    
 
 В дополнение к **Hadoop Service Principals**, сам **Ambari** также требует, чтобы набор Ambari-принципалов выполнял 
