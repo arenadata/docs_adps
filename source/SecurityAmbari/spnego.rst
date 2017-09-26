@@ -1,6 +1,10 @@
 Аутентификация SPNEGO для Hadoop
 --------------------------------
 
+.. |br| raw:: html
+
+   <br />
+
 По умолчанию доступ к HTTP-сервисам и пользовательскому интерфейсу кластера не настроен на необходимость аутентификации. 
 Аутентификацию **Kerberos** можно настроить для веб-интерфейсов **HDFS**, **YARN**, **MapReduce2**, **HBase** и **Oozie**.
 
@@ -26,19 +30,19 @@
    chmod 440 /etc/security/http_secret
 
 2. В Ambari Web перейти по вкладкам :menuselection:`"Services --> HDFS  --> Configs"`;
-3. Добавить или изменить свойства конфигурации в *Advanced core-site*, приведенные в таблице 6.
+3. Добавить или изменить свойства конфигурации в *Advanced core-site*, приведенные в таблице.
 
-.. csv-table:: Табл. 6. Новые значения свойств конфигурации в Advanced core-site
+.. csv-table:: Новые значения свойств конфигурации в Advanced core-site
    :header: "Свойство", "Новое значение"
    :widths: 25, 25
 
-   "hadoop.http.authentication.simple.anonymous.allowed", "false"
-   "hadoop.http.authentication.signature.secret.file", "/etc/security/http_secret"
+   "hadoop.http.authentication.simple. |br| anonymous.allowed", "false"
+   "hadoop.http.authentication. |br| signature.secret.file", "/etc/security/http_secret"
    "hadoop.http.authentication.type", "kerberos"
-   "hadoop.http.authentication.kerberos.keytab", "/etc/security/keytabs/spnego.service.keytab"
-   "hadoop.http.authentication.kerberos.principal", "HTTP/_HOST@ **EXAMPLE.COM**"
+   "hadoop.http.authentication. |br| kerberos.keytab", "/etc/security/keytabs/spnego.service.keytab"
+   "hadoop.http.authentication. |br| kerberos.principal", "HTTP/_HOST@ **EXAMPLE.COM**"
    "hadoop.http.filter.initializers", "org.apache.hadoop.security.AuthenticationFilterInitializer"
-   "hadoop.http.authentication.cookie.domain", "**mycompany.local**"
+   "hadoop.http.authentication. |br| cookie.domain", "**mycompany.local**"
    
 Выделенные в таблице записи зависят от сайта. Свойство *hadoop.http.authentication.cookie.domain* основано на полностью доменных именах серверов в кластере. Например, если **FQDN** вашего **NameNode** – *host1.mycompany.local*, то *hasoop.http.authentication.cookie.domain* должен быть установлен в *mycompany.local*.
 
