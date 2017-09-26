@@ -19,11 +19,11 @@
 Настройка аутентификации пользователя LDAP
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-В таблице 4 описаны свойства и значения, которые необходимо знать для настройки аутентификации **LDAP**.
+В таблице описаны свойства и значения, которые необходимо знать для настройки аутентификации **LDAP**.
 
 .. important:: Если оставить установленное по умолчанию значение *false* для *bindAnonymously*, необходимо убедиться, что у вас есть имя и пароль LDAP-менеджера. Если будет использоваться SSL, необходимо убедиться, что сертификат и ключи к нему установлены
 
-.. csv-table:: Табл. 4. Свойства и значения для настройки аутентификации LDAP
+.. csv-table:: Свойства и значения для настройки аутентификации LDAP
    :header: "Свойство", "Значение", "Описание"
    :widths: 20, 15, 25
 
@@ -34,7 +34,7 @@
    "authentication.ldap. |br| baseDn", "[Distinguished Name]", "root Distinguished Name поиска в |br| каталоге для пользователей. |br| Пример: ou=people,dc=hadoop, |br| dc=apache,dc=org"
    "authentication.ldap. |br| referral", "[Referral method]", "Определяет необходимость следовать |br| рекомендациям LDAP"
    "authentication.ldap. |br| bindAnonymously", "true or false", "Если значение true –  привязать |br| сервер LDAP или AD анонимно"
-   "authentication.ldap. |br| managerDn", "[Full Distinguished Name]", "Если для параметра «Bind anonymous» |br| установлено значение «false», |br| «Distinguished Name» («DN») для менеджера. |br| Пример: uid=hdfs,ou=people,dc=hadoop, |br| dc=apache,dc=org"
+   "authentication.ldap. |br| managerDn", "[Full Distinguished Name]", "Если для параметра «Bind anonymous» |br| установлено значение «false», |br| «Distinguished Name» («DN») для |br| менеджера. |br| Пример: uid=hdfs,ou=people,dc=hadoop, |br| dc=apache,dc=org"
    "authentication.ldap. |br| managerPassword", "[password]", "Если для параметра «Bind anonymous» |br| установлено значение «false», пароль |br| для менеджера"
    "authentication.ldap. |br| userObjectClass", "[LDAP Object Class]", "Класс объекта для пользователей. |br| Пример: organizationalPerson"
    "authentication.ldap. |br| groupObjectClass", "[LDAP Object Class]", "Класс объекта для групп. |br| Пример: groupOfUniqueNames"
@@ -137,7 +137,7 @@
 
 В **Directory Server** используются специальные классы объектов и атрибуты для хранения идентификаторов. В данном разделе в качестве примера отображаются конфигурации, характерные для **Active Directory**.
 
-.. csv-table:: Табл. 5. Пример конфигурации AD
+.. csv-table:: Пример конфигурации AD
    :header: "Запрос (значение по умолчанию)", "Пример значений для Active Directory"
    :widths: 25, 25
    
