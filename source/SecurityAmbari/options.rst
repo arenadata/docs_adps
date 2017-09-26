@@ -1,6 +1,10 @@
 Расширенные параметры безопасности для Ambari
 ---------------------------------------------
 
+.. |br| raw:: html
+
+   <br />
+
 
 Настройка Ambari для аутентификации LDAP или Active Directory
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -23,19 +27,19 @@
    :header: "Свойство", "Значение", "Описание"
    :widths: 20, 15, 25
 
-   "authentication.ldap.primaryUrl", "server:port", "Имя хоста и порт для LDAP или сервера Active Directory (AD). Пример: my.ldap.server: 389"
-   "authentication.ldap.secondaryUrl", "server:port", "Имя хоста и порт для вторичного сервера LDAP или AD. Пример: my.secondary.ldap.server: 389 Необязательный параметр"
-   "authentication.ldap.useSSL", "true or false", "Если значение true –  использовать SSL при подключении к LDAP или серверу AD"
-   "authentication.ldap.usernameAttribute", "[LDAP attribute]", "Атрибут для имени пользователя. Пример: uid"
-   "authentication.ldap.baseDn", "[Distinguished Name]", "root Distinguished Name поиска в каталоге для пользователей. Пример: ou=people,dc=hadoop,dc=apache,dc=org"
-   "authentication.ldap.referral", "[Referral method]", "Определяет необходимость следовать рекомендациям LDAP"
-   "authentication.ldap.bindAnonymously", "true or false", "Если значение true –  привязать сервер LDAP или AD анонимно"
-   "authentication.ldap.managerDn", "[Full Distinguished Name]", "Если для параметра «Bind anonymous» установлено значение «false», «Distinguished Name» («DN») для менеджера. Пример: uid=hdfs,ou=people,dc=hadoop,dc=apache,dc=org"
-   "authentication.ldap.managerPassword", "[password]", "Если для параметра «Bind anonymous» установлено значение «false», пароль для менеджера"
-   "authentication.ldap.userObjectClass", "[LDAP Object Class]", "Класс объекта для пользователей. Пример: organizationalPerson"
-   "authentication.ldap.groupObjectClass", "[LDAP Object Class]", "Класс объекта для групп. Пример: groupOfUniqueNames"
-   "authentication.ldap.groupMembershipAttr", "[LDAP attribute]", "Атрибут принадлежности к группе. Пример: uniqueMember"
-   "authentication.ldap.groupNamingAttr", "[LDAP attribute]", "Атрибут имени группы"
+   "authentication.ldap. |br| primaryUrl", "server:port", "Имя хоста и порт для LDAP или |br| сервера Active Directory (AD). Пример: my.ldap.server: 389"
+   "authentication.ldap. |br| secondaryUrl", "server:port", "Имя хоста и порт для вторичного |br| сервера LDAP или AD. Пример: my.secondary.ldap.server: 389 Необязательный параметр"
+   "authentication.ldap. |br| useSSL", "true or false", "Если значение true –  использовать |br| SSL при подключении к LDAP или серверу AD"
+   "authentication.ldap. |br| usernameAttribute", "[LDAP attribute]", "Атрибут для имени пользователя. |br| Пример: uid"
+   "authentication.ldap. |br| baseDn", "[Distinguished Name]", "root Distinguished Name поиска в |br| каталоге для пользователей. Пример: ou=people,dc=hadoop,dc=apache,dc=org"
+   "authentication.ldap. |br| referral", "[Referral method]", "Определяет необходимость следовать |br| рекомендациям LDAP"
+   "authentication.ldap. |br| bindAnonymously", "true or false", "Если значение true –  привязать |br| сервер LDAP или AD анонимно"
+   "authentication.ldap. |br| managerDn", "[Full Distinguished Name]", "Если для параметра «Bind anonymous» |br| установлено значение «false», «Distinguished Name» («DN») для менеджера. Пример: uid=hdfs,ou=people,dc=hadoop,dc=apache,dc=org"
+   "authentication.ldap. |br| managerPassword", "[password]", "Если для параметра «Bind anonymous» |br| установлено значение «false», пароль для менеджера"
+   "authentication.ldap. |br| userObjectClass", "[LDAP Object Class]", "Класс объекта для пользователей. |br| Пример: organizationalPerson"
+   "authentication.ldap. |br| groupObjectClass", "[LDAP Object Class]", "Класс объекта для групп. |br| Пример: groupOfUniqueNames"
+   "authentication.ldap. |br| groupMembershipAttr", "[LDAP attribute]", "Атрибут принадлежности к группе. |br| Пример: uniqueMember"
+   "authentication.ldap. |br| groupNamingAttr", "[LDAP attribute]", "Атрибут имени группы"
    
 
 Настройка Ambari для использования LDAP-сервера
