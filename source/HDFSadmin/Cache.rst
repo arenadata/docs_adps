@@ -355,7 +355,7 @@ removeDirective
    :header: "Функция", "Описание"
    :widths: 10, 30
 
-   "<id>", "Идентификатор Cache Directive для удаления. Необходимо разрешение *Write* Cache Pool, к которому принадлежит директива. Можно использовать команду *-listDirectives* для отображения списка идентификаторов Cache Directive"
+   "<id>", "Идентификатор Cache Directive для удаления. Необходимо разрешение *Write* |br| Cache Pool, к которому принадлежит директива. Можно использовать команду |br| *-listDirectives* для отображения списка идентификаторов Cache Directive"
 
 
 
@@ -373,7 +373,7 @@ removeDirectives
    :header: "Функция", "Описание"
    :widths: 10, 30
 
-   "<path>", "Путь Cache Directives для удаления. Необходимо разрешение *Write* Cache Pool, к которому относятся директивы. Можно использовать команду *-listDirectives* для отображения списка Cache Directives"
+   "<path>", "Путь Cache Directives для удаления. Необходимо разрешение *Write* Cache Pool, к |br| которому относятся директивы. Можно использовать команду *-listDirectives* для |br| отображения списка Cache Directives"
    
    
 
@@ -391,7 +391,7 @@ listDirectives
    :header: "Функция", "Описание"
    :widths: 10, 30
 
-   "<path>", "Список Cache Directives данного пути. Если в <path>, принадлежащему Cache Pool, нет доступа *Read*, Cache Directive не указывается"
+   "<path>", "Список Cache Directives данного пути. Если в <path>, принадлежащему Cache |br| Pool, нет доступа *Read*, Cache Directive не указывается"
    "<pool>", "Список Cache Directives, относящихся только к данному Cache Pool"
    "<-stats>", "Статистика по Cache Directive указанного пути"
    
