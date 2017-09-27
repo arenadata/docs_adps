@@ -32,7 +32,7 @@ API-интерфейсы JMX Metrics для HDFS Daemons
  -Dcom.sun.management.jmxremote.ssl=false
  -Dcom.sun.management.jmxremote.port=8004 $HADOOP_NAMENODE_OPTS"
 
-Подробности о связанных настройках можно найти здесь (http://docs.oracle.com/javase/7/docs/technotes/guides/management/agent.html). Также можно использовать инструмент *jmxquery* (https://code.google.com/p/jmxquery/) для извлечения информации через **JMX**.
+Подробности о связанных настройках можно найти `здесь <http://docs.oracle.com/javase/7/docs/technotes/guides/management/agent.html>`_. Также можно использовать инструмент `jmxquery <https://code.google.com/p/jmxquery/>`_ для извлечения информации через **JMX**.
 
 **Hadoop** также имеет встроенный инструмент запросов **JMX** *jmxget*. Например:
 
