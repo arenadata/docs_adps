@@ -4,6 +4,10 @@ a {
     cursor: pointer
 }
 
+a:visited {
+    color: #4dc872
+}
+
 .wy-text-info {
     color: #4dc872 !important
 }
