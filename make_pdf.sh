@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
-rm -rf ./latex && mkdir ./latex &&
-
 export PATH=~/.local/bin/:$PATH
-sphinx-build -b latex ./source/ ./latex/ && cd ./latex/
+
+mkdir ./latex
+mkdir ./latex/all
+rm -rf ./latex/all
+
+sphinx-build -b latex ./source ./latex/all && cd ./latex/all
 
 pdflatex Arenadata.tex
 makeindex Arenadata.idx

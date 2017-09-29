@@ -6,7 +6,7 @@
 
 .. _install-img-1:
 
-.. figure:: /imgs/install_pic1.*
+.. figure:: imgs/install_pic1.*
    :align: center
    
    Рис.1. Arenadata Store
@@ -16,7 +16,7 @@
 
 .. _install-img-2:
 
-.. figure:: /imgs/install_pic2.*
+.. figure:: imgs/install_pic2.*
    :align: center
    
    Рис.2. Выбор версии кластера
@@ -26,7 +26,7 @@
 
 .. _install-img-3:
 
-.. figure:: /imgs/install_pic3.*
+.. figure:: imgs/install_pic3.*
    :scale: 50 %
    :align: center
 
@@ -45,7 +45,7 @@
 
 .. _install_pic4:
 
-.. figure:: /imgs/install_pic4.*
+.. figure:: imgs/install_pic4.*
    :align: center
    
    Рис.4. Заявка принята
@@ -55,7 +55,7 @@
 
 .. _install_pic5:
 
-.. figure:: /imgs/install_pic5.*
+.. figure:: imgs/install_pic5.*
    :align: center
    
    Рис.5. Выбор компонентов дистрибутива

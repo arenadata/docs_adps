@@ -21,12 +21,12 @@ E-mail: info@arenadata.io
    :maxdepth: 2
    :caption: Оглавление:
 
-   install/download
-   install/prepare
-   install/install
-   install/master
-   install/cluster
-   install/annex
+   download
+   prepare
+   installation
+   master
+   cluster
+   annex
 
 
 
