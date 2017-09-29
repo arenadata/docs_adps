@@ -125,6 +125,16 @@ htmlhelp_basename = 'Arenadatadoc'
 # -- Options for LaTeX output ---------------------------------------------
 
 latex_elements = {
+    'fontpkg': '',
+    'fncychap': '\\usepackage{fncychap}',
+    'babel': '\\usepackage[english, russian]{babel}',
+    # The font size ('10pt', '11pt' or '12pt').
+    #
+    'pointsize': '10pt',
+    'preamble': "".join(
+        "\setlength{\parindent}{1cm}\n"  # Paragraph indent
+        "\\renewcommand{\\baselinestretch}{1}\n"  # Line spacing
+    )
     # The paper size ('letterpaper' or 'a4paper').
     #
     # 'papersize': 'letterpaper',
@@ -147,7 +157,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'Arenadata.tex', u'Arenadata Documentation',
-     u'Anton', 'manual'),
+     u'Arenadata', 'manual'),
 ]
 
 

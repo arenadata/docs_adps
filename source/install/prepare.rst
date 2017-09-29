@@ -39,6 +39,8 @@
 
 .. list-table:: Минимальные системные требования для установки кластера Arenadata Ambari
    :header-rows: 1   
+   :widths: 20, 80
+   :class: longtable
     
    * - Компонент
      - Требования
