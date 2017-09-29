@@ -8,11 +8,11 @@
    :caption: Оглавление:
 
    intro
-   install
-   administration
-   security
-   SecurityAmbari
-   HDFSadmin
+   install/index
+   administration/index
+   security/index
+   SecurityAmbari/index
+   HDFSadmin/index
    Glossary
 
 Алфавитный справочник

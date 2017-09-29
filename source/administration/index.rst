@@ -19,10 +19,10 @@ E-mail: info@arenadata.io
    :maxdepth: 2
    :caption: Оглавление:
 
-   administration/intro
-   administration/account
-   administration/cluster
-   administration/users&groups
+   intro
+   account
+   cluster
+   users&groups
    
 
    

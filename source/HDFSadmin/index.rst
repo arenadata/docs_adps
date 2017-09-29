@@ -20,17 +20,17 @@ E-mail: info@arenadata.io
    :maxdepth: 2
    :caption: Оглавление:
 
-   HDFSadmin/ACLonHDFS
-   HDFSadmin/Examples
-   HDFSadmin/features
-   HDFSadmin/Archiv
-   HDFSadmin/Cache 
-   HDFSadmin/HDFSCompression
-   HDFSadmin/RackAwareness
-   HDFSadmin/HDFSArchives
-   HDFSadmin/JMXMetrics
-   HDFSadmin/Memory
-   HDFSadmin/DataNodesNon-root
-   HDFSadmin/Short-Circuit
-   HDFSadmin/WebHDFS
+   ACLonHDFS
+   Examples
+   features
+   Archiv
+   Cache 
+   HDFSCompression
+   RackAwareness
+   HDFSArchives
+   JMXMetrics
+   Memory
+   DataNodesNon-root
+   Short-Circuit
+   WebHDFS
 
