@@ -3,7 +3,7 @@
 export PATH=~/.local/bin/:$PATH
 mkdir ../html
 
-for dir in `ls -d */`; do
+for dir in `find . -maxdepth 1 -type d -printf "%P\n"`; do
     if [ ${dir} != "imgs/" ] && [ ${dir} != "_static/" ]
     then
 

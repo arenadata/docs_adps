@@ -15,7 +15,8 @@
    HDFSadmin/index
    Glossary
 
-Алфавитный справочник
-=====================
+.. toctree::
+   :maxdepth: 1
+   :caption: Скачать
 
-* :ref:`genindex`
+   download
