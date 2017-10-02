@@ -15,7 +15,7 @@ pdflatex Arenadata.tex
 cd ../..
 
 for dir in `find source -maxdepth 1 -type d -printf "%P\n"`; do
-    if [ ${dir} != "imgs" ] && [ ${dir} != "_static" ]
+    if [ ${dir} != "imgs" ] && [ ${dir} != "_static" ]  && [ ${dir} != "_templates" ]
     then
     
         echo ${dir}

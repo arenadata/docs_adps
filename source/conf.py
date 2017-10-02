@@ -87,6 +87,14 @@ todo_include_todos = False
 # a list of builtin themes.
 #
 html_theme = "sphinx_rtd_theme"
+
+html_context = {
+    "display_github": True, # Integrate GitHub
+    "github_user": "Aspekt112", # Username
+    "github_repo": "docs_adh", # Repo name
+    "github_version": "v1.4", # Version
+    "conf_py_path": "/source/", # Path in the checkout to the docs root
+}
 html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
 # Theme options are theme-specific and customize the look and feel of a theme
@@ -123,7 +131,6 @@ htmlhelp_basename = 'Arenadatadoc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
-
 latex_elements = {
     'fontpkg': '',
     'fncychap': '\\usepackage{fncychap}',
