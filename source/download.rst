@@ -1,7 +1,7 @@
 Скачать документацию
 ====================
 
-:download:`Скачать полную документацию <../latex/all/Arenadata.pdf>`
+:download:`Скачать инструкцию по установке кластера <../latex/install/Arenadata_install.pdf>`
 
 :download:`Скачать руководство администратора по работе с кластером <../latex/administration/Arenadata_administration.pdf>`
 

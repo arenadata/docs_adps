@@ -72,6 +72,7 @@
    Glossary
 
 .. toctree::
+   :hidden:
    :maxdepth: 1
    :caption: Скачать
 
