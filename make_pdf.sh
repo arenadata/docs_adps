@@ -3,6 +3,7 @@
 export PATH=~/.local/bin/:$PATH
 
 mkdir ./latex
+mkdir ./pdf
 #mkdir ./latex/all
 #rm -rf ./latex/all
 #
@@ -17,7 +18,6 @@ mkdir ./latex
 for dir in `find source -maxdepth 1 -type d -printf "%P\n"`; do
     if [ ${dir} != "imgs" ] && [ ${dir} != "_static" ]  && [ ${dir} != "_templates" ]
     then
-    
         echo ${dir}
         cp ./source/conf.py ./source/${dir}
         
@@ -29,7 +29,7 @@ for dir in `find source -maxdepth 1 -type d -printf "%P\n"`; do
         makeindex Arenadata.idx
         pdflatex Arenadata.tex
         
-        mv Arenadata.pdf Arenadata_${dir}.pdf
+        mv Arenadata.pdf ../../pdf/ADH_${dir}.pdf
         
         cd ../..
         rm ./source/${dir}/conf.py

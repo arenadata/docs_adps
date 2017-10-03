@@ -1,12 +1,18 @@
 Скачать документацию
 ====================
 
-:download:`Скачать инструкцию по установке кластера <../latex/install/Arenadata_install.pdf>`
 
-:download:`Скачать руководство администратора по работе с кластером <../latex/administration/Arenadata_administration.pdf>`
+`Скачать инструкцию по установке кластера`_
+ .. _Скачать инструкцию по установке кластера: https://storage.googleapis.com/arenadata-repo/docs/adh/pdf/ADH_install.pdf
 
-:download:`Скачать Hadoop Security Guide <../latex/security/Arenadata_security.pdf>`
+`Скачать руководство администратора по работе с кластером`_
+ .. _Скачать руководство администратора по работе с кластером: https://storage.googleapis.com/arenadata-repo/docs/adh/pdf/ADH_administration.pdf
 
-:download:`Скачать Ambari Security Guide <../latex/SecurityAmbari/Arenadata_SecurityAmbari.pdf>`
+`Скачать Hadoop Security Guide`_
+ .. _Скачать Hadoop Security Guide: https://storage.googleapis.com/arenadata-repo/docs/adh/pdf/ADH_security.pdf
 
-:download:`Скачать руководство администратора по HDFS <../latex/HDFSadmin/Arenadata_HDFSadmin.pdf>`
+`Скачать Ambari Security Guide`_
+ .. _Скачать Ambari Security Guide: https://storage.googleapis.com/arenadata-repo/docs/adh/pdf/ADH_SecurityAmbari.pdf
+
+`Скачать руководство администратора по HDFS`_
+ .. _Скачать руководство администратора по HDFS: https://storage.googleapis.com/arenadata-repo/docs/adh/pdf/ADH_HDFSadmin.pdf
