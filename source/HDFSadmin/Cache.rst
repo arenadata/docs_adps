@@ -218,9 +218,9 @@ addPool
  [-mode <mode>] [-limit <limit>] [-maxTtl <maxTtl>]
 
 
-Функции команды *addPool* описаны в таблице 4. 
+Функции команды *addPool* описаны в таблице. 
 
-.. csv-table:: Табл. 4. Функции команды addPool
+.. csv-table:: Функции команды addPool
    :header: "Функция", "Описание"
    :widths: 10, 30
 
@@ -243,9 +243,9 @@ modifyPool
  [-mode <mode>] [-limit <limit>] [-maxTtl <maxTtl>]
 
 
-Функции команды *modifyPool* описаны в таблице 5. 
+Функции команды *modifyPool* описаны в таблице. 
 
-.. csv-table:: Табл. 5. Функции команды removePool
+.. csv-table:: Функции команды removePool
    :header: "Функция", "Описание"
    :widths: 10, 30
 
@@ -266,9 +266,9 @@ removePool
 
  hdfs cacheadmin -removePool <name>
 
-Функции команды *removePool* описаны в таблице 6. 
+Функции команды *removePool* описаны в таблице. 
 
-.. csv-table:: Табл. 6. Функции команды removePool
+.. csv-table:: Функции команды removePool
    :header: "Функция", "Описание"
    :widths: 10, 30
 
@@ -284,9 +284,9 @@ listPools
 
  hdfs cacheadmin -listPools [-stats] [<name>]
 
-Функции команды *listPools* описаны в таблице 7. 
+Функции команды *listPools* описаны в таблице. 
 
-.. csv-table:: Табл. 7. Функции команды listPools
+.. csv-table:: Функции команды listPools
    :header: "Функция", "Описание"
    :widths: 10, 30
 
@@ -303,9 +303,9 @@ help
 
  hdfs cacheadmin -help <command-name>
 
-Функции команды *help* описаны в таблице 8. 
+Функции команды *help* описаны в таблице. 
 
-.. csv-table:: Табл. 8. Функции команды help
+.. csv-table:: Функции команды help
    :header: "Функция", "Описание"
    :widths: 10, 30
    
@@ -326,9 +326,9 @@ addDirective
  hdfs cacheadmin -addDirective -path <path> -pool <pool-name> [-force]
  [-replication <replication>] [-ttl <time-to-live>]
 
-Функции команды *addDirective* описаны в таблице 9. 
+Функции команды *addDirective* описаны в таблице. 
 
-.. csv-table:: Табл. 9. Функции команды addDirective
+.. csv-table:: Функции команды addDirective
    :header: "Функция", "Описание"
    :widths: 10, 30
 
@@ -349,9 +349,9 @@ removeDirective
 
  hdfs cacheadmin -removeDirective <id>
 
-Функции команды *removeDirective* описаны в таблице 10. 
+Функции команды *removeDirective* описаны в таблице. 
 
-.. csv-table:: Табл. 10. Функции команды removeDirective
+.. csv-table:: Функции команды removeDirective
    :header: "Функция", "Описание"
    :widths: 10, 30
 
@@ -367,9 +367,9 @@ removeDirectives
 
  hdfs cacheadmin -removeDirectives <path>
 
-Функции команды *removeDirectives* описаны в таблице 11. 
+Функции команды *removeDirectives* описаны в таблице. 
 
-.. csv-table:: Табл. 11. Функции команды removeDirectives
+.. csv-table:: Функции команды removeDirectives
    :header: "Функция", "Описание"
    :widths: 10, 30
 
@@ -385,9 +385,9 @@ listDirectives
 
  hdfs cacheadmin -listDirectives [-stats] [-path <path>] [-pool <pool>]
 
-Функции команды *listDirectives* описаны в таблице 12. 
+Функции команды *listDirectives* описаны в таблице. 
 
-.. csv-table:: Табл. 12. Функции команды listDirectives
+.. csv-table:: Функции команды listDirectives
    :header: "Функция", "Описание"
    :widths: 10, 30
 
