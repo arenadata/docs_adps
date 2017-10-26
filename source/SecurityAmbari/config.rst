@@ -50,13 +50,13 @@
    :header: "Термин", "Определение"
    :widths: 25, 25
 
-   "Key Distribution Center, KDC", "Надежный источник для аутентификации в экосистеме с |br| поддержкой Kerberos"
-   "Сервер Kerberos KDC ", "Машина или сервер, который служит в качестве центра |br| распределения ключей"
+   "Key Distribution Center, KDC", "Надежный источник для аутентификации в экосистеме с поддержкой Kerberos"
+   "Сервер Kerberos KDC ", "Машина или сервер, который служит в качестве центра распределения ключей"
    "Клиент Kerberos", "Любая машина в кластере, которая аутентифицируется с KDC"
-   "Принципал", "Уникальное имя пользователя или сервиса, который |br| аутентифицируется с KDC"
+   "Принципал", "Уникальное имя пользователя или сервиса, который аутентифицируется с KDC"
    "Keytab", "Файл, содержащий один или несколько принципалов и их ключи"
    "Сфера ", "Сеть Kerberos, включающая KDC и ряд клиентов"
-   "KDC Admin Account", "Учетная запись администратора, используемая Ambari для |br| создания принципов и генерации ключей в KDC"
+   "KDC Admin Account", "Учетная запись администратора, используемая Ambari для создания принципов и генерации ключей в KDC"
    
    
 Принципалы Hadoop и Kerberos
@@ -82,8 +82,8 @@
    :header: " ", "Условное обозначение", "Пример"
    :widths: 10, 20, 20
 
-   "Principals", "$service_component_name/$FQDN |br| @EXAMPLE.COM", "nn/c6401.ambari.apache.org@EXAMPLE.COM"
-   "Keytabs", "$service_component_abbreviation. |br| service.keytab", "/etc/security/keytabs/nn.service.keytab"
+   "Principals", "$service_component_name/$FQDN @EXAMPLE.COM", "nn/c6401.ambari.apache.org@EXAMPLE.COM"
+   "Keytabs", "$service_component_abbreviation. service.keytab", "/etc/security/keytabs/nn.service.keytab"
    
 
 В дополнение к **Hadoop Service Principals**, сам **Ambari** также требует, чтобы набор Ambari-принципалов выполнял 
