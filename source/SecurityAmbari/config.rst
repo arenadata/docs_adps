@@ -184,11 +184,11 @@
 
 +	RHEL / CentOS:
 
-    :command:`yum install krb5-server krb5-libs krb5-workstation`
+      :command:`yum install krb5-server krb5-libs krb5-workstation`
 
 +	SLES:
 
-    :command:`Zypper install krb5 krb5-server krb5-client`
+      :command:`Zypper install krb5 krb5-server krb5-client`
 
 2.	Используя текстовый редактор, открыть файл конфигурации сервера KDC, расположенный по умолчанию в *Vi/etc/krb5.conf*;
 
@@ -209,11 +209,11 @@
 
 +	RHEL / CentOS:
 
-    :command:`Kdb5_util create -s`
+      :command:`Kdb5_util create -s`
 
 +	SLES:
 
-    :command:`Kdb5_util create –s`
+      :command:`Kdb5_util create –s`
 
 
 Запуск KDC
@@ -273,35 +273,35 @@
 
 1.	Создать администратора KDC, путем создания принципала-администратора:
 
-    :command:`Kadmin.local -q "addprinc admin / admin"`
+      :command:`Kadmin.local -q "addprinc admin / admin"`
 
 2.	Убедиться, что созданный администратор имеет права в ACL KDC. Открыть файл ACL KDC, используя текстовый редактор:
 
 +	RHEL / CentOS:
 
-    :command:`Vi /var/kerberos/krb5kdc/kadm5.acl`
+      :command:`Vi /var/kerberos/krb5kdc/kadm5.acl`
 
 +	SLES:
 
-    :command:`Vi /var/lib/kerberos/krb5kdc/kadm5.acl`
+      :command:`Vi /var/lib/kerberos/krb5kdc/kadm5.acl`
 
 3.	Убедиться, что файл ACL KDC содержит запись, позволяющую принципал-администратору управлять KDC в используемой конкретной сфере. При использовании сферы, отличной от *EXAMPLE.COM*, необходимо убедиться, что есть запись для конкретной сферы. Например, для принципала *admin/admin@HADOOP.COM* следующая запись:
 
-    :command:`*/admin@HADOOP.COM *`
+      :command:`*/admin@HADOOP.COM *`
 
 4.	После редактирования и сохранения файла *kadm5.acl* необходимо перезапустить процесс *kadmin*:
 
 +	RHEL/CentOS 6:
 
-    :command:`/etc/rc.d/init.d/kadmin restart`
+      :command:`/etc/rc.d/init.d/kadmin restart`
 
 +	RHEL/CentOS 7:
 
-    :command:`systemctl restart kadmin`
+      :command:`systemctl restart kadmin`
 
 +	SLES 11:
 
-    :command:`rckadmind restart`
+      :command:`rckadmind restart`
 
 
 
