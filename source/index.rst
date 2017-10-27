@@ -70,7 +70,6 @@
    security/index
    SecurityAmbari/index
    HDFSadmin/index
-   ports
    Glossary
 
 .. toctree::
