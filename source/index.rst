@@ -71,6 +71,7 @@
    SecurityAmbari/index
    HDFSadmin/index
    Glossary
+   ports
 
 .. toctree::
    :hidden:
