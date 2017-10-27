@@ -152,6 +152,29 @@ latex_elements = {
     # 'figure_align': 'htbp',
 }
 
+# If true, figures, tables and code-blocks are automatically numbered if they have a caption.
+# At same time, the numref role is enabled.
+# For now, it works only with the HTML builder and LaTeX builder.
+# Default is False.
+
+numfig = True
+
+# The scope of figure numbers, that is, the numfig feature numbers figures in which scope.
+# 0 means “whole document”. 1 means “in a section”.
+# Sphinx numbers like x.1, x.2, x.3... 2 means “in a subsection”.
+# Sphinx numbers like x.x.1, x.x.2, x.x.3..., and so on. Default is 1.
+
+numfig_secnum_depth = 1
+
+# A dictionary mapping 'figure', 'table' and 'code-block' to strings that are used for format of figure numbers.
+# Default is to use 'Fig. %s' for 'figure',
+# 'Table %s' for 'table' and
+# 'Listing %s' for 'code-block'.
+
+numfig_format = {'figure': 'Рис. %s.',
+                 'table': 'Табл. %s.',
+                 'code-block': 'Лист. %s.'}
+
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
