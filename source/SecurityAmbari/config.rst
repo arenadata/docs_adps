@@ -143,7 +143,7 @@
 +	Пользовательскую Active Directory для принципалов. Например, *"OU = Hadoop, OU = People, dc = apache, dc = org"*;
 +	Учетные данные администратора Active Directory с с настроенным правом "Создание, удаление и управление учетными записями пользователей".
 
-Дальнейшие действия описаны в разделе `"Подключение системы безопасности Kerberos в Ambari" <http://docs.arenadata.io/adh/SecurityAmbari/config.html#kerberos-ambari>`_.
+Дальнейшие действия описаны в разделе `"Подключение системы безопасности Kerberos в Ambari" <http://docs.arenadata.io/adh/SecurityAmbari/config.html#id9>`_.
 
 
 Ручная настройка Kerberos
@@ -157,7 +157,7 @@
 +	Вручную создать сервисные и Ambari принципалы в KDC перед выполнением мастера;
 +	Создать вручную и распространить ключи для принципалов сервисов и Ambari на узлы кластера перед выполнением мастера.
 
-Дальнейшие действия описаны в разделе `"Подключение системы безопасности Kerberos в Ambari" <http://docs.arenadata.io/adh/SecurityAmbari/config.html#kerberos-ambari>`_.
+Дальнейшие действия описаны в разделе `"Подключение системы безопасности Kerberos в Ambari" <http://docs.arenadata.io/adh/SecurityAmbari/config.html#id9>`_.
 
 
 Установка нового MIT KDC
