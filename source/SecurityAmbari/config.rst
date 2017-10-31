@@ -130,7 +130,7 @@
 +	Серверы Ambari и кластеры, имеющие сетевой доступ как к административным узлам KDC, так и к самому KDC;
 +	Учетные данные администратора KDC.
 
-Дальнейшие действия описаны в разделе `"Подключение системы безопасности Kerberos в Ambari" <http://docs.arenadata.io/adh/SecurityAmbari/config.html#kerberos-ambari>`_.
+Дальнейшие действия описаны в разделе `"Подключение системы безопасности Kerberos в Ambari" <http://docs.arenadata.io/adh/SecurityAmbari/config.html#id9>`_.
 
 
 Использование существующей Active Directory
