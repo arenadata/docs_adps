@@ -70,6 +70,7 @@
    security/index
    SecurityAmbari/index
    HDFSadmin/index
+   ReleaseNotes/index
    Glossary
 
 .. toctree::
