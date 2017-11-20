@@ -21,7 +21,7 @@
 
 .. _install-img-7:
 
-.. figure:: imgs/install_pic7.
+.. figure:: imgs/install_pic7.*
    :align: center
    
    Выбор стека
@@ -33,7 +33,7 @@
 
 .. _install-img-7-2:
 
-.. figure:: imgs/install_pic7-2.
+.. figure:: imgs/install_pic7-2.*
    :align: center
    
    Установка из публичного репозитория
@@ -87,7 +87,7 @@ Ambari-агент зарегистрируется на сервере при е
 
 .. _install-img-8:
 
-.. figure:: imgs/install_pic8.
+.. figure:: imgs/install_pic8.*
    :align: center
    
    Выбор компонентов
@@ -104,7 +104,7 @@ Ambari-агент зарегистрируется на сервере при е
 
 .. _install-img-9:
 
-.. figure:: imgs/install_pic9.
+.. figure:: imgs/install_pic9.*
    :align: center
    
    Назначение мастер-узлов
@@ -122,7 +122,7 @@ Ambari-агент зарегистрируется на сервере при е
 
 .. _install-img-10:
 
-.. figure:: imgs/install_pic10.
+.. figure:: imgs/install_pic10.*
    :align: center
    
    Назначение Slave и Client узлов
@@ -139,7 +139,7 @@ Ambari-агент зарегистрируется на сервере при е
 
 .. _install-img-11:
 
-.. figure:: imgs/install_pic11.
+.. figure:: imgs/install_pic11.*
    :align: center
    
    Дополнительные настройки компонентов
@@ -159,7 +159,7 @@ Ambari-агент зарегистрируется на сервере при е
 
 .. _install-img-12:
 
-.. figure:: imgs/install_pic12.
+.. figure:: imgs/install_pic12.*
    :align: center
    
    Ход развертывания кластера
@@ -172,7 +172,7 @@ Ambari-агент зарегистрируется на сервере при е
 
 .. _install-img-13:
 
-.. figure:: imgs/install_pic13.
+.. figure:: imgs/install_pic13.*
    :align: center
    
    Информация о задачах хоста
