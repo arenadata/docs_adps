@@ -408,6 +408,7 @@
   :command:`vi/etc/hosts`
 
 И добавить строку для каждого хоста, состоящую из IP-адреса и **FQDN**, например:
+
  ::
 
   1.2.3.4 <fully.qualified.domain.name>
