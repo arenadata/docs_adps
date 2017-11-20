@@ -72,7 +72,8 @@
 
 +	Создать подкаталоги:
 
-    :command:`> hdfs dfs -mkdir /monthly-sales-data/JAN` |br|
+    :command:`> hdfs dfs -mkdir /monthly-sales-data/JAN`
+    
     :command:`> hdfs dfs -mkdir /monthly-sales-data/FEB`
 
 +	Убедиться, что HDFS автоматически применил ACL по умолчанию в подкаталоги: 
