@@ -21,7 +21,6 @@
 # sys.path.insert(0, os.path.abspath('.'))
 import sphinx_rtd_theme
 
-
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -80,7 +79,6 @@ pygments_style = 'sphinx'
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
 
-
 # -- Options for HTML output ----------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
@@ -116,25 +114,111 @@ html_sidebars = {
     ]
 }
 
-
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'Arenadatadoc'
 
-
+today = '2017, Arenadata™'
+latex_keep_old_macro_names = True
 # -- Options for LaTeX output ---------------------------------------------
 latex_elements = {
+
+    'sphinxsetup': 'TitleColor={rgb}{0.05, 0.5, 0.06}, InnerLinkColor={rgb}{0.05, 0.5, 0.06},\
+                    VerbatimColor={rgb}{0.66, 0.89, 0.63}, importantBorderColor={rgb}{0.66, 0.89, 0.63},\
+                    OuterLinkColor={rgb}{0.04, 0.5, 0.06}, importantborder=1.5pt,\
+                    hmargin={0.7in,0.7in}, vmargin={1in,1in}, verbatimwithframe=true',
     'fontpkg': '',
     'fncychap': '\\usepackage{fncychap}',
     'babel': '\\usepackage[english, russian]{babel}',
     # The font size ('10pt', '11pt' or '12pt').
     #
     'pointsize': '10pt',
-    'preamble': ''.join(
-        '\setlength{\parindent}{1cm}\n'  # Paragraph indent
-        '\\renewcommand{\\baselinestretch}{1}\n'  # Line spacing
-    )
+    # 'date': '2017, Arenadata™',  # date is setting up by `today` variable, described above
+
+    'preamble': r'''
+        \renewcommand{\tablecontinued}[1]{}
+        \hyphenpenalty10000
+        \exhyphenpenalty10000
+
+
+        \usepackage{amsmath,amsfonts,amssymb,amsthm}
+        \usepackage{graphicx}
+
+        %%% reduce spaces for Table of contents, figures and tables
+        %%% it is used "\addtocontents{toc}{\vskip -1.2cm}" etc. in the document
+        \usepackage[notlot,nottoc,notlof]{}
+
+        \usepackage{color}
+        \usepackage{transparent}
+        \usepackage{eso-pic}
+        \usepackage{lipsum}
+
+        \usepackage{footnotebackref} %%link at the footnote to go to the place of footnote in the text
+
+        %% spacing between line
+        \usepackage{setspace}
+        \singlespacing
+
+
+        %%%%%%%%%%% datetime
+        \usepackage{datetime}
+
+
+        %% RO, LE will not work for 'oneside' layout.
+        %% Change oneside to twoside in document class
+        \usepackage{fancyhdr}
+        \pagestyle{fancy}
+        \fancyhf{}
+
+        %%% Alternating Header for oneside
+        \fancyhead[L]{\ifthenelse{\isodd{\value{page}}}{ \small \nouppercase{\leftmark} }{}}
+        \fancyhead[R]{\ifthenelse{\isodd{\value{page}}}{}{ \small \nouppercase{\rightmark} }}
+
+        %%% Alternating Header for two side
+        %\fancyhead[RO]{\small \nouppercase{\rightmark}}
+        %\fancyhead[LE]{\small \nouppercase{\leftmark}}
+
+
+        %%% page number
+        \fancyfoot[RO, RE]{\textbf{\thepage}}
+
+        \renewcommand{\headrulewidth}{0.5pt}
+        \renewcommand{\footrulewidth}{0.5pt}
+
+        \setlength{\parindent}{1cm}
+        \renewcommand{\baselinestretch}{1}
+    ''',
+
+    'maketitle': r'''
+            \pagenumbering{Roman} %%% to avoid page 1 conflict with actual page 1
+            \begin{titlepage}
+                \raggedright
+
+                \vspace{0mm}
+
+                \vspace*{40mm} %%% * is used to give space from top
+                \textbf{\Huge {Arenadata™ document-title}}
+                \vspace{0mm}
+                \par
+                \Large \textit{Версия - document-release}
+                \vspace{30mm}
+
+                \LARGE \textbf{{document-name}}
+
+
+                %% \vfill adds at the bottom
+                \vfill
+                \normalsize \textit{document-pusblish-date Arenadata™}
+            \end{titlepage}
+            \clearpage
+            \pagenumbering{arabic}
+            \tableofcontents
+            \clearpage
+    ''',
+
+    'tableofcontents': ' ',
+
     # The paper size ('letterpaper' or 'a4paper').
     #
     # 'papersize': 'letterpaper',
@@ -183,7 +267,6 @@ latex_documents = [
      u'Arenadata', 'manual'),
 ]
 
-
 # -- Options for manual page output ---------------------------------------
 
 # One entry per manual page. List of tuples
@@ -192,7 +275,6 @@ man_pages = [
     (master_doc, 'arenadata', u'Arenadata Documentation',
      [author], 1)
 ]
-
 
 # -- Options for Texinfo output -------------------------------------------
 
