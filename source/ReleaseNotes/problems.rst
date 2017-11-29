@@ -3,7 +3,7 @@
 
 *Apache Ambari:*
 
-+ При установки ambari-server возможно появление ошибки "Error extracting ambari views";
++ При установке ambari-server возможно появление ошибки "Error extracting ambari views";
 
 *Apache HDFS:*
 
@@ -11,11 +11,11 @@
 
 *Apache Oozie:*
 
-+ Возможно возникновение ошибки при проверке сервиса (Service Check) из-за недостатка ресурсов, возникает как правило при установке множества сервисов на одном узле;
++ Возможно возникновение ошибки при проверке сервиса (Service Check) из-за недостатка ресурсов, возникает, как правило, при установке множества сервисов на одном узле;
 
 *Apache Metrics:*
 
-+ Метрики для Ambari Metrics Collector могут отображаться некорретно;
++ Метрики для Ambari Metrics Collector могут отображаться некорректно;
 
 *Apache Hive Interactive Service:*
 
