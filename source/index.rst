@@ -31,7 +31,7 @@
 получил подтверждение о полном соответствии стандартам **Open Data Platform Initiative** (**ODPi**). **ODPi** – крупнейшее мировое сообщество разработчиков проектов хранения больших данных с открытым кодом под эгидой **Linux Foundation**: `https://www.odpi.org/odpi-isvs/odpi-compliant-hadoop-platforms`_
 
 
-Текущий релиз версии **1.4.1** вышел во втором квартале 2017 года. В состав версии входят следующие компоненты: **Ambari**, **HDFS**,	**YARN**,	**Zookeeper**, **Tez**, **Hive**,	**HBase**, **Phoenix**, **Pig**, **Sqoop**, **Flume**, **Oozie**, **Atlas**, **NiFi**, **Apex**, **Flink**, **Kafka**, **Knox**,	**Mahout**,	**Ranger**,	**Ranger KMS**,	**Solr**,	**Spark**, **Zeppelin**, **Giraph**,	**Kite**.
+Текущий релиз версии **1.5.0** вышел в четвертом квартале 2017 года. В состав версии входят следующие компоненты: **Ambari**, **HDFS**, **YARN**,	**Zookeeper**, **Tez**, **Hive**,	**HBase**, **Phoenix**, **Pig**, **Sqoop**, **Flume**, **Oozie**, **Atlas**, **NiFi**, **Apex**, **Flink**, **Kafka**, **Knox**,	**Mahout**,	**Ranger**,	**Ranger KMS**,	**Solr**,	**Spark**, **Zeppelin**, **Giraph**,	**Kite**.
 
 
 
