@@ -8,26 +8,30 @@
    :widths: 10, 45, 45
 
    "1", "Hue", "3.11.0"
-   "2", "Bigtop-groovy", "2.4.4"
+   "2", "Bigtop-groovy", "2.4.10"
    "3", "Bigtop-jsvc", "1.10.15"
    "4", "Bigtop-tomcat", "6.0.45"
-   "5", "Bigtop-utils", "1.2.0"
-   "6", "EPEL", "6.8"
-   "7", "extks", "2.2.1"
-   "8", "fping", "3.10"
-   "9", "LZO", "2.0.6"
-   "10", "lzo-devel", "2.06"
-   "11", "lzo-minilzo", "2.06"
-   "12", "mysql-connector-java", "5.1.25"
-   "13", "numactl-libs", "2.0.9"
-   "14", "perl-Crypt-DES", "2.0.5"
-   "15", "perl-Net-SNMP", "5.2.0"
-   "16", "RRD-Tool", "1.4.8"
-   "17", "snappy", "1.1.0"
-   "18", "snappy-devel", "1.1.0"
+   "5", "Bigtop-utils", "1.3.0"
+   "6", "extjs", "2.2"
+   "7", "fping", "3.10"
+   "8", "grafana", "4.3.1"
+   "9", "libconfuse", "2.7"
+   "10", "lzo", "2.06"
+   "11", "lzo-devel", "2.06"
+   "12", "lzo-minilzo", "2.06"
+   "13", "mysql-connector-java", "5.1.25"
+   "14", "net-tools", "2.0"
+   "15", "numactl-libs", "2.0.9"
+   "16", "pdsh", "2.3.1"
+   "17", "perl-Crypt-DES", "2.05"
+   "18", "perl-Net-SNMP", "6.0.1"
+   "19", "rrdtool", "1.4.8"
+   "20", "rrdtool-devel", "1.4.8"
+   "21", "snappy", "1.1.0"
+   "22", "snappy-devel", "1.1.0"
 
 
-	
+
 	
 	
 	
