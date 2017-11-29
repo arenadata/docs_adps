@@ -4,9 +4,6 @@
 
 Новые функциональности компонентов описаны по следующим ссылкам:
 
-+	`Apache HDFS, Apache YARN, Apache MR2 <https://hadoop.apache.org/docs/r2.7.3/hadoop-project-dist/hadoop-common/releasenotes.html>`_;
-
-
 + `Apache HDFS, Apache YARN, Apache MR2 <https://hadoop.apache.org/docs/r2.8.0/hadoop-project-dist/hadoop-common/release/2.8.0/RELEASENOTES.2.8.0.html>`_;
 
 + `Apache Zookeeper <https://zookeeper.apache.org/doc/r3.4.10/releasenotes.html>`_;
