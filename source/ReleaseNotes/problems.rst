@@ -1,9 +1,20 @@
 Известные проблемы
 ------------------
 
-+ В некоторых случаях возможно возникновение ошибки при проверке сервиса (Service Check) **Oozie** в **Ambari**: `подробнее <https://jira.arenadata.io/browse/ADH-76>`_.
+*Apache Ambari:*
+- При установки ambari-server возможно появление ошибки "Error extracting ambari views";
 
-+ Некорректно осуществляется запуск сервиса при команде *Start All Services*, требуется запуск сервиса после старта всех остальных процессов: `подробнее <https://jira.arenadata.io/browse/ADH-82>`_.
+*Apache HDFS:*
+- При активации NFS Gateway возможно появление ошибки "service: no such service nfs-kernel-server";
+
+*Apache Oozie:*
+- Возможно возникновение ошибки при проверке сервиса (Service Check) из-за недостатка ресурсов, возникает как правило при установке множества сервисов на одном узле;
+
+*Apache Metrics:*
+- Метрики для Ambari Metrics Collector могут отображаться некорретно;
+
+*Apache Hive Interactive Service:*
+- При повторном включении сервиса Hive Interactive возможно появление ошибки о невозможности установки сервиса.
 
 
 
