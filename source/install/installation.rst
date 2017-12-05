@@ -168,6 +168,8 @@
 
 Сервер **Ambari** устанавливается из RPM-пакета по команде:
 
+*CentOS/RHEL7*
+
 .. code-block:: bash
 
     yum install ambari-server
