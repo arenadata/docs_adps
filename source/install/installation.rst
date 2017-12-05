@@ -31,17 +31,15 @@
 
 Настройка удаленного репозитория не отличается от настройки любого дополнительного репозитория. Для добавления репозитория необходимо выполнить от имени *root* команду:
 
-*CentOS/RHEL7*
-
-.. code-block:: bash
++ RHEL/CentOS 7:
+  ::
 
    yum-config-manager –-add-repo <URL репозитория Ambari>/ambari.repo
 
-*SUSE/SLES12*
++ SUSE/SLES 12:
+  ::
 
-.. code-block:: bash
-
-  zypper addrepo <URL репозитория Ambari>/ambari.repo
+   zypper addrepo <URL репозитория Ambari>/ambari.repo
 
 
 Настройка локального репозитория
@@ -49,29 +47,25 @@
 
 Для настройки нового сервера репозитория необходим веб-сервер *httpd*. Следует убедиться, что сервер *httpd* запускается на хосте, который служит в качестве репозитория:
 
-*CentOS/RHEL7*
++ RHEL/CentOS 7:
+  ::
 
-.. code-block:: bash
+   systemctl status httpd
 
-  systemctl status httpd
++ SUSE/SLES 12:
+  ::
 
-*SUSE/SLES12*
-
-.. code-block:: bash
-
-  systemctl status apache2.service
+   systemctl status apache2.service
 
 В случае если сервер не запущен, необходимо его установить и запустить:
 
-*CentOS/RHEL7*
-
-.. code-block:: bash
++ RHEL/CentOS 7:
+  ::
 
    systemctl start httpd
 
-*SUSE/SLES12*
-
-.. code-block:: bash
++ SUSE/SLES 12:
+  ::
 
    systemctl start apache2.service
 
@@ -87,7 +81,6 @@
 .. code-block:: bash
 
   mkdir /staging
-
   chmod a+rx /staging
 
 .. important:: Не используйте каталог */TMP* в качестве промежуточного, так как файлы могут быть удалены в любое время
@@ -101,15 +94,13 @@
 
 На узел, который используется в качестве репозитория, необходимо загрузить архив **Ambari 2.5.1** в ранее созданный промежуточный каталог, или в каталог:
 
-*CentOS/RHEL7*
-
-.. code-block:: bash
++ RHEL/CentOS 7:
+  ::
 
    wget https://storage.googleapis.com/arenadata-repo/ADH/1.5.0/centos7/ambari.repo -O /etc/yum.repos.d/
 
-*SUSE/SLES12*
-
-.. code-block:: bash
++ SUSE/SLES 12:
+  ::
 
    wget https://storage.googleapis.com/arenadata-repo/ADH/1.5.0/sles12/ambari.repo - O /etc/zypp/repos.d/
 
@@ -139,15 +130,13 @@
 
 Скрипт также создает определенный репозиторий **Ambari** и помещает его в файл:
 
-*CentOS/RHEL7*
-
-.. code-block:: bash
++ RHEL/CentOS 7:
+  ::
 
     /etc/yum.repos.d/ambari.repo
 
-*SUSE/SLES12*
-
-.. code-block:: bash
++ SUSE/SLES 12:
+  ::
 
    /etc/zypp/repos.d/ambari.repo
 
@@ -167,15 +156,13 @@
 
 Сервер **Ambari** устанавливается из RPM-пакета по команде:
 
-*CentOS/RHEL7*
-
-.. code-block:: bash
++ RHEL/CentOS 7:
+  ::
 
     yum install ambari-server
 
-*SUSE/SLES12*
-
-.. code-block:: bash
++ SUSE/SLES 12:
+  ::
 
    zypper install ambari-server
 
@@ -303,15 +290,13 @@
 
 Скрипт каждого стека создает символическую ссылку в документе сервера репозитория, указывающую на местоположение извлеченного архива стека, и создает файл с местоположением репозитория в каталоге:
 
-*CentOS/RHEL7*
-
-.. code-block:: bash
++ RHEL/CentOS 7:
+  ::
 
     /etc/yum.repos.d/
 
-*SUSE/SLES12*
-
-.. code-block:: bash
++ SUSE/SLES 12:
+  ::
 
    /etc/zypp/repos.d/
 
@@ -327,16 +312,14 @@
 
 Затем необходимо проверить правильность настройки репозитория, выполнив две команды от узла администратора:
 
-*CentOS/RHEL7*
-
-.. code-block:: bash
++ RHEL/CentOS 7:
+  ::
 
     yum clean all
     yum repolist
 
-*SUSE/SLES12*
-
-.. code-block:: bash
++ SUSE/SLES 12:
+  ::
 
    zypper clean -a
    zypper repos
