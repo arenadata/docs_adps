@@ -105,16 +105,15 @@
 
 .. code-block:: bash
 
-   /etc/yum.repos.d/
+   wget https://storage.googleapis.com/arenadata-repo/ADH/1.5.0/centos7/ambari.repo -O /etc/yum.repos.d/
 
 *SUSE/SLES12*
 
 .. code-block:: bash
 
-   /etc/zypp/repos.d/
+   wget https://storage.googleapis.com/arenadata-repo/ADH/1.5.0/sles12/ambari.repo - O /etc/zypp/repos.d/
 
 
-разместить repo-файл https://storage.googleapis.com/arenadata-repo/ADH/1.4.1/centos7/ambari.repo.
 
 Необходимо убедиться, что все родительские каталоги до промежуточного имеют доступ *"r + х"* для всех пользователей, поскольку данный каталог будет использоваться для создания локального репозитория.
 
