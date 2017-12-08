@@ -8,7 +8,7 @@
 
 .. figure:: imgs/install_pic1.*
    :align: center
-   
+
    Arenadata Store
 
 
@@ -18,11 +18,11 @@
 
 .. figure:: imgs/install_pic2.*
    :align: center
-   
+
    ARENADATA HADOOP
 
 
-Для загрузки beta-версии дистрибутива кластера необходимо нажать кнопку *ARENADATA HADOOP 1.5 (BETA)*. При этом открывается диалоговое окно заявки для загрузки продукта (:numref:`Рис.%s.<install-img-3>`).
+Для загрузки дистрибутива кластера необходимо нажать кнопку *ARENADATA HADOOP 1.5*. При этом открывается диалоговое окно заявки для загрузки продукта (:numref:`Рис.%s.<install-img-3>`).
 
 .. _install-img-3:
 
@@ -31,8 +31,8 @@
    :align: center
 
    Заявка для загрузки продукта
-    
-    
+
+
 В экранной форме заявки следует заполнить следующие поля:
 
 + *ФИО* – ФИО пользователя;
@@ -47,24 +47,24 @@
 
 .. figure:: imgs/install_pic4.*
    :align: center
-   
+
    Заявка принята
-    
+
 
 Окно сообщения следует закрыть. При этом происходит переход на страницу с выбором компонентов дистрибутива (:numref:`Рис.%s.<install_pic5>`).
 
-.. _install_pic5:
+.. _install_pic5-2:
 
-.. figure:: imgs/install_pic5.*
+.. figure:: imgs/install_pic5-2.*
    :align: center
-   
+
    Выбор компонентов дистрибутива
 
 
 Есть возможность загрузить следующие компоненты дистрибутива:
 
-+ *Arenadata Ambari 1.5 (BETA) (CENTOS/RHEL 7)* – beta-версия дистрибутива для ОС CENTOS/RHEL 7;
-+ *Arenadata Ambari 1.5 (BETA) (SUSE/SLES 12)* – beta-версия дистрибутива для ОС SUSE/SLES 12;
++ *Arenadata Ambari 1.5 (CENTOS/RHEL 7)* – версия дистрибутива для ОС CENTOS/RHEL 7;
++ *Arenadata Ambari 1.5 (SUSE/SLES 12)* – версия дистрибутива для ОС SUSE/SLES 12;
 
 
 Для старта загрузки необходимо кликнуть по требуемому компоненту, при этом начинается скачивание дистрибутива.
@@ -77,9 +77,5 @@
 
 .. figure:: imgs/install_pic5-1.*
    :align: center
-   
-   HADOOP SIZING TOOL
-   
-   
-   
 
+   HADOOP SIZING TOOL
