@@ -78,4 +78,4 @@
 .. figure:: imgs/install_pic5-1.*
    :align: center
 
-   HADOOP SIZING TOOL
+   Hadoop Sizing Tool
