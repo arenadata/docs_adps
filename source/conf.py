@@ -121,23 +121,34 @@ htmlhelp_basename = 'Arenadatadoc'
 
 today = '2017, Arenadata™'
 latex_keep_old_macro_names = True
+
+latex_logo = '../_static/logo.png'
+
 # -- Options for LaTeX output ---------------------------------------------
 latex_elements = {
-
+    'classoptions': ',openany,oneside',  # Removes blank pages
+    # VerbatimColor - background color of codeblocks
     'sphinxsetup': 'TitleColor={rgb}{0.05, 0.5, 0.06}, InnerLinkColor={rgb}{0.05, 0.5, 0.06},\
-                    VerbatimColor={rgb}{0.66, 0.89, 0.63}, importantBorderColor={rgb}{0.66, 0.89, 0.63},\
+                    VerbatimColor={rgb}{0.82, 0.94, 0.75}, importantBorderColor={rgb}{0.66, 0.89, 0.63},\
                     OuterLinkColor={rgb}{0.04, 0.5, 0.06}, importantborder=1.5pt,\
                     hmargin={0.7in,0.7in}, vmargin={1in,1in}, verbatimwithframe=true',
     'fontpkg': '',
-    'fncychap': '\\usepackage{fncychap}',
-    'babel': '\\usepackage[english, russian]{babel}',
+    'fncychap': r'\usepackage{fncychap}',
+    'babel': r'\usepackage[english, russian]{babel}',
     # The font size ('10pt', '11pt' or '12pt').
     #
     'pointsize': '10pt',
     # 'date': '2017, Arenadata™',  # date is setting up by `today` variable, described above
 
-    'preamble': r'''
+    'preamble': r"""
+        \usepackage{indentfirst}  %% It should makes indent at first paragraph in chapter
+
+        \setlength{\parindent}{1cm}
+
+        % Disable 'Continue on the next page'
         \renewcommand{\tablecontinued}[1]{}
+
+        % Disable hyphenation
         \hyphenpenalty10000
         \exhyphenpenalty10000
 
@@ -145,9 +156,6 @@ latex_elements = {
         \usepackage{amsmath,amsfonts,amssymb,amsthm}
         \usepackage{graphicx}
 
-        %%% reduce spaces for Table of contents, figures and tables
-        %%% it is used "\addtocontents{toc}{\vskip -1.2cm}" etc. in the document
-        \usepackage[notlot,nottoc,notlof]{}
 
         \usepackage{color}
         \usepackage{transparent}
@@ -186,36 +194,36 @@ latex_elements = {
         \renewcommand{\headrulewidth}{0.5pt}
         \renewcommand{\footrulewidth}{0.5pt}
 
-        \setlength{\parindent}{1cm}
         \renewcommand{\baselinestretch}{1}
-    ''',
+    """,
 
-    'maketitle': r'''
+    'maketitle': r"""
             \pagenumbering{Roman} %%% to avoid page 1 conflict with actual page 1
             \begin{titlepage}
+
+                \vspace*{-31.4mm}
+                \begin{center}
+                  \makebox[\textwidth]{\includegraphics[width=\paperwidth]{logo.png}}
+                \end{center}
+
                 \raggedright
 
-                \vspace{0mm}
-
-                \vspace*{40mm} %%% * is used to give space from top
+                \vspace*{70mm} %%% * is used to give space from top
                 \textbf{\Huge {Arenadata™ document-title}}
-                \vspace{0mm}
-                \par
+
+                \vspace*{30mm}
                 \Large \textit{Версия - document-release}
-                \vspace{30mm}
 
                 \LARGE \textbf{{document-name}}
-
 
                 %% \vfill adds at the bottom
                 \vfill
                 \normalsize \textit{document-pusblish-date Arenadata™}
             \end{titlepage}
-            \clearpage
             \pagenumbering{arabic}
             \tableofcontents
             \clearpage
-    ''',
+    """,
 
     'tableofcontents': ' ',
 
