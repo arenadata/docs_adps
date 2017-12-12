@@ -459,8 +459,8 @@
 + SUSE/SLES 12:
   ::
 
-  rcSuSEfirewall2 stop
-  chkconfig SuSEfirewall2 off
+   rcSuSEfirewall2 stop
+   сhkconfig SuSEfirewall2 off
 
 По завершению установки следует перезапустить **IPTables**.
 
