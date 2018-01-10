@@ -29,11 +29,11 @@
 
 В полях "Base URL" необходимо указать URL-адреса репозиториев, которые были получены при запуске скрипта *setup_repo.sh*. Данные URL-адреса всегда можно уточнить в файлах <имя репозитория>.repo*.
 
-Для установки из публичного репозитория **Arenadata** необходимо выбрать соответствующий пункт меню "Use Public Repository" (:numref:`Рис.%s.<install-img-7-2>`).
+Для установки из публичного репозитория **Arenadata** необходимо выбрать соответствующий пункт меню "Use Public Repository" (:numref:`Рис.%s.<install_master_use-public-rep>`).
 
-.. _install-img-7-2:
+.. _install_master_use-public-rep:
 
-.. figure:: imgs/install_pic7-2.jpg
+.. figure:: imgs/install_master_use-public-rep.*
    :align: center
 
    Установка из публичного репозитория
