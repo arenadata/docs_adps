@@ -226,11 +226,11 @@
 
   :command:`http://<адрес сервера>:8080`
 
-При этом запрашивается логин и пароль. После авторизации открывается веб-интерфейс **Ambari** (:numref:`Рис.%s.<install_pic6>`).
+При этом запрашивается логин и пароль. После авторизации открывается веб-интерфейс **Ambari** (:numref:`Рис.%s.<install_installation_welcom-to-ambari-before-config>`).
 
-.. _install_pic6:
+.. _install_installation_welcom-to-ambari-before-config:
 
-.. figure:: imgs/install_pic6.*
+.. figure:: ../imgs/install_installation_welcom-to-ambari-before-config.*
    :align: center
 
    Веб-интерфейс Ambari до настройки кластера
