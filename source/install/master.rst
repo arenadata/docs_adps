@@ -33,7 +33,7 @@
 
 .. _install_master_use-public-rep:
 
-.. figure:: imgs/install_master_use-public-rep.*
+.. figure:: ../imgs/install_master_use-public-rep.*
    :align: center
 
    Установка из публичного репозитория
