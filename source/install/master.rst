@@ -127,11 +127,11 @@ Ambari-агент зарегистрируется на сервере при е
 Назначение Slave и Client узлов компонентов кластера
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Необходимо назначить **Slave** и **Client** узлы, на которых будут разворачиваться соответствующие компоненты кластера (:numref:`Рис.%s.<install-img-10>`).
+Необходимо назначить **Slave** и **Client** узлы, на которых будут разворачиваться соответствующие компоненты кластера (:numref:`Рис.%s.<install_master_assign-slaves-clients>`).
 
-.. _install-img-10:
+.. _install_master_assign-slaves-clients:
 
-.. figure:: imgs/install_pic10.jpg
+.. figure:: ../imgs/install_master_assign-slaves-clients.*
    :align: center
 
    Назначение Slave и Client узлов
