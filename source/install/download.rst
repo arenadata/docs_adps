@@ -6,7 +6,7 @@
 
 .. _install_form-download.png:
 
-.. figure:: imgs/install_form-download.png.*
+.. figure:: install_form-download.png.*
    :align: center
 
    Заявка для загрузки продукта
@@ -33,7 +33,7 @@
 
 .. _install_app-store.png:
 
-.. figure:: imgs/install_app-store.png.*
+.. figure:: install_app-store.png.*
    :align: center
 
    Магазин Приложений
