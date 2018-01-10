@@ -29,11 +29,11 @@
    Заявка принята
 
 
-Окно сообщения следует закрыть. При этом происходит переход на страницу *Магазин Приложений* с выбором продуктов и их версий для загрузки (:numref:`Рис.%s.<imgs/install_app-store.png>`).
+Окно сообщения следует закрыть. При этом происходит переход на страницу *Магазин Приложений* с выбором продуктов и их версий для загрузки (:numref:`Рис.%s.<install_app-store>`).
 
-.. _imgs/install_app-store.png:
+.. _install_app-store:
 
-.. figure:: imgs/install_app-store.png.*
+.. figure:: imgs/install_app-store.*
    :align: center
 
    Магазин Приложений
@@ -45,11 +45,11 @@
 
 + Arenadata Hadoop 1.5
 
-При выборе той или иной версии продукта происходит переход на соответствующую страницу с кратким описанием продукта, ссылками на компоненты дистрибутива и информацией о релизе :numref:`Рис.%s.<install_download-ADH1.5.png>`:
+При выборе той или иной версии продукта происходит переход на соответствующую страницу с кратким описанием продукта, ссылками на компоненты дистрибутива и информацией о релизе :numref:`Рис.%s.<install_download-ADH1.5>`:
 
-.. _install_download-ADH1.5.png:
+.. _install_download-ADH1.5:
 
-.. figure:: install_download-ADH1.5.png.*
+.. figure:: imgs/install_download-ADH1.5.*
    :align: center
 
    Arenadata Hadoop 1.5
