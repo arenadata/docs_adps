@@ -29,11 +29,11 @@
    Заявка принята
 
 
-Окно сообщения следует закрыть. При этом происходит переход на страницу *Магазин Приложений* с выбором продуктов и их версий для загрузки (:numref:`Рис.%s.<install_app-store.png>`).
+Окно сообщения следует закрыть. При этом происходит переход на страницу *Магазин Приложений* с выбором продуктов и их версий для загрузки (:numref:`Рис.%s.<imgs/install_app-store.png>`).
 
-.. _install_app-store.png:
+.. _imgs/install_app-store.png:
 
-.. figure:: install_app-store.png.*
+.. figure:: imgs/install_app-store.png.*
    :align: center
 
    Магазин Приложений
