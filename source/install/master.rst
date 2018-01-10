@@ -17,11 +17,11 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-Для того чтобы открыть список репозиториев, необходимо в блоке "Stacks" установить флаг в поле *ADH 1.5* и раскрыть блок "Advanced Repository Options", при этом **Ambari** предлагает указать URL-адреса репозиториев (:numref:`Рис.%s.<install-img-7>`).
+Для того чтобы открыть список репозиториев, необходимо в блоке "Stacks" установить флаг в поле *ADH 1.5* и раскрыть блок "Advanced Repository Options", при этом **Ambari** предлагает указать URL-адреса репозиториев (:numref:`Рис.%s.<install_master_select-version>`).
 
-.. _install-img-7:
+.. _install_master_select-version:
 
-.. figure:: imgs/install_pic7.jpg
+.. figure:: ../imgs/install_master_select-version.*
    :align: center
 
    Выбор стека
