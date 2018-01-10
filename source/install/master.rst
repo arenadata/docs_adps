@@ -109,11 +109,11 @@ Ambari-агент зарегистрируется на сервере при е
 Назначение мастер-узлов
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Необходимо назначить мастер-узлы компонентов кластера (:numref:`Рис.%s.<install-img-9>`).
+Необходимо назначить мастер-узлы компонентов кластера (:numref:`Рис.%s.<install_master_assign-masters>`).
 
-.. _install-img-9:
+.. _install_master_assign-masters:
 
-.. figure:: imgs/install_pic9.jpg
+.. figure:: ../imgs/install_master_assign-masters.*
    :align: center
 
    Назначение мастер-узлов
