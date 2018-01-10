@@ -2,7 +2,7 @@
 ==============================
 
 
-Для загрузки дистрибутива кластера **Arenadata Hadoop** (далее – **ADH**) необходимо на сайте продукта https://arenadata.tech/ перейти на вкладку "Скачать". При этом происходит переход на страницу *Магазин Программного Обеспечения Arenadata* (:numref:`Рис.%s.<install_download_app-store>`) и открывается экранная форма для заполнения заявки для загрузки продукта (:numref:`Рис.%s.<install_download_form-download>`):
+Для загрузки дистрибутива кластера **Arenadata Hadoop** (далее – **ADH**) необходимо на сайте продукта `arenadata.tech <https://arenadata.tech/>`_ перейти на вкладку "Скачать". При этом происходит переход на страницу *Магазин Программного Обеспечения Arenadata* (:numref:`Рис.%s.<install_download_app-store>`) и открывается экранная форма для заполнения заявки для загрузки продукта (:numref:`Рис.%s.<install_download_form-download>`):
 
 .. _install_download_form-download:
 
