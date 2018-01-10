@@ -6,7 +6,7 @@
 
 .. _install_form-download:
 
-.. figure:: source/imgs/install_form-download.*
+.. figure:: ../imgs/install_form-download.*
    :align: center
 
    Заявка для загрузки продукта
@@ -23,7 +23,7 @@
 
 .. _install_pic4:
 
-.. figure:: source/imgs/install_pic4.*
+.. figure:: ../imgs/install_pic4.*
    :align: center
 
    Заявка принята
@@ -33,7 +33,7 @@
 
 .. _install_app-store:
 
-.. figure:: source/imgs/install_app-store.*
+.. figure:: ../imgs/install_app-store.*
    :align: center
 
    Магазин Приложений
@@ -49,7 +49,7 @@
 
 .. _install_download-ADH1.5:
 
-.. figure:: source/imgs/install_download-ADH1.5.*
+.. figure:: ../imgs/install_download-ADH1.5.*
    :align: center
 
    Arenadata Hadoop 1.5
@@ -79,13 +79,13 @@
 
 .. _install_calc-ADH1.5:
 
-.. figure:: source/imgs/install_calc-ADH1.5.*
+.. figure:: ../imgs/install_calc-ADH1.5.*
    :align: center
 
    Калькулятор оборудования для Hadoop
 
 
-
+На странице калькулятора есть возможность задать персональные параметры в соответствующих полях для расчета необходимого количества серверов заданной конфигурации для хранения и обработки указанного объема пользовательских данных в **HDFS**.
 
 
 
