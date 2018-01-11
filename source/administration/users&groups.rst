@@ -103,7 +103,7 @@
 
 .. _admin_usersgroups_users-settings:
 
-.. figure:: ../imgs/admin_usersgroups_users-settings*
+.. figure:: ../imgs/admin_usersgroups_users-settings.*
    :align: center
    
    Параметры пользователя
@@ -152,7 +152,7 @@
 
 .. _admin_usersgroups_groups:
 
-.. figure:: ../imgs/admin_usersgroups_groups*
+.. figure:: ../imgs/admin_usersgroups_groups.*
    :align: center
    
    Группы пользователей
@@ -166,7 +166,7 @@
 
 .. _admin_usersgroups_groups-settings:
 
-.. figure:: ../imgs/admin_usersgroups_groups-settings*
+.. figure:: ../imgs/admin_usersgroups_groups-settings.*
    :align: center
    
    Параметры группы пользователей
