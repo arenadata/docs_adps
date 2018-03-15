@@ -3,8 +3,8 @@ set -e
 
 export PATH=~/.local/bin/:$PATH
 
-mkdir ./latex
-mkdir ./pdf
+mkdir -p ./latex
+mkdir -p ./pdf
 #mkdir ./latex/all
 #rm -rf ./latex/all
 #
@@ -22,7 +22,7 @@ for dir in `find source -maxdepth 1 -type d -printf "%P\n"`; do
         echo "${dir}"
         cp ./source/conf.py ./source/"${dir}"
 
-        mkdir ./latex/"${dir}"
+        mkdir -p ./latex/"${dir}"
         rm -rf ./latex/"${dir}"
         sphinx-build -b latex ./source/"${dir}" ./latex/"${dir}" && cd ./latex/"${dir}"
 
