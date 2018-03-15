@@ -21,13 +21,13 @@
 # sys.path.insert(0, os.path.abspath('.'))
 import sphinx_rtd_theme
 import datetime
-import subprocess
 
 from string import Template
 
 # -- General configuration ------------------------------------------------
 now = datetime.datetime.now()
-branch = subprocess.check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD']).decode('utf-8')
+# branch = subprocess.check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD']).decode('utf-8')
+branch = "v1.5"
 
 title = Template(r"""
             \pagenumbering{Roman} %%% to avoid page 1 conflict with actual page 1
@@ -157,7 +157,7 @@ html_sidebars = {
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'Arenadatadoc'
 
-today = '{}, Arenadata™'.format(branch)
+today = '{}, Arenadata™'.format(now.year)
 latex_keep_old_macro_names = True
 
 latex_logo = '../_static/logo.png'
