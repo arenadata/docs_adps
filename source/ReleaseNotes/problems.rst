@@ -1,13 +1,10 @@
 Известные проблемы
 ------------------
 
-*Apache Ambari:*
-
-+ При установке ambari-server возможно появление ошибки "Error extracting ambari views";
-
 *Apache HDFS:*
 
 + При активации NFS Gateway возможно появление ошибки "service: no such service nfs-kernel-server";
++ При активации Apache Ranger HDFS Plugin возможно появление ошибки NullPointerException при попытке чтения root директории не под поллзователем HDFS;
 
 *Apache Oozie:*
 
@@ -20,8 +17,6 @@
 *Apache Hive Interactive Service:*
 
 + При повторном включении сервиса Hive Interactive возможно появление ошибки о невозможности установки сервиса.
-
-
 
 
 
