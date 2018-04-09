@@ -19,3 +19,4 @@
    :caption: Оглавление:
 
    features
+   authorization
