@@ -274,7 +274,7 @@
 .. figure:: ../imgs/security_authorization_Ranger-user.*
    :align: center
 
-   Необходимые изменения пользователям *Ranger db* и *Ranger audit db*
+   Необходимые изменения пользователям Ranger db и Ranger audit db
 
 8. После редактирования файла *pg_hba.conf* запустить команду для обновления конфигурации базы данных PostgreSQL:
 
@@ -286,6 +286,41 @@
 
 Конфигурация Oracle
 ````````````````````
+
+При использовании **Amazon RDS** есть дополнительные требования (`Требования к Amazon RDS`_).
+
+Для конфигурации экземпляра для **Ranger** для **Oracle** необходимо выполнить следующие шаги:
+
+1. На узле Oracle установить соответствующий JDBC-файл *.jar*:
+
+  + Загрузить драйвер `Oracle JDBC (OJDBC) <http://www.oracle.com/technetwork/database/features/jdbc/index-091264.html>`_
+  + Для Oracle Database 11g: выбрать Oracle Database 11g Release 2 drivers > ojdbc6.jar
+  + Для Oracle Database 12c: выбрать Oracle Database 12c Release 1 driver > ojdbc7.jar
+  + Скопировать файл *.jar* в папку общего доступа Java. Например, *cp ojdbc7.jar /usr/share/java/*
+  + Убедиться, что .jar-файл имеет соответствующие разрешения: 
+  
+:command:`chmod 644 /usr/share/java/ojdbc7.jar`
+
+2. Для создания баз данных Ranger должен использоваться администратор базы данных Oracle.
+
+Для создания пользователя *RANGERDBA* и предоставления ему прав с помощью SQL*Plus -- утилиты администрирования базы данных Oracle, следует использовать команду:
+
+  ::
+  
+   # sqlplus sys/root as sysdba
+   CREATE USER $RANGERDBA IDENTIFIED BY $RANGERDBAPASSWORD; 
+   GRANT SELECT_CATALOG_ROLE TO $RANGERDBA;
+   GRANT CONNECT, RESOURCE TO $RANGERDBA; 
+   QUIT;
+
+3. Использовать следующий формат команды, чтобы установить путь *jdbc/driver/path* на основе местоположения файла *.jar* драйвера Oracle JDBC. Команда должна выполняться на сервере, на котором установлен сервер Ambari:
+
+:command:`ambari-server setup --jdbc-db={database-type} --jdbc-driver={/jdbc/driver/path}`
+
+Например:
+
+:command:`ambari-server setup --jdbc-db=oracle --jdbc-driver=/usr/share/java/ojdbc6.jar`
+
 
 
 Требования к Amazon RDS
