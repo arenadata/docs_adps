@@ -185,12 +185,31 @@
 
     После тестирования входа в систему *rangerdba* использовать команду *exit* для выхода из MySQL.
 
+2. Следующая команда используется для подтверждения, что файл *mysql-connector-java.jar* находится в папке общего доступа Java. Команда должна быть запущена на сервере, на котором установлен сервер Ambari:
 
+  :command:`ls /usr/share/java/mysql-connector-java.jar`
 
+Если файл находится не в каталоге общего доступа Java, использовать следующую команду для установки соединения:
 
++ RHEL/CentOS/Oracle Linux:
 
+  ::
+   
+   yum install mysql-connector-java*
 
++ SLES:
 
+  ::
+  
+   zypper install mysql-connector-java*
+
+3. Использовать следующий формат команды, чтобы установить путь *jdbc/driver/path* на основе местоположения файла *.jar* драйвера MySQL JDBC. Команда должна выполняться на сервере, на котором установлен сервер Ambari:
+
+:command:`ambari-server setup --jdbc-db={database-type} --jdbc-driver={/jdbc/driver/path}`
+
+Например:
+
+:command:`ambari-server setup --jdbc-db=mysql --jdbc-driver=/usr/share/java/mysql-connector-java.jar`
 
 
 
