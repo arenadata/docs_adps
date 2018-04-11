@@ -242,8 +242,45 @@
 
 :command:`chmod 644 /usr/share/java/postgresql-jdbc.jar`
      
-4. 
+4. Для создания баз данных Ranger должен использоваться администратор базы данных PostgreSQL. Для создания пользователя *rangerdba* и предоставления ему соответствующих прав следует использовать команду:
 
+  ::
+  
+   echo "CREATE DATABASE $dbname;" | sudo -u $postgres psql -U postgres
+   echo "CREATE USER $rangerdba WITH PASSWORD '$passwd';" | sudo -u $postgres psql -U postgres
+   echo "GRANT ALL PRIVILEGES ON DATABASE $dbname TO $rangerdba;" | sudo -u $postgres psql -U postgres 
+
+Где *$postgres* -- пользователь Postgres, *$dbname* -- имя базы данных PostgreSQL.
+
+5. Использовать следующий формат команды, чтобы установить путь *jdbc/driver/path* на основе местоположения файла *.jar* драйвера PostgreSQL JDBC. Команда должна выполняться на сервере, на котором установлен сервер Ambari:
+
+:command:`ambari-server setup --jdbc-db={database-type} --jdbc-driver={/jdbc/driver/path}`
+
+Например:
+
+:command:`ambari-server setup --jdbc-db=postgres --jdbc-driver=/usr/share/java/postgresql-jdbc.jar`
+
+6. Выполнить следующую команду:
+
+:command:`export HADOOP_CLASSPATH=${HADOOP_CLASSPATH}:${JAVA_JDBC_LIBS}:/connector jar path`
+
+7. Разрешить доступ *Allow Access* для пользователей Ranger:
+
+  + изменить *listen_addresses='localhost'* на *listen_addresses='*' ('*' = any)*, чтобы прослушивать все IP-адреса в *postgresql.conf*;
+  + внести следующие изменения пользователям *Ranger db* и *Ranger audit db* в файле *pg_hba.conf* (:numref:`Рис.%s.<security_authorization_Ranger-user>`).
+
+.. _security_authorization_Ranger-user:
+
+.. figure:: ../imgs/security_authorization_Ranger-user.*
+   :align: center
+
+   Необходимые изменения пользователям *Ranger db* и *Ranger audit db*
+
+8. После редактирования файла *pg_hba.conf* запустить команду для обновления конфигурации базы данных PostgreSQL:
+
+:command:`sudo -u postgres /usr/bin/pg_ctl -D $PGDATA reload`
+
+Например, если файл *pg_hba.conf* находится в каталоге */var/lib/pgsql/data*, значением *$PGDATA* является */var/lib/pgsql/data*.
 
 
 
