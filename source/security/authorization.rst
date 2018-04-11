@@ -157,7 +157,41 @@
 
 Для конфигурации экземпляра для **Ranger** для **MySQL** необходимо следовать следующим шагам:
 
-1. 
+1. Для создания баз данных Ranger должен использоваться администратор базы данных MySQL. Для создания пользователя *rangerdba* с паролем *rangerdba* необходимо:
+
+  + Войти в систему как пользователь *root* и использовать следующие команды, чтобы создать пользователя *rangerdba* и предоставить ему соответствующие права:
+  
+    ::
+    
+     CREATE USER 'rangerdba'@'localhost' IDENTIFIED BY 'rangerdba';
+     
+     GRANT ALL PRIVILEGES ON *.* TO 'rangerdba'@'localhost';
+     
+     CREATE USER 'rangerdba'@'%' IDENTIFIED BY 'rangerdba';
+     
+     GRANT ALL PRIVILEGES ON *.* TO 'rangerdba'@'%';
+     
+     GRANT ALL PRIVILEGES ON *.* TO 'rangerdba'@'localhost' WITH GRANT OPTION;
+     
+     GRANT ALL PRIVILEGES ON *.* TO 'rangerdba'@'%' WITH GRANT OPTION;
+     
+     FLUSH PRIVILEGES;
+
+  + Использовать команду *exit* для выхода из MySQL;
+  
+  + Теперь можно подключиться к базе данных как *rangerdba*, используя следующую команду:
+
+:command:`mysql -u rangerdba -prangerdba`
+
+  После тестирования входа в систему *rangerdba* использовать команду *exit* для выхода из MySQL.
+
+
+
+
+
+
+
+
 
 
 Конфигурация PostgreSQL
