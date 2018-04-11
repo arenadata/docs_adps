@@ -326,6 +326,31 @@
 Требования к Amazon RDS
 ````````````````````````
 
+**Ranger** требует наличия реляционной базы данных в качестве хранилища политик. Существуют дополнительные требования для баз данных на основе **Amazon RDS** из-за специфичности настроек и управления.
+
++ **MySQL/MariaDB**
+
+Во время установки **Ranger** необходимо изменить переменную *log_bin_trust_function_creators* на значение *1*. Через панель управления RDS Dashboard > Parameter group (в левой части страницы):
+
+  + Установить переменную MySQL Server *log_bin_trust_function_creators* в значение *1*.
+  + (Опционально) после завершения установки Ranger сбросить значение параметра *log_bin_trust_function_creators* в исходное значение (требование к значению переменной относится только на время установки Ranger).
+  
+Для получения дополнительной информации см.:
+
+  + `Stratalux: Why You Should Always Use a Custom DB Parameter Group When Creating an RDS Instance <https://www.stratalux.com/blog/always-use-custom-db-parameter-group-creating-rds-instance/>`_
+  + `AWS Documentation>Amazon RDS DB Instance Lifecycle » Working with DB Parameter Groups <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html>`_
+  + `MySQL 5.7 Reference Manual >Binary Logging of Stored Programs <https://dev.mysql.com/doc/refman/5.7/en/stored-programs-logging.html>`_
+  
+
++ **PostgreSQL**
+
+`Ссылка <https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.6.4/bk_security/content/amazon_rds_requirements_postgresql.html>`_
+
+
++ **Oracle**
+
+
+
 
 Настройка пользователей базы данных без совместного использования учетных данных DBA
 `````````````````````````````````````````````````````````````````````````````````````
