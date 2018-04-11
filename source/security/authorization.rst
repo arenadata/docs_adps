@@ -183,7 +183,7 @@
 
 :command:`mysql -u rangerdba -prangerdba`
 
-  После тестирования входа в систему *rangerdba* использовать команду *exit* для выхода из MySQL.
+    После тестирования входа в систему *rangerdba* использовать команду *exit* для выхода из MySQL.
 
 
 
