@@ -454,7 +454,7 @@
 
    Действие -- Добавить сервис
 
-3. На открывшейся странице "Choose Services" выбрать Ranger и нажать "Next" :numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Choose-Service>`).
+3. На открывшейся странице "Choose Services" выбрать Ranger и нажать "Next" (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Choose-Service>`).
 
 .. _security_authorizationHadoop_InstallingRanger_Choose-Service:
 
@@ -463,11 +463,26 @@
 
    Добавление сервиса
 
-4. 
+4. Открывается страница "Ranger Requirements". Необходимо убедиться, что выполнены все требования к установке, и затем установить флажок "I have met all the requirements above" (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Requirements>`).
+
+.. _security_authorizationHadoop_InstallingRanger_Requirements:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Requirements.*
+   :align: center
+
+   Требования Ranger
+
+5. Далее необходимо выбрать хост, на котором будет установлен Ranger Admin (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Assign-Masters>`). Этот хост должен иметь доступ администратора базы данных к хосту Ranger DB и User Sync. На приведенном рисунке показано, что службы Ranger Admin и Ranger User Sync будут установлены на основном узле кластера (*c6401.ambari.apache.org*). Следует запомнить хост администратора Ranger для использования на последующих этапах установки. Нажать "Next" для продолжения установки.
 
 
+.. _security_authorizationHadoop_InstallingRanger_Assign-Masters:
 
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Assign-Masters.*
+   :align: center
 
+   Выбор хоста для установки Ranger Admin
+
+6. Открывается страница "Customize Services". Настройки сервисов описаны в следующем разделе (`Настройка сервисов`_).
 
 
 
