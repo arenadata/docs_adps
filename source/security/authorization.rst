@@ -181,13 +181,17 @@
   
   + Теперь можно подключиться к базе данных как *rangerdba*, используя следующую команду:
 
-:command:`mysql -u rangerdba -prangerdba`
+    ::
+    
+     mysql -u rangerdba -prangerdba
 
     После тестирования входа в систему *rangerdba* использовать команду *exit* для выхода из MySQL.
 
 2. Следующая команда используется для подтверждения, что файл *mysql-connector-java.jar* находится в папке общего доступа Java. Команда должна быть запущена на сервере, на котором установлен сервер Ambari:
 
-:command:`ls /usr/share/java/mysql-connector-java.jar`
+  ::
+  
+   ls /usr/share/java/mysql-connector-java.jar
 
 Если файл находится не в каталоге общего доступа Java, использовать следующую команду для установки соединения:
 
@@ -205,11 +209,15 @@
 
 3. Использовать следующий формат команды, чтобы установить путь *jdbc/driver/path* на основе местоположения файла *.jar* драйвера MySQL JDBC. Команда должна выполняться на сервере, на котором установлен сервер Ambari:
 
-:command:`ambari-server setup --jdbc-db={database-type} --jdbc-driver={/jdbc/driver/path}`
+  ::
+  
+   ambari-server setup --jdbc-db={database-type} --jdbc-driver={/jdbc/driver/path}
 
 Например:
 
-:command:`ambari-server setup --jdbc-db=mysql --jdbc-driver=/usr/share/java/mysql-connector-java.jar`
+  ::
+  
+   ambari-server setup --jdbc-db=mysql --jdbc-driver=/usr/share/java/mysql-connector-java.jar
 
 
 
@@ -236,11 +244,15 @@
      
 2. Убедиться, что файл *.jar* находится в папке общего доступа Java:
 
-:command:`ls /usr/share/java/postgresql-jdbc.jar`
+  ::
+  
+   ls /usr/share/java/postgresql-jdbc.jar
 
 3. Изменить режим доступа файла *.jar* на *644*:
 
-:command:`chmod 644 /usr/share/java/postgresql-jdbc.jar`
+  ::
+  
+   chmod 644 /usr/share/java/postgresql-jdbc.jar
      
 4. Для создания баз данных Ranger должен использоваться администратор базы данных PostgreSQL. Для создания пользователя *rangerdba* и предоставления ему соответствующих прав следует использовать команду:
 
@@ -254,15 +266,21 @@
 
 5. Использовать следующий формат команды, чтобы установить путь *jdbc/driver/path* на основе местоположения файла *.jar* драйвера PostgreSQL JDBC. Команда должна выполняться на сервере, на котором установлен сервер Ambari:
 
-:command:`ambari-server setup --jdbc-db={database-type} --jdbc-driver={/jdbc/driver/path}`
+  ::
+  
+   ambari-server setup --jdbc-db={database-type} --jdbc-driver={/jdbc/driver/path}
 
 Например:
 
-:command:`ambari-server setup --jdbc-db=postgres --jdbc-driver=/usr/share/java/postgresql-jdbc.jar`
+  ::
+  
+   ambari-server setup --jdbc-db=postgres --jdbc-driver=/usr/share/java/postgresql-jdbc.jar
 
 6. Выполнить следующую команду:
 
-:command:`export HADOOP_CLASSPATH=${HADOOP_CLASSPATH}:${JAVA_JDBC_LIBS}:/connector jar path`
+  ::
+  
+   export HADOOP_CLASSPATH=${HADOOP_CLASSPATH}:${JAVA_JDBC_LIBS}:/connector jar path
 
 7. Разрешить доступ *Allow Access* для пользователей Ranger:
 
@@ -278,7 +296,9 @@
 
 8. После редактирования файла *pg_hba.conf* запустить команду для обновления конфигурации базы данных PostgreSQL:
 
-:command:`sudo -u postgres /usr/bin/pg_ctl -D $PGDATA reload`
+  ::
+  
+   sudo -u postgres /usr/bin/pg_ctl -D $PGDATA reload
 
 Например, если файл *pg_hba.conf* находится в каталоге */var/lib/pgsql/data*, значением *$PGDATA* является */var/lib/pgsql/data*.
 
@@ -298,8 +318,10 @@
   + Для Oracle Database 12c: выбрать Oracle Database 12c Release 1 driver > ojdbc7.jar
   + Скопировать файл *.jar* в папку общего доступа Java. Например, *cp ojdbc7.jar /usr/share/java/*
   + Убедиться, что .jar-файл имеет соответствующие разрешения: 
-  
-:command:`chmod 644 /usr/share/java/ojdbc7.jar`
+
+    ::
+    
+     chmod 644 /usr/share/java/ojdbc7.jar
 
 2. Для создания баз данных Ranger должен использоваться администратор базы данных Oracle.
 
@@ -315,11 +337,15 @@
 
 3. Использовать следующий формат команды, чтобы установить путь *jdbc/driver/path* на основе местоположения файла *.jar* драйвера Oracle JDBC. Команда должна выполняться на сервере, на котором установлен сервер Ambari:
 
-:command:`ambari-server setup --jdbc-db={database-type} --jdbc-driver={/jdbc/driver/path}`
+  ::
+  
+   ambari-server setup --jdbc-db={database-type} --jdbc-driver={/jdbc/driver/path}
 
 Например:
 
-:command:`ambari-server setup --jdbc-db=oracle --jdbc-driver=/usr/share/java/ojdbc6.jar`
+  ::
+  
+   ambari-server setup --jdbc-db=oracle --jdbc-driver=/usr/share/java/ojdbc6.jar
 
 
 
