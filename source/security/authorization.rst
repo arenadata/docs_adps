@@ -396,6 +396,29 @@
 
 + **Oracle**
 
+Из-за ограничений в `Amazon RDS <https://forums.aws.amazon.com/thread.jspa?messageID=450535>`_ создание пользователя базы данных **Ranger** и табличного пространства, а так же предоставление пользователю **Ranger** необходимых привилегий выполняется вручную.
+
+1. Используя основную учетную запись пользователя (заведенную при создании экземпляра RDS Oracle), войти в RDS Oracle Server и выполнить команды:
+
+  ::
+  
+   create user $rangerdbuser identified by “password”;
+   GRANT CREATE SESSION,CREATE PROCEDURE,CREATE TABLE,CREATE VIEW,CREATE SEQUENCE,CREATE PUBLIC SYNONYM,CREATE ANY SYNONYM,CREATE TRIGGER,UNLIMITED Tablespace TO $rangerdbuser;
+   create tablespace $rangerdb datafile size 10M autoextend on;
+   alter user $rangerdbuser DEFAULT Tablespace $rangerdb;
+
+Где *$rangerdb* -- это фактическое имя базы данных Ranger (например, *ranger*), а *$rangerdbuser* -- имя пользователя Ranger (например: *rangeradmin*).
+
+2. Если используется Ranger KMS, выполнить следующие команды:
+
+  ::
+  
+   create user $rangerdbuser identified by “password”;
+   GRANT CREATE SESSION,CREATE PROCEDURE,CREATE TABLE,CREATE VIEW,CREATE SEQUENCE,CREATE PUBLIC SYNONYM,CREATE ANY SYNONYM,CREATE TRIGGER,UNLIMITED Tablespace TO $rangerkmsuser;
+   create tablespace $rangerkmsdb datafile size 10M autoextend on;
+   alter user $rangerkmsuser DEFAULT Tablespace $rangerkmsdb;
+
+Где *$rangerkmsdb* -- это фактическое имя базы данных Ranger (например: *rangerkms*), а *$rangerkmsuser* -- имя пользователя Ranger (например: *rangerkms*).
 
 
 
