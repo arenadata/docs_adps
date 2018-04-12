@@ -14,8 +14,8 @@
    :maxdepth: 2
    :caption: Оглавление:
 
-   Installing Ranger
-   HDFS Policy
+   InstallingRanger
+   PolicyHDFS
 
 
 
