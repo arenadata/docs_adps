@@ -370,7 +370,28 @@
 
 + **PostgreSQL**
 
-`Ссылка <https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.6.4/bk_security/content/amazon_rds_requirements_postgresql.html>`_
+Пользователь базы данных **Ranger** на сервере **Amazon RDS PostgreSQL Server** должен быть создан до установки **Ranger** и ему должна быть предоставлена роль *CREATEDB*.
+
+1. Используя основную учетную запись пользователя (заведенную при создании экземпляра RDS PostgreSQL), войти в Amazon RDS PostgreSQL Server и выполнить команды:
+
+  ::
+  
+   CREATE USER $rangerdbuser WITH LOGIN PASSWORD 'password'
+   
+   GRANT $rangerdbuser to $postgresroot
+
+Где *$postgresroot* -- это основная учетная запись пользователя RDS PostgreSQL (например, *postgresroot*), а *$rangerdbuser* -- имя пользователя базы данных Ranger (например: *rangeradmin*).
+
+2. Если используется Ranger KMS, выполнить следующие команды:
+
+  ::
+  
+   CREATE USER $rangerkmsuser WITH LOGIN PASSWORD 'password'
+
+   GRANT $rangerkmsuser to $postgresroot
+
+Где *$postgresroot* -- это основная учетная запись пользователя RDS PostgreSQL (например, *postgresroot*), а *$rangerkmsuser* -- имя пользователя Ranger KMS (например, *rangerkms*).
+
 
 
 + **Oracle**
