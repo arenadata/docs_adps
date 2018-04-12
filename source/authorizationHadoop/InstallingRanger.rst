@@ -489,6 +489,7 @@
 Настройка сервисов
 ~~~~~~~~~~~~~~~~~~~
 
+`Ссылка <https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.6.4/bk_security/content/customize_ranger_services.html>`_
 
 Завершение установки
 ~~~~~~~~~~~~~~~~~~~~~
