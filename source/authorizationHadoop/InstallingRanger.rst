@@ -434,6 +434,41 @@
 Запуск инсталляции
 ~~~~~~~~~~~~~~~~~~~
 
+Запуск интсалляции осуществляется по следующему сценарию:
+
+1. Войти в кластер Ambari с помощью назначенных учетных данных пользователя. При этом отображается главная страница панели инструментов Ambari (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Dashboard>`).
+
+.. _security_authorizationHadoop_InstallingRanger_Dashboard:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Dashboard.*
+   :align: center
+
+   Главная страница Ambari
+
+2. В левом меню навигации нажать "Actions", затем выбрать "Add Service" (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Add-Service>`).
+
+.. _security_authorizationHadoop_InstallingRanger_Add-Service:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Add-Service.*
+   :align: center
+
+   Действие -- Добавить сервис
+
+3. На открывшейся странице "Choose Services" выбрать Ranger и нажать "Next" :numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Choose-Service>`).
+
+.. _security_authorizationHadoop_InstallingRanger_Choose-Service:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Choose-Service.*
+   :align: center
+
+   Добавление сервиса
+
+4. 
+
+
+
+
+
 
 
 Настройка сервисов
