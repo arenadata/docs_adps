@@ -502,7 +502,7 @@
 
 Настройка администратора **Ranger** выполняется в следующем порядке:
 
-1. На странице "Customize Services" выберать вкладку "Ranger Admin" и в раскрывающемся списке "DB Flavor" выбрать тип базы данных, используемый с Ranger (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_DB-Flavor>`).
+1. На странице "Customize Services" выбрать вкладку "Ranger Admin" и в раскрывающемся списке "DB Flavor" выбрать тип базы данных, используемый с Ranger (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_DB-Flavor>`).
 
 .. _security_authorizationHadoop_InstallingRanger_DB-Flavor:
 
