@@ -489,6 +489,64 @@
 Настройка сервисов
 ~~~~~~~~~~~~~~~~~~~
 
+Следующим шагом в процессе установки **Ranger** является задание настроек на странице "Customize Services":
+
++ `Настройка Ranger Admin`_
++ `Настройка Ranger Audit`_
++ `Настройка Ranger User Sync`_
++ `Настройка Ranger Authentication`_
+
+
+Настройка Ranger Admin
+```````````````````````
+
+Настройка администратора **Ranger** выполняется в следующем порядке:
+
+1. На странице "Customize Services" выберать вкладку "Ranger Admin" и в раскрывающемся списке "DB Flavor" выбрать тип базы данных, используемый с Ranger (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_DB-Flavor>`).
+
+.. _security_authorizationHadoop_InstallingRanger_DB-Flavor:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_DB-Flavor.*
+   :align: center
+
+   Выбор типа базы данных
+
+2. Ввести адрес сервера базы данных в поле "Ranger DB Host" в соответствии с таблицей.
+
+.. csv-table:: Ranger DB Host
+   :header: "DB Flavor", "Host", "Пример"
+   :widths: 25, 25, 50
+
+   "MySQL", "<HOST[:PORT]>", "c6401.ambari.apache.org или c6401.ambari.apache.org:3306"
+   "Oracle", "<HOST:PORT:SID>", "c6401.ambari.apache.org:1521:ORCL"
+   "Oracle", "<HOST:PORT/Service>", "c6401.ambari.apache.org:1521/XE"
+   "PostgreSQL", "<HOST[:PORT]>", "c6401.ambari.apache.org или c6401.ambari.apache.org:5432"
+   "MS SQL", "<HOST[:PORT]>", "c6401.ambari.apache.org или c6401.ambari.apache.org:1433"
+   "SQLA", "<HOST[:PORT]>", "c6401.ambari.apache.org или c6401.ambari.apache.org:2638"
+
+3. "Ranger DB name" -- имя базы данных Ranger Policy, то есть *Ranger_db*. 
+
+.. important:: При использовании Oracle указать имя табличного пространства Oracle
+
+4. "Driver class name for a JDBC Ranger database" -- имя класса драйвера для базы данных JDBC Ranger создается автоматически на основе выбранного типа в поле "DB Flavor". В приведенной таблице перечислены настройки класса драйвера по умолчанию (в настоящее время Ranger не поддерживает сторонний драйвер JDBC).
+
+
+
+
+
+Настройка Ranger Audit
+``````````````````````
+
+
+Настройка Ranger User Sync
+```````````````````````````
+
+
+Настройка Ranger Authentication
+````````````````````````````````
+
+
+
 `Ссылка <https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.6.4/bk_security/content/customize_ranger_services.html>`_
 
 Завершение установки
