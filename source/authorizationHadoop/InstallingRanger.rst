@@ -549,7 +549,7 @@ Ranger Admin
    "Ranger DB username", "Имя пользователя для базы данных Policy", "rangeradmin", "rangeradmin", "Да"
    "Ranger DB password", "Пароль для пользователя базы данных Ranger Policy", "", "PassWORd", "Да"
 
-6. Строка подключения JDBC
+6. Строка подключения JDBC -- в настоящее время установщик Ambari создает строку соединения JDBC, используя формат *jdbc:oracle:thin:@//host:port/db_name*. Необходимо заменить строку подключения, согласно таблице.
 
 
 Ranger Audit
