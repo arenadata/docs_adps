@@ -564,7 +564,46 @@ Ranger Admin
    
    
 
-6. Строка подключения JDBC -- в настоящее время установщик Ambari создает строку соединения JDBC, используя формат *jdbc:oracle:thin:@//host:port/db_name*. Необходимо заменить строку подключения, согласно таблице.
+6. Строка подключения JDBC -- в настоящее время установщик Ambari создает строку соединения JDBC, используя формат *jdbc:oracle:thin:@//host:port/db_name*. Необходимо заменить строку подключения:
+
++ **MySQL** -- синтаксис: *jdbc:mysql://DB_HOST:PORT/db_name*, пример значения:
+
+  ::
+  
+   jdbc:mysql://c6401.ambari.apache.org:3306/ranger_db
+   
++ **Oracle SID** -- синтаксис: *jdbc:oracle:thin:@DB_HOST:PORT:SID*, пример значения:
+
+  ::
+  
+   jdbc:oracle:thin:@c6401.ambari.apache.org:1521:ORCL
+
++ **Oracle Service Name** -- синтаксис: *jdbc:oracle:thin:@//DB_HOST[:PORT][/ServiceName]*, пример значения:
+
+  ::
+  
+   jdbc:oracle:thin:@//c6401.ambari.apache.org:1521/XE
+
++ **PostgreSQL** -- синтаксис: *jdbc:postgresql://DB_HOST/db_name*, пример значения:
+
+  ::
+  
+   jdbc:postgresql://c6401.ambari.apache.org:5432/ranger_db
+
++ **MS SQL** -- синтаксис: *jdbc:sqlserver://DB_HOST;databaseName=db_name*, пример значения:
+
+  ::
+  
+   jdbc:sqlserver://c6401.ambari.apache.org:1433;databaseName=ranger_db
+   
++ **SQLA** -- синтаксис: *jdbc:sqlanywhere:host=DB_HOST;database=db_name*, пример значения:
+
+  ::
+  
+   jdbc:sqlanywhere:host=c6401.ambari.apache.org:2638;database=ranger_db
+
+
+
 
 
 Ranger Audit
