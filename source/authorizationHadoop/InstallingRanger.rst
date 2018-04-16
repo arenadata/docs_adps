@@ -599,14 +599,70 @@ Ranger Admin
 8. "Database Administrator (DBA) username" и "Database Administrator (DBA) password" задаются при установке сервера баз данных. Если эти сведения отсутствуют, необходимо обратиться к администратору базы данных, установившему сервер.
    
 .. csv-table:: Настройки учетных данных DBA
-   :header: "", "Database Administrator (DBA) username", "Database Administrator (DBA) password"
-   :widths: 30, 35, 35
+   :header: "", "DBA username", "DBA password"
+   :widths: 20, 40, 40
 
    "Описание", "Пользователь базы данных Ranger, обладающий правами администратора для создания схем баз данных и пользователей", "Пароль пользователя базы данных Ranger" 
    "Значение по умолчанию", "root", ""
    "Пример значения", "root", "root"
    "Обязательность заполнения", "Да", "Да"
    
+Если роль пользователя root Oracle DB -- *SYSDBA*, необходимо указать это в параметре имени администратора базы данных. Например, если имя пользователя DBA -- *orcl_root*, следует указать *orcl_root AS SYSDBA*.
+
+Как упомянуто на предыдущем шаге, если "Setup Database and Database User" установлено в положение "No", имя и пароль DBA могут все еще требоваться для продолжения установки Ranger.
+
+На следующих рисунках показаны примеры настроек БД для каждого типа базы данных Ranger (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_MySQL>`, :numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Oracle-Service-Name>`, :numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Oracle-SID>`, :numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_PostgreSQL>`, :numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_MS-SQL>`, :numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_SQL-Anywhere>`).
+
+.. important:: Чтобы проверить настройки БД, следует нажать "Test Connection". Если база данных Ranger не была предварительно установлена, тестовое соединение завершится неудачно даже для правильной конфигурации 
+
+
+.. _security_authorizationHadoop_InstallingRanger_MySQL:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_MySQL.*
+   :align: center
+
+   MySQL
+
+
+.. _security_authorizationHadoop_InstallingRanger_Oracle-Service-Name:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Oracle-Service-Name.*
+   :align: center
+
+   Oracle Service Name
+
+
+.. _security_authorizationHadoop_InstallingRanger_Oracle-SID:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Oracle-SID.*
+   :align: center
+
+   Oracle SID
+
+
+.. _security_authorizationHadoop_InstallingRanger_PostgreSQL:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_PostgreSQL.*
+   :align: center
+
+   PostgreSQL
+
+
+.. _security_authorizationHadoop_InstallingRanger_MS-SQL:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_MS-SQL.*
+   :align: center
+
+   MS SQL
+
+
+.. _security_authorizationHadoop_InstallingRanger_SQL-Anywhere:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_SQL-Anywhere.*
+   :align: center
+
+   SQL Anywhere
+
 
 
 Ranger Audit
