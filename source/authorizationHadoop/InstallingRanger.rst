@@ -548,6 +548,21 @@ Ranger Admin
 
    "Ranger DB username", "Имя пользователя для базы данных Policy", "rangeradmin", "rangeradmin", "Да"
    "Ranger DB password", "Пароль для пользователя базы данных Ranger Policy", "", "PassWORd", "Да"
+   
+   
+   
+   
+.. csv-table:: Пользователь и пароль Ranger DB
+   :header: "", "Ranger DB username", "Ranger DB password"
+   :widths: 30, 35, 35
+
+   "Описание", "Имя пользователя для базы данных Policy", "Пароль для пользователя базы данных Ranger Policy" 
+   "Значение по умолчанию", "rangeradmin", ""
+   "Пример значения", "rangeradmin", "PassWORd"
+   "Обязательность заполнения", "Да", "Да"
+   
+   
+   
 
 6. Строка подключения JDBC -- в настоящее время установщик Ambari создает строку соединения JDBC, используя формат *jdbc:oracle:thin:@//host:port/db_name*. Необходимо заменить строку подключения, согласно таблице.
 
