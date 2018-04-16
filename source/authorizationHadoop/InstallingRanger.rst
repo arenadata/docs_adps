@@ -541,16 +541,6 @@ Ranger Admin
    "SQLA", "sap.jdbc4.sqlanywhere.IDriver"
    
 5. В поля "Ranger DB username" и "Ranger DB Password" необходимо ввести имя пользователя и пароль для сервера базы данных Ranger. В таблице описаны более детальные настройки. Можно использовать базу данных MySQL, установленную с Ambari, или внешнюю БД: MySQL, Oracle, PostgreSQL, MS SQL или SQL Anywhere.
-
-.. csv-table:: Пользователь и пароль Ranger DB
-   :header: "Поле", "Описание", "Значение по умолчанию", "Пример значения", "Обязательность заполнения"
-   :widths: 20, 20, 20, 20, 20
-
-   "Ranger DB username", "Имя пользователя для базы данных Policy", "rangeradmin", "rangeradmin", "Да"
-   "Ranger DB password", "Пароль для пользователя базы данных Ranger Policy", "", "PassWORd", "Да"
-   
-   
-   
    
 .. csv-table:: Пользователь и пароль Ranger DB
    :header: "", "Ranger DB username", "Ranger DB password"
@@ -560,8 +550,6 @@ Ranger Admin
    "Значение по умолчанию", "rangeradmin", ""
    "Пример значения", "rangeradmin", "PassWORd"
    "Обязательность заполнения", "Да", "Да"
-   
-   
    
 
 6. Строка подключения JDBC -- в настоящее время установщик Ambari создает строку соединения JDBC, используя формат *jdbc:oracle:thin:@//host:port/db_name*. Необходимо заменить строку подключения:
