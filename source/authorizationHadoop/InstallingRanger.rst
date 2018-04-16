@@ -463,7 +463,7 @@
 
    Добавление сервиса
 
-4. Открывается страница "Ranger Requirements". Необходимо убедиться, что выполнены все требования к установке, и затем установить флажок "I have met all the requirements above" (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Requirements>`).
+4. Открывается страница "Ranger Requirements". Необходимо убедиться, что выполнены все требования к установке, установить флажок "I have met all the requirements above" и нажать "Proceed" (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Requirements>`).
 
 .. _security_authorizationHadoop_InstallingRanger_Requirements:
 
@@ -472,7 +472,7 @@
 
    Требования Ranger
 
-5. Далее необходимо выбрать хост, на котором будет установлен Ranger Admin (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Assign-Masters>`). Этот хост должен иметь доступ администратора базы данных к хосту Ranger DB и User Sync. На приведенном рисунке показано, что службы Ranger Admin и Ranger User Sync будут установлены на основном узле кластера (*c6401.ambari.apache.org*). Следует запомнить хост администратора Ranger для использования на последующих этапах установки. Нажать "Next" для продолжения установки.
+5. Далее на открывшейся странице "Assign Masters" необходимо выбрать хост, на котором будет установлен Ranger Admin (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Assign-Masters>`). Этот хост должен иметь доступ администратора базы данных к хосту Ranger DB и User Sync. На приведенном рисунке показано, что службы Ranger Admin и Ranger User Sync будут установлены на основном узле кластера (*c6401.ambari.apache.org*). Следует запомнить хост администратора Ranger для использования на последующих этапах установки. Нажать "Next" для продолжения.
 
 
 .. _security_authorizationHadoop_InstallingRanger_Assign-Masters:
@@ -491,14 +491,14 @@
 
 Следующим шагом в процессе установки **Ranger** является задание настроек на странице "Customize Services":
 
-+ `Настройка Ranger Admin`_
-+ `Настройка Ranger Audit`_
-+ `Настройка Ranger User Sync`_
-+ `Настройка Ranger Authentication`_
++ `Ranger Admin`_
++ `Ranger Audit`_
++ `Ranger User Sync`_
++ `Ranger Authentication`_
 
 
-Настройка Ranger Admin
-```````````````````````
+Ranger Admin
+````````````
 
 Настройка администратора **Ranger** выполняется в следующем порядке:
 
@@ -524,26 +524,44 @@
    "MS SQL", "<HOST[:PORT]>", "c6401.ambari.apache.org или c6401.ambari.apache.org:1433"
    "SQLA", "<HOST[:PORT]>", "c6401.ambari.apache.org или c6401.ambari.apache.org:2638"
 
-3. "Ranger DB name" -- имя базы данных Ranger Policy, то есть *Ranger_db*. 
+3. Поле "Ranger DB name" -- имя базы данных Ranger Policy, то есть *Ranger_db*. 
 
 .. important:: При использовании Oracle указать имя табличного пространства Oracle
 
-4. "Driver class name for a JDBC Ranger database" -- имя класса драйвера для базы данных JDBC Ranger создается автоматически на основе выбранного типа в поле "DB Flavor". В приведенной таблице перечислены настройки класса драйвера по умолчанию (в настоящее время Ranger не поддерживает сторонний драйвер JDBC).
+4. Поле "Driver class name for a JDBC Ranger database" -- имя класса драйвера для базы данных JDBC Ranger -- создается автоматически на основе выбранного типа в поле "DB Flavor". В приведенной таблице перечислены настройки класса драйвера по умолчанию (в настоящее время Ranger не поддерживает сторонний драйвер JDBC).
+
+.. csv-table:: Driver Class Name
+   :header: "DB Flavor", "Driver class name для JDBC Ranger"
+   :widths: 50, 50
+
+   "MySQL", "com.mysql.jdbc.Driver"
+   "Oracle", "oracle.jdbc.driver.OracleDriver"
+   "PostgreSQL", "org.postgresql.Driver"
+   "MS SQL", "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+   "SQLA", "sap.jdbc4.sqlanywhere.IDriver"
+   
+5. В поля "Ranger DB username" и "Ranger DB Password" необходимо ввести имя пользователя и пароль для сервера базы данных Ranger. В таблице описаны более детальные настройки. Можно использовать базу данных MySQL, установленную с Ambari, или внешнюю БД: MySQL, Oracle, PostgreSQL, MS SQL или SQL Anywhere.
+
+.. csv-table:: Пользователь и пароль Ranger DB
+   :header: "Поле", "Описание", "Значение по умолчанию", "Пример значения", "Обязательность заполнения"
+   :widths: 20, 20, 20, 20, 20
+
+   "Ranger DB username", "Имя пользователя для базы данных Policy", "rangeradmin", "rangeradmin", "Да"
+   "Ranger DB password", "Пароль для пользователя базы данных Ranger Policy", "", "PassWORd", "Да"
+
+6. Строка подключения JDBC
 
 
+Ranger Audit
+`````````````
 
 
+Ranger User Sync
+`````````````````
 
-Настройка Ranger Audit
+
+Ranger Authentication
 ``````````````````````
-
-
-Настройка Ranger User Sync
-```````````````````````````
-
-
-Настройка Ranger Authentication
-````````````````````````````````
 
 
 
