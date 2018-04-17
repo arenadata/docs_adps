@@ -828,6 +828,23 @@ Ranger User Sync
 Автоматическое назначение роли ADMIN/KEYADMIN для внешних пользователей
 ************************************************************************
 
+Можно использовать **usersync** для пометки определенных внешних пользователей или пользователей в определенной внешней группе с ролью *ADMIN* или *KEYADMIN* в **Ranger**. Это полезно в тех случаях, когда внутренние пользователи не могут войти в **Ranger**.
+
+1. В *Ambari>Ranger>Configs>Advanced>Custom ranger-ugsync-site* выбрать "Add Property";
+2. Добавить следующие свойства:
+
+  + *ranger.usersync.role.assignment.list.delimiter =* **&**
+  Значение по умолчанию *&*
+
+  + *ranger.usersync.users.groups.assignment.list.delimiter =* **:**
+  Значение по умолчанию *:*
+
+  + *ranger.usersync.username.groupname.assignment.list.delimiter =* **,**
+  Значение по умолчанию *,*
+
+  + *ranger.usersync.group.based.role.assignment.rules =* 
+  ROLE_SYS_ADMIN:u:**userName1**,**userName2**&ROLE_SYS_ADMIN:g:**groupName1**,**groupName2**&ROLE_KEY_ADMIN:u:**userName**&ROLE_KEY_ADMIN:g:**groupName**&ROLE_USER:u:**userName3**,**userName4**&ROLE_USER:g:**groupName**
+
 
 
 
