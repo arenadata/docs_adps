@@ -691,6 +691,61 @@ Ranger Audit
 
 Ranger User Sync
 `````````````````
+В разделе описывается настройка **Ranger User Sync** для **UNIX** и **LDAP/AD**.
+
++ Тест-драйв Ranger Usersync;
++ Настройка синхронизации пользователей Ranger для UNIX;
++ Настройка синхронизации пользователя Ranger для LDAP/AD;
++ Автоматическое назначение роли ADMIN/KEYADMIN для внешних пользователей.
+
++ **Тест-драйв Ranger Usersync**
+
+Перед применением изменений в **usersync** рекомендуется выполнить тестовый запуск, чтобы пользователи и группы извлекались должным образом. Для тестового запуска загрузки данных User и Group в **Ranger** перед фиксацией изменений необходимо:
+
+1. Установить параметр в значение *ranger.usersync.policymanager.mockrun=true*. Он находится в *Ambari> Ranger> Configs> Advanced> Advanced ranger-ugsync-site*
+
+2. Проверить пользователей и группы для загрузки в Ranger: *tail -f /var/log/ranger/usersync/usersync.log*
+
+3. После подтверждения того, что пользователи и группы будут извлечены по назначению, установить *ranger.usersync.policymanager.mockrun=false* и перезапустить Ranger Usersync.
+
+Эти действия приводят к синхронизации пользователей, отображаемых в журнале **usersync**, с базой данных **Ranger**.
+
+
++ **Настройка синхронизации пользователей Ranger для UNIX**
+
+Для настройки **Ranger User Sync** для **UNIX** необходимо выполнить следующий порядок действий:
+
+1. На странице "Customize Services" выбрать вкладку "Ranger User Info" (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Ranger-User-Info>`);
+
+2. В разделе "Enable User Sync" установить значение *Yes*;
+
+3. В раскрывающемся списке "Sync Source" выбрать *UNIX*, а затем установить свойства, указанные в таблице.
+
+.. csv-table:: Свойства UNIX User Sync
+   :header: "Свойство", "Описание", "Значение по умолчанию"
+   :widths: 30, 35, 35
+
+   "Sync Source", "Синхронизировать пользователей только выше указанно ID", "500"
+   "Password File", "Расположение файла паролей на сервере Linux", "/etc/passwd"
+   "Group File", "Расположение файла групп на сервере Linux", "/etc/group"
+
+
+.. _security_authorizationHadoop_InstallingRanger_Ranger-User-Info:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Ranger-User-Info.*
+   :align: center
+
+   Настройка Ranger User Info для UNIX
+
+
++ **Настройка синхронизации пользователя Ranger для LDAP/AD**
+
+
++ **Автоматическое назначение роли ADMIN/KEYADMIN для внешних пользователей**
+
+
+
+
 
 
 Ranger Authentication
