@@ -784,7 +784,7 @@ Ranger User Sync
    "Username Attribute", "Атрибут имени пользователя LDAP", "", "sAMAccountName для AD, uid или cn для OpenLDAP"
    "User Object Class", "Класс объекта для идентификации записей пользователя", "person", "top, person, organizationalPerson, user или posixAccount"
    "User Search Base", "Поиск базы для пользователей. Ranger может искать несколько подразделений в AD. Модуль Ranger UserSync выполняет поиск пользователей по каждому настроенному подразделению и добавляет всех пользователей в один список. После того как все подразделения будут обработаны, членство в группе пользователя вычисляется на основе поиска группы", "", "cn=users,dc=example,dc=com; ou=example1,ou=example2"
-   "User Search Filter", "Дополнительный фильтр, ограничивающий пользователей, выбранных для синхронизации", "", "Для извлечения всех пользователей: cn=*. Для извлечения всех пользователей, которые являются членами groupA или groupB: (|(memberof=CN=GroupA, OU=groups,DC=example,DC=com) (memberof=CN=GroupB,OU=groups, DC=example,DC=com))"
+   "User Search Filter", "Дополнительный фильтр, ограничивающий пользователей, выбранных для синхронизации", "", "Для извлечения всех пользователей: cn=*. Для извлечения всех пользователей, которые являются членами groupA или groupB: (|(memberof=CN=GroupA, OU=groups,DC=example, DC=com) (memberof=CN=GroupB, OU=groups,DC=example, DC=com))"
    "User Search Scope", "Ограничение поиска по глубине поиска базы", "sub", "base, one или sub"
    "User Group Name Attribute", "Атрибут из записи пользователя, значения которого рассматриваются как значения группы для отправки в базу данных Access Manager. Можно указать несколько имен атрибутов, разделенных запятыми", "memberof,ismemberof", "memberof, ismemberof или gidNumber"
    "Enable User Search", "Параметр доступен, если выбрана опция *Enable Group Search First*", "No", "Yes"
@@ -798,22 +798,30 @@ Ranger User Sync
    Настройка User Configs для LDAP/AD
 
 
-5. На вкладке "Group Configs" установить свойства (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_User-Configs-LDAP>`), описание которых приведено таблице.
+5. На вкладке "Group Configs" установить свойства (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Group-Configs-LDAP>`), описание которых приведено таблице.
 
 
 .. csv-table:: LDAP/AD Group Configs
    :header: "Свойство", "Описание", "Значение по умолчанию", "Пример значения"
    :widths: 25, 25, 25, 25
 
-   "Enable Group Sync", "", "", ""
-   "Group Member Attribute", "", "", ""
-   "Group Name Attribute", "", "", ""
-   "Group Object Class", "", "", ""
-   "Group Search Base", "", "", ""
-   "Group Search Filter", "", "", ""
-   "Enable Group Search First", "", "", ""
-   "Sync Nested Groups", "", "", ""
-   "Group Hierarchy Levels", "", "", ""
+   "Enable Group Sync", "Если для параметра *Enable Group Sync* установлено *No*, имена групп, к которым принадлежат пользователи, получены из *User Group Name Attribute*. В этом случае не применяются дополнительные групповые фильтры. Если для параметра *Enable Group Sync* установлено *Yes*, группы, к которым принадлежат пользователи, извлекаются из LDAP/AD с помощью атрибутов, связанных с группой. Включено по умолчанию, если включена функция *Incremental Sync* на вкладке *Common Configs*", "No", "Yes"
+   "Group Member Attribute", "Имя атрибута члена группы LDAP", "", "member"
+   "Group Name Attribute", "Атрибут имени группы LDAP", "", "distinguishedName для AD, cn для OpenLdap"
+   "Group Object Class", "Класс объекта LDAP Group", "", "group, groupofnames или posixGroup"
+   "Group Search Base", "База поиска для групп. Ranger может искать несколько подразделений в AD. Модуль Ranger UserSync выполняет поиск пользователей по каждому настроенному подразделению и добавляет всех пользователей в один список. После того как все подразделения будут обработаны, членство в группе пользователей вычисляется на основе конфигурации поиска группы. Каждый сегмент подразделения должен быть разделен знаком *;* (точка с запятой)", "", "ou=groups,DC=example, DC=com;ou=group1; ou=group2"
+   "Group Search Filter", "Дополнительный фильтр, ограничивающий группы, выбранные для синхронизации", "", "Для извлечения всех групп: cn=*. Для извлечения только групп, cn которых является *Engineering* или *Sales*: (|(cn=Engineering) (cn=Sales))"
+   "Enable Group Search First", "Если параметр *Enable Group Search First* не выбран: пользователи извлекаются из атрибута группы *member*. Если параметр *Enable Group Search First* выбран: членство пользователя вычисляется путем выполнения поиска LDAP на основе пользовательской конфигурации", "No", "Yes"
+   "Sync Nested Groups", "Включает членство во вложенных группах в Ranger, чтобы права, настроенные для родительских групп, применялись ко всем членам в подгруппах. Если сама группа является членом другой группы, пользователи, принадлежащие к этой группе, также являются частью родительской группы. Уровни иерархии групп определяют глубину вложенной группы. Если свойство *Sync Nested Groups* не отображается, следует обновить Ambari 2.6.0+", "No", "Yes, No"
+   "Group Hierarchy Levels", "Количество вложенных групп для оценки в поддержку Sync Nested Groups. Задать любое целое число >0", "0", "2"
+
+
+.. _security_authorizationHadoop_InstallingRanger_Group-Configs-LDAP:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Group-Configs-LDAP.*
+   :align: center
+
+   Настройка Group Configs для LDAP/AD
 
 
 
