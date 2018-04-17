@@ -773,21 +773,47 @@ Ranger User Sync
    Настройка Ranger User Info для LDAP/AD
 
 
-4. На вкладке "User Configs" установить свойства, описание которых приведено таблице.
+4. На вкладке "User Configs" установить свойства (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_User-Configs-LDAP>`), описание которых приведено таблице.
 
 
-.. csv-table:: Свойства UNIX User Sync
+.. csv-table:: LDAP/AD User Configs
    :header: "Свойство", "Описание", "Значение по умолчанию", "Пример значения"
    :widths: 25, 25, 25, 25
 
    "Group User Map Sync", "Синхронизация определенных групп для пользователей", "Yes", "Yes"
-   "Username Attribute", "", "", ""
-   "User Object Class", "", "", ""
-   "User Search Base", "", "", ""
-   "User Search Filter", "", "", ""
-   "User Search Scope", "", "", ""
-   "User Group Name Attribute", "", "", ""
-   "Enable User Search", "", "", ""
+   "Username Attribute", "Атрибут имени пользователя LDAP", "", "sAMAccountName для AD, uid или cn для OpenLDAP"
+   "User Object Class", "Класс объекта для идентификации записей пользователя", "person", "top, person, organizationalPerson, user или posixAccount"
+   "User Search Base", "Поиск базы для пользователей. Ranger может искать несколько подразделений в AD. Модуль Ranger UserSync выполняет поиск пользователей по каждому настроенному подразделению и добавляет всех пользователей в один список. После того как все подразделения будут обработаны, членство в группе пользователя вычисляется на основе поиска группы", "", "cn=users,dc=example,dc=com; ou=example1,ou=example2"
+   "User Search Filter", "Дополнительный фильтр, ограничивающий пользователей, выбранных для синхронизации", "", "Для извлечения всех пользователей: cn=*. Для извлечения всех пользователей, которые являются членами groupA или groupB: (|(memberof=CN=GroupA, OU=groups,DC=example,DC=com) (memberof=CN=GroupB,OU=groups, DC=example,DC=com))"
+   "User Search Scope", "Ограничение поиска по глубине поиска базы", "sub", "base, one или sub"
+   "User Group Name Attribute", "Атрибут из записи пользователя, значения которого рассматриваются как значения группы для отправки в базу данных Access Manager. Можно указать несколько имен атрибутов, разделенных запятыми", "memberof,ismemberof", "memberof, ismemberof или gidNumber"
+   "Enable User Search", "Параметр доступен, если выбрана опция *Enable Group Search First*", "No", "Yes"
+
+
+.. _security_authorizationHadoop_InstallingRanger_User-Configs-LDAP:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_User-Configs-LDAP.*
+   :align: center
+
+   Настройка User Configs для LDAP/AD
+
+
+5. На вкладке "Group Configs" установить свойства (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_User-Configs-LDAP>`), описание которых приведено таблице.
+
+
+.. csv-table:: LDAP/AD Group Configs
+   :header: "Свойство", "Описание", "Значение по умолчанию", "Пример значения"
+   :widths: 25, 25, 25, 25
+
+   "Enable Group Sync", "", "", ""
+   "Group Member Attribute", "", "", ""
+   "Group Name Attribute", "", "", ""
+   "Group Object Class", "", "", ""
+   "Group Search Base", "", "", ""
+   "Group Search Filter", "", "", ""
+   "Enable Group Search First", "", "", ""
+   "Sync Nested Groups", "", "", ""
+   "Group Hierarchy Levels", "", "", ""
 
 
 
