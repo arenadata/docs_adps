@@ -693,10 +693,10 @@ Ranger User Sync
 `````````````````
 В разделе описывается настройка **Ranger User Sync** для **UNIX** и **LDAP/AD**.
 
-`Тест-драйв Ranger Usersync`_
-`Настройка синхронизации пользователей Ranger для UNIX`_
-`Настройка синхронизации пользователя Ranger для LDAP/AD`_
-`Автоматическое назначение роли ADMIN/KEYADMIN для внешних пользователей`_
++ `Тест-драйв Ranger Usersync`_
++ `Настройка синхронизации пользователей Ranger для UNIX`_
++ `Настройка синхронизации пользователя Ranger для LDAP/AD`_
++ `Автоматическое назначение роли ADMIN/KEYADMIN для внешних пользователей`_
 
   
 Тест-драйв Ranger Usersync
@@ -722,7 +722,7 @@ Ranger User Sync
 
 2. В разделе "Enable User Sync" установить значение *Yes*;
 
-3. В раскрывающемся списке "Sync Source" выбрать *UNIX*, а затем установить свойства, описание которых приведено таблице.
+3. В раскрывающемся списке "Sync Source" выбрать *UNIX*, а затем установить свойства, описание которых приведено в таблице.
 
 .. csv-table:: Свойства UNIX User Sync
    :header: "Свойство", "Описание", "Значение по умолчанию"
@@ -752,7 +752,7 @@ Ranger User Sync
 
 2. В разделе "Enable User Sync" установить значение *Yes*;
 
-3. В раскрывающемся списке "Sync Source" выбрать *LDAP/AD*, а затем установить свойства, описание которых приведено таблице.
+3. В раскрывающемся списке "Sync Source" выбрать *LDAP/AD*, а затем установить свойства, описание которых приведено в таблице.
 
 .. csv-table:: Свойства UNIX User Sync
    :header: "Свойство", "Описание", "Значение по умолчанию", "Пример значения"
@@ -773,7 +773,7 @@ Ranger User Sync
    Настройка Ranger User Info для LDAP/AD
 
 
-4. На вкладке "User Configs" установить свойства (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_User-Configs-LDAP>`), описание которых приведено таблице.
+4. На вкладке "User Configs" установить свойства (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_User-Configs-LDAP>`), описание которых приведено в таблице.
 
 
 .. csv-table:: LDAP/AD User Configs
@@ -798,7 +798,7 @@ Ranger User Sync
    Настройка User Configs для LDAP/AD
 
 
-5. На вкладке "Group Configs" установить свойства (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Group-Configs-LDAP>`), описание которых приведено таблице.
+5. На вкладке "Group Configs" установить свойства (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Group-Configs-LDAP>`), описание которых приведено в таблице.
 
 
 .. csv-table:: LDAP/AD Group Configs
