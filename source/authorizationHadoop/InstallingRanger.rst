@@ -834,19 +834,32 @@ Ranger User Sync
 2. Добавить следующие свойства:
 
   + *ranger.usersync.role.assignment.list.delimiter =* **&**
-  Значение по умолчанию **&**
+  Значение по умолчанию -- "&"
 
   + *ranger.usersync.users.groups.assignment.list.delimiter =* **:**
-  Значение по умолчанию **:**
+  Значение по умолчанию -- ":"
 
   + *ranger.usersync.username.groupname.assignment.list.delimiter =* **,**
-  Значение по умолчанию **,**
+  Значение по умолчанию -- ","
 
   + *ranger.usersync.group.based.role.assignment.rules =* 
-  ROLE_SYS_ADMIN:u:**userName1**,**userName2**&ROLE_SYS_ADMIN:g:**groupName1**,**groupName2**&ROLE_KEY_ADMIN:u:**userName**&ROLE_KEY_ADMIN:g:**groupName**&ROLE_USER:u:**userName3**,**userName4**&ROLE_USER:g:**groupName**
+
+  ::
+
+   ROLE_SYS_ADMIN:u:**userName1**,**userName2**&ROLE_SYS_ADMIN:g:**groupName1**,**groupName2**&ROLE_KEY_ADMIN:u:**userName**&ROLE_KEY_ADMIN:g:**groupName**&ROLE_USER:u:**userName3**,**userName4**&ROLE_USER:g:**groupName**
 
 
+3. Нажать "Add";
+4. Перезапустить Ranger.
 
+Пример:
+
+  ::
+  
+   ranger.usersync.role.assignment.list.delimiter = &
+   ranger.usersync.users.groups.assignment.list.delimiter = :
+   ranger.usersync.username.groupname.assignment.list.delimiter = ,
+   ranger.usersync.group.based.role.assignment.rules : &ROLE_SYS_ADMIN:u:ldapuser_12,ldapuser2
 
 
 
