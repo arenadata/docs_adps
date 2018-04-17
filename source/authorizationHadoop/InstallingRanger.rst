@@ -745,7 +745,7 @@ Ranger User Sync
 
 Для настройки **Ranger User Sync** для **LDAP/AD** необходимо выполнить следующий порядок действий:
 
-1. На странице "Customize Services" выбрать вкладку "Ranger User Info" (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Ranger-User-Info>`);
+1. На странице "Customize Services" выбрать вкладку "Ranger User Info" (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_User-Info-LDAP>`);
 
 2. В разделе "Enable User Sync" установить значение *Yes*;
 
@@ -762,8 +762,29 @@ Ranger User Sync
    "Incremental Sync", "Если выбрано *Yes*, Ranger Usersync сохраняет последнюю временную метку всех объектов, которые были синхронизированы ранее, и использует эту метку времени для выполнения следующей синхронизации. Затем Usersync использует механизм опроса для выполнения инкрементной синхронизации с помощью атрибутов LDAP uSNChanged (для AD) или modifytimestamp (для LDAP). Включение инкрементной синхронизации в первый раз приводит к полной синхронизации; последующие операции синхронизации будут инкрементальными. Когда включена инкрементная синхронизация, групповая синхронизация (на вкладке Group Configs) является обязательной. Рекомендуется для крупных развертываний", "Для обновления: No. Для инсталляции: Yes", "Yes"
 
 
+.. _security_authorizationHadoop_InstallingRanger_User-Info-LDAP:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_User-Info-LDAP.*
+   :align: center
+
+   Настройка Ranger User Info для LDAP/AD
 
 
+4. На вкладке "User Configs" установить свойства, описание которых приведено таблице.
+
+
+.. csv-table:: Свойства UNIX User Sync
+   :header: "Свойство", "Описание", "Значение по умолчанию", "Пример значения"
+   :widths: 25, 25, 25, 25
+
+   "Group User Map Sync", "Синхронизация определенных групп для пользователей", "Yes", "Yes"
+   "Username Attribute", "", "", ""
+   "User Object Class", "", "", ""
+   "User Search Base", "", "", ""
+   "User Search Filter", "", "", ""
+   "User Search Scope", "", "", ""
+   "User Group Name Attribute", "", "", ""
+   "Enable User Search", "", "", ""
 
 
 
