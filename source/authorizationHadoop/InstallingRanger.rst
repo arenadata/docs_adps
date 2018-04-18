@@ -757,31 +757,6 @@ Ranger User Sync
 
 + **LDAP/AD URL** -- Добавление URL в зависимости от источника синхронизации LDAP/AD.
 
-Значение по умолчанию -- *ldap://{host}:{port}*
-  
-Пример значения -- *ldap://ldap.example.com:389* или *ldaps://ldap.example.com:636*
-
-+ **Bind Anonymous** -- Если выбрано значение *Yes*, Bind User и Bind User Password не требуются.
-
-Значение по умолчанию -- *NO*
-  
-+ **Bind User** -- Расположение файла групп на сервере Linux.
-
-Значение по умолчанию -- Полное distinguished name (DN), включая common name (CN), учетной записи пользователя LDAP/AD с правами поиска пользователей. Используется для запроса пользователей и групп.
-  
-Пример значения -- *cn=admin,dc=example,dc=com* или *admin@example.com*
-
-+ **Bind User Password** -- Пароль Bind User.
-
-+ **Incremental Sync** -- Если выбрано *Yes*, Ranger Usersync сохраняет последнюю временную метку всех объектов, которые были синхронизированы ранее, и использует эту метку времени для выполнения следующей синхронизации. Затем Usersync использует механизм опроса для выполнения инкрементной синхронизации с помощью атрибутов LDAP uSNChanged (для AD) или modifytimestamp (для LDAP). Включение инкрементной синхронизации в первый раз приводит к полной синхронизации; последующие операции синхронизации будут инкрементальными. Когда включена инкрементная синхронизация, групповая синхронизация (на вкладке Group Configs) является обязательной. Рекомендуется для крупных развертываний.
-
-Значение по умолчанию -- Для обновления: *No*, для инсталляции: *Yes*.
-  
-Пример значения -- *Yes*
-
-
-+ **LDAP/AD URL** -- Добавление URL в зависимости от источника синхронизации LDAP/AD.
-
   + Значение по умолчанию -- *ldap://{host}:{port}*
   + Пример значения -- *ldap://ldap.example.com:389* или *ldaps://ldap.example.com:636*
 
@@ -800,40 +775,6 @@ Ranger User Sync
 
   + Значение по умолчанию -- Для обновления: *No*, для инсталляции: *Yes*.
   + Пример значения -- *Yes*
-
-
-**LDAP/AD URL** -- Добавление URL в зависимости от источника синхронизации LDAP/AD.
-
-  + Значение по умолчанию -- *ldap://{host}:{port}*
-  + Пример значения -- *ldap://ldap.example.com:389* или *ldaps://ldap.example.com:636*
-
-**Bind Anonymous** -- Если выбрано значение *Yes*, Bind User и Bind User Password не требуются.
-
-  + Значение по умолчанию -- *NO*
-  
-**Bind User** -- Расположение файла групп на сервере Linux.
-
-  + Значение по умолчанию -- Полное distinguished name (DN), включая common name (CN), учетной записи пользователя LDAP/AD с правами поиска пользователей. Используется для запроса пользователей и групп.
-  + Пример значения -- *cn=admin,dc=example,dc=com* или *admin@example.com*
-
-**Bind User Password** -- Пароль Bind User.
-
-**Incremental Sync** -- Если выбрано *Yes*, Ranger Usersync сохраняет последнюю временную метку всех объектов, которые были синхронизированы ранее, и использует эту метку времени для выполнения следующей синхронизации. Затем Usersync использует механизм опроса для выполнения инкрементной синхронизации с помощью атрибутов LDAP uSNChanged (для AD) или modifytimestamp (для LDAP). Включение инкрементной синхронизации в первый раз приводит к полной синхронизации; последующие операции синхронизации будут инкрементальными. Когда включена инкрементная синхронизация, групповая синхронизация (на вкладке Group Configs) является обязательной. Рекомендуется для крупных развертываний.
-
-  + Значение по умолчанию -- Для обновления: *No*, для инсталляции: *Yes*.
-  + Пример значения -- *Yes*
-
-
-
-.. csv-table:: Свойства UNIX User Sync
-   :header: "Свойство", "Описание", "Значение по умолчанию", "Пример значения"
-   :widths: 25, 25, 25, 25
-
-   "LDAP/AD URL", "Добавление URL в зависимости от источника синхронизации LDAP/AD", "ldap://{host}:{port}", "ldap://ldap.example.com:389 или ldaps://ldap.example.com:636"
-   "Bind Anonymous", "Если выбрано значение *Yes*, Bind User и Bind User Password не требуются", "NO", ""
-   "Bind User", "Расположение файла групп на сервере Linux", "Полное distinguished name (DN), включая common name (CN), учетной записи пользователя LDAP/AD с правами поиска пользователей. Используется для запроса пользователей и групп", "cn=admin,dc=example, dc=com или admin@example.com"
-   "Bind User Password", "Пароль Bind User", "", ""
-   "Incremental Sync", "Если выбрано *Yes*, Ranger Usersync сохраняет последнюю временную метку всех объектов, которые были синхронизированы ранее, и использует эту метку времени для выполнения следующей синхронизации. Затем Usersync использует механизм опроса для выполнения инкрементной синхронизации с помощью атрибутов LDAP uSNChanged (для AD) или modifytimestamp (для LDAP). Включение инкрементной синхронизации в первый раз приводит к полной синхронизации; последующие операции синхронизации будут инкрементальными. Когда включена инкрементная синхронизация, групповая синхронизация (на вкладке Group Configs) является обязательной. Рекомендуется для крупных развертываний", "Для обновления: No. Для инсталляции: Yes", "Yes"
 
 
 .. _security_authorizationHadoop_InstallingRanger_User-Info-LDAP:
@@ -844,21 +785,44 @@ Ranger User Sync
    Настройка Ranger User Info для LDAP/AD
 
 
-4. На вкладке "User Configs" установить свойства (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_User-Configs-LDAP>`), описание которых приведено в таблице.
+4. На вкладке "User Configs" установить свойства (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_User-Configs-LDAP>`):
 
++ **Group User Map Sync** -- Синхронизация определенных групп для пользователей.
 
-.. csv-table:: LDAP/AD User Configs
-   :header: "Свойство", "Описание", "Значение по умолчанию", "Пример значения"
-   :widths: 25, 25, 25, 25
+  + Значение по умолчанию -- *Yes*
+  + Пример значения -- *Yes*
 
-   "Group User Map Sync", "Синхронизация определенных групп для пользователей", "Yes", "Yes"
-   "Username Attribute", "Атрибут имени пользователя LDAP", "", "sAMAccountName для AD, uid или cn для OpenLDAP"
-   "User Object Class", "Класс объекта для идентификации записей пользователя", "person", "top, person, organizationalPerson, user или posixAccount"
-   "User Search Base", "Поиск базы для пользователей. Ranger может искать несколько подразделений в AD. Модуль Ranger UserSync выполняет поиск пользователей по каждому настроенному подразделению и добавляет всех пользователей в один список. После того как все подразделения будут обработаны, членство в группе пользователя вычисляется на основе поиска группы", "", "cn=users,dc=example,dc=com; ou=example1,ou=example2"
-   "User Search Filter", "Дополнительный фильтр, ограничивающий пользователей, выбранных для синхронизации", "", "Для извлечения всех пользователей: cn=*. Для извлечения всех пользователей, которые являются членами groupA или groupB: (|(memberof=CN=GroupA, OU=groups,DC=example, DC=com) (memberof=CN=GroupB, OU=groups,DC=example, DC=com))"
-   "User Search Scope", "Ограничение поиска по глубине поиска базы", "sub", "base, one или sub"
-   "User Group Name Attribute", "Атрибут из записи пользователя, значения которого рассматриваются как значения группы для отправки в базу данных Access Manager. Можно указать несколько имен атрибутов, разделенных запятыми", "memberof,ismemberof", "memberof, ismemberof или gidNumber"
-   "Enable User Search", "Параметр доступен, если выбрана опция *Enable Group Search First*", "No", "Yes"
++ **Username Attribute** -- Атрибут имени пользователя LDAP.
+
+  + Пример значения -- *sAMAccountName* для AD, *uid* или *cn* для OpenLDAP
+
++ **User Object Class** -- Класс объекта для идентификации записей пользователя.
+
+  + Значение по умолчанию -- *person*
+  + Пример значения -- *top*, *person*, *organizationalPerson*, *user* или *posixAccount*
+
++ **User Search Base** -- Поиск базы для пользователей. Ranger может искать несколько подразделений в AD. Модуль Ranger UserSync выполняет поиск пользователей по каждому настроенному подразделению и добавляет всех пользователей в один список. После того как все подразделения будут обработаны, членство в группе пользователя вычисляется на основе поиска группы.
+
+  + Пример значения -- *cn=users,dc=example,dc=com;ou=example1,ou=example2*
+
++ **User Search Filter** -- Дополнительный фильтр, ограничивающий пользователей, выбранных для синхронизации.
+
+  + Пример значения -- Для извлечения всех пользователей: cn=*. Для извлечения всех пользователей, которые являются членами groupA или groupB: *(|(memberof=CN=GroupA,OU=groups,DC=example, DC=com)(memberof=CN=GroupB,OU=groups,DC=example,DC=com))*
+
++ **User Search Scope** -- Ограничение поиска по глубине поиска базы.
+
+  + Значение по умолчанию -- *sub*
+  + Пример значения -- *base*, *one* или *sub*
+
++ **User Group Name Attribute** -- Атрибут из записи пользователя, значения которого рассматриваются как значения группы для отправки в базу данных Access Manager. Можно указать несколько имен атрибутов, разделенных запятыми.
+
+  + Значение по умолчанию -- *memberof,ismemberof*
+  + Пример значения -- *memberof*, *ismemberof* или *gidNumber*
+
++ **Enable User Search** -- Параметр доступен, если выбрана опция *Enable Group Search First*.
+
+  + Значение по умолчанию -- *No*
+  + Пример значения -- *Yes*
 
 
 .. _security_authorizationHadoop_InstallingRanger_User-Configs-LDAP:
@@ -869,24 +833,49 @@ Ranger User Sync
    Настройка User Configs для LDAP/AD
 
 
-5. На вкладке "Group Configs" установить свойства (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Group-Configs-LDAP>`), описание которых приведено в таблице.
+5. На вкладке "Group Configs" установить свойства (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Group-Configs-LDAP>`):
 
++ **Enable Group Sync** -- Если для параметра "Enable Group Sync" установлено *No*, имена групп, к которым принадлежат пользователи, получены из "User Group Name Attribute". В этом случае не применяются дополнительные групповые фильтры. Если для параметра "Enable Group Sync" установлено *Yes*, группы, к которым принадлежат пользователи, извлекаются из LDAP/AD с помощью атрибутов, связанных с группой. Включено по умолчанию, если включена функция "Incremental Sync" на вкладке "Common Configs".
 
-.. csv-table:: LDAP/AD Group Configs
-   :header: "Свойство", "Описание", "Значение по умолчанию", "Пример значения"
-   :widths: 25, 25, 25, 25
+  + Значение по умолчанию -- *No*
+  + Пример значения -- *Yes*
 
-   "Enable Group Sync", "Если для параметра *Enable Group Sync* установлено *No*, имена групп, к которым принадлежат пользователи, получены из *User Group Name Attribute*. В этом случае не применяются дополнительные групповые фильтры. Если для параметра *Enable Group Sync* установлено *Yes*, группы, к которым принадлежат пользователи, извлекаются из LDAP/AD с помощью атрибутов, связанных с группой. Включено по умолчанию, если включена функция *Incremental Sync* на вкладке *Common Configs*", "No", "Yes"
-   "Group Member Attribute", "Имя атрибута члена группы LDAP", "", "member"
-   "Group Name Attribute", "Атрибут имени группы LDAP", "", "distinguishedName для AD, cn для OpenLdap"
-   "Group Object Class", "Класс объекта LDAP Group", "", "group, groupofnames или posixGroup"
-   "Group Search Base", "База поиска для групп. Ranger может искать несколько подразделений в AD. Модуль Ranger UserSync выполняет поиск пользователей по каждому настроенному подразделению и добавляет всех пользователей в один список. После того как все подразделения будут обработаны, членство в группе пользователей вычисляется на основе конфигурации поиска группы. Каждый сегмент подразделения должен быть разделен знаком *;* (точка с запятой)", "", "ou=groups,DC=example, DC=com;ou=group1; ou=group2"
-   "Group Search Filter", "Дополнительный фильтр, ограничивающий группы, выбранные для синхронизации", "", "Для извлечения всех групп: cn=*. Для извлечения только групп, cn которых является *Engineering* или *Sales*: (|(cn=Engineering) (cn=Sales))"
-   "Enable Group Search First", "Если параметр *Enable Group Search First* не выбран: пользователи извлекаются из атрибута группы *member*. Если параметр *Enable Group Search First* выбран: членство пользователя вычисляется путем выполнения поиска LDAP на основе пользовательской конфигурации", "No", "Yes"
-   "Sync Nested Groups", "Включает членство во вложенных группах в Ranger, чтобы права, настроенные для родительских групп, применялись ко всем членам в подгруппах. Если сама группа является членом другой группы, пользователи, принадлежащие к этой группе, также являются частью родительской группы. Уровни иерархии групп определяют глубину вложенной группы. Если свойство *Sync Nested Groups* не отображается, следует обновить Ambari 2.6.0+", "No", "Yes, No"
-   "Group Hierarchy Levels", "Количество вложенных групп для оценки в поддержку Sync Nested Groups. Задать целое число >0", "0", "2"
++ **Group Member Attribute** -- Имя атрибута члена группы LDAP.
 
+  + Пример значения -- *member*
 
++ **Group Name Attribute** -- Атрибут имени группы LDAP.
+
+  + Пример значения -- *distinguishedName* для AD, *cn* для OpenLdap
+
++ **Group Object Class** -- Класс объекта LDAP Group.
+
+  + Пример значения -- *group*, *groupofnames* или *posixGroup*
+  
++ **"Group Search Base** -- База поиска для групп. Ranger может искать несколько подразделений в AD. Модуль Ranger UserSync выполняет поиск пользователей по каждому настроенному подразделению и добавляет всех пользователей в один список. После того как все подразделения будут обработаны, членство в группе пользователей вычисляется на основе конфигурации поиска группы. Каждый сегмент подразделения должен быть разделен знаком ";" (точка с запятой).
+
+  + Пример значения -- *ou=groups,DC=example,DC=com;ou=group1;ou=group2*
+
++ **Group Search Filter** -- Дополнительный фильтр, ограничивающий группы, выбранные для синхронизации.
+
+  + Пример значения -- Для извлечения всех групп: cn=*. Для извлечения только групп, cn которых является *Engineering* или *Sales*: *(|(cn=Engineering)(cn=Sales))*
+
++ **Enable Group Search First** -- Если параметр "Enable Group Search First" не выбран: пользователи извлекаются из атрибута группы *member*. Если параметр "Enable Group Search First" выбран: членство пользователя вычисляется путем выполнения поиска LDAP на основе пользовательской конфигурации.
+
+  + Значение по умолчанию -- *No*
+  + Пример значения -- *Yes*
+  
++ **Sync Nested Groups** -- Включает членство во вложенных группах в Ranger, чтобы права, настроенные для родительских групп, применялись ко всем членам в подгруппах. Если сама группа является членом другой группы, пользователи, принадлежащие к этой группе, также являются частью родительской группы. Уровни иерархии групп определяют глубину вложенной группы. Если свойство "Sync Nested Groups" не отображается, следует обновить Ambari 2.6.0+.
+
+  + Значение по умолчанию -- *No*
+  + Пример значения -- *Yes*, *No*  
+  
++ **Group Hierarchy Levels** -- Количество вложенных групп для оценки в поддержку "Sync Nested Groups". Задать целое число *>0*.
+
+  + Значение по умолчанию -- *0*
+  + Пример значения -- *2*
+  
+    
 .. _security_authorizationHadoop_InstallingRanger_Group-Configs-LDAP:
 
 .. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Group-Configs-LDAP.*
@@ -1001,6 +990,12 @@ Ranger UNIX Authentication
 
 4. В блоке "UNIX Authentication Settings" указать свойства, описание которых приведено в таблице. 
 
++ **** -- .
+
+  + Значение по умолчанию -- **
+  + Пример значения -- **  
+  
+
 .. csv-table:: Настройки UNIX Authentication
    :header: "Свойство", "Описание", "Значение по умолчанию", "Примемр значения"
    :widths: 25, 25, 25, 25
@@ -1083,13 +1078,13 @@ Ranger Active Directory Authentication
    :header: "Свойство", "Описание", "Значение по умолчанию", "Примемр значения"
    :widths: 25, 25, 25, 25
 
-   "ranger.ldap.ad.base.dn", "", "", ""
-   "ranger.ldap.ad.bind.dn", "", "", ""
-   "ranger.ldap.ad.bind.password", "", "", ""
-   "Domain Name (Only for AD)", "", "", ""
-   "ranger.ldap.ad.referral", "", "", ""
-   "ranger.ldap.ad.url", "", "", ""
-   "ranger.ldap.ad.user.searchfilter", "", "", ""
+   "ranger.ldap.ad.base.dn", "Distinguished Name (DN) начальной точки для поиска на сервере каталогов", "dc=example,dc=com", "dc=example,dc=com"
+   "ranger.ldap.ad.bind.dn", "Полное Distinguished Name (DN), включая Common Name (CN) учетной записи пользователя LDAP с правами поиска пользователей. Это значение макропеременной, полученное из значения Bind User из *Ranger User Info > Common Configs*", "{{ranger_ug_ldap_bind_dn}}", "{{ranger_ug_ldap_bind_dn}}"
+   "ranger.ldap.ad.bind.password", "Пароль для bind.dn. Это значение макропеременной, полученное из значения Bind User Password из *Ranger User Info > Common Configs*", "", ""
+   "Domain Name (Only for AD)", "Доменное имя сервера аутентификации AD", "", "dc=example,dc=com"
+   "ranger.ldap.ad.referral", "Описание свойства приведено после таблицы", "ignore", "follow | ignore | throw"
+   "ranger.ldap.ad.url", "URL-адрес сервера AD. Это значение макропеременной, полученное из значения LDAP/AD URL из *Ranger User Info > Common Configs*", "{{ranger_ug_ldap_url}}", "{{ranger_ug_ldap_url}}"
+   "ranger.ldap.ad.user.searchfilter", "Фильтр поиска, используемый для Bind Authentication. Это значение макропеременной, полученное из значения User Search Filter из *Ranger User Info > Common Configs*", "{{ranger_ug_ldap_user_searchfilter}}", "{{ranger_ug_ldap_user_searchfilter}}"
 
 
 Завершение установки
