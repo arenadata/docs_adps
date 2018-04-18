@@ -482,14 +482,14 @@
 
    Выбор хоста для установки Ranger Admin
 
-6. Открывается страница "Customize Services". Настройки сервисов описаны в следующем разделе (`Настройка сервисов`_).
+6. Открывается страница "Customize Services" (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_DB-Flavor>`). Настройки сервисов описаны в следующем разделе (`Настройка сервисов`_).
 
 
 
 Настройка сервисов
 ~~~~~~~~~~~~~~~~~~~
 
-Следующим шагом в процессе установки **Ranger** является задание настроек на странице "Customize Services":
+Следующим шагом в процессе установки **Ranger** является задание настроек на странице "Customize Services" (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_DB-Flavor>`):
 
 + `Ranger Admin`_
 + `Ranger Audit`_
@@ -911,6 +911,87 @@ Ranger Tagsync
 Ranger Authentication
 ``````````````````````
 
+В разделе описывается, как настроить аутентификацию **Ranger** для **UNIX**, **LDAP** и **AD**:
+
++ `Ranger UNIX Authentication`_
++ `Ranger LDAP Authentication`_
++ `Ranger Active Directory Authentication`_
+
+
+Ranger UNIX Authentication
+***************************
+
+Для настройки аутентификации **Ranger** для **UNIX** необходимо выполнить следующий порядок действий:
+
+1. Перейти на вкладку "Advanced" на странице "Customize Services" (см. :numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_DB-Flavor>`);
+
+2. На открывшейся странице в разделе "Ranger Settings" указать адрес хоста Ranger Access Manager/Service Manager в поле "External URL" в формате *http://<your_ranger_host>:6080* (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_UNIX-Authentic>`);
+
+3. В поле "Authentication method" отметить *UNIX*. *HTTP* включен по умолчанию -- если отключить *HTTP*, то возможен только *HTTPS*.
+
+4. В блоке "UNIX Authentication Settings" указать свойства, описание которых приведено в таблице. 
+
+.. csv-table:: Настройки UNIX Authentication
+   :header: "Свойство", "Описание", "Значение по умолчанию", "Примемр значения"
+   :widths: 25, 25, 25, 25
+
+   "Allow remote Login", "Флаг для включения/отключения удаленного входа", "true", "true"
+   "ranger.unixauth.service.hostname", "Адрес хоста, на котором запущена служба проверки подлинности UNIX", "{{ugsync_host}}", "{{ugsync_host}}"
+   "ranger.unixauth.service.port", "Номер порта, на котором запущена служба проверки подлинности UNIX", "5151", "5151"
+
+Свойства со значением *{{xyz}}* -- это макропеременные, которые производятся из других заданных значений, для оптимизации процесса настройки. Переменные можно редактировать. Для восстановления исходного значения следует нажать значок "Set Recommended" справа от поля свойства.
+
+
+.. _security_authorizationHadoop_InstallingRanger_UNIX-Authentic:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_UNIX-Authentic.*
+   :align: center
+
+   Настройка Ranger UNIX Authentication
+
+
+Ranger LDAP Authentication
+**************************
+
+Для настройки аутентификации **Ranger** для **LDAP** необходимо выполнить следующий порядок действий:
+
+1. Перейти на вкладку "Advanced" на странице "Customize Services" (см. :numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_DB-Flavor>`);
+
+2. На открывшейся странице в разделе "Ranger Settings" указать адрес хоста Ranger Access Manager/Service Manager в поле "External URL" в формате *http://<your_ranger_host>:6080* (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_LDAP-Authentic>`);
+
+3. В поле "Authentication method" отметить *LDAP*;
+
+4. В блоке "LDAP Settings" указать свойства, описание которых приведено в таблице. 
+
+.. csv-table:: Настройки LDAP Authentication
+   :header: "Свойство", "Описание", "Значение по умолчанию", "Примемр значения"
+   :widths: 25, 25, 25, 25
+
+   "ranger.ldap.base.dn", "Distinguished Name (DN) начальной точки для поиска на сервере каталогов", "dc=example,dc=com", "dc=example,dc=com"
+   "Bind User", "Полное Distinguished Name (DN), включая Common Name (CN) учетной записи пользователя LDAP с правами поиска пользователей. Это значение макропеременной, полученное из значения Bind User из *Ranger User Info > Common Configs*", "{{ranger_ug_ldap_bind_dn}}", "{{ranger_ug_ldap_bind_dn}}"
+   "Bind User Password", "Пароль для Bind User. Это значение макропеременной, которое получено из значения пароля Bind User из *Ranger User Info > Common Configs*", "", ""
+   "ranger.ldap.group. roleattribute", "Атрибут роли группы LDAP", "cn", "cn"
+   "ranger.ldap.referral", "Описание свойства приведено после таблицы", "ignore", "follow | ignore | throw"
+   "LDAP URL", "URL-адрес сервера LDAP. Это значение макропеременной, полученное из значения URL-адреса LDAP/AD из *Ranger User Info > Common Configs*", "{{ranger_ug_ldap_url}}", "{{ranger_ug_ldap_url}}"
+   "ranger.ldap.user. dnpattern", "Шаблон DN пользователя расширяется при входе пользователя в систему. Например, если пользователь *ldapadmin* выполняет вход, сервер LDAP попытается связаться с DN *uid=ldapadmin,ou=users, dc=example,dc=com*, используя пароль, предоставленный пользователем", "uid={0},ou=users, dc=xasecure,dc=net", "cn=ldapadmin,ou=Users, dc=example,dc=com"
+   "User Search Filter", "Фильтр поиска, используемый для Bind Authentication. Это значение макропеременной, полученное из значения User Search Filter из *Ranger User Info > Common Configs*", "{{ranger_ug_ldap_user _searchfilter}}", "{{ranger_ug_ldap_user _searchfilter}}"
+
+Свойства со значением *{{xyz}}* -- это макропеременные, которые производятся из других заданных значений, для оптимизации процесса настройки. Переменные можно редактировать. Для восстановления исходного значения следует нажать значок "Set Recommended" справа от поля свойства.
+
+
+
+
+
+.. _security_authorizationHadoop_InstallingRanger_LDAP-Authentic:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_LDAP-Authentic.*
+   :align: center
+
+   Настройка Ranger LDAP Authentication
+   
+
+Ranger Active Directory Authentication
+**************************************
 
 
 
