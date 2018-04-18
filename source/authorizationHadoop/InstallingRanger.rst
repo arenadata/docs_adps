@@ -771,9 +771,9 @@ Ranger User Sync
 
 + **Bind User Password** -- Пароль Bind User.
 
-+ **Incremental Sync** -- Если выбрано *Yes*, Ranger Usersync сохраняет последнюю временную метку всех объектов, которые были синхронизированы ранее, и использует эту метку времени для выполнения следующей синхронизации. Затем Usersync использует механизм опроса для выполнения инкрементной синхронизации с помощью атрибутов LDAP uSNChanged (для AD) или modifytimestamp (для LDAP). Включение инкрементной синхронизации в первый раз приводит к полной синхронизации; последующие операции синхронизации будут инкрементальными. Когда включена инкрементная синхронизация, групповая синхронизация (на вкладке Group Configs) является обязательной. Рекомендуется для крупных развертываний.
++ **Incremental Sync** -- Если выбрано *Yes*, Ranger Usersync сохраняет последнюю временную метку всех объектов, которые были синхронизированы ранее, и использует эту метку времени для выполнения следующей синхронизации. Затем Usersync использует механизм опроса для выполнения инкрементной синхронизации с помощью атрибутов LDAP uSNChanged (для AD) или modifytimestamp (для LDAP). Включение инкрементной синхронизации в первый раз приводит к полной синхронизации; последующие операции синхронизации будут инкрементальными. Когда включена инкрементная синхронизация, групповая синхронизация (на вкладке "Group Configs") является обязательной. Рекомендуется для крупных развертываний.
 
-  + Значение по умолчанию -- Для обновления: *No*, для инсталляции: *Yes*.
+  + Значение по умолчанию -- Для обновления: *No*; для инсталляции: *Yes*.
   + Пример значения -- *Yes*
 
 
@@ -819,7 +819,7 @@ Ranger User Sync
   + Значение по умолчанию -- *memberof,ismemberof*
   + Пример значения -- *memberof*, *ismemberof* или *gidNumber*
 
-+ **Enable User Search** -- Параметр доступен, если выбрана опция *Enable Group Search First*.
++ **Enable User Search** -- Параметр доступен, если выбрана опция "Enable Group Search First".
 
   + Значение по умолчанию -- *No*
   + Пример значения -- *Yes*
@@ -852,7 +852,7 @@ Ranger User Sync
 
   + Пример значения -- *group*, *groupofnames* или *posixGroup*
   
-+ **"Group Search Base** -- База поиска для групп. Ranger может искать несколько подразделений в AD. Модуль Ranger UserSync выполняет поиск пользователей по каждому настроенному подразделению и добавляет всех пользователей в один список. После того как все подразделения будут обработаны, членство в группе пользователей вычисляется на основе конфигурации поиска группы. Каждый сегмент подразделения должен быть разделен знаком ";" (точка с запятой).
++ **Group Search Base** -- База поиска для групп. Ranger может искать несколько подразделений в AD. Модуль Ranger UserSync выполняет поиск пользователей по каждому настроенному подразделению и добавляет всех пользователей в один список. После того как все подразделения будут обработаны, членство в группе пользователей вычисляется на основе конфигурации поиска группы. Каждый сегмент подразделения должен быть разделен знаком ";" (точка с запятой).
 
   + Пример значения -- *ou=groups,DC=example,DC=com;ou=group1;ou=group2*
 
@@ -893,14 +893,17 @@ Ranger User Sync
 1. В *Ambari>Ranger>Configs>Advanced>Custom ranger-ugsync-site* выбрать "Add Property";
 2. Добавить следующие свойства:
 
-  + *ranger.usersync.role.assignment.list.delimiter =* **&**
-  Значение по умолчанию -- "&"
++ *ranger.usersync.role.assignment.list.delimiter =* **&**
+  
+  + Значение по умолчанию -- "&"
 
-  + *ranger.usersync.users.groups.assignment.list.delimiter =* **:**
-  Значение по умолчанию -- ":"
++ *ranger.usersync.users.groups.assignment.list.delimiter =* **:**
+  
+  + Значение по умолчанию -- ":"
 
-  + *ranger.usersync.username.groupname.assignment.list.delimiter =* **,**
-  Значение по умолчанию -- ","
++ *ranger.usersync.username.groupname.assignment.list.delimiter =* **,**
+  
+  + Значение по умолчанию -- ","
 
   + *ranger.usersync.group.based.role.assignment.rules =* 
 
@@ -977,6 +980,16 @@ Ranger Authentication
 + `Ranger Active Directory Authentication`_
 
 
+После завершения настройки параметров аутентификации нажать "Next" для продолжения установки. Затем обновить конфигурацию **Ranger admin truststore**, добавив следующие параметры в *Ambari> Ranger> Configs> Advanced> Advanced ranger-admin-site*:
+
+  ::
+  
+   ranger.truststore.file=/etc/ranger/admin/truststore
+   ranger.truststore.password=password
+
+И перезапустить Ranger.
+
+
 Ranger UNIX Authentication
 ***************************
 
@@ -988,24 +1001,25 @@ Ranger UNIX Authentication
 
 3. В поле "Authentication method" отметить *UNIX*. *HTTP* включен по умолчанию -- если отключить *HTTP*, то возможен только *HTTPS*.
 
-4. В блоке "UNIX Authentication Settings" указать свойства, описание которых приведено в таблице. 
+4. В блоке "UNIX Authentication Settings" указать свойства: 
 
-+ **** -- .
++ **Allow remote Login"** -- Флаг для включения/отключения удаленного входа.
 
-  + Значение по умолчанию -- **
-  + Пример значения -- **  
-  
+  + Значение по умолчанию -- *true*
+  + Пример значения -- *true*  
 
-.. csv-table:: Настройки UNIX Authentication
-   :header: "Свойство", "Описание", "Значение по умолчанию", "Примемр значения"
-   :widths: 25, 25, 25, 25
++ **ranger.unixauth.service.hostname** -- Адрес хоста, на котором запущена служба проверки подлинности UNIX.
 
-   "Allow remote Login", "Флаг для включения/отключения удаленного входа", "true", "true"
-   "ranger.unixauth.service.hostname", "Адрес хоста, на котором запущена служба проверки подлинности UNIX", "{{ugsync_host}}", "{{ugsync_host}}"
-   "ranger.unixauth.service.port", "Номер порта, на котором запущена служба проверки подлинности UNIX", "5151", "5151"
+  + Значение по умолчанию -- *{{ugsync_host}}*
+  + Пример значения -- *{{ugsync_host}}*  
 
-Свойства со значением *{{xyz}}* -- это макропеременные, которые производятся из других заданных значений, для оптимизации процесса настройки. Переменные можно редактировать. Для восстановления исходного значения следует нажать значок "Set Recommended" справа от поля свойства.
++ **ranger.unixauth.service.port** -- Номер порта, на котором запущена служба проверки подлинности UNIX.
 
+  + Значение по умолчанию -- *5151*
+  + Пример значения -- *5151*  
+
+
+Свойства со значением {{xyz}} – это макропеременные, которые производятся из других заданных значений, для оптимизации процесса настройки. Переменные можно редактировать. Для восстановления исходного значения следует нажать значок “Set Recommended” справа от поля свойства.
 
 .. _security_authorizationHadoop_InstallingRanger_UNIX-Authentic:
 
@@ -1026,31 +1040,47 @@ Ranger LDAP Authentication
 
 3. В поле "Authentication method" отметить *LDAP*;
 
-4. В блоке "LDAP Settings" указать свойства, описание которых приведено в таблице. 
+4. В блоке "LDAP Settings" указать свойства: 
 
-.. csv-table:: Настройки LDAP Authentication
-   :header: "Свойство", "Описание", "Значение по умолчанию", "Примемр значения"
-   :widths: 25, 25, 25, 25
++ **ranger.ldap.base.dn** -- Distinguished Name (DN) начальной точки для поиска на сервере каталогов.
 
-   "ranger.ldap.base.dn", "Distinguished Name (DN) начальной точки для поиска на сервере каталогов", "dc=example,dc=com", "dc=example,dc=com"
-   "Bind User", "Полное Distinguished Name (DN), включая Common Name (CN) учетной записи пользователя LDAP с правами поиска пользователей. Это значение макропеременной, полученное из значения Bind User из *Ranger User Info > Common Configs*", "{{ranger_ug_ldap_bind_dn}}", "{{ranger_ug_ldap_bind_dn}}"
-   "Bind User Password", "Пароль для Bind User. Это значение макропеременной, которое получено из значения пароля Bind User из *Ranger User Info > Common Configs*", "", ""
-   "ranger.ldap.group. roleattribute", "Атрибут роли группы LDAP", "cn", "cn"
-   "ranger.ldap.referral", "Описание свойства приведено после таблицы", "ignore", "follow | ignore | throw"
-   "LDAP URL", "URL-адрес сервера LDAP. Это значение макропеременной, полученное из значения URL-адреса LDAP/AD из *Ranger User Info > Common Configs*", "{{ranger_ug_ldap_url}}", "{{ranger_ug_ldap_url}}"
-   "ranger.ldap.user. dnpattern", "Шаблон DN пользователя расширяется при входе пользователя в систему. Например, если пользователь *ldapadmin* выполняет вход, сервер LDAP попытается связаться с DN *uid=ldapadmin,ou=users, dc=example,dc=com*, используя пароль, предоставленный пользователем", "uid={0},ou=users, dc=xasecure,dc=net", "cn=ldapadmin,ou=Users, dc=example,dc=com"
-   "User Search Filter", "Фильтр поиска, используемый для Bind Authentication. Это значение макропеременной, полученное из значения User Search Filter из *Ranger User Info > Common Configs*", "{{ranger_ug_ldap_user _searchfilter}}", "{{ranger_ug_ldap_user _searchfilter}}"
+  + Значение по умолчанию -- *dc=example,dc=com*
+  + Пример значения -- *dc=example,dc=com*  
+
++ **Bind User** -- Полное Distinguished Name (DN), включая Common Name (CN) учетной записи пользователя LDAP с правами поиска пользователей. Это значение макропеременной, полученное из значения "Bind User" из "Ranger User Info > Common Configs".
+
+  + Значение по умолчанию -- *{{ranger_ug_ldap_bind_dn}}*
+  + Пример значения -- *{{ranger_ug_ldap_bind_dn}}*  
+
++ **Bind User Password** -- Пароль для Bind User. Это значение макропеременной, которое получено из значения пароля "Bind User" из "Ranger User Info > Common Configs".
+
++ **ranger.ldap.group. roleattribute** -- Атрибут роли группы LDAP.
+
+  + Значение по умолчанию -- *cn*
+  + Пример значения -- *cn*  
+
++ **ranger.ldap.referral** -- Существует три возможных значения: *follow* (сервис LDAP сначала обрабатывает все обычные записи, а затем следует по ссылкам), *throw* (все нормальные записи возвращаются в перечислении до того, как выбрано *ReferralException*. При этом в случаях настройки свойства на *follow* или *throw* ответ об ошибке "referral" обрабатывается немедленно) и *ignore* (указывает, что сервер должен возвращать записи ссылок как обычные записи, обычный текст. Это может привести к частичным результатам поиска). Рекомендуемая настройка *follow*. При поиске в каталоге сервер может возвращать несколько результатов поиска, а также несколько ссылок, которые показывают, где получить дальнейшие результаты. Эти результаты и ссылки могут чередоваться на уровне протокола.
+
+  + Значение по умолчанию -- *ignore*
+  + Пример значения -- *follow | ignore | throw*  
+
++ **LDAP URL** -- URL-адрес сервера LDAP. Это значение макропеременной, полученное из значения "LDAP/AD URL" из "Ranger User Info > Common Configs".
+
+  + Значение по умолчанию -- *{{ranger_ug_ldap_url}}*
+  + Пример значения -- *{{ranger_ug_ldap_url}}*  
+
++ **ranger.ldap.user. dnpattern** -- Шаблон DN пользователя расширяется при входе пользователя в систему. Например, если пользователь *ldapadmin* выполняет вход, сервер LDAP попытается связаться с DN *uid=ldapadmin,ou=users,dc=example,dc=com*, используя пароль, предоставленный пользователем.
+
+  + Значение по умолчанию -- *uid={0},ou=users,dc=xasecure,dc=net*
+  + Пример значения -- *cn=ldapadmin,ou=Users,dc=example,dc=com*  
+
++ **User Search Filter** -- Фильтр поиска, используемый для Bind Authentication. Это значение макропеременной, полученное из значения "User Search Filter" из "Ranger User Info > Common Configs".
+
+  + Значение по умолчанию -- *{{ranger_ug_ldap_user _searchfilter}}*
+  + Пример значения -- *{{ranger_ug_ldap_user _searchfilter}}*  
+
 
 Свойства со значением *{{xyz}}* -- это макропеременные, которые производятся из других заданных значений, для оптимизации процесса настройки. Переменные можно редактировать. Для восстановления исходного значения следует нажать значок "Set Recommended" справа от поля свойства.
-
-Существует три возможных значения для **ranger.ldap.referral**: *follow*, *throw* и *ignore*. Рекомендуемая настройка *follow*.
-При поиске в каталоге сервер может возвращать несколько результатов поиска, а также несколько ссылок, которые показывают, где получить дальнейшие результаты. Эти результаты и ссылки могут чередоваться на уровне протокола.
-
-+ Когда свойство установлено на *follow*, сервис LDAP сначала обрабатывает все обычные записи, а затем следует по ссылкам;
-
-+ Когда свойство установлено на *throw*, все нормальные записи возвращаются в перечислении до того, как выбрано *ReferralException*. При этом в случаях настройки свойства на *follow* или *throw* ответ об ошибке "referral" обрабатывается немедленно;
-
-+ Когда свойство установлено на *ignore*, оно указывает, что сервер должен возвращать записи ссылок как обычные записи (или обычный текст). Это может привести к частичным результатам поиска.
 
 
 .. _security_authorizationHadoop_InstallingRanger_LDAP-Authentic:
@@ -1068,23 +1098,62 @@ Ranger Active Directory Authentication
 
 1. Перейти на вкладку "Advanced" на странице "Customize Services" (см. :numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_DB-Flavor>`);
 
-2. На открывшейся странице в разделе "Ranger Settings" указать адрес хоста Ranger Access Manager/Service Manager в поле "External URL" в формате *http://<your_ranger_host>:6080* (:numref:`Рис.%s.<>`);
+2. На открывшейся странице в разделе "Ranger Settings" указать адрес хоста Ranger Access Manager/Service Manager в поле "External URL" в формате *http://<your_ranger_host>:6080* (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_AD-Authentic>`);
 
 3. В поле "Authentication method" отметить *ACTIVE_DIRECTORY*;
 
-4. В блоке "AD Settings" указать свойства, описание которых приведено в таблице. 
+4. В блоке "AD Settings" указать свойства: 
 
-.. csv-table:: Настройки LDAP Authentication
-   :header: "Свойство", "Описание", "Значение по умолчанию", "Примемр значения"
-   :widths: 25, 25, 25, 25
++ **ranger.ldap.ad.base.dn** -- Distinguished Name (DN) начальной точки для поиска на сервере каталогов.
 
-   "ranger.ldap.ad.base.dn", "Distinguished Name (DN) начальной точки для поиска на сервере каталогов", "dc=example,dc=com", "dc=example,dc=com"
-   "ranger.ldap.ad.bind.dn", "Полное Distinguished Name (DN), включая Common Name (CN) учетной записи пользователя LDAP с правами поиска пользователей. Это значение макропеременной, полученное из значения Bind User из *Ranger User Info > Common Configs*", "{{ranger_ug_ldap_bind_dn}}", "{{ranger_ug_ldap_bind_dn}}"
-   "ranger.ldap.ad.bind.password", "Пароль для bind.dn. Это значение макропеременной, полученное из значения Bind User Password из *Ranger User Info > Common Configs*", "", ""
-   "Domain Name (Only for AD)", "Доменное имя сервера аутентификации AD", "", "dc=example,dc=com"
-   "ranger.ldap.ad.referral", "Описание свойства приведено после таблицы", "ignore", "follow | ignore | throw"
-   "ranger.ldap.ad.url", "URL-адрес сервера AD. Это значение макропеременной, полученное из значения LDAP/AD URL из *Ranger User Info > Common Configs*", "{{ranger_ug_ldap_url}}", "{{ranger_ug_ldap_url}}"
-   "ranger.ldap.ad.user.searchfilter", "Фильтр поиска, используемый для Bind Authentication. Это значение макропеременной, полученное из значения User Search Filter из *Ranger User Info > Common Configs*", "{{ranger_ug_ldap_user_searchfilter}}", "{{ranger_ug_ldap_user_searchfilter}}"
+  + Значение по умолчанию -- *dc=example,dc=com*
+  + Пример значения -- *dc=example,dc=com*  
+
++ **ranger.ldap.ad.bind.dn** -- Полное Distinguished Name (DN), включая Common Name (CN) учетной записи пользователя LDAP с правами поиска пользователей. Это значение макропеременной, полученное из значения "Bind User" из "Ranger User Info > Common Configs".
+
+  + Значение по умолчанию -- *{{ranger_ug_ldap_bind_dn}}*
+  + Пример значения -- *{{ranger_ug_ldap_bind_dn}}*  
+
++ **ranger.ldap.ad.bind.password** -- Пароль для bind.dn. Это значение макропеременной, полученное из значения "Bind User Password" из "Ranger User Info > Common Configs".
+
++ **Domain Name (Only for AD)** -- Доменное имя сервера аутентификации AD.
+
+  + Пример значения -- *dc=example,dc=com*  
+
++ **ranger.ldap.ad.referral** -- Существует три возможных значения: *follow* (сервис LDAP сначала обрабатывает все обычные записи, а затем следует по ссылкам), *throw* (все нормальные записи возвращаются в перечислении до того, как выбрано *ReferralException*. При этом в случаях настройки свойства на *follow* или *throw* ответ об ошибке "referral" обрабатывается немедленно) и *ignore* (указывает, что сервер должен возвращать записи ссылок как обычные записи, обычный текст. Это может привести к частичным результатам поиска). Рекомендуемая настройка *follow*. При поиске в каталоге сервер может возвращать несколько результатов поиска, а также несколько ссылок, которые показывают, где получить дальнейшие результаты. Эти результаты и ссылки могут чередоваться на уровне протокола.
+
+  + Значение по умолчанию -- *ignore*
+  + Пример значения -- *follow | ignore | throw*  
+
++ **ranger.ldap.ad.url** -- URL-адрес сервера AD. Это значение макропеременной, полученное из значения "LDAP/AD URL" из "Ranger User Info > Common Configs".
+
+  + Значение по умолчанию -- *{{ranger_ug_ldap_url}}*
+  + Пример значения -- *{{ranger_ug_ldap_url}}*  
+
++ **ranger.ldap.ad.user.searchfilter** -- Фильтр поиска, используемый для Bind Authentication. Это значение макропеременной, полученное из значения "User Search Filter" из "Ranger User Info > Common Configs".
+
+  + Значение по умолчанию -- *{{ranger_ug_ldap_user_searchfilter}}*
+  + Пример значения -- *{{ranger_ug_ldap_user_searchfilter}}*  
+
+
+Свойства со значением *{{xyz}}* -- это макропеременные, которые производятся из других заданных значений, для оптимизации процесса настройки. Переменные можно редактировать. Для восстановления исходного значения следует нажать значок "Set Recommended" справа от поля свойства.
+
+.. _security_authorizationHadoop_InstallingRanger_AD-Authentic:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_AD-Authentic.*
+   :align: center
+
+   Настройка Ranger Active Directory Authentication
+
+
+5. При сохранении метода проверки подлинности Active Directory может появиться всплывающее окно "Dependent Configurations", рекомендующее установить метод проверки подлинности LDAP. Эта рекомендуемая конфигурация не должна применяться для AD, поэтому необходимо очистить (отменить) параметр **ranger.authentication.method**, а затем нажать "OK" (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Dep-Conf>`).
+
+.. _security_authorizationHadoop_InstallingRanger_Dep-Conf:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Dep-Conf.*
+   :align: center
+
+   Dependent Configurations
 
 
 Завершение установки
