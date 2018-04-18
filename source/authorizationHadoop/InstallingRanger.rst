@@ -814,7 +814,7 @@ Ranger User Sync
    "Group Search Filter", "Дополнительный фильтр, ограничивающий группы, выбранные для синхронизации", "", "Для извлечения всех групп: cn=*. Для извлечения только групп, cn которых является *Engineering* или *Sales*: (|(cn=Engineering) (cn=Sales))"
    "Enable Group Search First", "Если параметр *Enable Group Search First* не выбран: пользователи извлекаются из атрибута группы *member*. Если параметр *Enable Group Search First* выбран: членство пользователя вычисляется путем выполнения поиска LDAP на основе пользовательской конфигурации", "No", "Yes"
    "Sync Nested Groups", "Включает членство во вложенных группах в Ranger, чтобы права, настроенные для родительских групп, применялись ко всем членам в подгруппах. Если сама группа является членом другой группы, пользователи, принадлежащие к этой группе, также являются частью родительской группы. Уровни иерархии групп определяют глубину вложенной группы. Если свойство *Sync Nested Groups* не отображается, следует обновить Ambari 2.6.0+", "No", "Yes, No"
-   "Group Hierarchy Levels", "Количество вложенных групп для оценки в поддержку Sync Nested Groups. Задать любое целое число >0", "0", "2"
+   "Group Hierarchy Levels", "Количество вложенных групп для оценки в поддержку Sync Nested Groups. Задать целое число >0", "0", "2"
 
 
 .. _security_authorizationHadoop_InstallingRanger_Group-Configs-LDAP:
@@ -864,9 +864,48 @@ Ranger User Sync
 
 
 Ranger Tagsync
-************************
+**************
 
-`Ссылка <https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.6.4/bk_security/content/ranger_tag_sync_settings.html>`_
+Для настройки **Ranger Tagsync** необходимо на странице "Customize Services" на вкладке "Ranger Tagsync" выбрать **Tag Source** путем проставления флага в соответствующее поле (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Ranger-Tagsync>`): 
+
++ Atlas Tag Source;
++ AtlasREST Tag Source;
++ File Tag Source.
+
+
+.. _security_authorizationHadoop_InstallingRanger_Ranger-Tagsync:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Ranger-Tagsync.*
+   :align: center
+
+   Ranger Tagsync
+
+
+Описание свойств **Tag Source** приведено в таблицах. 
+
+
+.. csv-table:: Atlas Tag Source
+   :header: "Свойство", "Описание"
+   :widths: 50, 50
+
+   "Atlas Source: Kafka endpoint", "Конечная точка Kafka: *<kafka_server_url>:6667*"
+   "Atlas Source: ZooKeeper endpoint", "Конечная точка ZooKeeper: *<zookeeper_server_url>*:2181"
+   "Atlas Source: Kafka consumer group", "Пользователь Ranger"
+   
+.. csv-table:: AtlasREST Tag Source
+   :header: "Свойство", "Описание"
+   :widths: 50, 50
+
+   "AtlasREST Source: Atlas endpoint", "Конечная точка AtlasREST: *<atlas_host_url>:21000*"
+   "AtlasREST Source: Atlas source download interval", "Интервал загрузки AtlasREST (миллисекунды)"
+      
+.. csv-table:: File Tag Source
+   :header: "Свойство", "Описание"
+   :widths: 50, 50
+
+   "File Source: File update polling interval", "Интервал опроса обновлений файла (миллисекунды)"
+   "File Source: Filename", "Имя файла tag source"
+      
 
 
 Ranger Authentication
