@@ -23,7 +23,7 @@
 
 Перед установкой **Ranger** необходимо убедиться, что кластер отвечает следующим требованиям:
 
-+ Рекомендуется хранить аудиты как в HDFS, так и в Solr. Конфигурация по умолчанию для Ranger Audits в Solr использует общий экземпляр Solr, предоставляемый сервисом Ambari Infra (дополнительные сведения см. в разделе `Ranger Audit Settings <https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.6.4/bk_security/content/ranger_audit_settings.html>`_);
++ Рекомендуется хранить аудиты как в HDFS, так и в Solr. Конфигурация по умолчанию для Ranger Audits в Solr использует общий экземпляр Solr, предоставляемый сервисом Ambari Infra (дополнительные сведения см. в разделе `Ranger Audit`_);
 
 + Чтобы обеспечить принудительную авторизацию на уровне групп LDAP/AD в Hadoop, необходимо настроить сопоставление групп Hadoop для LDAP/AD для LDAP (`Настройка сопоставления групп Hadoop для LDAP/AD`_);
 
@@ -1174,7 +1174,7 @@ Ranger Active Directory Authentication
 
 Завершение процесса установки **Ranger** осуществляется в 3 шага:
 
-1. На странице "Review" внимательно проверить заданные параметры конфигурации. Затем для установки Ranger на сервер Ambari нажать "Deploy" (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Review>`).
+1. На странице "Review" внимательно проверить заданные параметры конфигурации. Затем для установки Ranger на сервер Ambari нажать кнопку "Deploy" (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Review>`).
 
 .. _security_authorizationHadoop_InstallingRanger_Review:
 
@@ -1200,7 +1200,59 @@ Ranger Active Directory Authentication
 Расширенные настройки пользователей
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Для получения доступа к расширенным настройкам пользователя необходимо выбрать вкладку "Advanced" на странице "Customize Service". **Usersync** загружает пользователей из **UNIX**, **LDAP** или **AD** и заполняет ими локальные таблицы пользователей **Ranger**.
+
+.. important:: Чтобы гарантировать, что авторизация уровня LDAP/AD применяется в Hadoop, следует сначала настроить Hadoop Group Mapping для LDAP/AD (`Настройка сопоставления групп Hadoop для LDAP/AD`_). 
+
+.. important:: Перед применением изменений рекомендуется протестировать Usersync, чтобы пользователи и группы извлекались по назначению: `Тест-драйв Ranger Usersync`_
+
+
+Настройки UNIX Usersync
+```````````````````````
+
+При использовании аутентификации **UNIX** значения по умолчанию для свойств *Advanced ranger-ugsync-site* -- это настройки для проверки подлинности **UNIX** (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Advanced>`).
+
+.. _security_authorizationHadoop_InstallingRanger_Advanced:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Advanced.*
+   :align: center
+
+   Свойства Advanced ranger-ugsync-site
+
+
+Необходимые настройки LDAP и AD Usersync
+`````````````````````````````````````````
+
+При использовании аутентификации **LDAP** необходимо обновить следующие свойства *Advanced ranger-ugsync-site*:
+
+.. csv-table:: Настройки LDAP Advanced ranger-ugsync-site
+   :header: "Свойство", "Значение LDAP"
+   :widths: 50, 50
+
+   "ranger.usersync.ldap.bindkeystore", "Установить значение таким же, как и в свойстве *ranger.usersync.credstore.filename*. Значение по умолчанию: /usr/hdp/current/ranger-usersync/conf/ugsync.jceks"
+   "ranger.usersync.ldap.bindalias", "ranger.usersync.ldap.bindalias"
+   "ranger.usersync.source.impl.class", "ldap"
+   
+.. csv-table:: Настройки AD Advanced ranger-ugsync-site
+   :header: "Свойство", "Значение AD"
+   :widths: 50, 50
+
+   "ranger.usersync.source.impl.class", "ldap"
+  
+  
+Дополнительные настройки LDAP и AD Usersync
+````````````````````````````````````````````
+
+При использовании проверки подлинности **LDAP** или **Active Directory** может потребоваться обновление свойств в зависимости от конкретных характеристик развертывания:
+
++ ****
+
+  + Значение LDAP: **
+  + Значение AD: **
+
+
 `Ссылка <https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.6.4/bk_security/content/ranger_advanced_usersync_settings.html>`_ 
+
 
 Настройка пользователей базы данных без совместного использования учетных данных DBA
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
