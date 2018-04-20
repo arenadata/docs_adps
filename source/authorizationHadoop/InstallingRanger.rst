@@ -426,6 +426,7 @@
 
 Смежные темы:
 
++ `Расширенные настройки пользователей`_
 + `Настройка пользователей базы данных без совместного использования учетных данных DBA`_
 + `Обновление паролей администратора Ranger`_
 
@@ -1122,7 +1123,7 @@ Ranger Active Directory Authentication
 
 + **ranger.ldap.ad.bind.password** -- Пароль для bind.dn. Это значение макропеременной, полученное из значения "Bind User Password" из "Ranger User Info > Common Configs"
 
-+ **Domain Name (Only for AD)** -- Доменное имя сервера аутентификации AD.
++ **Domain Name (Only for AD)** -- Доменное имя сервера аутентификации AD
 
   + Пример значения -- *dc=example,dc=com*  
 
@@ -1171,9 +1172,35 @@ Ranger Active Directory Authentication
 Завершение установки
 ~~~~~~~~~~~~~~~~~~~~~
 
+Завершение процесса установки **Ranger** осуществляется в 3 шага:
+
+1. На странице "Review" внимательно проверить заданные параметры конфигурации. Затем для установки Ranger на сервер Ambari нажать "Deploy" (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Review>`).
+
+.. _security_authorizationHadoop_InstallingRanger_Review:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Review.*
+   :align: center
+
+   Проверка установленных параметров конфигурации
+
+2. Ranger устанавливается на указанном хосте на сервере Ambari. Индикатор выполнения отображает ход установки (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Progress-bar>`).
+
+.. _security_authorizationHadoop_InstallingRanger_Progress-bar:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Progress-bar.*
+   :align: center
+
+   Отображение хода установки
+
+3. По завершении установки на странице "Summary" отображаются детали установки. Может потребоваться перезапуск служб для компонентов кластера.
+
+.. important:: В случае сбоя установки необходимо завершить процесс установки, а затем перенастроить и переустановить Ranger
 
 
+Расширенные настройки пользователей
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+`Ссылка <https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.6.4/bk_security/content/ranger_advanced_usersync_settings.html>`_ 
 
 Настройка пользователей базы данных без совместного использования учетных данных DBA
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
