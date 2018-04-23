@@ -1564,3 +1564,10 @@ HDFS
 
 8. После перезапуска HDFS плагин Ranger для HDFS будет включен. Другие компоненты могут также потребовать перезагрузки.
 
+
+
+
+
+`Ranger Plugins - Kerberos Overview <https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.6.4/bk_security/content/ch_enable_ranger_plugins_kerberos_ambari.html>`_
+
+
