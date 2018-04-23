@@ -1498,7 +1498,7 @@ Ranger Active Directory Authentication
 
 При использовании кластера с поддержкой **Kerberos** необходимо выполнить ряд дополнительных шагов, чтобы убедиться в возможности использования подключаемых плагинов **Ranger** в кластере **Kerberos**.
 
-Доступны следующие плагины Ranger: `**HDFS**`_, **Hive**, **HBase**, **Kafka**, **Knox**, **YARN**, **Storm**, **Atlas**. 
+Доступны следующие плагины Ranger: `HDFS`_, **Hive**, **HBase**, **Kafka**, **Knox**, **YARN**, **Storm**, **Atlas**. 
 
 
 HDFS
