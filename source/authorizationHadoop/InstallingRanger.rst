@@ -1,7 +1,7 @@
 Установка Ranger с помощью Ambari
 ---------------------------------
 
-**Apache Ranger** можно установить при помощи пользовательского интерфейса **Ambari** или вручную, используя платформу **Arenadata Hadoop**. В отличие от ручного процесса установки, требующего выполнения ряда шагов, установка **Ranger** с использованием интерфейса **Ambari** проще и легче. Опция службы **Ranger** доступна через мастер **Add Service** после инсталляции кластера **ADH** с помощью установщика.
+**Apache Ranger** можно установить при помощи пользовательского интерфейса **Ambari** или вручную, используя платформу **Arenadata Hadoop**. В отличие от ручного процесса установки, требующего выполнения ряда шагов, установка **Ranger** с использованием интерфейса **Ambari** проще. Опция службы **Ranger** доступна через мастер **Add Service** после инсталляции кластера **ADH** с помощью установщика.
 
 После установки и настройки **Ambari** можно использовать мастер добавления служб для установки следующих компонентов:
 
@@ -1496,13 +1496,71 @@ Ranger Active Directory Authentication
 
 Плагины **Ranger** могут быть включены для нескольких сервисов **ADH**. По соображениям производительности рекомендуется хранить аудиты в **Solr** и **HDFS**, а не в базе данных.
 
-При использовании кластера с поддержкой **Kerberos** необходимо выполнить ряд дополнительных шагов, чтобы убедиться в возможности использования подключаемых плагинов Ranger в кластере Kerberos.
+При использовании кластера с поддержкой **Kerberos** необходимо выполнить ряд дополнительных шагов, чтобы убедиться в возможности использования подключаемых плагинов **Ranger** в кластере **Kerberos**.
 
-Доступны следующие плагины Ranger: `HDFS`_, Hive, HBase, Kafka, Knox, YARN, Storm, Atlas. 
+Доступны следующие плагины Ranger: `**HDFS**`_, **Hive**, **HBase**, **Kafka**, **Knox**, **YARN**, **Storm**, **Atlas**. 
 
 
 HDFS
 `````
 
+Для включения плагина **Ranger HDFS** необходимо выполнить следующие действия:
 
+1. На странице "Ranger Configs" выбрать вкладку "Ranger Plugin" (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Ranger-Plugin>`).
+
+.. _security_authorizationHadoop_InstallingRanger_Ranger-Plugin:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Ranger-Plugin.*
+   :align: center
+
+   Ranger Plugin
+
+2. В поле *HDFS Ranger Plugin* активировать кнопку *On* и сохранить действие.
+
+3. При этом появляется всплывающее окно "Save Configuration". Необходимо ввести примечание с описанием только что внесенных изменений и сохранить кнопкой *Save* (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Save-Config>`).
+
+.. _security_authorizationHadoop_InstallingRanger_Save-Config:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Save-Config.*
+   :align: center
+
+   Save Configuration
+
+4. При этом появляется всплывающее окно "Dependent Configuration". Для подтверждения обновлений конфигурации необходимо нажать кнопку *OK* (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Dependent-Config>`).
+
+.. _security_authorizationHadoop_InstallingRanger_Dependent-Config:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Dependent-Config.*
+   :align: center
+
+   Dependent Configuration
+
+5. Нажать *OK* во всплывающем окне сохранения настроек "Save Configuration Changes" (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Save-Config-Changes>`).
+
+.. _security_authorizationHadoop_InstallingRanger_Save-Config-Changes:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Save-Config-Changes.*
+   :align: center
+
+   Save Configuration Changes
+
+6. Выбрать в меню навигации *HDFS*, затем выбрать пункты меню "Restart > Restart All Affected" для перезапуска сервиса HDFS и загрузки новой конфигурации (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Restart>`).
+
+.. _security_authorizationHadoop_InstallingRanger_Restart:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Restart.*
+   :align: center
+
+   Restart All Affected
+
+7. Нажать *Confirm Restart All* во всплывающем окне для подтверждения перезапуска HDFS (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Confirm>`).
+
+.. _security_authorizationHadoop_InstallingRanger_Confirm:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Confirm.*
+   :align: center
+
+   Confirm Restart All
+
+8. После перезапуска HDFS плагин Ranger для HDFS будет включен. Другие компоненты могут также потребовать перезагрузки.
 
