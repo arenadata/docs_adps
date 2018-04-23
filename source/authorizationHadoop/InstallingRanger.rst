@@ -1210,6 +1210,8 @@ Ranger Active Directory Authentication
 
 .. important:: Перед применением изменений рекомендуется протестировать Usersync, чтобы пользователи и группы извлекались по назначению: `Тест-драйв Ranger Usersync`_
 
+После указания всех настроек на странице "Customize Services" следует нажать "Next" для продолжения установки.
+
 
 Настройки UNIX Usersync
 ```````````````````````
@@ -1249,13 +1251,159 @@ Ranger Active Directory Authentication
 
 При использовании проверки подлинности **LDAP** или **Active Directory** может потребоваться обновление свойств в зависимости от конкретных характеристик развертывания:
 
-+ ****
++ **ranger.usersync.ldap.url**
 
-  + Значение LDAP: **
-  + Значение AD: **
+  + Значение LDAP: *ldap://127.0.0.1:389*
+  + Значение AD: *ldap://ad-conrowoller-hostname:389*
 
 
-`Ссылка <https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.6.4/bk_security/content/ranger_advanced_usersync_settings.html>`_ 
++ **ranger.usersync.ldap.binddn**
+
+  + Значение LDAP: *cn=ldapadmin,ou=users, dc=example,dc=com*
+  + Значение AD: *cn=adadmin,cn=Users, dc=example,dc=com*
+
+
++ **ranger.usersync.ldap.ldapbindpassword**
+
+  + Значение LDAP: *secret*
+  + Значение AD: *secret*
+
+
++ **ranger.usersync.ldap.searchBase**
+
+  + Значение LDAP: *dc=example,dc=com*
+  + Значение AD: *dc=example,dc=com*
+
+
++ **ranger.usersync.source.impl.class**
+
+  + Значение LDAP: *org.apache.ranger. ladpusersync. process.LdapUserGroupBuilder*
+  
+
++ **ranger.usersync.ldap.user.searchbase**
+
+  + Значение LDAP: *ou=users, dc=example, dc=com*
+  + Значение AD: *dc=example,dc=com*
+
+
++ **ranger.usersync.ldap.user.searchscope**
+
+  + Значение LDAP: *sub*
+  + Значение AD: *sub*
+
+
++ **ranger.usersync.ldap.user.objectclass**
+
+  + Значение LDAP: *person*
+  + Значение AD: *person*
+
+
++ **ranger.usersync.ldap.user.searchfilter**
+
+  + Значение LDAP: *Set to single empty space if no value. Do not leave it as “empty”*
+  + Значение AD: *(objectcategory=person)*
+
+
++ **ranger.usersync.ldap.user.nameattribute**
+
+  + Значение LDAP: *uid or cn*
+  + Значение AD: *sAMAccountName*
+
+
++ **ranger.usersync.ldap.user.groupnameattribute**
+
+  + Значение LDAP: *memberof,ismemberof*
+  + Значение AD: *memberof,ismemberof*
+
+
++ **ranger.usersync.ldap.username.caseconversion**
+
+  + Значение LDAP: *none*
+  + Значение AD: *none*
+
+
++ **ranger.usersync.ldap.groupname.caseconversion**
+
+  + Значение LDAP: *none*
+  + Значение AD: *none*
+
+Следующие свойства применяются при фильтровке групп:
+
++ **ranger.usersync.group.searchenabled**
+
+  + Значение LDAP: *false*
+  + Значение AD: *false*
+
+
++ **ranger.usersync.group.usermapsyncenabled**
+
+  + Значение LDAP: *false*
+  + Значение AD: *false*
+
+
++ **ranger.usersync.group.searchbase**
+
+  + Значение LDAP: *ou=groups, dc=example, dc=com*
+  + Значение AD: *dc=example,dc=com*
+
+
++ **ranger.usersync.group.searchscope**
+
+  + Значение LDAP: *sub*
+  + Значение AD: *sub*
+
+
++ **ranger.usersync.group.objectclass**
+
+  + Значение LDAP: *groupofnames*
+  + Значение AD: *groupofnames*
+
+
++ **ranger.usersync.group.searchfilter**
+
+  + Значение LDAP: *needed for AD authentication*
+  + Значение AD: *(member=CN={0}, OU=MyUsers, DC=AD-HDP, DC=COM)*
+
+
++ **ranger.usersync.group.nameattribute**
+
+  + Значение LDAP: *cn*
+  + Значение AD: *cn*
+
+
++ **ranger.usersync.group.memberattributename**
+
+  + Значение LDAP: *member*
+  + Значение AD: *member*
+
+
++ **ranger.usersync.pagedresultsenabled**
+
+  + Значение LDAP: *true*
+  + Значение AD: *true*
+
+
++ **ranger.usersync.pagedresultssize**
+
+  + Значение LDAP: *500*
+  + Значение AD: *500*
+
+
++ **ranger.usersync.user.searchenabled**
+
+  + Значение LDAP: *false*
+  + Значение AD: *false*
+
+
++ **ranger.usersync.group.search.first.enabled**
+
+  + Значение LDAP: *false*
+  + Значение AD: *false*
+
+
+
+Настройка Ranger для LDAP SSL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 Настройка пользователей базы данных без совместного использования учетных данных DBA
