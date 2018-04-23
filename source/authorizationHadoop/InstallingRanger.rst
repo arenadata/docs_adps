@@ -1407,8 +1407,8 @@ Ranger Active Directory Authentication
 
 Можно использовать следующие настройки **LDAP SSL** с помощью самоподписанных сертификатов в стандартном **Ranger User Sync TrustStore**:
 
-1. Для свойства *ranger.usersync.truststore.file* расположение по умолчанию */usr/hdp/current/ranger-usersync/conf/mytruststore.jks*
-2. Скопировать и отредактировать самоподписанные сертификаты
+1. Для свойства *ranger.usersync.truststore.file* расположение по умолчанию */usr/hdp/current/ranger-usersync/conf/mytruststore.jks*;
+2. Скопировать и отредактировать самоподписанные сертификаты;
 3. Установить свойство *ranger.usersync.truststore.file* в новый файл:
 
   ::
@@ -1417,7 +1417,7 @@ Ranger Active Directory Authentication
    service ranger-usersync stop 
    service ranger-usersync start
 
-  При этом *cert.pem* содержит сертификат LDAPS.
+  Сертификат LDAPS содержится в *cert.pem*.
 
 
 
@@ -1428,6 +1428,41 @@ Ranger Active Directory Authentication
 
 Создание пользователей **Ranger DB** при помощи скрипта *dba_script.py*:
 
+1. Загрузить Ranger rpm с помощью команды *yum install*:
+
+  ::
+  
+   yum install ranger-admin
+   
+2. В каталоге */usr/hdp/current/ranger-admin* должен быть файл с именем *dba_script.py*; 
+
+3. Получить внутренний скрипт и убедиться, что DBA имеет право запускать его;
+
+4. Выполнить скрипт командой:
+
+  ::
+  
+   python dba_script.py
+   
+ 5. Указать все необходимые значения в аргемунте (включает *db flavor*, *JDBC jar*, *db host*, *db name*, *db user* и другие параметры):
+ 
+  + Если не предпочитается передача аргументов во время выполнения в командной строке, можно обновить файл */usr/hdp/current/ranger-admin/install.properties*, а затем выполнить команду:
+  
+  ::
+  
+   python dba_script.py -q
+  
+  При указании опции *-q* скрипт считывает всю необходимую информацию из файла *install.properties*
+  
+  + Опция *-d* используется для запуска скрипта в режиме "dry". Это приводит к созданию сценария базы данных:
+  
+  ::
+  
+   python dba_script.py -d /tmp/generated-script.sql
+   
+   Сценарий может выполнить любой пользователь, но рекомендуется, чтобы его запустил в режиме "dry" системный администратор баз данных. В любом случае системный DBA должен просматривать сгенерированный скрипт, но должен вносить лишь незначительные корректировки, например, изменить расположение конкретного файла базы данных. Не следует вносить существенных изменений, которые могут сильно изменить скрипт -- в противном случае установка Ranger может завершиться ошибкой.
+
+Затем системный администратор баз данных должен запустить созданный скрипт.
 
 
 
