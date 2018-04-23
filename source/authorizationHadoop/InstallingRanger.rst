@@ -1465,12 +1465,29 @@ Ranger Active Directory Authentication
 
 Затем системный администратор баз данных должен запустить созданный скрипт.
 
-6. Запустить процедуру установки Ranger Ambari, предварительно установив на странице "Customize Services" в разделе "Ranger Admin" для параметра "Setup Database and Database User" значение "No".
+6. Запустить процедуру установки Ranger Ambari, предварительно установив на странице "Customize Services" в разделе "Ranger Admin" для параметра *Setup Database and Database User* значение *No*.
 
 
 
 Обновление паролей администратора Ranger
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+При обновлении паролей на странице "Ranger Configs" для следующих пользователей необходимо также обновить пароли каждого компонента **Ambari**, для которого включен плагин **Ranger**. 
+
+.. important:: Индивидуальные конфигурации компонентов Ambari не обновляются автоматически -- перезапуск сервиса завершается ошибкой, если пароли для каждого компонента не обновлены
+
++ Ranger Admin user -- учетные данные пользователя устанавливаются в "Configs > Advanced ranger-env" в полях *admin_username* (значение по умолчанию: *admin*) и *admin_password* (значение по умолчанию: *admin*);
+
++ Admin user, используемый Ambari для создания репозитория/политик -- имя пользователя задается в "Configs > Admin Settings" в поле *Ranger Admin username for Ambari* (значение по умолчанию: *amb_ranger_admin*). Пароль устанавливается в поле *Ranger Admin user's password for Ambari*, задается во время установки Ranger.
+
+На рисунке показано расположение полей с перечисленными параметрами на странице настроек "Ranger Configs" (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Configs-page>`).
+
+.. _security_authorizationHadoop_InstallingRanger_Configs-page:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Configs-page.*
+   :align: center
+
+   Обновление паролей администратора Ranger
 
 
 
