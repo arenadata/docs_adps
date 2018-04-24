@@ -1496,7 +1496,7 @@ Ranger Active Directory Authentication
 
 Плагины **Ranger** могут быть включены для нескольких сервисов **ADH**. По соображениям производительности рекомендуется хранить аудиты в **Solr** и **HDFS**, а не в базе данных.
 
-При использовании кластера с поддержкой **Kerberos** необходимо выполнить ряд дополнительных шагов, чтобы убедиться в возможности использования подключаемых плагинов **Ranger** в кластере **Kerberos**.
+При использовании кластера с поддержкой **Kerberos** необходимо выполнить ряд дополнительных шагов, чтобы убедиться в возможности использования подключаемых плагинов **Ranger** в кластере **Kerberos** (`HDFS в кластере с поддержкой Kerberos`_).
 
 Доступны следующие плагины Ranger: `HDFS`_, **Hive**, **HBase**, **Kafka**, **Knox**, **YARN**, **Storm**, **Atlas**. 
 
@@ -1553,7 +1553,7 @@ HDFS
 
    Restart All Affected
 
-7. Нажать *Confirm Restart All* во всплывающем окне для подтверждения перезапуска HDFS (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Confirm>`).
+7. Нажать *Confirm Restart All* во всплывающем окне "Confirmation" для подтверждения перезапуска HDFS (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Confirm>`).
 
 .. _security_authorizationHadoop_InstallingRanger_Confirm:
 
@@ -1565,9 +1565,42 @@ HDFS
 8. После перезапуска HDFS плагин Ranger для HDFS будет включен. Другие компоненты могут также потребовать перезагрузки.
 
 
+HDFS в кластере с поддержкой Kerberos
+`````````````````````````````````````
+
+Для включения плагина **Ranger HDFS** в кластере с поддержкой **Kerberos** необходимо выполнить следующие действия:
+
+1. Создать пользователя системы *rangerhdfslookup*. Убедиться, что пользователь синхронизирован с *Ranger Admin* (на вкладке "Settings > Users/Groups" в интерфейсе "Ranger Admin User Interface");
+
+2. Создать принципала Kerberos для *rangerhdfslookup*, введя следующую команду (один пользователь/принципал, например, *rangerrepouser*, может быть создан и использован в разных сервисах):
+
+  ::
+  
+   kadmin.local -q 'addprinc -pw rangerhdfslookup rangerhdfslookup@example.com
+   
+3. Перейти в разделе сервиса "HDFS" на вкладку "Config";
+
+4. В блоке "Advanced ranger-hdfs-plugin-properties" обновить свойства, перечисленные в таблице под рисунком (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_HDFS-Config>`).
+
+.. _security_authorizationHadoop_InstallingRanger_HDFS-Config:
+
+.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_HDFS-Config.*
+   :align: center
+
+   Advanced ranger-hdfs-plugin-properties
+
+
+.. csv-table:: Свойства HDFS Plugin
+   :header: "Свойство конфигурации", "Значение"
+   :widths: 50, 50
+
+   "Ranger repository config user", "rangerhdfslookup@example.com"
+   "Ranger repository config password", "rangerhdfslookup"
+   "common.name.for.certificate", "blank"
+
+5. После обновления свойств нажать кнопку *Save* и перезапустить сервис HDFS.
 
 
 
-`Ranger Plugins - Kerberos Overview <https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.6.4/bk_security/content/ch_enable_ranger_plugins_kerberos_ambari.html>`_
 
 
