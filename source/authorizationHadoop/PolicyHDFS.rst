@@ -18,9 +18,41 @@ Ranger для авторизации в Hadoop
 
 Добавление новой политики к существующему сервису **HDFS** осуществляется по следующему алгоритму:
 
+1. На странице "Service Manager" выбрать существующий сервис в разделе HDFS (:numref:`Рис.%s.<security_authorizationHadoop_PolicyHDFS_Existing-service>`).
 
+.. _security_authorizationHadoop_PolicyHDFS_Existing-service:
 
+.. figure:: ../imgs/security_authorizationHadoop_PolicyHDFS_Existing-service.*
+   :align: center
 
+   Выбор сервиса HDFS
 
+При этом открывается страница "List of Policies", на которой необходимо нажать кнопку "Add New Policy" (:numref:`Рис.%s.<security_authorizationHadoop_PolicyHDFS_List-Policies>`).
 
+.. _security_authorizationHadoop_PolicyHDFS_List-Policies:
+
+.. figure:: ../imgs/security_authorizationHadoop_PolicyHDFS_List-Policies.*
+   :align: center
+
+   List of Policies
+
+2. Открывается страница "Create Policy" (:numref:`Рис.%s.<security_authorizationHadoop_PolicyHDFS_Create-Policy>`).
+
+.. _security_authorizationHadoop_PolicyHDFS_Create-Policy:
+
+.. figure:: ../imgs/security_authorizationHadoop_PolicyHDFS_Create-Policy.*
+   :align: center
+
+   Create Policy
+
+На странице необходимо заполнить поля. Раздел "Policy Details":
+
++ *Policy Name* -- ввести уникальное имя для данной политики (имя не может быть продублировано нигде в системе);
++ *Resource Path* -- определить путь к ресурсу для папки/файла политики. Во избежание необходимости указывать полный путь или включать политику для всех вложенных папок или файлов, можно заполнить это поле с помощью подстановочных знаков (например, /home*) либо указать, что политика должна быть рекурсивной (Смотреть ниже);
++ *Description* -- (опционально) указать цель политики;
++ *Audit Logging* -- указать, выполняется ли аудит данной политики (снять флажок, чтобы отключить аудит).
+
+Раздел "Allow Conditions":
+
++ ** -- 
 
