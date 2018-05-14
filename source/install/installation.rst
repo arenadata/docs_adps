@@ -97,14 +97,17 @@
 + RHEL/CentOS 7:
   ::
 
-   wget https://storage.googleapis.com/arenadata-repo/ADH/1.5.0/centos7/ambari.repo -O /etc/yum.repos.d/
+   wget https://storage.googleapis.com/arenadata-repo/ambari/2.5.2/repos/ambari.repo -O /etc/yum.repos.d/
 
 + SUSE/SLES 12:
   ::
 
-   wget https://storage.googleapis.com/arenadata-repo/ADH/1.5.0/sles12/ambari.repo - O /etc/zypp/repos.d/
+   wget https://storage.googleapis.com/arenadata-repo/ambari/2.5.2/repos/ambari-sles.repo - O /etc/zypp/repos.d/
 
++ PPC64le RHEL7:
+  ::
 
+   wget https://storage.googleapis.com/arenadata-repo/ambari/2.5.2/repos/ambari-ppc64le.repo - O /etc/zypp/repos.d/
 
 Необходимо убедиться, что все родительские каталоги до промежуточного имеют доступ *"r + х"* для всех пользователей, поскольку данный каталог будет использоваться для создания локального репозитория.
 
