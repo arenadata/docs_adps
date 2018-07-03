@@ -42,6 +42,4 @@
 
 + `Apache Giraph <https://issues.apache.org/jira/secure/ReleaseNote.jspa?version=12324313&styleName=Html&projectId=12311820&Create=Create&atl_token=A5KQ-2QAV-T4JA-FDED%7Cf550d76dc7661f3664292f8b2cb901e6acc554dd%7Clin>`_;
 
-+ `Apache Kite <http://kitesdk.org/docs/1.1.0/release-notes.html>`_;
-
 + `Hue <https://github.com/cloudera/hue/blob/master/docs/release-notes/release-notes-3.11.0.txt>`_;

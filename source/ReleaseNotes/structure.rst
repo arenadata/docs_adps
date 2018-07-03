@@ -34,3 +34,5 @@
    "25", "Apache Zeppelin", "0.7.3"
    "26", "Apache Giraph", "1.1.0"
    "27", "Apache Slider", "0.92.0"
+   "28", "Kafka Manager", "1.1.0"
+   "29", "Logsearch", "0.5.0"
