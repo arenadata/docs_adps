@@ -69,6 +69,7 @@
    authorizationHadoop/index
    SecurityAmbari/index
    HDFSadmin/index
+   views/index
    ReleaseNotes/index
    Glossary
 
