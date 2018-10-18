@@ -32,7 +32,7 @@
 
 + `Apache Mahout <http://mahout.apache.org/release-notes/Apache-Mahout-0.13.0-Release-Notes.pdf>`_;
 
-+ `Apache Ranger <https://cwiki.apache.org/confluence/display/RANGER/Apache+Ranger+0.7.1+-+Release+Notes>`_;
++ `Apache Ranger <https://cwiki.apache.org/confluence/display/RANGER/Apache+Ranger+0.7.0+-+Release+Notes>`_;
 
 + `Apache Solr <https://lucene.apache.org/solr/6_6_0/changes/Changes.html>`_;
 
