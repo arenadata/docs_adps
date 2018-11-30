@@ -75,10 +75,12 @@
 
 + Изменить конфигурацию Ambari-агента */etc/ambari-agent/conf/ambari-agent.ini* для определения его на сервере Ambari:
 
-    + [server]
-    + hostname={ambari.server.hostname}
-    + url_port=8440
-    + secured_url_port=8441
+  ::
+  
+   [server]
+   hostname={ambari.server.hostname}
+   url_port=8440
+   secured_url_port=8441
 
 
 + Запустить Ambari-агент, выполнив команду:
