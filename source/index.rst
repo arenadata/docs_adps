@@ -58,7 +58,6 @@
    install/index
    administration/index
    security/index
-   authorizationHadoop/index
    SecurityAmbari/index
    HDFSadmin/index
    views/index
