@@ -1,4 +1,4 @@
-Установка сервера Ambari 2.6.1
+Установка сервера Ambari 2.6.2
 ==============================
 
 .. |br| raw:: html
@@ -7,7 +7,7 @@
 
 
 
-Установка сервера **Ambari 2.6.1** проходит в несколько этапов:
+Установка сервера **Ambari 2.6.2** проходит в несколько этапов:
 
 
 + Настройка репозитория;
@@ -92,28 +92,28 @@
 
 **Arenadata Ambari** поставляется как архив репозитория, который необходимо извлечь на сервер репозитория.
 
-На узел, который используется в качестве репозитория, необходимо загрузить архив **Ambari 2.6.1** в ранее созданный промежуточный каталог, или в каталог:
+На узел, который используется в качестве репозитория, необходимо загрузить архив **Ambari 2.6.2** в ранее созданный промежуточный каталог, или в каталог:
 
 + RHEL/CentOS 7:
   ::
 
-   wget https://storage.googleapis.com/arenadata-repo/ambari/2.6.1/repos/ambari.repo -O /etc/yum.repos.d/
+   wget https://storage.googleapis.com/arenadata-repo/ambari/2.6.2/repos/ambari.repo -O /etc/yum.repos.d/
 
 + SUSE/SLES 12:
   ::
 
-   wget https://storage.googleapis.com/arenadata-repo/ambari/2.6.1/repos/ambari-sles.repo - O /etc/zypp/repos.d/
+   wget https://storage.googleapis.com/arenadata-repo/ambari/2.6.2/repos/ambari-sles.repo - O /etc/zypp/repos.d/
 
 + PPC64le RHEL7:
   ::
 
-   wget https://storage.googleapis.com/arenadata-repo/ambari/2.6.1/repos/ambari-ppc64le.repo - O /etc/zypp/repos.d/
+   wget https://storage.googleapis.com/arenadata-repo/ambari/2.6.2/repos/ambari-ppc64le.repo - O /etc/zypp/repos.d/
 
 Необходимо убедиться, что все родительские каталоги до промежуточного имеют доступ *"r + х"* для всех пользователей, поскольку данный каталог будет использоваться для создания локального репозитория.
 
-После загрузки **Ambari 2.6.1** необходимо извлечь архив в промежуточный каталог. Например:
+После загрузки **Ambari 2.6.2** необходимо извлечь архив в промежуточный каталог. Например:
 
-  :command:`tar -xvf /staging/AMBARI-2.6.1.tar -C /staging/`
+  :command:`tar -xvf /staging/AMBARI-2.6.2.tar -C /staging/`
 
 
 
@@ -123,13 +123,13 @@
 Для настройки локального репозитория необходимо на хосте, используемом в качестве репозитория, выполнить скрипт
 *setup_repo.sh*, входящий в состав архива **Ambari**:
 
-  :command:`/staging/AMBARI-2.6.1/setup_repo.sh`
+  :command:`/staging/AMBARI-2.6.2/setup_repo.sh`
 
 В скрипте предполагается, что в корневом каталоге репозитория веб-сервер устанавливает */var /www /html* и создает ссылку *ambari-<версия>*, указывающую на извлеченный архив.
 
 Необходимо убедиться, что репозиторий доступен на веб-сервере:
 
-  :command:`curl http://localhost/AMBARI-2.6.1/repodata/repomd.xml`
+  :command:`curl http://localhost/AMBARI-2.6.2/repodata/repomd.xml`
 
 Скрипт также создает определенный репозиторий **Ambari** и помещает его в файл:
 
@@ -150,7 +150,7 @@
 
 Необходимо проверить наличие доступа к следующему URL-адресу с хоста администратора и с узлов кластера:
 
-  :command:`http://<yum.repo.host.fqdn>/AMBARI-2.6.1`
+  :command:`http://<yum.repo.host.fqdn>/AMBARI-2.6.2`
 
 
 
@@ -267,8 +267,8 @@
 Необходимо загрузить и распаковать следующие архивы в выделенном для них месте (при этом следует избегать использования каталога */tmp*):
 
 
-+ *ADH-1.5.2* – RPM-пакеты для сервисов Hadoop, таких как HDFS, YARN, Hbase, Hive, Zookeeper;
-+ *ADH-UTILS-1.5.2* – дополнительные сервисы и библиотеки, используемые для мониторинга и оповещения серверов кластера.
++ *ADH-1.6.1* – RPM-пакеты для сервисов Hadoop, таких как HDFS, YARN, Hbase, Hive, Zookeeper;
++ *ADH-UTILS-1.6.1* – дополнительные сервисы и библиотеки, используемые для мониторинга и оповещения серверов кластера.
 
 
 В случае если архивы загружены в каталог */tmp*, то для их распаковки в каталоге, например, */staging* необходимо выполнить следующую команду:

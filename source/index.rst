@@ -25,7 +25,7 @@
 В 2016 году дистрибутив **Arenadata Hadoop 1.3.2** прошел сертификацию и получил подтверждение о полном соответствии стандартам **Open Data Platform Initiative** (**ODPi**). **ODPi** – крупнейшее мировое сообщество разработчиков проектов хранения больших данных с открытым кодом под эгидой **Linux Foundation**: `подробнее <https://www.odpi.org/blog/2016/07/13/hadoop-summit-san-jose-2016-wrap-up>`_
 
 
-Текущий релиз версии **1.5.2** вышел во втором квартале 2018 года. В состав версии входят следующие компоненты: **Ambari**, **HDFS**, **YARN**,	**Zookeeper**, **Tez**, **Hive**,	**HBase**, **Phoenix**, **Pig**, **Sqoop**, **Flume**, **Oozie**, **Atlas**, **NiFi**, **Apex**, **Flink**, **Kafka**, **LogSearch**, **Knox**,	**Mahout**,	**Ranger**,	**Ranger KMS**,	**Solr**,	**Spark**, **Zeppelin**, **Giraph**.
+Текущий релиз версии **1.6.1** вышел во втором квартале 2018 года. В состав версии входят следующие компоненты: **Ambari**, **HDFS**, **YARN**,	**Zookeeper**, **Tez**, **Hive**,	**HBase**, **Phoenix**, **Pig**, **Sqoop**, **Flume**, **Oozie**, **Atlas**, **NiFi**, **Apex**, **Flink**, **Kafka**, **LogSearch**, **Knox**,	**Mahout**,	**Ranger**,	**Ranger KMS**,	**Solr**,	**Spark**, **Zeppelin**, **Giraph**.
 
 
 
