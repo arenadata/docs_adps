@@ -555,5 +555,5 @@
    "Apache Zeppelin", "Поддерживается не во всехах типах окружения"
    "Apache Giraph", "Не поддерживается"
    "Apache Slider", "Не поддерживается"
-   "Kafka Manager", "Не поддерживается"
+   "Kafka Manager", "Поддерживается"
    "Logsearch", "Поддерживается"
