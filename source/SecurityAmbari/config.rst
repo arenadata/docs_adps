@@ -551,6 +551,6 @@
    "Apache Spark", "Поддерживается"
    "Apache Zeppelin", "Поддерживается ограничено"
    "Apache Giraph", "Не поддерживается"
-   "Apache Slider", "Поддерживается ограничено"
+   "Apache Slider", "Не поддерживается"
    "Kafka Manager", "Не поддерживается"
    "Logsearch", "Поддерживается"
