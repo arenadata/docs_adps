@@ -15,3 +15,5 @@ Ambari Views – это способ расширения Ambari, который
    :caption: Оглавление:
 
    viewlist
+   setup_view
+   kerberos_view

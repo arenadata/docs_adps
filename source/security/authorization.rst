@@ -44,7 +44,7 @@ Ranger. Введение
   + `Конфигурация MySQL`_
   + `Конфигурация PostgreSQL`_
   + `Конфигурация Oracle`_
-  
+
   При использовании Amazon RDS есть дополнительные требования (`Требования к Amazon RDS`_).
 
 + При решении не предоставлять данные учетной записи администратора базы данных (DBA) установщику Ambari Ranger, можно использовать Python-скрипт *dba_script.py* для создания пользователей базы данных Ranger DB без предоставления этой информации установщику. После чего запустить обычную установку Ambari Ranger без указания имени и пароля администратора. Дополнительные сведения приведены в разделе `Настройка пользователей базы данных без совместного использования учетных данных DBA`_.
@@ -78,59 +78,59 @@ Ranger. Введение
 1. Добавить свойства, показанные в приведенном ниже примере, в файл *core-site.xml*. Необходимо указать значение для привязанного пользователя, его пароль и другие свойства, специфичные для экземпляра LDAP, и убедиться, что фильтры классов объектов, пользователей и групп соответствуют значениям, указанным в экземпляре LDAP.
 
   ::
-  
+
    <property>
    <name>hadoop.security.group.mapping</name>
    <value>org.apache.hadoop.security.LdapGroupsMapping</value>
    </property>
-   
+
    <property>
    <name>hadoop.security.group.mapping.ldap.bind.user</name>
    <value>cn=Manager,dc=hadoop,dc=apache,dc=org</value>
    </property>
-   
+
    <!–
    <property>
    <name>hadoop.security.group.mapping.ldap.bind.password.file</name>
    <value>/etc/hadoop/conf/ldap-conn-pass.txt</value>
    </property>
    –>
-   
+
    <property>
    <name>hadoop.security.group.mapping.ldap.bind.password</name>
    <value>hadoop</value>
    </property>
-   
+
    <property>
    <name>hadoop.security.group.mapping.ldap.url</name>
    <value>ldap://localhost:389/dc=hadoop,dc=apache,dc=org</value>
    </property>
-   
+
    <property>
    <name>hadoop.security.group.mapping.ldap.url</name>
    <value>ldap://localhost:389/dc=hadoop,dc=apache,dc=org</value>
    </property>
-   
+
    <property>
    <name>hadoop.security.group.mapping.ldap.base</name>
    <value></value>
    </property>
-   
+
    <property>
    <name>hadoop.security.group.mapping.ldap.search.filter.user</name>
    <value>(&amp;(|(objectclass=person)(objectclass=applicationProcess))(cn={0}))</value>
    </property>
-   
+
    <property>
    <name>hadoop.security.group.mapping.ldap.search.filter.group</name>
    <value>(objectclass=groupOfNames)</value>
    </property>
-   
+
    <property>
    <name>hadoop.security.group.mapping.ldap.search.attr.member</name>
    <value>member</value>
    </property>
-   
+
    <property>
    <name>hadoop.security.group.mapping.ldap.search.attr.group.name</name>
    <value>cn</value>
@@ -139,7 +139,7 @@ Ranger. Введение
 2. В зависимости от конфигурации можно обновлять сопоставления пользователей и групп с помощью следующих команд HDFS и YARN:
 
   ::
-  
+
    hdfs dfsadmin -refreshUserToGroupsMappings
    yarn rmadmin -refreshUserToGroupsMappings
 
@@ -154,7 +154,7 @@ Ranger. Введение
 Конфигурация MySQL
 ```````````````````
 
-При использовании **MySQL** машина для хранения таблиц политики администратора **Ranger** обязательно должна поддерживать транзакции. **InnoDB** -- это пример машины, поддерживающей транзакции. 
+При использовании **MySQL** машина для хранения таблиц политики администратора **Ranger** обязательно должна поддерживать транзакции. **InnoDB** -- это пример машины, поддерживающей транзакции.
 
 При использовании **Amazon RDS** есть дополнительные требования (`Требования к Amazon RDS`_).
 
@@ -163,29 +163,29 @@ Ranger. Введение
 1. Для создания баз данных Ranger должен использоваться администратор базы данных MySQL. Для создания пользователя *rangerdba* с паролем *rangerdba* необходимо:
 
   + Войти в систему как пользователь *root* и использовать следующие команды, чтобы создать пользователя *rangerdba* и предоставить ему соответствующие права:
-  
+
     ::
-    
+
      CREATE USER 'rangerdba'@'localhost' IDENTIFIED BY 'rangerdba';
-     
+
      GRANT ALL PRIVILEGES ON *.* TO 'rangerdba'@'localhost';
-     
+
      CREATE USER 'rangerdba'@'%' IDENTIFIED BY 'rangerdba';
-     
+
      GRANT ALL PRIVILEGES ON *.* TO 'rangerdba'@'%';
-     
+
      GRANT ALL PRIVILEGES ON *.* TO 'rangerdba'@'localhost' WITH GRANT OPTION;
-     
+
      GRANT ALL PRIVILEGES ON *.* TO 'rangerdba'@'%' WITH GRANT OPTION;
-     
+
      FLUSH PRIVILEGES;
 
   + Использовать команду *exit* для выхода из MySQL;
-  
+
   + Теперь можно подключиться к базе данных как *rangerdba*, используя следующую команду:
 
     ::
-    
+
      mysql -u rangerdba -prangerdba
 
     После тестирования входа в систему *rangerdba* использовать команду *exit* для выхода из MySQL.
@@ -193,7 +193,7 @@ Ranger. Введение
 2. Следующая команда используется для подтверждения, что файл *mysql-connector-java.jar* находится в папке общего доступа Java. Команда должна быть запущена на сервере, на котором установлен сервер Ambari:
 
   ::
-  
+
    ls /usr/share/java/mysql-connector-java.jar
 
 Если файл находится не в каталоге общего доступа Java, использовать следующую команду для установки соединения:
@@ -201,25 +201,25 @@ Ranger. Введение
 + RHEL/CentOS/Oracle Linux:
 
   ::
-   
+
    yum install mysql-connector-java*
 
 + SLES:
 
   ::
-  
+
    zypper install mysql-connector-java*
 
 3. Использовать следующий формат команды, чтобы установить путь *jdbc/driver/path* на основе местоположения файла *.jar* драйвера MySQL JDBC. Команда должна выполняться на сервере, на котором установлен сервер Ambari:
 
   ::
-  
+
    ambari-server setup --jdbc-db={database-type} --jdbc-driver={/jdbc/driver/path}
 
 Например:
 
   ::
-  
+
    ambari-server setup --jdbc-db=mysql --jdbc-driver=/usr/share/java/mysql-connector-java.jar
 
 
@@ -234,55 +234,55 @@ Ranger. Введение
 1. На хосте PostgreSQL установить соответствующий коннектор PostgreSQL:
 
   + RHEL/CentOS/Oracle Linux:
-  
+
     ::
-    
+
      yum install postgresql-jdbc*
 
   + SLES:
-  
+
     ::
-    
+
      zypper install -y postgresql-jdbc
-     
+
 2. Убедиться, что файл *.jar* находится в папке общего доступа Java:
 
   ::
-  
+
    ls /usr/share/java/postgresql-jdbc.jar
 
 3. Изменить режим доступа файла *.jar* на *644*:
 
   ::
-  
+
    chmod 644 /usr/share/java/postgresql-jdbc.jar
-     
+
 4. Для создания баз данных Ranger должен использоваться администратор базы данных PostgreSQL. Для создания пользователя *rangerdba* и предоставления ему соответствующих прав следует использовать команду:
 
   ::
-  
+
    echo "CREATE DATABASE $dbname;" | sudo -u $postgres psql -U postgres
    echo "CREATE USER $rangerdba WITH PASSWORD '$passwd';" | sudo -u $postgres psql -U postgres
-   echo "GRANT ALL PRIVILEGES ON DATABASE $dbname TO $rangerdba;" | sudo -u $postgres psql -U postgres 
+   echo "GRANT ALL PRIVILEGES ON DATABASE $dbname TO $rangerdba;" | sudo -u $postgres psql -U postgres
 
 Где *$postgres* -- пользователь Postgres, *$dbname* -- имя базы данных PostgreSQL.
 
 5. Использовать следующий формат команды, чтобы установить путь *jdbc/driver/path* на основе местоположения файла *.jar* драйвера PostgreSQL JDBC. Команда должна выполняться на сервере, на котором установлен сервер Ambari:
 
   ::
-  
+
    ambari-server setup --jdbc-db={database-type} --jdbc-driver={/jdbc/driver/path}
 
 Например:
 
   ::
-  
+
    ambari-server setup --jdbc-db=postgres --jdbc-driver=/usr/share/java/postgresql-jdbc.jar
 
 6. Выполнить следующую команду:
 
   ::
-  
+
    export HADOOP_CLASSPATH=${HADOOP_CLASSPATH}:${JAVA_JDBC_LIBS}:/connector jar path
 
 7. Разрешить доступ *Allow Access* для пользователей Ranger:
@@ -300,7 +300,7 @@ Ranger. Введение
 8. После редактирования файла *pg_hba.conf* запустить команду для обновления конфигурации базы данных PostgreSQL:
 
   ::
-  
+
    sudo -u postgres /usr/bin/pg_ctl -D $PGDATA reload
 
 Например, если файл *pg_hba.conf* находится в каталоге */var/lib/pgsql/data*, значением *$PGDATA* является */var/lib/pgsql/data*.
@@ -320,10 +320,10 @@ Ranger. Введение
   + Для Oracle Database 11g: выбрать Oracle Database 11g Release 2 drivers > ojdbc6.jar
   + Для Oracle Database 12c: выбрать Oracle Database 12c Release 1 driver > ojdbc7.jar
   + Скопировать файл *.jar* в папку общего доступа Java. Например, *cp ojdbc7.jar /usr/share/java/*
-  + Убедиться, что .jar-файл имеет соответствующие разрешения: 
+  + Убедиться, что .jar-файл имеет соответствующие разрешения:
 
     ::
-    
+
      chmod 644 /usr/share/java/ojdbc7.jar
 
 2. Для создания баз данных Ranger должен использоваться администратор базы данных Oracle.
@@ -331,23 +331,23 @@ Ranger. Введение
 Для создания пользователя *RANGERDBA* и предоставления ему прав с помощью SQL*Plus -- утилиты администрирования базы данных Oracle, следует использовать команду:
 
   ::
-  
+
    # sqlplus sys/root as sysdba
-   CREATE USER $RANGERDBA IDENTIFIED BY $RANGERDBAPASSWORD; 
+   CREATE USER $RANGERDBA IDENTIFIED BY $RANGERDBAPASSWORD;
    GRANT SELECT_CATALOG_ROLE TO $RANGERDBA;
-   GRANT CONNECT, RESOURCE TO $RANGERDBA; 
+   GRANT CONNECT, RESOURCE TO $RANGERDBA;
    QUIT;
 
 3. Использовать следующий формат команды, чтобы установить путь *jdbc/driver/path* на основе местоположения файла *.jar* драйвера Oracle JDBC. Команда должна выполняться на сервере, на котором установлен сервер Ambari:
 
   ::
-  
+
    ambari-server setup --jdbc-db={database-type} --jdbc-driver={/jdbc/driver/path}
 
 Например:
 
   ::
-  
+
    ambari-server setup --jdbc-db=oracle --jdbc-driver=/usr/share/java/ojdbc6.jar
 
 
@@ -363,13 +363,13 @@ Ranger. Введение
 
   + Установить переменную MySQL Server *log_bin_trust_function_creators* в значение *1*.
   + (Опционально) после завершения установки Ranger сбросить значение параметра *log_bin_trust_function_creators* в исходное значение (требование к значению переменной относится только на время установки Ranger).
-  
+
 Дополнительная информация:
 
   + `Stratalux: Why You Should Always Use a Custom DB Parameter Group When Creating an RDS Instance <https://www.stratalux.com/blog/always-use-custom-db-parameter-group-creating-rds-instance/>`_
   + `AWS Documentation>Amazon RDS DB Instance Lifecycle » Working with DB Parameter Groups <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html>`_
   + `MySQL 5.7 Reference Manual >Binary Logging of Stored Programs <https://dev.mysql.com/doc/refman/5.7/en/stored-programs-logging.html>`_
-  
+
 
 + **PostgreSQL**
 
@@ -378,9 +378,9 @@ Ranger. Введение
 1. Используя основную учетную запись пользователя (заведенную при создании экземпляра RDS PostgreSQL), войти в Amazon RDS PostgreSQL Server и выполнить команды:
 
   ::
-  
+
    CREATE USER $rangerdbuser WITH LOGIN PASSWORD 'password'
-   
+
    GRANT $rangerdbuser to $postgresroot
 
 Где *$postgresroot* -- это основная учетная запись пользователя RDS PostgreSQL (например, *postgresroot*), а *$rangerdbuser* -- имя пользователя базы данных Ranger (например: *rangeradmin*).
@@ -388,7 +388,7 @@ Ranger. Введение
 2. Если используется Ranger KMS, выполнить следующие команды:
 
   ::
-  
+
    CREATE USER $rangerkmsuser WITH LOGIN PASSWORD 'password'
 
    GRANT $rangerkmsuser to $postgresroot
@@ -404,7 +404,7 @@ Ranger. Введение
 1. Используя основную учетную запись пользователя (заведенную при создании экземпляра RDS Oracle), войти в RDS Oracle Server и выполнить команды:
 
   ::
-  
+
    create user $rangerdbuser identified by “password”;
    GRANT CREATE SESSION,CREATE PROCEDURE,CREATE TABLE,CREATE VIEW,CREATE SEQUENCE,CREATE PUBLIC SYNONYM,CREATE ANY SYNONYM,CREATE TRIGGER,UNLIMITED Tablespace TO $rangerdbuser;
    create tablespace $rangerdb datafile size 10M autoextend on;
@@ -415,7 +415,7 @@ Ranger. Введение
 2. Если используется Ranger KMS, выполнить следующие команды:
 
   ::
-  
+
    create user $rangerdbuser identified by “password”;
    GRANT CREATE SESSION,CREATE PROCEDURE,CREATE TABLE,CREATE VIEW,CREATE SEQUENCE,CREATE PUBLIC SYNONYM,CREATE ANY SYNONYM,CREATE TRIGGER,UNLIMITED Tablespace TO $rangerkmsuser;
    create tablespace $rangerkmsdb datafile size 10M autoextend on;
@@ -438,7 +438,6 @@ Ranger. Введение
 Смежные темы:
 
 + `Расширенные настройки пользователей`_
-+ `Настройка Ranger для LDAP SSL`_
 + `Настройка пользователей без использования учетных данных DBA`_
 + `Обновление паролей администратора Ranger`_
 + `Включение плагинов Ranger`_
@@ -539,7 +538,7 @@ Ranger Admin
    "MS SQL", "<HOST[:PORT]>", "c6401.ambari.apache.org или c6401.ambari.apache.org:1433"
    "SQLA", "<HOST[:PORT]>", "c6401.ambari.apache.org или c6401.ambari.apache.org:2638"
 
-3. Поле "Ranger DB name" -- имя базы данных Ranger Policy, то есть *Ranger_db*. 
+3. Поле "Ranger DB name" -- имя базы данных Ranger Policy, то есть *Ranger_db*.
 
 .. important:: При использовании Oracle указать имя табличного пространства Oracle
 
@@ -554,55 +553,55 @@ Ranger Admin
    "PostgreSQL", "org.postgresql.Driver"
    "MS SQL", "com.microsoft.sqlserver.jdbc.SQLServerDriver"
    "SQLA", "sap.jdbc4.sqlanywhere.IDriver"
-   
+
 5. В поля "Ranger DB username" и "Ranger DB Password" необходимо ввести имя пользователя и пароль для сервера базы данных Ranger. В таблице описаны более детальные настройки. Можно использовать базу данных MySQL, установленную с Ambari, или внешнюю БД: MySQL, Oracle, PostgreSQL, MS SQL или SQL Anywhere.
-   
+
 .. csv-table:: Пользователь и пароль Ranger DB
    :header: "", "Ranger DB username", "Ranger DB password"
    :widths: 30, 35, 35
 
-   "Описание", "Имя пользователя для базы данных Policy", "Пароль для пользователя базы данных Ranger Policy" 
+   "Описание", "Имя пользователя для базы данных Policy", "Пароль для пользователя базы данных Ranger Policy"
    "Значение по умолчанию", "rangeradmin", ""
    "Пример значения", "rangeradmin", "PassWORd"
    "Обязательность заполнения", "Да", "Да"
-   
+
 
 6. Строка подключения JDBC -- в настоящее время установщик Ambari создает строку соединения JDBC, используя формат *jdbc:oracle:thin:@//host:port/db_name*. Необходимо заменить строку подключения:
 
 + **MySQL** -- синтаксис: *jdbc:mysql://DB_HOST:PORT/db_name*, пример значения:
 
   ::
-  
+
    jdbc:mysql://c6401.ambari.apache.org:3306/ranger_db
-   
+
 + **Oracle SID** -- синтаксис: *jdbc:oracle:thin:@DB_HOST:PORT:SID*, пример значения:
 
   ::
-  
+
    jdbc:oracle:thin:@c6401.ambari.apache.org:1521:ORCL
 
 + **Oracle Service Name** -- синтаксис: *jdbc:oracle:thin:@//DB_HOST[:PORT][/ServiceName]*, пример значения:
 
   ::
-  
+
    jdbc:oracle:thin:@//c6401.ambari.apache.org:1521/XE
 
 + **PostgreSQL** -- синтаксис: *jdbc:postgresql://DB_HOST/db_name*, пример значения:
 
   ::
-  
+
    jdbc:postgresql://c6401.ambari.apache.org:5432/ranger_db
 
 + **MS SQL** -- синтаксис: *jdbc:sqlserver://DB_HOST;databaseName=db_name*, пример значения:
 
   ::
-  
+
    jdbc:sqlserver://c6401.ambari.apache.org:1433;databaseName=ranger_db
-   
+
 + **SQLA** -- синтаксис: *jdbc:sqlanywhere:host=DB_HOST;database=db_name*, пример значения:
 
   ::
-  
+
    jdbc:sqlanywhere:host=c6401.ambari.apache.org:2638;database=ranger_db
 
 7. Поле "Setup Database and Database User":
@@ -612,23 +611,23 @@ Ranger Admin
 + установка значения *No* означает отказ от предоставления данных учетной записи DBA установщику Ambari Ranger. Процесс установки Ranger продолжится без предоставления этих данных. В таком случае необходимо выполнить настройку пользователя базы данных системы, как описано в разделе `Настройка пользователей без использования учетных данных DBA`_, а затем приступить к установке. При этом пользовательский интерфейс по-прежнему требует ввода имени и пароля для продолжения, тогда можно ввести любые значения (значения не обязательно должны быть фактическим именем и паролем администратора).
 
 8. "Database Administrator (DBA) username" и "Database Administrator (DBA) password" задаются при установке сервера баз данных. Если эти сведения отсутствуют, необходимо обратиться к администратору базы данных, установившему сервер.
-   
+
 .. csv-table:: Настройки учетных данных DBA
    :header: "", "DBA username", "DBA password"
    :widths: 20, 40, 40
 
-   "Описание", "Пользователь базы данных Ranger, обладающий правами администратора для создания схем баз данных и пользователей", "Пароль пользователя базы данных Ranger" 
+   "Описание", "Пользователь базы данных Ranger, обладающий правами администратора для создания схем баз данных и пользователей", "Пароль пользователя базы данных Ranger"
    "Значение по умолчанию", "root", ""
    "Пример значения", "root", "root"
    "Обязательность заполнения", "Да", "Да"
-   
+
 Если роль пользователя root Oracle DB -- *SYSDBA*, необходимо указать это в параметре имени администратора базы данных. Например, если имя пользователя DBA -- *orcl_root*, следует указать *orcl_root AS SYSDBA*.
 
 Как упомянуто на предыдущем шаге, если "Setup Database and Database User" установлено в положение *No*, имя и пароль DBA могут все еще требоваться для продолжения установки Ranger.
 
 На следующих рисунках показаны примеры настроек БД для каждого типа базы данных Ranger (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_MySQL>`, :numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Oracle-Service-Name>`, :numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Oracle-SID>`, :numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_PostgreSQL>`, :numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_MS-SQL>`, :numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_SQL-Anywhere>`).
 
-.. important:: Чтобы проверить настройки БД, следует нажать "Test Connection". Если база данных Ranger не была предварительно установлена, тестовое соединение завершится неудачно даже при правильной конфигурации 
+.. important:: Чтобы проверить настройки БД, следует нажать "Test Connection". Если база данных Ranger не была предварительно установлена, тестовое соединение завершится неудачно даже при правильной конфигурации
 
 
 .. _security_authorizationHadoop_InstallingRanger_MySQL:
@@ -685,7 +684,7 @@ Ranger Audit
 
 **Apache Ranger** использует **Apache Solr** для хранения журналов аудита и обеспечивает поиск пользовательского интерфейса через них. **Solr** необходимо установить и настроить перед инсталляцией **Ranger Admin** или любого из плагинов компонента **Ranger**. Конфигурация по умолчанию для **Ranger Audits** в **Solr** использует общий экземпляр **Solr**, предоставляемый сервисом **Ambari Infra**. **Solr** -- это и память, и процессор. Если продуктивная система имеет большой объем запросов доступа, необходимо убедиться, что хост **Solr** имеет достаточную память, процессор и дисковое пространство.
 
-`SolrCloud <https://lucene.apache.org/solr/guide/6_6/solrcloud.html>`_ является предпочтительной установкой для использования **Ranger**. **SolrCloud**, разворачиваемый с сервисом **Ambari Infra**, представляет собой масштабируемую архитектуру, которая может работать как единый узел или кластер с несколькими узлами. Он имеет дополнительные функции, такие как репликация и сегментирование, что полезно для высокой доступности (HA) и масштабируемости. 
+`SolrCloud <https://lucene.apache.org/solr/guide/6_6/solrcloud.html>`_ является предпочтительной установкой для использования **Ranger**. **SolrCloud**, разворачиваемый с сервисом **Ambari Infra**, представляет собой масштабируемую архитектуру, которая может работать как единый узел или кластер с несколькими узлами. Он имеет дополнительные функции, такие как репликация и сегментирование, что полезно для высокой доступности (HA) и масштабируемости.
 
 Следует планировать развертывание на основе размера кластера. Поскольку записи аудита могут значительно увеличиваться, важно иметь не менее *1 ТБ* свободного места, где **Solr** будет хранить данные индекса. Необходимо предоставить процессу **Solr** как можно больше памяти (хорошо работает с *32 ГБ* оперативной памяти). Настоятельно рекомендуется использовать **SolrCloud** по меньшей мере с двумя узлами **Solr**, работающими на разных серверах с включенной `репликацией <https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=62687462>`_. **SolrCloud** также требует **Apache ZooKeeper**.
 
@@ -713,7 +712,7 @@ Ranger User Sync
 + `Настройка синхронизации пользователя Ranger для LDAP/AD`_
 + `Автоматическое назначение роли ADMIN/KEYADMIN для внешних пользователей`_
 
-  
+
 Тест-драйв Ranger Usersync
 **************************
 
@@ -777,7 +776,7 @@ Ranger User Sync
 + **Bind Anonymous** -- Если выбрано значение *Yes*, Bind User и Bind User Password не требуются.
 
   + Значение по умолчанию -- *NO*
-  
+
 + **Bind User** -- Расположение файла групп на сервере Linux.
 
   + Значение по умолчанию -- Полное distinguished name (DN), включая common name (CN), учетной записи пользователя LDAP/AD с правами поиска пользователей. Используется для запроса пользователей и групп.
@@ -865,7 +864,7 @@ Ranger User Sync
 + **Group Object Class** -- Класс объекта LDAP Group.
 
   + Пример значения -- *group*, *groupofnames* или *posixGroup*
-  
+
 + **Group Search Base** -- База поиска для групп. Ranger может искать несколько подразделений в AD. Модуль Ranger UserSync выполняет поиск пользователей по каждому настроенному подразделению и добавляет всех пользователей в один список. После того как все подразделения будут обработаны, членство в группе пользователей вычисляется на основе конфигурации поиска группы. Каждый сегмент подразделения должен быть разделен знаком ";" (точка с запятой).
 
   + Пример значения -- *ou=groups,DC=example,DC=com;ou=group1;ou=group2*
@@ -878,18 +877,18 @@ Ranger User Sync
 
   + Значение по умолчанию -- *No*
   + Пример значения -- *Yes*
-  
+
 + **Sync Nested Groups** -- Включает членство во вложенных группах в Ranger, чтобы права, настроенные для родительских групп, применялись ко всем членам в подгруппах. Если сама группа является членом другой группы, пользователи, принадлежащие к этой группе, также являются частью родительской группы. Уровни иерархии групп определяют глубину вложенной группы. Если свойство "Sync Nested Groups" не отображается, следует обновить Ambari 2.6.0+.
 
   + Значение по умолчанию -- *No*
-  + Пример значения -- *Yes*, *No*  
-  
+  + Пример значения -- *Yes*, *No*
+
 + **Group Hierarchy Levels** -- Количество вложенных групп для оценки в поддержку "Sync Nested Groups". Задать целое число *>0*.
 
   + Значение по умолчанию -- *0*
   + Пример значения -- *2*
-  
-    
+
+
 .. _security_authorizationHadoop_InstallingRanger_Group-Configs-LDAP:
 
 .. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Group-Configs-LDAP.*
@@ -908,18 +907,18 @@ Ranger User Sync
 2. Добавить следующие свойства:
 
 + *ranger.usersync.role.assignment.list.delimiter =* **&**
-  
+
   + Значение по умолчанию -- "&"
 
 + *ranger.usersync.users.groups.assignment.list.delimiter =* **:**
-  
+
   + Значение по умолчанию -- ":"
 
 + *ranger.usersync.username.groupname.assignment.list.delimiter =* **,**
-  
+
   + Значение по умолчанию -- ","
 
-  + *ranger.usersync.group.based.role.assignment.rules =* 
+  + *ranger.usersync.group.based.role.assignment.rules =*
 
   ::
 
@@ -932,7 +931,7 @@ Ranger User Sync
 Пример:
 
   ::
-  
+
    ranger.usersync.role.assignment.list.delimiter = &
    ranger.usersync.users.groups.assignment.list.delimiter = :
    ranger.usersync.username.groupname.assignment.list.delimiter = ,
@@ -942,7 +941,7 @@ Ranger User Sync
 Ranger Tagsync
 **************
 
-Для настройки **Ranger Tagsync** следует на странице "Customize Services" на вкладке "Ranger Tagsync" выбрать необходимый **Tag Source** путем проставления флага в соответствующее поле (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Ranger-Tagsync>`): 
+Для настройки **Ranger Tagsync** следует на странице "Customize Services" на вкладке "Ranger Tagsync" выбрать необходимый **Tag Source** путем проставления флага в соответствующее поле (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Ranger-Tagsync>`):
 
 + Atlas Tag Source;
 + AtlasREST Tag Source;
@@ -957,7 +956,7 @@ Ranger Tagsync
    Ranger Tagsync
 
 
-Описание свойств **Tag Source** приведено в таблицах. 
+Описание свойств **Tag Source** приведено в таблицах.
 
 
 .. csv-table:: Atlas Tag Source
@@ -967,21 +966,21 @@ Ranger Tagsync
    "Atlas Source: Kafka endpoint", "Конечная точка Kafka: *<kafka_server_url>:6667*"
    "Atlas Source: ZooKeeper endpoint", "Конечная точка ZooKeeper: *<zookeeper_server_url>*:2181"
    "Atlas Source: Kafka consumer group", "Пользователь Ranger"
-   
+
 .. csv-table:: AtlasREST Tag Source
    :header: "Свойство", "Описание"
    :widths: 50, 50
 
    "AtlasREST Source: Atlas endpoint", "Конечная точка AtlasREST: *<atlas_host_url>:21000*"
    "AtlasREST Source: Atlas source download interval", "Интервал загрузки AtlasREST (миллисекунды)"
-      
+
 .. csv-table:: File Tag Source
    :header: "Свойство", "Описание"
    :widths: 50, 50
 
    "File Source: File update polling interval", "Интервал опроса обновлений файла (миллисекунды)"
    "File Source: Filename", "Имя файла tag source"
-      
+
 
 
 Ranger Authentication
@@ -997,7 +996,7 @@ Ranger Authentication
 После завершения настройки параметров аутентификации нажать кнопку *Next* для продолжения установки. Затем обновить конфигурацию **Ranger admin truststore**, добавив следующие параметры в "Ambari> Ranger> Configs> Advanced> Advanced ranger-admin-site":
 
   ::
-  
+
    ranger.truststore.file=/etc/ranger/admin/truststore
    ranger.truststore.password=password
 
@@ -1015,22 +1014,22 @@ Ranger UNIX Authentication
 
 3. В поле "Authentication method" отметить *UNIX*. *HTTP* включен по умолчанию -- если отключить *HTTP*, то возможен только *HTTPS*;
 
-4. В блоке "UNIX Authentication Settings" указать свойства: 
+4. В блоке "UNIX Authentication Settings" указать свойства:
 
 + **Allow remote Login** -- Флаг для включения/отключения удаленного входа.
 
   + Значение по умолчанию -- *true*
-  + Пример значения -- *true*  
+  + Пример значения -- *true*
 
 + **ranger.unixauth.service.hostname** -- Адрес хоста, на котором запущена служба проверки подлинности UNIX.
 
   + Значение по умолчанию -- *{{ugsync_host}}*
-  + Пример значения -- *{{ugsync_host}}*  
+  + Пример значения -- *{{ugsync_host}}*
 
 + **ranger.unixauth.service.port** -- Номер порта, на котором запущена служба проверки подлинности UNIX.
 
   + Значение по умолчанию -- *5151*
-  + Пример значения -- *5151*  
+  + Пример значения -- *5151*
 
 
 Свойства со значением {{xyz}} – это макропеременные, которые производятся из других заданных значений, для оптимизации процесса настройки. Переменные доступны для редактирования. Для восстановления исходного значения следует нажать значок *Set Recommended* справа от поля свойства.
@@ -1054,50 +1053,50 @@ Ranger LDAP Authentication
 
 3. В поле "Authentication method" отметить *LDAP*;
 
-4. В блоке "LDAP Settings" указать свойства: 
+4. В блоке "LDAP Settings" указать свойства:
 
 + **ranger.ldap.base.dn** -- Distinguished Name (DN) начальной точки для поиска на сервере каталогов.
 
   + Значение по умолчанию -- *dc=example,dc=com*
-  + Пример значения -- *dc=example,dc=com*  
+  + Пример значения -- *dc=example,dc=com*
 
 + **Bind User** -- Полное Distinguished Name (DN), включая Common Name (CN) учетной записи пользователя LDAP с правами поиска пользователей. Это значение макропеременной, полученное из значения "Bind User" из "Ranger User Info > Common Configs".
 
   + Значение по умолчанию -- *{{ranger_ug_ldap_bind_dn}}*
-  + Пример значения -- *{{ranger_ug_ldap_bind_dn}}*  
+  + Пример значения -- *{{ranger_ug_ldap_bind_dn}}*
 
 + **Bind User Password** -- Пароль для Bind User. Это значение макропеременной, которое получено из значения пароля "Bind User" из "Ranger User Info > Common Configs".
 
 + **ranger.ldap.group. roleattribute** -- Атрибут роли группы LDAP.
 
   + Значение по умолчанию -- *cn*
-  + Пример значения -- *cn*  
+  + Пример значения -- *cn*
 
-+ **ranger.ldap.referral** -- Существует три возможных значения: 
++ **ranger.ldap.referral** -- Существует три возможных значения:
 
-  + *follow* -- сервис LDAP сначала обрабатывает все обычные записи, а затем следует по ссылкам; 
+  + *follow* -- сервис LDAP сначала обрабатывает все обычные записи, а затем следует по ссылкам;
   + *throw* -- все нормальные записи возвращаются в перечислении до того, как выбрано *ReferralException*. При этом в случаях настройки свойства на *follow* или *throw* ответ об ошибке "referral" обрабатывается немедленно;
-  + *ignore* -- указывает, что сервер должен возвращать записи ссылок как обычные записи, обычный текст. Это может привести к частичным результатам поиска. 
-  
+  + *ignore* -- указывает, что сервер должен возвращать записи ссылок как обычные записи, обычный текст. Это может привести к частичным результатам поиска.
+
   Рекомендуемая настройка *follow*. При поиске в каталоге сервер может возвращать несколько результатов поиска, а также несколько ссылок, которые показывают, где получить дальнейшие результаты. Эти результаты и ссылки могут чередоваться на уровне протокола.
 
   + Значение по умолчанию -- *ignore*
-  + Пример значения -- *follow | ignore | throw*  
+  + Пример значения -- *follow | ignore | throw*
 
 + **LDAP URL** -- URL-адрес сервера LDAP. Это значение макропеременной, полученное из значения "LDAP/AD URL" из "Ranger User Info > Common Configs".
 
   + Значение по умолчанию -- *{{ranger_ug_ldap_url}}*
-  + Пример значения -- *{{ranger_ug_ldap_url}}*  
+  + Пример значения -- *{{ranger_ug_ldap_url}}*
 
 + **ranger.ldap.user. dnpattern** -- Шаблон DN пользователя расширяется при входе пользователя в систему. Например, если пользователь *ldapadmin* выполняет вход, сервер LDAP попытается связаться с DN *uid=ldapadmin,ou=users,dc=example,dc=com*, используя пароль, предоставленный пользователем.
 
   + Значение по умолчанию -- *uid={0},ou=users,dc=xasecure,dc=net*
-  + Пример значения -- *cn=ldapadmin,ou=Users,dc=example,dc=com*  
+  + Пример значения -- *cn=ldapadmin,ou=Users,dc=example,dc=com*
 
 + **User Search Filter** -- Фильтр поиска, используемый для Bind Authentication. Это значение макропеременной, полученное из значения "User Search Filter" из "Ranger User Info > Common Configs".
 
   + Значение по умолчанию -- *{{ranger_ug_ldap_user _searchfilter}}*
-  + Пример значения -- *{{ranger_ug_ldap_user _searchfilter}}*  
+  + Пример значения -- *{{ranger_ug_ldap_user _searchfilter}}*
 
 
 Свойства со значением *{{xyz}}* -- это макропеременные, которые производятся из других заданных значений, для оптимизации процесса настройки. Переменные доступны для редактирования. Для восстановления исходного значения следует нажать значок *Set Recommended* справа от поля свойства.
@@ -1109,7 +1108,7 @@ Ranger LDAP Authentication
    :align: center
 
    Настройка Ranger LDAP Authentication
-   
+
 
 Ranger Active Directory Authentication
 **************************************
@@ -1122,44 +1121,44 @@ Ranger Active Directory Authentication
 
 3. В поле "Authentication method" отметить *ACTIVE_DIRECTORY*;
 
-4. В блоке "AD Settings" указать свойства: 
+4. В блоке "AD Settings" указать свойства:
 
 + **ranger.ldap.ad.base.dn** -- Distinguished Name (DN) начальной точки для поиска на сервере каталогов.
 
   + Значение по умолчанию -- *dc=example,dc=com*
-  + Пример значения -- *dc=example,dc=com*  
+  + Пример значения -- *dc=example,dc=com*
 
 + **ranger.ldap.ad.bind.dn** -- Полное Distinguished Name (DN), включая Common Name (CN) учетной записи пользователя LDAP с правами поиска пользователей. Это значение макропеременной, полученное из значения "Bind User" из "Ranger User Info > Common Configs".
 
   + Значение по умолчанию -- *{{ranger_ug_ldap_bind_dn}}*
-  + Пример значения -- *{{ranger_ug_ldap_bind_dn}}*  
+  + Пример значения -- *{{ranger_ug_ldap_bind_dn}}*
 
 + **ranger.ldap.ad.bind.password** -- Пароль для bind.dn. Это значение макропеременной, полученное из значения "Bind User Password" из "Ranger User Info > Common Configs".
 
 + **Domain Name (Only for AD)** -- Доменное имя сервера аутентификации AD
 
-  + Пример значения -- *dc=example,dc=com*  
+  + Пример значения -- *dc=example,dc=com*
 
-+ **ranger.ldap.ad.referral** -- Существует три возможных значения: 
++ **ranger.ldap.ad.referral** -- Существует три возможных значения:
 
-  + *follow* -- сервис LDAP сначала обрабатывает все обычные записи, а затем следует по ссылкам; 
+  + *follow* -- сервис LDAP сначала обрабатывает все обычные записи, а затем следует по ссылкам;
   + *throw* -- все нормальные записи возвращаются в перечислении до того, как выбрано *ReferralException*. При этом в случаях настройки свойства на *follow* или *throw* ответ об ошибке "referral" обрабатывается немедленно;
-  + *ignore* -- указывает, что сервер должен возвращать записи ссылок как обычные записи, обычный текст. Это может привести к частичным результатам поиска. 
+  + *ignore* -- указывает, что сервер должен возвращать записи ссылок как обычные записи, обычный текст. Это может привести к частичным результатам поиска.
 
   Рекомендуемая настройка *follow*. При поиске в каталоге сервер может возвращать несколько результатов поиска, а также несколько ссылок, которые показывают, где получить дальнейшие результаты. Эти результаты и ссылки могут чередоваться на уровне протокола.
 
   + Значение по умолчанию -- *ignore*
-  + Пример значения -- *follow | ignore | throw*  
+  + Пример значения -- *follow | ignore | throw*
 
 + **ranger.ldap.ad.url** -- URL-адрес сервера AD. Это значение макропеременной, полученное из значения "LDAP/AD URL" из "Ranger User Info > Common Configs".
 
   + Значение по умолчанию -- *{{ranger_ug_ldap_url}}*
-  + Пример значения -- *{{ranger_ug_ldap_url}}*  
+  + Пример значения -- *{{ranger_ug_ldap_url}}*
 
 + **ranger.ldap.ad.user.searchfilter** -- Фильтр поиска, используемый для Bind Authentication. Это значение макропеременной, полученное из значения "User Search Filter" из "Ranger User Info > Common Configs".
 
   + Значение по умолчанию -- *{{ranger_ug_ldap_user_searchfilter}}*
-  + Пример значения -- *{{ranger_ug_ldap_user_searchfilter}}*  
+  + Пример значения -- *{{ranger_ug_ldap_user_searchfilter}}*
 
 
 Свойства со значением *{{xyz}}* -- это макропеременные, которые производятся из других заданных значений, для оптимизации процесса настройки. Переменные доступны для редактирования. Для восстановления исходного значения следует нажать значок *Set Recommended* справа от поля свойства.
@@ -1251,14 +1250,14 @@ Ranger Active Directory Authentication
    "ranger.usersync.ldap.bindkeystore", "Установить значение таким же, как и в свойстве *ranger.usersync.credstore.filename*. Значение по умолчанию: /usr/hdp/current/ranger-usersync/conf/ugsync.jceks"
    "ranger.usersync.ldap.bindalias", "ranger.usersync.ldap.bindalias"
    "ranger.usersync.source.impl.class", "ldap"
-   
+
 .. csv-table:: Настройки AD Advanced ranger-ugsync-site
    :header: "Свойство", "Значение AD"
    :widths: 50, 50
 
    "ranger.usersync.source.impl.class", "ldap"
-  
-  
+
+
 Дополнительные настройки LDAP и AD Usersync
 ````````````````````````````````````````````
 
@@ -1291,7 +1290,7 @@ Ranger Active Directory Authentication
 + **ranger.usersync.source.impl.class**
 
   + Значение LDAP: *org.apache.ranger. ladpusersync. process.LdapUserGroupBuilder*
-  
+
 
 + **ranger.usersync.ldap.user.searchbase**
 
@@ -1414,26 +1413,6 @@ Ranger Active Directory Authentication
   + Значение AD: *false*
 
 
-
-Настройка Ranger для LDAP SSL
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Можно использовать следующие настройки **LDAP SSL** с помощью самоподписанных сертификатов в стандартном **Ranger User Sync TrustStore**:
-
-1. Для свойства *ranger.usersync.truststore.file* расположение по умолчанию */usr/hdp/current/ranger-usersync/conf/mytruststore.jks*;
-2. Скопировать и отредактировать самоподписанные сертификаты;
-3. Установить свойство *ranger.usersync.truststore.file* в новый файл:
-
-  ::
-  
-   cd /usr/hdp/<version>/ranger-usersync 
-   service ranger-usersync stop 
-   service ranger-usersync start
-
-  Сертификат LDAPS содержится в *cert.pem*.
-
-
-
 Настройка пользователей без использования учетных данных DBA
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -1444,35 +1423,35 @@ Ranger Active Directory Authentication
 1. Загрузить Ranger rpm с помощью команды *yum install*:
 
   ::
-  
+
    yum install ranger-admin
-   
-2. В каталоге */usr/hdp/current/ranger-admin* должен быть файл с именем *dba_script.py*; 
+
+2. В каталоге */usr/hdp/current/ranger-admin* должен быть файл с именем *dba_script.py*;
 
 3. Получить внутренний скрипт и убедиться, что DBA имеет право запускать его;
 
 4. Выполнить скрипт командой:
 
   ::
-  
+
    python dba_script.py
-   
+
 5. Указать все необходимые значения в аргументе (включает *db flavor*, *JDBC jar*, *db host*, *db name*, *db user* и другие параметры):
- 
+
 + Если во время выполнения не предпочитается передача аргументов в командной строке, можно обновить файл */usr/hdp/current/ranger-admin/install.properties*, а затем выполнить команду:
-  
+
   ::
-  
+
    python dba_script.py -q
-  
+
 При указании опции *-q* скрипт считывает всю необходимую информацию из файла *install.properties*;
-  
+
 + Опция *-d* используется для запуска скрипта в режиме "dry". Это приводит к созданию сценария базы данных:
-  
+
   ::
-  
+
    python dba_script.py -d /tmp/generated-script.sql
-   
+
 Сценарий может выполнить любой пользователь, но рекомендуется, чтобы его запустил в режиме "dry" системный администратор баз данных. В любом случае системный DBA должен просматривать сгенерированный скрипт, но при этом вносить лишь незначительные корректировки, например, изменение расположения конкретного файла базы данных. Не следует вносить существенных изменений, которые могут сильно изменить скрипт -- в противном случае установка Ranger может завершиться ошибкой.
 
 Затем системному администратору баз данных необходимо запустить созданный скрипт.
@@ -1484,7 +1463,7 @@ Ranger Active Directory Authentication
 Обновление паролей администратора Ranger
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-При обновлении паролей на странице "Ranger Configs" для нижеприведенных пользователей необходимо также обновить пароли каждого компонента **Ambari**, для которого включен плагин **Ranger**. 
+При обновлении паролей на странице "Ranger Configs" для нижеприведенных пользователей необходимо также обновить пароли каждого компонента **Ambari**, для которого включен плагин **Ranger**.
 
 .. important:: Индивидуальные конфигурации компонентов Ambari не обновляются автоматически -- перезапуск сервиса завершается ошибкой, если пароли для каждого компонента не обновлены
 
@@ -1509,7 +1488,7 @@ Ranger Active Directory Authentication
 
 При использовании кластера с поддержкой **Kerberos** необходимо выполнить ряд дополнительных шагов, чтобы убедиться в возможности использования подключаемых плагинов **Ranger** в кластере **Kerberos** (`HDFS в кластере с поддержкой Kerberos`_).
 
-Доступны следующие плагины **Ranger**: `HDFS`_, **Hive**, **HBase**, **Kafka**, **Knox**, **YARN**, **Storm**, **Atlas**. 
+Доступны следующие плагины **Ranger**: `HDFS`_, **Hive**, **HBase**, **Kafka**, **Knox**, **YARN**, **Storm**, **Atlas**.
 
 
 HDFS
@@ -1586,9 +1565,9 @@ HDFS в кластере с поддержкой Kerberos
 2. Создать принципала Kerberos для *rangerhdfslookup*, введя следующую команду (один пользователь/принципал, например, *rangerrepouser*, может быть создан и использован в разных сервисах):
 
   ::
-  
+
    kadmin.local -q 'addprinc -pw rangerhdfslookup rangerhdfslookup@example.com
-   
+
 3. Перейти в разделе сервиса "HDFS" на вкладку "Config";
 
 4. В блоке "Advanced ranger-hdfs-plugin-properties" обновить свойства, перечисленные в таблице под рисунком (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_HDFS-Config>`).
@@ -1666,7 +1645,7 @@ Ranger для авторизации в Hadoop
 + *Resource Path* -- определить путь к ресурсу для папки/файла политики. Во избежание необходимости указывать полный путь или включать политику для всех вложенных папок или файлов, можно заполнить это поле с помощью подстановочных знаков (например, /home*) либо указать, что политика должна быть рекурсивной;
 
   + Подстановочные знаки могут быть включены в путь ресурса, имя базы данных, таблицы или столбца: "*" -- указывает ноль или более символов; "?" -- указывает один символ;
-  
+
 + *Description* -- (опционально) указать цель политики;
 + *Audit Logging* -- указать, выполняется ли аудит данной политики (снять флажок, чтобы отключить аудит).
 
@@ -1680,5 +1659,3 @@ Ranger для авторизации в Hadoop
 3. Для добавления дополнительных условий можно использовать символ плюс "+". Условия оцениваются в порядке, указанном в списке -- сначала применяется условие в верхней части списка, затем второе, третье и так далее;
 
 4. Нажать кнопку *Add* для сохранения новой политики.
-
-
