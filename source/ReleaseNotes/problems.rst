@@ -17,3 +17,7 @@
 *Apache Hive LLAP:*
 
 + Не поддерживается корректная работа в Kerberos окружении в связи с оганичениями Slider (SLIDER-993)
+
+*Apache Atlas:*
+
++ Возможны проблемы при запуске Apache Atlas в Kerberos окружении с созданием топиков Kafka и таблицами HBase. Для решения данной проблемой воспользуйтесь следующими рекомендациями: https://support.arenadata.io/kb/faq.php?id=19
