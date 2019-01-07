@@ -11,7 +11,7 @@
 2. Выполнить команду:
 
   ::
-  
+
    ambari-server setup-sso
 
 3. На выпадающий запрос ответить *y*.
@@ -19,14 +19,14 @@
 4. Ввести URL-адрес:
 
   ::
-  
+
    https://<hostname>:8443/gateway/knoxsso/api/v1/websso
 
 5. Выполнить следующую команду CLI для экспорта сертификата **Knox**:
 
   ::
-  
-   JAVA_HOME/bin/keytool -export -alias gateway-identity -rfc -file <cert.pem> -keystore /usr/hdp/current/knox-server/data/security/keystores/gateway.jks
+
+   JAVA_HOME/bin/keytool -export -alias gateway-identity -rfc -file <cert.pem> -keystore /usr/lib/knox-server/data/security/keystores/gateway.jks
 
 При появлении запроса ввести пароль мастера **Knox**. Обратить внимание на место сохранения файла *cert.pem*.
 
@@ -41,7 +41,7 @@
 -----------------------------
 
   ::
-  
+
    ambari-server setup-sso
    Setting up SSO authentication properties...
    Do you want to configure SSO authentication [y/n] (y)?y
@@ -58,10 +58,10 @@
    hCkaalUCAwEAATANBgkqhkiG9w0BAQUFAAOBgQAqvPfl4fivozd+4QI4ZBohFHHvf1z4Y7+DxlY7
    iNAnjnau4W3wgwTt6CQ1B9fSx3zVTlhu2PfDJwvumBbuKuth/M+KXpG28AbKIojrL2Odlv+cftrJ
    YeJC6Qjee+5Pf2P9G2wd9fahWF+aQpr50YlMZSU+VMiTO2a2FSAXvOdjvA==
-   
+
    Do you want to configure advanced properties [y/n] (n) ?y
    JWT Cookie name (hadoop-jwt):
    JWT audiences list (comma-separated), empty for any ():
    Ambari Server 'setup-sso' completed successfully.
-   
+
    ambari-server restart

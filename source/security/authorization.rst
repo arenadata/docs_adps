@@ -33,7 +33,7 @@ Ranger. Введение
 
 Перед установкой **Ranger** необходимо убедиться, что кластер отвечает следующим требованиям:
 
-+ Рекомендуется хранить аудиты как в HDFS, так и в Solr. Конфигурация по умолчанию для Ranger Audits в Solr использует общий экземпляр Solr, предоставляемый сервисом Ambari Infra (дополнительные сведения см. в разделе `Ranger Audit Settings <https://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.6.4/bk_security/content/ranger_audit_settings.html>`_);
++ Рекомендуется хранить аудиты как в HDFS, так и в Solr. Конфигурация по умолчанию для Ranger Audits в Solr использует общий экземпляр Solr, предоставляемый сервисом Ambari Infra;
 
 + Чтобы обеспечить принудительную авторизацию на уровне групп LDAP/AD в Hadoop, необходимо настроить сопоставление групп Hadoop для LDAP/AD для LDAP (`Настройка сопоставления групп Hadoop для LDAP/AD`_);
 
@@ -1247,7 +1247,7 @@ Ranger Active Directory Authentication
    :header: "Свойство", "Значение LDAP"
    :widths: 50, 50
 
-   "ranger.usersync.ldap.bindkeystore", "Установить значение таким же, как и в свойстве *ranger.usersync.credstore.filename*. Значение по умолчанию: /usr/hdp/current/ranger-usersync/conf/ugsync.jceks"
+   "ranger.usersync.ldap.bindkeystore", "Установить значение таким же, как и в свойстве *ranger.usersync.credstore.filename*. Значение по умолчанию: /usr/lib/ranger-usersync/conf/ugsync.jceks"
    "ranger.usersync.ldap.bindalias", "ranger.usersync.ldap.bindalias"
    "ranger.usersync.source.impl.class", "ldap"
 
@@ -1426,7 +1426,7 @@ Ranger Active Directory Authentication
 
    yum install ranger-admin
 
-2. В каталоге */usr/hdp/current/ranger-admin* должен быть файл с именем *dba_script.py*;
+2. В каталоге */usr/lib/ranger-admin* должен быть файл с именем *dba_script.py*;
 
 3. Получить внутренний скрипт и убедиться, что DBA имеет право запускать его;
 
@@ -1438,7 +1438,7 @@ Ranger Active Directory Authentication
 
 5. Указать все необходимые значения в аргументе (включает *db flavor*, *JDBC jar*, *db host*, *db name*, *db user* и другие параметры):
 
-+ Если во время выполнения не предпочитается передача аргументов в командной строке, можно обновить файл */usr/hdp/current/ranger-admin/install.properties*, а затем выполнить команду:
++ Если во время выполнения не предпочитается передача аргументов в командной строке, можно обновить файл */usr/lib/ranger-admin/install.properties*, а затем выполнить команду:
 
   ::
 
