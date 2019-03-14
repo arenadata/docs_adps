@@ -8,6 +8,10 @@ a:visited {
     color: #4dc872
 }
 
+.caption-text {
+    color: #4dc872 
+}
+
 table td {
     white-space: normal !important;
 }
