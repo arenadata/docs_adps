@@ -54,10 +54,10 @@
 
    install/index
    administration/index
-   security/index
-   SecurityAmbari/index
    HDFSadmin/index
    views/index
+   SecurityAmbari/index
+   security/index
    Knox/index
    ReleaseNotes/index
    Glossary
