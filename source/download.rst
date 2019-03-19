@@ -17,7 +17,7 @@
 `Скачать использование Ambari View`_
  .. _Скачать использование Ambari View: https://storage.googleapis.com/arenadata-repo/docs/adh/pdf/v1.6.1/Использование%20Ambari%20View.pdf
 
- `Руководство по работе с Apache Ranger`_
+`Руководство по работе с Apache Ranger`_
   .. _Скачать руководство по работе с Apache Ranger: https://storage.googleapis.com/arenadata-repo/docs/adh/pdf/v1.6.1/Руководство%20по%20работе%20с%20Apache%20Ranger.pdf
 
 `Скачать руководство по работе с Knox Gateway`_
