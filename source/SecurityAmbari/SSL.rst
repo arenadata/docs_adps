@@ -136,7 +136,7 @@
   
    > start ambari-agent
 
-2. В UI *ambari-server* пройти процедуру `добавления нового узла <../administration/cluster>`_, выбрав опцию *Perform manual registration on hosts and do not use SSH* и подтвердив регистрацию кнопкой *Register and confirm*.1
+2. В UI *ambari-server* пройти процедуру `добавления нового узла <../administration/cluster.html#adh>`_, выбрав опцию *Perform manual registration on hosts and do not use SSH* и подтвердив регистрацию кнопкой *Register and confirm*.2
 
 
 
