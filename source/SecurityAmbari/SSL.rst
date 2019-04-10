@@ -118,3 +118,25 @@
    > ambari-agent start
 
 
+Добавление новых нод
+---------------------
+
+Добавление новых нод осуществляется следующим образом:
+
+1. На новых узлах *ambari-agent* выполнить:
+
+  ::
+  
+   > yum install ambari-agent
+   > scp ca.crt agent2.local.crt agent2.local.key root@agent2.local:/var/lib/ambari-agent/keys/
+
+После чего в файле */etc/ambari-agent/conf/ambari-agent.ini* изменить параметр *hostname=server.local* и запустить *ambari-agent*:
+
+  ::
+  
+   > start ambari-agent
+
+2. В UI *ambari-server* пройти процедуру добавления нового узла: https://docs.arenadata.io/adh/administration/cluster.html#adh, выбрав опцию *Perform manual registration on hosts and do not use SSH* и подтвердив регистрацию кнопкой *Register and confirm*.
+
+
+
