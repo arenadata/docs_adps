@@ -49,34 +49,72 @@
    > openssl x509 -req -in agent2.local.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out agent2.local.crt
 
 
-Включить SSL на стороне ambari-server
+Включение SSL на стороне ambari-server
 ---------------------------------------
 
+Для включения SSL на стороне *ambari-server* неообходимо последовательно выполнить шаги:
 
-2.1)
-> ambari-server stop
+1. Остановить сервер:
 
-2.2)
-> scp ca.crt server.local.crt server.local.key root@server.local:/root/
-> mv /var/lib/ambari-server/keys /var/lib/ambari-server/keys.bak
-> mkdir /var/lib/ambari-server/keys
-> ambari-server setup-security (option 1 -- use crt and key from scp step)
-> openssl pkcs12 -export -in /root/server.local.crt -inkey /root/server.local.key -certfile /root/server.local.crt -name 1 -out /var/lib/ambari-server/keys/keystore.p12
+  ::
+   
+   > ambari-server stop
 
-Утилита потребует пароль для шифрования keystore. Этот пароль необходимо будет также поместить в файл /var/lib/ambari-server/keys/pass.txt:
-> echo "keystore_pass" > /var/lib/ambari-server/keys/pass.txt
-> keytool -importcert -alias 2 -file /root/ca.crt -keystore /var/lib/ambari-server/keys/keystore.p12 -storepass `cat /var/lib/ambari-server/keys/pass.txt`
+2. Выполнить набор команд:
 
-Можно удостовериться, что в keystore импортированы нужные сертификаты, а именно сертификаты ambari-server и УЦ:
-> keytool -list -v -keystore /var/lib/ambari-server/keys/keystore.p12 -storepass `cat /var/lib/ambari-server/keys/pass.txt`
+  ::
+   
+   > scp ca.crt server.local.crt server.local.key root@server.local:/root/
+   > mv /var/lib/ambari-server/keys /var/lib/ambari-server/keys.bak
+   > mkdir /var/lib/ambari-server/keys
+   > ambari-server setup-security (option 1 -- use crt and key from scp step)
+   > openssl pkcs12 -export -in /root/server.local.crt -inkey /root/server.local.key -certfile /root/server.local.crt -name 1 -out /var/lib/ambari-server/keys/keystore.p12
 
-2.3)
-> ambari-server start
+При этом утилита требует пароль для шифрования keystore. Пароль также необходимо поместить в файл */var/lib/ambari-server/keys/pass.txt*:
+
+  ::
+  
+   > echo "keystore_pass" > /var/lib/ambari-server/keys/pass.txt
+   > keytool -importcert -alias 2 -file /root/ca.crt -keystore /var/lib/ambari-server/keys/keystore.p12 -storepass `cat /var/lib/ambari-server/keys/pass.txt`
+
+Для того, чтобы удостовериться, что в keystore импортированы неообходимые сертификаты, а именно сертификаты *ambari-server* и УЦ, выполнить действие:
+
+  ::
+  
+   > keytool -list -v -keystore /var/lib/ambari-server/keys/keystore.p12 -storepass `cat /var/lib/ambari-server/keys/pass.txt`
+
+3. Запустить сервер:
+
+  ::
+  
+   > ambari-server start
 
 
+Включение двустороннего SSL шифрования
+----------------------------------------
 
+Для включения двустороннего SSL шифрования необходимо:
 
+1. На узле с *ambari-server* выполнить команду:
 
+  ::
+  
+   > ambari-server stop
 
+После чего добавить в файл */etc/ambari-server/conf/ambari.properties* параметр: *security.server.two_way_ssl=true*.
+
+2. На узлах *ambari-agent*:
+
+  ::
+  
+   > ambari-agent stop
+   > scp ca.crt agent.local.crt agent.local.key root@agent.local:/var/lib/ambari-agent/keys/
+
+3. Стартовать *ambari-server* и *ambari-agent*:
+
+  ::
+  
+   > ambari-server start
+   > ambari-agent start
 
 
