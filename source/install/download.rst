@@ -7,7 +7,6 @@
 .. _install_download_form-download:
 
 .. figure:: ../imgs/install_download_form-download.png
-   :scale: 60 %
    :align: center
 
    Заявка для загрузки продукта
@@ -25,7 +24,6 @@
 .. _install_download_accepted:
 
 .. figure:: ../imgs/install_download_accepted.png
-   :scale: 80 %
    :align: center
 
    Заявка принята
@@ -36,7 +34,6 @@
 .. _install_download_app-store:
 
 .. figure:: ../imgs/install_download_app-store.png
-   :scale: 90 %
    :align: center
 
    Магазин Приложений
