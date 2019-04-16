@@ -1,7 +1,7 @@
 .. _ADH_index_logo:
 
-.. figure:: imgs/ADH_index_logo.*
-   :align: center
+.. figure:: imgs/ADH_index_logo.png
+   :align: left
 
 
 Универсальная платформа данных
@@ -12,12 +12,12 @@
 
 Основная идея универсальной платформы заключается в обеспечении возможности работы с любыми типами и форматами данных путем комбинированного использования различных технологических решений и архитектур обработки данных.
 
-.. figure:: imgs/arenadata-ru-products-obshii-obzor-1.*
+.. figure:: imgs/arenadata-ru-products-obshii-obzor-1.png
    :align: center
 
 В настоящий момент полностью реализован уровень хранения и обработки слабоструктурированных и неструктурированных данных – **Arenadata Hadoop** (**ADH**). Это полноценный дистрибутив распределенной платформы хранения на базе **Apache Hadoop**, адаптированный для корпоративного использования.
 
-.. figure:: imgs/arenadata-ru-products-obshii-obzor-2.*
+.. figure:: imgs/arenadata-ru-products-obshii-obzor-2.png
    :align: center
 
 
