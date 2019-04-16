@@ -6,7 +6,8 @@
 
 .. _install_download_form-download:
 
-.. figure:: ../imgs/install_download_form-download.*
+.. figure:: ../imgs/install_download_form-download.png
+   :scale: 70 %
    :align: center
 
    Заявка для загрузки продукта
@@ -19,21 +20,23 @@
 + *Компания* – наименование компании пользователя;
 + *Цель использования* – описание цели использования кластера.
 
-Все поля являются обязательными для заполнения. После ввода данных необходимо нажать кнопку *Отправить*. При корректном заполнении полей выдается соответствующее сообщение (:numref:`Рис.%s.<install_download_accepted>`).
+Все поля являются обязательными для заполнения. После ввода данных необходимо нажать кнопку *Отправить*, в результате чего выдается соответствующее сообщение (:numref:`Рис.%s.<install_download_accepted>`).
 
 .. _install_download_accepted:
 
-.. figure:: ../imgs/install_download_accepted.*
+.. figure:: ../imgs/install_download_accepted.png
+   :scale: 80 %
    :align: center
 
    Заявка принята
 
 
-Окно сообщения следует закрыть. При этом происходит переход на страницу *Магазин Приложений* с перечнем продуктов **Arenadata** (:numref:`Рис.%s.<install_download_app-store>`).
+При закрытии окна происходит переход на страницу *Магазин Приложений* с перечнем продуктов **Arenadata** (:numref:`Рис.%s.<install_download_app-store>`).
 
 .. _install_download_app-store:
 
-.. figure:: ../imgs/install_download_app-store.*
+.. figure:: ../imgs/install_download_app-store.png
+   :scale: 90 %
    :align: center
 
    Магазин Приложений
@@ -42,14 +45,13 @@
 При наведении курсора на продукт **ARENADATA HADOOP** предоставляется выбор действий:
 
 + *Скачать* -- переход на страницу загрузки дистрибутива кластера **ADH**;
-+ *Документация* -- переход на страницу он-лайн документации кластера **ADH**;
-+ *Сайзинг оборудования* -- переход на страницу расчета необходимого количества серверов для хранения данных в кластере **ADH**.
++ *Документация* -- переход на страницу он-лайн документации кластера **ADH**.
 
-Для загрузки дистрибутива кластера следует выбрать пункт *Скачать*, при этом происходит переход на соответствующую страницу с кратким описанием продукта, ссылками на компоненты дистрибутива и информацией о релизе (:numref:`Рис.%s.<install_download_download-ADH>`).
+Для загрузки дистрибутива кластера следует выбрать пункт *Скачать*, при этом происходит переход на соответствующую страницу с кратким описанием продукта, ссылками на компоненты дистрибутива и информацией о релизе (:numref:`Рис.%s.<install_download_download-ADH1.6.1>`).
 
-.. _install_download_download-ADH:
+.. _install_download_download-ADH1.6.1:
 
-.. figure:: ../imgs/install_download_download-ADH.*
+.. figure:: ../imgs/install_download_download-ADH1.6.1.png
    :align: center
 
    Страница загрузки кластера Arenadata Hadoop
@@ -63,7 +65,7 @@
 
 .. _install_download_calc-ADH1.5:
 
-.. figure:: ../imgs/install_download_calc-ADH1.5.*
+.. figure:: ../imgs/install_download_calc-ADH1.5.png
    :align: center
 
    Калькулятор оборудования для Hadoop
