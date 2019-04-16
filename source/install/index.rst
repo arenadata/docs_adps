@@ -1,17 +1,13 @@
 Инструкция по установке кластера
 ================================
 
-.. |br| raw:: html
 
-   <br />
-
-В инструкции приведены сведения необходимые для подготовки к установке кластера Arenadata Hadoop, к его настройке и запуску.
+В документации приведены необходимые сведения для подготовки к установке кластера Arenadata Hadoop, к его планированию, настройке и запуску.
 
 Инструкция может быть полезна администраторам, программистам, разработчикам и сотрудникам подразделений информационных технологий,
 осуществляющих внедрение кластера.
 
 .. important:: Контактная информация службы поддержки -- e-mail: info@arenadata.io
-
 
 
 .. toctree::
@@ -26,13 +22,5 @@
    annex
 
 
-
-
-
-
-
-.. _Справочному руководству Ambari: https://pivotalhd.docs.pivotal.io/docs/reference-guide-ambari-2.1.2.html#_optional_changing_the_default_ambari_server_port
-.. _io: mailto:info@arenadata.io
-.. _http://arenadata.io/adru-download.html#arenadata-ru-download-easydown: http://arenadata.io/adru-download.html#arenadata-ru-download-easydown
 
 
