@@ -7,6 +7,7 @@
 .. _install_download_form-download:
 
 .. figure:: ../imgs/install_download_form-download.png
+   :scale: 60 %
    :align: center
 
    Заявка для загрузки продукта
@@ -23,7 +24,8 @@
 
 .. _install_download_accepted:
 
-.. figure:: ../imgs/install_download_accepted.png
+.. figure:: ../imgs/install_download_accepted.jpg
+   :scale: 60 %
    :align: center
 
    Заявка принята
