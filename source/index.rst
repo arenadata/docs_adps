@@ -1,7 +1,7 @@
 .. _ADH_index_logo:
 
 .. figure:: imgs/ADH_index_logo.*
-   :align: left
+   :align: center
 
 
 Универсальная платформа данных
