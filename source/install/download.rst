@@ -7,7 +7,7 @@
 .. _install_download_form-download:
 
 .. figure:: ../imgs/install_download_form-download.png
-   :scale: 70 %
+   :scale: 60 %
    :align: center
 
    Заявка для загрузки продукта
