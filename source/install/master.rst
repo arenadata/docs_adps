@@ -21,7 +21,7 @@
 
 .. _install_master_select-version:
 
-.. figure:: ../imgs/install_master_select-version.*
+.. figure:: ../imgs/install_master_select-version.png
    :align: center
 
    Выбор стека
@@ -33,7 +33,7 @@
 
 .. _install_master_use-public-rep:
 
-.. figure:: ../imgs/install_master_use-public-rep.*
+.. figure:: ../imgs/install_master_use-public-rep.png
    :align: center
 
    Установка из публичного репозитория
@@ -98,7 +98,7 @@ Ambari-агент зарегистрируется на сервере при е
 
 .. _install_master_choose-services:
 
-.. figure:: ../imgs/install_master_choose-services.*
+.. figure:: ../imgs/install_master_choose-services.png
    :align: center
 
    Выбор компонентов
@@ -115,7 +115,7 @@ Ambari-агент зарегистрируется на сервере при е
 
 .. _install_master_assign-masters:
 
-.. figure:: ../imgs/install_master_assign-masters.*
+.. figure:: ../imgs/install_master_assign-masters.png
    :align: center
 
    Назначение мастер-узлов
@@ -133,7 +133,7 @@ Ambari-агент зарегистрируется на сервере при е
 
 .. _install_master_assign-slaves-clients:
 
-.. figure:: ../imgs/install_master_assign-slaves-clients.*
+.. figure:: ../imgs/install_master_assign-slaves-clients.png
    :align: center
 
    Назначение Slave и Client узлов
@@ -150,7 +150,7 @@ Ambari-агент зарегистрируется на сервере при е
 
 .. _install_master_customize-services:
 
-.. figure:: ../imgs/install_master_customize-services.*
+.. figure:: ../imgs/install_master_customize-services.png
    :align: center
 
    Дополнительные настройки компонентов
@@ -170,7 +170,7 @@ Ambari-агент зарегистрируется на сервере при е
 
 .. _install_master_install-start-test:
 
-.. figure:: ../imgs/install_master_install-start-test.*
+.. figure:: ../imgs/install_master_install-start-test.png
    :align: center
 
    Ход развертывания кластера
@@ -183,7 +183,7 @@ Ambari-агент зарегистрируется на сервере при е
 
 .. _install_master_tasks:
 
-.. figure:: ../imgs/install_master_tasks.*
+.. figure:: ../imgs/install_master_tasks.png
    :align: center
 
    Информация о задачах хоста
