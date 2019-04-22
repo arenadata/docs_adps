@@ -21,7 +21,7 @@
 
 .. _install_master_select-version:
 
-.. figure:: ../imgs/install_master_select-version.png
+.. figure:: ../imgs/install_master_select-version.jpg
    :align: center
 
    Выбор стека
@@ -115,7 +115,7 @@ Ambari-агент зарегистрируется на сервере при е
 
 .. _install_master_assign-masters:
 
-.. figure:: ../imgs/install_master_assign-masters.png
+.. figure:: ../imgs/install_master_assign-masters.jpg
    :align: center
 
    Назначение мастер-узлов
@@ -133,7 +133,7 @@ Ambari-агент зарегистрируется на сервере при е
 
 .. _install_master_assign-slaves-clients:
 
-.. figure:: ../imgs/install_master_assign-slaves-clients.png
+.. figure:: ../imgs/install_master_assign-slaves-clients.jpg
    :align: center
 
    Назначение Slave и Client узлов
@@ -150,7 +150,7 @@ Ambari-агент зарегистрируется на сервере при е
 
 .. _install_master_customize-services:
 
-.. figure:: ../imgs/install_master_customize-services.png
+.. figure:: ../imgs/install_master_customize-services.jpg
    :align: center
 
    Дополнительные настройки компонентов
@@ -170,7 +170,7 @@ Ambari-агент зарегистрируется на сервере при е
 
 .. _install_master_install-start-test:
 
-.. figure:: ../imgs/install_master_install-start-test.png
+.. figure:: ../imgs/install_master_install-start-test.jpg
    :align: center
 
    Ход развертывания кластера
@@ -183,7 +183,7 @@ Ambari-агент зарегистрируется на сервере при е
 
 .. _install_master_tasks:
 
-.. figure:: ../imgs/install_master_tasks.png
+.. figure:: ../imgs/install_master_tasks.jpg
    :align: center
 
    Информация о задачах хоста
