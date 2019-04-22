@@ -33,7 +33,7 @@
 
 .. _install_master_use-public-rep:
 
-.. figure:: ../imgs/install_master_use-public-rep.png
+.. figure:: ../imgs/install_master_use-public-rep.jpg
    :align: center
 
    Установка из публичного репозитория
@@ -98,7 +98,7 @@ Ambari-агент зарегистрируется на сервере при е
 
 .. _install_master_choose-services:
 
-.. figure:: ../imgs/install_master_choose-services.png
+.. figure:: ../imgs/install_master_choose-services.jpg
    :align: center
 
    Выбор компонентов
