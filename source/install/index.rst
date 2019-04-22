@@ -14,6 +14,7 @@
    :maxdepth: 2
    :caption: Оглавление:
 
+   ClusterPlanning
    download
    prepare
    installation
