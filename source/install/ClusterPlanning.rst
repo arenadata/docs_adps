@@ -288,11 +288,11 @@ NameNodes и их клиенты очень "болтливы". Поэтому �
    :header: "Сервер", "Нагрузка", "Хранение [*]_", "Процессор", "Память", "Сеть"
    :widths: 16, 16, 16, 16, 16, 20
 
-   "Slaves", "Balanced workload", "Двенадцать дисков по 2-3 ТБ", "8 ядер", "128-256 ГБ", "1 GB onboard, 2x10 GBE mezzanine/external"
-   "", "Compute-intensive workload", "Двенадцать дисков по 1-2 ТБ", "10 ядер", "128-256 ГБ", "1 GB onboard, 2x10 GBE mezzanine/external"
-   "", "Storage-heavy workload", "Двенадцать дисков по 4+ ТБ", "8 ядер", "128-256 ГБ", "1 GB onboard, 2x10 GBE mezzanine/external"
-   "NameNode", "Balanced workload", "Четыре или более 2-3 ТБ RAID 10 с запасными частями", "8 ядер", "128-256 ГБ", "1 GB onboard, 2x10 GBE mezzanine/external"
-   "ResourceManager", "Balanced workload", "Четыре или более 2-3 ТБ RAID 10 с запасными частями", "8 ядер", "128-256 ГБ", "1 GB onboard, 2x10 GBE mezzanine/external"
+   "Slaves", "Balanced workload", "Двенадцать дисков по 2-3 ТБ", "8 ядер", "128-256 ГБ", "1 GB onboard, 2x10 GbE mezzanine/external"
+   "", "Compute-intensive workload", "Двенадцать дисков по 1-2 ТБ", "10 ядер", "128-256 ГБ", "1 GB onboard, 2x10 GbE mezzanine/external"
+   "", "Storage-heavy workload", "Двенадцать дисков по 4+ ТБ", "8 ядер", "128-256 ГБ", "1 GB onboard, 2x10 GbE mezzanine/external"
+   "NameNode", "Balanced workload", "Четыре или более 2-3 ТБ RAID 10 with spares", "8 ядер", "128-256 ГБ", "1 GB onboard, 2x10 GbE mezzanine/external"
+   "ResourceManager", "Balanced workload", "Четыре или более 2-3 ТБ RAID 10 with spares", "8 ядер", "128-256 ГБ", "1 GB onboard, 2x10 GbE mezzanine/external"
 
 
 .. [*] Дополнительно зарезервировать как минимум 2,5 ГБ на жестком диске для каждой устанавливаемой версии **Hadoop**.
