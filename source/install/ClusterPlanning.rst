@@ -289,8 +289,8 @@ NameNodes и их клиенты очень "болтливы". Поэтому �
    :widths: 16, 16, 16, 16, 16, 20
 
    "Slaves", "Balanced workload", "Двенадцать дисков по 2-3 ТБ", "8", "128-256", "1 GB onboard, 2x10 GBE mezzanine/external"
-   "1", "Compute-intensive workload", "Двенадцать дисков по 1-2 ТБ", "10", "128-256", "1 GB onboard, 2x10 GBE mezzanine/external"
-   "1", "Storage-heavy workload", "Двенадцать дисков по 4+ ТБ", "8", "128-256", "1 GB onboard, 2x10 GBE mezzanine/external"
+   "", "Compute-intensive workload", "Двенадцать дисков по 1-2 ТБ", "10", "128-256", "1 GB onboard, 2x10 GBE mezzanine/external"
+   "", "Storage-heavy workload", "Двенадцать дисков по 4+ ТБ", "8", "128-256", "1 GB onboard, 2x10 GBE mezzanine/external"
    "NameNode", "Balanced workload", "Четыре или более 2-3 ТБ RAID 10 с запасными частями", "8", "128-256", "1 GB onboard, 2x10 GBE mezzanine/external"
    "ResourceManager", "Balanced workload", "Четыре или более 2-3 ТБ RAID 10 с запасными частями", "8", "128-256", "1 GB onboard, 2x10 GBE mezzanine/external"
 
