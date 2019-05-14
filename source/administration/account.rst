@@ -1,11 +1,11 @@
 Учетная запись администратора Ambari
--------------------------------------
+=====================================
 
 Авторизация в Ambari
-^^^^^^^^^^^^^^^^^^^^
+----------------------
 
 
-После установки **Ambari** (см. `"Инструкция по установке кластера" <http://docs.arenadata.io/adh/install/index.html>`_) для входа в систему необходимо ввести в веб-браузер следующий URL-адрес:
+После установки **Ambari** (см. `Инструкция по установке кластера <http://docs.arenadata.io/adh/install/index.html>`_) для входа в систему необходимо ввести в веб-браузер следующий URL-адрес:
 
     :command:`http://<your.ambari.server>:8080`
 
@@ -24,21 +24,20 @@
 
 .. _admin_account_dashboard:
 
-.. figure:: ../imgs/admin_account_dashboard.*
+.. figure:: ../imgs/admin_account_dashboard.jpg
    :align: center
    
    Главная страница Ambari
 
 
 Экран настроек Ambari
-^^^^^^^^^^^^^^^^^^^^^
-
+------------------------
 
 Для перехода на экран настроек **Ambari** необходимо на главной странице перейти по пунктам меню панели управления :menuselection:`"admin --> Manage Ambari"` (см. :numref:`Рис.%s.<admin_account_dashboard>`). При этом открывается экран настроек **Ambari** (:numref:`Рис.%s.<admin_account_welcome-ambari>`).
 
 .. _admin_account_welcome-ambari:
 
-.. figure:: ../imgs/admin_account_welcome-ambari.*
+.. figure:: ../imgs/admin_account_welcome-ambari.jpg
    :align: center
    
    Экран настроек Ambari
@@ -51,7 +50,7 @@
 
 
 Изменение пароля учетной записи администратора
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------------------------
 
 Во время установки и настройки кластера мастер установки автоматически создает пользователя с правами администратора **Ambari**. Для данного пользователя рекомендуется сменить пароль, заданный по умолчанию. Для этого на экране настроек **Ambari** необходимо (см. :numref:`Рис.%s.<admin_account_welcome-ambari>`):
 
@@ -62,7 +61,7 @@
 
 .. _admin_account_password:
 
-.. figure:: ../imgs/admin_account_password.*
+.. figure:: ../imgs/admin_account_password.jpg
    :align: center
    
-   Параментры администратора
+   Параметры администратора
