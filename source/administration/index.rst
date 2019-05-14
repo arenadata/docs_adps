@@ -25,7 +25,6 @@
    :maxdepth: 2
    :caption: Оглавление:
 
-   intro
    account
    cluster
    users&groups
