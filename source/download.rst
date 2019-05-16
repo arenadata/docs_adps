@@ -11,9 +11,6 @@
 `Скачать руководство администратора по HDFS`_
   .. _Скачать руководство администратора по HDFS: https://storage.googleapis.com/arenadata-repo/docs/adh/pdf/v1.6.1/Руководство%20администратора%20по%20HDFS.pdf
 
-`Скачать использование Ambari View`_
- .. _Скачать использование Ambari View: https://storage.googleapis.com/arenadata-repo/docs/adh/pdf/v1.6.1/Использование%20Ambari%20View.pdf
-
 `Скачать настройку безопасности для Ambari`_
  .. _Скачать настройку безопасности для Ambari: https://storage.googleapis.com/arenadata-repo/docs/adh/pdf/v1.6.1/Настройка%20безопасности%20для%20Ambari.pdf
 
