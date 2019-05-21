@@ -117,13 +117,14 @@ Hive View
 
 Перед настройкой SSL-протокола для **Hive View** необходимо сначала настроить Truststore для **Ambari Server**, импортировав все необходимые ключи в Truststore.
 
-После настройки SSL для **Ambari** в разделе "Settings" настраиваемого View необходимо ввести свойства, описанные в таблице:
+После настройки SSL для **Ambari** в разделе "Settings" настраиваемого View необходимо ввести свойство:
 
-.. csv-table::
-   :header: "Параметр", "Описание", "Значение"
-   :widths: 33, 33, 33
++ *Hive Session Parameters* -- дополнительные параметры, передаваемые в рамках сессии Hive:
 
-   "Hive Session Parameters", "Дополнительные параметры, передаваемые в рамках сессии Hive", "``sslTrustStore=/path_to_ambari_truststore/ambari_truststore_name.jks;trustStorePassword=********``"
+  ::
+  
+   sslTrustStore=/path_to_ambari_truststore/ambari_truststore_name.jks;trustStorePassword=********
+   
 
 
 Pig View
@@ -134,6 +135,7 @@ Pig View
 .. _view_pig:
 
 .. figure:: ../imgs/view_pig.jpg
+   :scale: 80 %
    :align: center
 
    Пример экрана Pig View
