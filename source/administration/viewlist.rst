@@ -100,15 +100,15 @@ Hive View
 
 + Используя клиент HDFS, создать каталог HDFS для пользователя. Например, если имя пользователя *admin*, создать каталог следующим образом:
 
-   ::
-   
-    hadoop fs -mkdir /user/admin
+  ::
+  
+   hadoop fs -mkdir /user/admin
 
 + Установить права на вновь созданный каталог. Например, если имя пользователя *admin*, сделать данного пользователя владельцем каталога:
 
-   ::
-   
-    hadoop fs -chown admin:hadoop /user/admin
+  ::
+  
+   hadoop fs -chown admin:hadoop /user/admin
 
 
 
