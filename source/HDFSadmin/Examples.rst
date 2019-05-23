@@ -142,22 +142,22 @@ ACL & Permission Bits
 
 + Запустить ``getfacl`` для проверки результатов:
 
-   ::
-   
-    > hdfs dfs -getfacl /monthly-sales-data
-    # file: /monthly-sales-data
-    # owner: bruce
-    # group: sales
-    user::rwx
-    user:diana:---
-    group::r-x
-    mask::r-x
-    other::---
-    default:user::rwx
-    default:group::r-x
-    default:group:execs:r-x
-    default:mask::r-x
-    default:other::---
+  ::
+  
+   > hdfs dfs -getfacl /monthly-sales-data
+   # file: /monthly-sales-data
+   # owner: bruce
+   # group: sales
+   user::rwx
+   user:diana:---
+   group::r-x
+   mask::r-x
+   other::---
+   default:user::rwx
+   default:group::r-x
+   default:group:execs:r-x
+   default:mask::r-x
+   default:other::---
 
 Новая запись **ACL** добавляется к существующим разрешениям, определенным в **Permission Bits**. Брюс имеет полный контроль как владельц файла. Члены группы *sales* и *execs* имеют доступ на чтение. У других пользователей доступа нет.
 
