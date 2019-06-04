@@ -42,6 +42,7 @@
 
 XML для вышеуказанных записей:
 ::
+
  <configuration>
   <property>
     <name>dfs.client.read.shortcircuit</name>

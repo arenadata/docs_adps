@@ -17,5 +17,3 @@
 
    features
    authorization
-   InstallingRanger
-   PolicyHDFS

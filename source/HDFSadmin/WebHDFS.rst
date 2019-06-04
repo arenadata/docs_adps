@@ -9,6 +9,7 @@
 
 + Настроить WebHDFS. Добавить в файл *hdfs-site.xml* следующее свойство:
   ::
+
    <property>
     <name>dfs.webhdfs.enabled</name>
     <value>true</value>
@@ -33,6 +34,7 @@
       
   + Добавить в файл *hdfs-site.xml* следующие свойства:
     ::
+
      <property>
        <name>dfs.web.authentication.kerberos.principal</name>
        <value>HTTP/$<Fully_Qualified_Domain_Name>@$<Realm_Name>.COM</value>

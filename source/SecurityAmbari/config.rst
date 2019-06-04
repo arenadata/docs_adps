@@ -215,6 +215,7 @@
 2.	Используя текстовый редактор, открыть файл конфигурации сервера KDC, расположенный по умолчанию в *Vi/etc/krb5.conf*;
 
 3.	Изменить раздел *[realms]* этого файла, заменив параметр *kerberos.example.com* для свойств *kdc* и *admin_server*, установленный по умолчанию с Fully Qualified Domain Name хоста сервера KDC, как показано в примере, где *kerberos.example.com* заменен на *my.kdc.server*:
+
   ::
 
    [realms]
@@ -244,18 +245,21 @@
 Для запуска сервера **KDC** и сервера администратора **KDC** необходимо выполнить команды:
 
 +	RHEL/CentOS 6:
+
    ::
 
     /etc/rc.d/init.d/krb5kdc start
     /etc/rc.d/init.d/kadmin start
 
 +	RHEL/CentOS 7:
+
    ::
 
     systemctl start krb5kdc
     systemctl start kadmin
 
 +	SLES 11:
+
    ::
 
     rckrb5kdc start
@@ -264,18 +268,21 @@
 При установке и управлении собственным **MIT KDC** важно настроить сервер **KDC** на автоматический запуск при загрузке:
 
 +	RHEL/CentOS 6:
+
    ::
 
     chkconfig krb5kdc on
     chkconfig kadmin on
 
 +	RHEL/CentOS 7:
+
    ::
 
     systemctl enable krb5kdc
     systemctl enable kadmin
 
 +	SLES 11:
+
    ::
 
     chkconfig rckrb5kdc on
