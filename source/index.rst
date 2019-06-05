@@ -56,11 +56,7 @@
    :caption: Оглавление:
 
    install/index
-   administration/index
    HDFSadmin/index
-   SecurityAmbari/index
-   security/index
-   Knox/index
    ReleaseNotes/index
    Glossary
 
