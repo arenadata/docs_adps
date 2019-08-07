@@ -1,19 +1,19 @@
-Выгрузка бандла хост провайдера в ADCM
+Выгрузка бандла хостпровайдера в ADCM
 ======================================
 
 Для выгрузки бандла в ADCM следует выполнить следующие действия в веб-интерфейсе ADCM:
 
-1. Открыть вкладку "BUNDLES":
+1. Открыть вкладку *"BUNDLES"*:
 
-.. figure:: images/bundles.png
+.. figure:: /images/install/bundles.png
    :align: center
 
-2. Нажать "Upload bundle" и в открывшейся форме выбрать файл бандла:
+2. Нажать *"Upload bundle"* и в открывшейся форме выбрать файл бандла:
 
-.. figure:: images/choose_bundle.png
+.. figure:: /images/install/choose_bundle.png
    :align: center
 
-3. В результате выполненных действий факт успешной выгрузки отображается в общем списке бандлов на вкладке "BUNDLES":
+3. В результате выполненных действий факт успешной выгрузки отображается в общем списке бандлов на вкладке *"BUNDLES"*:
 
-.. figure:: images/load_bundle.png
+.. figure:: /images/install/load_bundle.png
    :align: center
