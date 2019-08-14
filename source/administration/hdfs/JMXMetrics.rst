@@ -21,7 +21,7 @@ APIs JMX Metrics для HDFS Daemons
 
 Например, следующие параметры *JVM* в *hadoop-env.sh* используются для включения удаленного агента **JMX** для *NameNode*. Он работает на порту *8004* с отключенным **SSL**. Имя пользователя и пароль сохраняются в файле *mxremote.password*.
 ::
- 
+
  export HADOOP_NAMENODE_OPTS="-Dcom.sun.management.jmxremote
  -Dcom.sun.management.jmxremote.password.file=$HADOOP_CONF_DIR/jmxremote.password
  -Dcom.sun.management.jmxremote.ssl=false

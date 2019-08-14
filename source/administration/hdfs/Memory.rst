@@ -62,14 +62,14 @@ C помощью политики хранения *LAZY_PERSIST* можно х�
 **1. Выключить DataNode**
 
 Закрыть *DataNode*.
-  
+
 **2. Установить часть памяти DataNode для HDFS**
 
 Для использования памяти *DataNode* в качестве хранилища необходимо сначала установить часть памяти *DataNode* для использования **HDFS**.
 
 Например, для выделения *2 ГБ* памяти для хранения **HDFS** необходимо использовать команды:
 ::
- 
+
  sudo mkdir -p /mnt/hdfsramdisk
  sudo mount -t tmpfs -o size=2048m tmpfs /mnt/hdfsramdisk
  Sudo mkdir -p /usr/lib/hadoop-hdfs
@@ -89,17 +89,17 @@ C помощью политики хранения *LAZY_PERSIST* можно х�
     <name>dfs.data.dir</name>
     <value>file:///grid/3/aa/hdfs/data/,[RAM_DISK]file:///mnt/hdfsramdisk/</value>
   </property>
- 
+
   <property>
     <name>dfs.client.read.shortcircuit</name>
     <value>true</value>
   </property>
- 
+
   <property>
     <name>dfs.domain.socket.path</name>
     <value>/var/lib/hadoop-hdfs/dn_socket</value>
   </property>
- 
+
   <property>
     <name>dfs.checksum.type</name>
     <value>NULL</value>
@@ -129,7 +129,7 @@ C помощью политики хранения *LAZY_PERSIST* можно х�
 + ``<path>`` -- путь к каталогу или файлу.
 
 Пример:
-  
+
   :command:`hdfs dfsadmin -getStoragePolicy /memory1 LAZY_PERSIST`
 
 **5. Запуск DataNode**
