@@ -44,4 +44,3 @@
     где ``Fully_Qualified_Domain_Name`` -- хост, на котором развертывается NameNode; ``Realm_Name`` -- название сферы Kerberos.
 
 + Перезапустить сервисы NameNode и DataNode.
-

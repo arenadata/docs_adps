@@ -158,4 +158,3 @@ Mover для политик хранения
 Пример:
 
   :command:`hdfs mover /memory1/testfile`
-

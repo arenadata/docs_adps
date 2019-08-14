@@ -150,7 +150,3 @@
 ::
 
  hdfs mover /cold1/testfile
-
-
-
-
