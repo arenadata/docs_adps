@@ -30,7 +30,7 @@
 
 .. _hdfsadmin_pic1:
 
-.. figure:: /images/administration/hdfs/hdfsadmin_pic1.png
+.. figure:: ../../imgs/administration/hdfs/hdfsadmin_pic1.png
    :scale: 80 %
    :align: center
 

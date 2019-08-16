@@ -3,7 +3,7 @@
 
 Для добавления или удаления YARN NodeManager с хостов или привидения YARN NodeManager в состояние декоммисии на хосте необходимо воспользоваться соответствующими кнопками выпадающего меню, доступного по нажатию на иконку в поле *"Actions"* сервиса YARN:
 
-.. figure:: /images/administration/yarn/buttons.png
+.. figure:: ../../imgs/administration/yarn/buttons.png
    :align: center
 
    Выпадающее меню *"Actions"* сервиса YARN
@@ -40,7 +40,7 @@
 
 1. нажать кнопку *"Decommiss NodeManagers"*, что приведёт к появлению следующего окна:
 
-.. figure:: /images/administration/yarn/decommission.png
+.. figure:: ../../imgs/administration/yarn/decommission.png
    :align: center
 
 2. для добавления хоста в список декоммиссованных необходимо нажать "+" и ввести fqdn хоста и таймаут в секундах. Через "+" возможно добавить несколько хостов.

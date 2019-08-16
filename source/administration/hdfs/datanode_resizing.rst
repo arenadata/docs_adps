@@ -3,7 +3,7 @@
 
 Для добавления или удаления HDFS DataNode с хостов или привидения HDFS DataNode в состояние обслуживания или декоммисии на хосте необходимо воспользоваться соответствующими кнопками выпадающего меню, доступного по нажатию на иконку в поле *"Actions"* сервиса HDFS:
 
-.. figure:: /images/administration/hdfs/buttons.png
+.. figure:: ../../imgs/administration/hdfs/buttons.png
    :align: center
 
    Выпадающее меню *"Actions"* сервиса HDFS
@@ -37,7 +37,7 @@
 
 1. нажать кнопку *"Maintenance DataNodes"*, что приведёт к появлению следующего окна:
 
-.. figure:: /images/administration/hdfs/maintenance.png
+.. figure:: ../../imgs/administration/hdfs/maintenance.png
    :align: center
 
 2. для добавления хоста в список на обслуживание необходимо нажать "+" и ввести fqdn хоста и время окончания окна обслуживания в формате `UNIX-времени <https://ru.wikipedia.org/wiki/Unix-%D0%B2%D1%80%D0%B5%D0%BC%D1%8F>`_ в миллисекундах. Через "+" возможно добавить несколько хостов.
@@ -55,7 +55,7 @@
 
 1. нажать кнопку *"Decommiss DataNodes"*, что приведёт к появлению следующего окна:
 
-.. figure:: /images/administration/hdfs/decommission.png
+.. figure:: ../../imgs/administration/hdfs/decommission.png
    :align: center
 
 2. для добавления хоста в список декоммиссованных необходимо нажать "+" и ввести fqdn хоста. Через "+" возможно добавить несколько хостов.

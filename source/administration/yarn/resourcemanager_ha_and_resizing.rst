@@ -7,7 +7,7 @@
 
 Для активации HA, добавления или удаления YARN ResourceManager с хостов необходимо воспользоваться соответствующими кнопками выпадающего меню, доступного по нажатию на иконку в поле *"Actions"* сервиса YARN:
 
-.. figure:: /images/administration/yarn/buttons.png
+.. figure:: ../../imgs/administration/yarn/buttons.png
    :align: center
 
    Выпадающее меню *"Actions"* сервиса YARN
