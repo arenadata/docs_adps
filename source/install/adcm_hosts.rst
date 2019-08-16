@@ -15,7 +15,7 @@
 
 Настройки для каждого добавленного в ADCM хоста возможно изменять. Для этого на вкладке *"HOSTS"* необходимо нажать на иконку шестерёнки в строке необходимого хоста. Так, в частности, при использовании хостпровайдера ssh в настройках хоста возможно указать приватный ssh ключ в строке ansible_ssh_private_key_file:
 
-.. figure:: /images/install/adcm_hosts_item_configuration.png
+.. figure:: ../images/install/adcm_hosts_item_configuration.png
    :align: center
 
    Страница настройки для хоста в ADCM на примере хостпровайдера ssh

@@ -20,7 +20,7 @@
 
 .. _adcm_url:
 
-.. figure:: /images/install/adcm_url.png
+.. figure:: ../images/install/adcm_url.png
    :align: center
 
    Вкладка "Settings"

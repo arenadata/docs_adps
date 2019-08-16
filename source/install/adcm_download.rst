@@ -9,7 +9,7 @@
 
 Для загрузки бандла хостпровайдера необходимо перейти на сайт https://arenadata.tech/products/adcm и выбрать вкладку *"Скачать"*. Далее отразиться краткое описание продукта, ссылки на компоненты дистрибутива и информация о релизе:
 
-.. figure:: /images/install/adcm_hostprovider_download.png
+.. figure:: ../images/install/adcm_hostprovider_download.png
    :align: center
 
    Страница загрузки Arenadata Cluster Manager

@@ -7,7 +7,7 @@
 
 Для загрузки бандла ADH необходимо перейти на сайт https://arenadata.io и выбрать вкладку *"Скачать"*. Произойдёт переход на страницу `Магазин Программного Обеспечения Arenadata <https://store.arenadata.io/>`_ и откроется форма заявки для загрузки продукта:
 
-.. figure:: /images/install/download_form.png
+.. figure:: ../images/install/download_form.png
    :scale: 60 %
    :align: center
 
@@ -15,7 +15,7 @@
 
 Все поля являются обязательными для заполнения. После отправки данных формы происходит переход на страницу *"Магазин Приложений"* с перечнем продуктов Arenadata:
 
-.. figure:: /images/install/download_app-store.png
+.. figure:: ../images/install/download_app-store.png
    :align: center
 
    Магазин Приложений
@@ -27,7 +27,7 @@
 
 По прохождению по адресу ссылки *"Скачать"* отразиться краткоe описание продукта, ссылки на компоненты дистрибутива и информация о релизе:
 
-.. figure:: /images/install/download.png
+.. figure:: ../images/install/download.png
    :align: center
 
    Страница загрузки Arenadata Hadoop

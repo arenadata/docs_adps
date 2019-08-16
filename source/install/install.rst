@@ -15,21 +15,21 @@
 
 1. Открыть в ADCM вкладку *"CLUSTERS"*:
 
-.. figure:: /images/install/cluster_mon.png
+.. figure:: ../images/install/cluster_mon.png
    :align: center
 
    Вкладка *"CLUSTERS"*
 
 2. Нажать *"Add cluster"* и в открывшейся форме создать экземпляр кластера из прототипа ADH:
 
-.. figure:: /images/install/add_cluster.png
+.. figure:: ../images/install/add_cluster.png
    :align: center
 
    Создание экземпляра кластера
 
 3. В результате экземпляр кластера отразится в списке на вкладке *"CLUSTERS"*:
 
-.. figure:: /images/install/clusters_list.png
+.. figure:: ../images/install/clusters_list.png
    :align: center
 
    Результат успешного создания экземпляра кластера
@@ -49,7 +49,7 @@
 
 4. нажать *"Save"*.
 
-.. figure:: /images/install/add_services.png
+.. figure:: ../images/install/add_services.png
    :align: center
 
    Выбор сервисов
@@ -61,7 +61,7 @@
 
 Для перехода к настройкам сервиса кластера необходимо нажать кнопку с пиктограммой шестеренки в соответствующей строке вкладки пункта меню *"Services"*.
 
-.. figure:: /images/install/service_configure.png
+.. figure:: ../images/install/service_configure.png
    :align: center
 
    Настройка сервиса
@@ -70,14 +70,14 @@
 
 В случае, если сервису требуется изначальная настройка, то в поле *"Actions"* соответствующего сервиса вместо иконки будет отражён оранжевый восклицательный знак:
 
-.. figure:: /images/install/service_configure_warning.png
+.. figure:: ../images/install/service_configure_warning.png
    :align: center
 
    Сервисы, требующие настройки
 
 Это означает, что необходимо открыть страницу конфигурирования сервиса и заполнить поля, выделенные оранжевым:
 
-.. figure:: /images/install/service_configure_warning_in.png
+.. figure:: ../images/install/service_configure_warning_in.png
    :align: center
 
    Настройка сервиса, требующего настройки
@@ -91,21 +91,21 @@
 
 1. В меню кластера ADH открыть вкладку *"Hosts"*:
 
-.. figure:: /images/install/hosts_list.png
+.. figure:: ../images/install/hosts_list.png
    :align: center
 
    Вкладка *"Hosts"* кластера ADH
 
 2. Нажать *"Add hosts"* и в открывшейся форме выбрать необходимые хосты:
 
-.. figure:: /images/install/add_hosts.png
+.. figure:: ../images/install/add_hosts.png
    :align: center
 
    Выбор хостов
 
 3. В результате добавленные хосты отразятся в списке вкладки *"Hosts"*:
 
-.. figure:: /images/install/hosts_list2.png
+.. figure:: ../images/install/hosts_list2.png
    :align: center
 
    Результат успешного добавления хостов
@@ -119,7 +119,7 @@
 
 Для размещения компонентов необходимо перейти на вкладку *"Hosts - Components"*:
 
-.. figure:: /images/install/components.png
+.. figure:: ../images/install/components.png
    :align: center
 
    Размещение компонентов сервисов на хостах
@@ -138,7 +138,7 @@
 
 Для перехода к настройкам экземпляра кластера ADH необходимо нажать кнопку с пиктограммой шестеренки в соответствующей строке вкладки *"CLUSTERS"* и перейти в раздел меню *"Configuration"*. При этом открывается окно конфигурации выбранного экземпляра:
 
-.. figure:: /images/install/cluster_config.png
+.. figure:: ../images/install/cluster_config.png
    :align: center
 
    Окно конфигурирования кластера
@@ -172,7 +172,7 @@
 
 По результатам инсталляции сервис изменяет состояние (поле *"State"*) с *created* на *enabled*.
 
-.. figure:: /images/install/cluster_actions.png
+.. figure:: ../images/install/cluster_actions.png
    :align: center
 
    Состояние сервисов кластера
