@@ -63,4 +63,4 @@
    :maxdepth: 1
    :caption: Скачать
 
-   download
+   download_pdf
