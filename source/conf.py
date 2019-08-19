@@ -27,7 +27,7 @@ from string import Template
 # -- General configuration ------------------------------------------------
 now = datetime.datetime.now()
 # branch = subprocess.check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD']).decode('utf-8')
-branch = "v1.5"
+branch = "v2.1.0"
 
 title = Template(r"""
             \pagenumbering{Roman} %%% to avoid page 1 conflict with actual page 1
@@ -95,7 +95,7 @@ author = u'Arenadata.io'
 # The short X.Y version.
 
 # git rev-parse --abbrev-ref HEAD
-version = u'{}'.format(branch)
+version = u'{}'.format(branch[1:])
 # The full version, including alpha/beta/rc tags.
 release = u'{}'.format(branch)
 
