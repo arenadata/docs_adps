@@ -147,31 +147,32 @@
 
 + Команда Hadoop *dfsadmin -report* возвращает отчет, содержащий имя стойки рядом с каждой машиной. Отчет должен выглядеть примерно следующим образом (частично):
   ::
-  [bsmith@hadoop01 ~]$ sudo -u hdfs hadoop dfsadmin -report
-  Configured Capacity: 19010409390080 (17.29 TB)
-  Present Capacity: 18228294160384 (16.58 TB)
-  DFS Remaining: 5514620928000 (5.02 TB)
-  DFS Used: 12713673232384 (11.56 TB) DFS Used%: 69.75%
-  Under replicated blocks: 181
-  Blocks with corrupt replicas: 0
-  Missing blocks: 0
 
-  -------------------------------------------------
-  Datanodes available: 5 (5 total, 0 dead)
+   [bsmith@hadoop01 ~]$ sudo -u hdfs hadoop dfsadmin -report
+   Configured Capacity: 19010409390080 (17.29 TB)
+   Present Capacity: 18228294160384 (16.58 TB)
+   DFS Remaining: 5514620928000 (5.02 TB)
+   DFS Used: 12713673232384 (11.56 TB) DFS Used%: 69.75%
+   Under replicated blocks: 181
+   Blocks with corrupt replicas: 0
+   Missing blocks: 0
 
-  Name: 192.0.2.0:50010 (h2d1.phd.local)
-  Hostname: h2d1.phd.local
-  Rack: /default/rack_02
-  Decommission Status : Normal
-  Configured Capacity: 15696052224 (14.62 GB)
-  DFS Used: 314380288 (299.82 MB)
-  Non DFS Used: 3238612992 (3.02 GB)
-  DFS Remaining: 12143058944 (11.31 GB)
-  DFS Used%: 2.00%
-  DFS Remaining%: 77.36%
-  Configured Cache Capacity: 0 (0 B)
-  Cache Used: 0 (0 B)
-  Cache Remaining: 0 (0 B)
-  Cache Used%: 100.00%
-  Cache Remaining%: 0.00%
-  Last contact: Thu Jun 12 11:39:51 EDT 2014
+   -------------------------------------------------
+   Datanodes available: 5 (5 total, 0 dead)
+
+   Name: 192.0.2.0:50010 (h2d1.phd.local)
+   Hostname: h2d1.phd.local
+   Rack: /default/rack_02
+   Decommission Status : Normal
+   Configured Capacity: 15696052224 (14.62 GB)
+   DFS Used: 314380288 (299.82 MB)
+   Non DFS Used: 3238612992 (3.02 GB)
+   DFS Remaining: 12143058944 (11.31 GB)
+   DFS Used%: 2.00%
+   DFS Remaining%: 77.36%
+   Configured Cache Capacity: 0 (0 B)
+   Cache Used: 0 (0 B)
+   Cache Remaining: 0 (0 B)
+   Cache Used%: 100.00%
+   Cache Remaining%: 0.00%
+   Last contact: Thu Jun 12 11:39:51 EDT 2014
