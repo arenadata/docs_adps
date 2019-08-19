@@ -55,7 +55,7 @@
 
    install/index
    administration/index
-   release_notes/index
+   release_notes
    glossary
 
 .. toctree::
