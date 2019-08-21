@@ -4,7 +4,7 @@
 .. important:: Контактная информация службы поддержки -- e-mail: info@arenadata.io
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: Оглавление:
 
    hdfs/index

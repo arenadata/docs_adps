@@ -8,7 +8,8 @@
 С документацией ADCM возможно ознакомиться по следующей ссылке: https://docs.arenadata.io/adcm/user/index.html
 
 .. toctree::
-   :hidden:
+   :maxdepth: 1
+   :caption: Оглавление:
 
    adcm_install
    adcm_download
