@@ -12,20 +12,20 @@
 
 Основная идея универсальной платформы заключается в обеспечении возможности работы с любыми типами и форматами данных путем комбинированного использования различных технологических решений и архитектур обработки данных.
 
-.. figure:: imgs/arenadata-ru-products-obshii-obzor-1.png
+.. figure:: imgs/arenadata-ru-products-obshii-obzor-adh21-stack.png
    :scale: 90 %
    :align: center
 
 В настоящий момент полностью реализован уровень хранения и обработки слабоструктурированных и неструктурированных данных – **Arenadata Hadoop** (**ADH**). Это полноценный дистрибутив распределенной платформы хранения на базе **Apache Hadoop**, адаптированный для корпоративного использования.
 
-.. figure:: imgs/arenadata-ru-products-obshii-obzor-2.png
+.. figure:: imgs/arenadata-ru-products-obshii-obzor-adh21-ui.png
    :align: center
 
 
 В 2016 году дистрибутив **Arenadata Hadoop 1.3.2** прошел сертификацию и получил подтверждение о полном соответствии стандартам **Open Data Platform Initiative** (**ODPi**). **ODPi** – крупнейшее мировое сообщество разработчиков проектов хранения больших данных с открытым кодом под эгидой **Linux Foundation**: `подробнее <https://www.odpi.org/blog/2016/07/13/hadoop-summit-san-jose-2016-wrap-up>`_.
 
 
-Текущий релиз версии **1.6.1** вышел во втором квартале 2018 года. В состав версии входят следующие компоненты: **Ambari**, **HDFS**, **YARN**,	**Zookeeper**, **Tez**, **Hive**,	**HBase**, **Phoenix**, **Pig**, **Sqoop**, **Flume**, **Oozie**, **Atlas**, **NiFi**, **Apex**, **Flink**, **Kafka**, **LogSearch**, **Knox**,	**Mahout**,	**Ranger**,	**Ranger KMS**,	**Solr**,	**Spark**, **Zeppelin**, **Giraph**.
+Текущий релиз версии **2.1.0** был выпущен в третьем квартале 2019 года. В состав версии входят следующие компоненты: **HDFS**, **YARN**,	**Zookeeper**, **Tez**, **Hive**,	**HBase**, **Phoenix**, **Spark**, **Zeppelin**.
 
 
 
