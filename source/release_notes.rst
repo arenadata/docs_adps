@@ -53,7 +53,7 @@ Release notes
 
 .. 2.0.5 RN is for whole 2.0 line
 
-.. _hbase_version: https://apache.org/dist/hbase/2.0.5/RELEASENOTES.md
+.. _hbase_version: https://apache.org/dist/hbase/2.0.6/RELEASENOTES.md
 .. _phoenix_version: https://phoenix.apache.org/release_notes.html#Phoenix_5.0.0-alpha_Release_Notes
 .. _hdfs_version: https://hadoop.apache.org/docs/r3.1.2/hadoop-project-dist/hadoop-common/release/3.1.2/RELEASENOTES.3.1.2.html
 .. _hive_version: https://issues.apache.org/jira/secure/ReleaseNote.jspa?version=12344240&styleName=Text&projectId=12310843
