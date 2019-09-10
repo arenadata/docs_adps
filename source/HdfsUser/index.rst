@@ -12,4 +12,19 @@
    :caption: Оглавление:
 
    Overview
+   Shell
+   NameNode
+   Checkpoint
+   Backup
+   Import
+   Balancer
+   Rack
+   Safemode
+   fsck
+   fetchdt
+   Recovery
+   Upgrade
+   DataNode
+   
+   
    
