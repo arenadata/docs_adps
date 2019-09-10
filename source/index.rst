@@ -55,6 +55,7 @@
 
    install/index
    administration/index
+   HdfsUser/index
    release_notes
    glossary
 
