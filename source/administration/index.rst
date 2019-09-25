@@ -8,5 +8,6 @@
    :caption: Оглавление:
 
    hdfs/index
+   hive/index
    yarn/index
    ports
