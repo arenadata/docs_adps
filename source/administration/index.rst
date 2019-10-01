@@ -9,5 +9,6 @@
 
    hdfs/index
    hive/index
+   spark/index
    yarn/index
    ports
