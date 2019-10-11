@@ -16,3 +16,4 @@
    NameNode
    CheckpointNode
    BackupNode
+   ImportCheckpoint
