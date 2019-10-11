@@ -15,3 +15,4 @@
    Shell
    NameNode
    CheckpointNode
+   BackupNode
