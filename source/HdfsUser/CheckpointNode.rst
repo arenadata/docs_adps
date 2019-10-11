@@ -1,6 +1,3 @@
-.. _usage_checkpoint:
-
-
 Checkpoint Node
 ================
 
@@ -20,22 +17,24 @@ Checkpoint Node хранит последнюю контрольную точк�
 
 .. important:: В файле конфигурации кластера можно указать несколько Checkpoint Node.
 
+.. _usage_checkpoint:
+
 Пример использования:
 
-  ::
-  
-     hdfs namenode [-backup] |
-           [-checkpoint] |
-           [-format [-clusterid cid ] [-force] [-nonInteractive] ] |
-           [-upgrade [-clusterid cid] [-renameReserved<k-v pairs>] ] |
-           [-upgradeOnly [-clusterid cid] [-renameReserved<k-v pairs>] ] |
-           [-rollback] |
-           [-rollingUpgrade <rollback |started> ] |
-           [-importCheckpoint] |
-           [-initializeSharedEdits] |
-           [-bootstrapStandby [-force] [-nonInteractive] [-skipSharedEditsCheck] ] |
-           [-recover [-force] ] |
-           [-metadataVersion ]
+::
+
+   hdfs namenode [-backup] |
+         [-checkpoint] |
+         [-format [-clusterid cid ] [-force] [-nonInteractive] ] |
+         [-upgrade [-clusterid cid] [-renameReserved<k-v pairs>] ] |
+         [-upgradeOnly [-clusterid cid] [-renameReserved<k-v pairs>] ] |
+         [-rollback] |
+         [-rollingUpgrade <rollback |started> ] |
+         [-importCheckpoint] |
+         [-initializeSharedEdits] |
+         [-bootstrapStandby [-force] [-nonInteractive] [-skipSharedEditsCheck] ] |
+         [-recover [-force] ] |
+         [-metadataVersion ]
 
 
 * ``-backup`` -- запуск Backup Node;
