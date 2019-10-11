@@ -14,3 +14,4 @@
    Overview
    Shell
    NameNode
+   CheckpointNode
