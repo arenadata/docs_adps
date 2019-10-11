@@ -1,3 +1,6 @@
+.. _usage_checkpoint:
+
+
 Checkpoint Node
 ================
 
