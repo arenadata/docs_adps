@@ -18,3 +18,12 @@
    BackupNode
    ImportCheckpoint
    Balancer
+   Rack
+   Safemode
+   fsck
+   fetchdt
+   Recovery
+   Upgrade
+   HotSwap
+   Security
+   Scalability
