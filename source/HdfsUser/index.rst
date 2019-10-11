@@ -17,3 +17,4 @@
    CheckpointNode
    BackupNode
    ImportCheckpoint
+   Balancer
