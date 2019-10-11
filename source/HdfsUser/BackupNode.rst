@@ -15,34 +15,4 @@ Backup Node настраивается так же, как узел Checkpoint, 
 
 Использование узла Backup обеспечивает возможность запуска NameNode без постоянного хранилища, делегируя всю ответственность за сохранение состояния пространства имен узлу Backup. Для этого необходимо запустить NameNode с параметром ``-importCheckpoint``, а также не указывать постоянные каталоги хранения типа edits *dfs.namenode.edits.dir* в конфигурации NameNode.
 
-Пример использования:
-
-  ::
-  
-     hdfs namenode [-backup] |
-           [-checkpoint] |
-           [-format [-clusterid cid ] [-force] [-nonInteractive] ] |
-           [-upgrade [-clusterid cid] [-renameReserved<k-v pairs>] ] |
-           [-upgradeOnly [-clusterid cid] [-renameReserved<k-v pairs>] ] |
-           [-rollback] |
-           [-rollingUpgrade <rollback |started> ] |
-           [-importCheckpoint] |
-           [-initializeSharedEdits] |
-           [-bootstrapStandby [-force] [-nonInteractive] [-skipSharedEditsCheck] ] |
-           [-recover [-force] ] |
-           [-metadataVersion ]
-
-
-* ``-backup`` -- запуск Backup Node;
-* ``-checkpoint`` -- запуск Checkpoint Node;
-* ``-format [-clusterid cid]`` -- форматирование указанного NameNode. Запускает NameNode, форматирует его и затем выключает. Будет генерировать NameNodeFormatException, если имя dir уже существует и если переформатирование для кластера отключено;
-* ``-upgrade [-clusterid cid] [-renameReserved <k-v pairs>]`` -- Namenode должен быть запущен с опцией обновления до новой версии Hadoop;
-* ``-upgradeOnly [-clusterid cid] [-renameReserved <k-v pairs>]`` -- обновляет и закрывает указанный NameNode;
-* ``-rollback`` -- откат NameNode до предыдущей версии. Следует использовать после остановки кластера и разворачивания старой версии Hadoop;
-* ``-rollingUpgrade <rollback|started>`` -- *query* - запрос текущего текущего состояния обновления; *prepare* - подготовка нового обновления; *finalize* - завершение текущего обновления;
-* ``-importCheckpoint`` -- загрузка изображения из каталога контрольных точек и сохранение его в текущем. Контрольная точка dir читается из свойства *dfs.namenode.checkpoint.dir*;
-* ``-initializeSharedEdits`` -- форматирование нового общего каталога изменений и копирование его в достаточное количество сегментов журнала для запуска резервного NameNode;
-* ``-bootstrapStandby [-force] [-nonInteractive] [-skipSharedEditsCheck]`` -- позволяет загружать резервные каталоги хранилища NameNode путем копирования последнего снимка пространства имен из активного NameNode. Используется при первой настройке кластера высокой доступности. Опция *-force* или *-nonInteractive* имеет то же значение, что и *-format*. Опция *-skipSharedEditsCheck* пропускает проверку правок, которая гарантирует достаточное количество правок, уже находящихся в общем каталоге, для запуска с последней контрольной точки;
-* ``-recover [-force]`` -- восстановление потерянных метаданных в поврежденной файловой системе;
-* ``-metadataVersion`` -- печать версии метаданных программного обеспечения и образа (при условии наличия настроенных каталогов).
-
+Пример использования приведен в главве :ref:`Checkpoint Node <usage_checkpoint>`.
