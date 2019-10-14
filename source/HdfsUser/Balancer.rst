@@ -24,7 +24,7 @@ Balancer
            [-idleiterations <idleiterations>]
            [-runDuringUpgrade]
 
-* ``-policy <policy>`` -- datanode (по умолчанию): кластер сбалансирован, если каждый datanode сбалансирован; blockpool: кластер сбалансирован, если каждый пул блоков в каждой datanode сбалансирован;
+* ``-policy <policy>`` -- *datanode* (по умолчанию): кластер сбалансирован, если каждый datanode сбалансирован; *blockpool*: кластер сбалансирован, если каждый пул блоков в каждой datanode сбалансирован;
 * ``-threshold <threshold>`` -- процент емкости диска; перезапись порога по умолчанию;
 * ``-exclude -f <hosts-file> | <comma-separated list of hosts>`` -- исключение указанных datanode из баланса балансировщиком;
 * ``-include -f <hosts-file> | <comma-separated list of hosts>`` -- включение только указанных datanode для балансировки балансировщиком;
