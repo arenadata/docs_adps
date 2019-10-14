@@ -9,4 +9,4 @@ Import Checkpoint
 
 При этом NameNode загружает контрольную точку из каталога *dfs.namenode.checkpoint.dir*, а затем сохраняет ее в каталог NameNode, заданный в *dfs.namenode.name.dir*. Если в *dfs.namenode.name.dir* содержится допустимый образ, NameNode выдает сбой. NameNode проверяет согласованность изображения в *dfs.namenode.checkpoint.dir*, но не изменяет его каким-либо образом.
 
-Пример использования приведен в главве :ref:`Checkpoint Node <usage_checkpoint>`.
+Пример использования приведен в главе :ref:`Checkpoint Node <usage_checkpoint>`.
