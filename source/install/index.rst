@@ -11,6 +11,8 @@
    :maxdepth: 1
    :caption: Оглавление:
 
+   planning
+   requirements
    adcm_install
    adcm_download
    adcm_upload
