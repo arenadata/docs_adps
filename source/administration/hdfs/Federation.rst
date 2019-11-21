@@ -31,7 +31,7 @@ Background
 
 .. _background:
 
-.. figure:: ../imgs/install/background.png
+.. figure:: ../../imgs/install/background.png
    :align: center
 
    Background
