@@ -138,6 +138,8 @@ Background
    .... Other common configuration ...
  </configuration>
 
+Formatting Namenodes
+^^^^^^^^^^^^^^^^^^^^^^
 
 Форматирование Namenodes осуществляется в два шага:
 
@@ -156,6 +158,9 @@ Background
  [hdfs]$ $HADOOP_HOME/bin/hdfs namenode -format -clusterId <cluster_id>
  
 Важно обратить внимание, что ``cluster_id`` на этом шаге должен быть таким же, как в предыдущем. Если они отличаются, дополнительные Namenodes не будут частью кластера Federation.
+
+Upgrading
+^^^^^^^^^^
 
 В процессе обновления с предыдущего релиза и настройки **Federation** необходимо указать ClusterID следующим образом:
 
