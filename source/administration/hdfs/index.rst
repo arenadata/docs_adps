@@ -13,6 +13,7 @@
    :caption: Оглавление:
 
    Federation
+   ErasureCoding
    ACLonHDFS
    Archiv
    Cache
