@@ -44,8 +44,37 @@ Reporting Command
 + Пространство файловой системы хоста, используемое для сохранения метаданных файла, не учитывается в квоте;
 + Квоты начисляются с предполагаемым коэффициентом репликации для файла, при этом изменение коэффициента репликации для файла приводит к кредитным или дебетовым квотам.
 
+Квоты постоянны благодаря *fsimage*. При запуске, если *fsimage* нарушает квоту (возможно, при скрытном изменении *fsimage*), выдается предупреждение для каждого из таких нарушений. Установка или удаление квоты создает запись в журнале.
 
-The space quota is a hard limit on the number of bytes used by files in the tree rooted at that directory. Block allocations fail if the quota would not allow a full block to be written. Each replica of a block counts against the quota. Quotas stick with renamed directories; the rename operation fails if the operation would result in a quota violation. A newly created directory has no associated quota. The largest quota is Long.Max_Value. A quota of zero still permits files to be created, but no blocks can be added to the files. Directories don’t use host file system space and don’t count against the space quota. The host file system space used to save the file meta data is not counted against the quota. Quotas are charged at the intended replication factor for the file; changing the replication factor for a file will credit or debit quotas.
+
+Квоты типа хранилища
+---------------------
+
+Квота типа хранилища -- это жесткое ограничение на использование определенного типа хранилища (SSD, DISK, ARCHIVE) для файлов в root-дереве директории. Во многих аспектах она работает аналогично квоте дискового пространства, но предлагает точный контроль над использованием пространства хранения кластера. Для установки квоты в каталоге должны быть настроены политики хранения, чтобы разрешить хранение файлов в разных типах хранилища в соответствии с политикой. 
+
+Квота типа хранилища может быть объединена с квотами пространств и квотами имен для эффективного управления используемого хранилища кластера. Например:
+
++ Для каталогов с настроенной политикой хранения администратор может установить квоты типа хранения для типов хранения с ограничением ресурсов, таких как SSD, и оставить квоты для других типов хранения и общую квоту пространств с менее ограничительными значениями или без ограничений вовсе (по умолчанию). HDFS при этом высчитывает квоты из обоих типов хранилища на основе политики хранения и общей квоты пространств;
+
++ Для каталогов без настроенной политики хранения администратор может не настраивать квоту типа хранения. Квота может быть настроена, даже если определенный тип хранилища недоступен (или доступен, но не настроен должным образом с информацией о его типе). Однако в этом случае рекомендуется использовать общую квоту пространств, так как информация о типе хранилища либо недоступна, либо неточна для применения квоты на тип хранения;
+
++ Квота типа хранения DISK ограничена за исключением случаев, когда DISK не является доминирующим носителем данных (например, кластер с преимущественным типом хранения ARCHIVE).
+
+
+Административные команды
+--------------------------
+
+Квоты управляются набором команд, доступных только администратору:
+
++ ``hdfs dfsadmin -setQuota <N> <directory>...<directory>`` -- 
++ ``hdfs dfsadmin -clrQuota <directory>...<directory>`` -- 
++ ``hdfs dfsadmin -setSpaceQuota <N> <directory>...<directory>`` -- 
++ ``hdfs dfsadmin -clrSpaceQuota <directory>...<directory>`` -- 
++ ``hdfs dfsadmin -setSpaceQuota <N> -storageType <storagetype> <directory>...<directory>`` -- 
++ ``hdfs dfsadmin -clrSpaceQuota -storageType <storagetype> <directory>...<directory>`` -- 
+
+
+
 
 
 
