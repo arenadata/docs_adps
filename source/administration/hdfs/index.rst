@@ -14,6 +14,7 @@
 
    Federation
    ErasureCoding
+   Quotas
    ACLonHDFS
    Archiv
    Cache
