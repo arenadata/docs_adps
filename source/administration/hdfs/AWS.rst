@@ -263,11 +263,160 @@ JAR **hadoop-aws** не декларирует никаких зависимос
  export AWS_ACCESS_KEY_ID=my.aws.key
  export AWS_SECRET_ACCESS_KEY=my.secret.key
 
+Эти переменные среды могут использоваться для установки учетных данных аутентификации вместо свойств в конфигурации Hadoop:
+
+::
+
+ export AWS_SESSION_TOKEN=SECRET-SESSION-TOKEN
+ export AWS_ACCESS_KEY_ID=SESSION-ACCESS-KEY
+ export AWS_SECRET_ACCESS_KEY=SESSION-SECRET-KEY
+
+Если установлена переменная среды ``AWS_SESSION_TOKEN``, аутентификация сессии с использованием "временных учетных данных безопасности" ("Temporary Security Credentials") включена. Идентификатор ключа и секретный ключ должны быть установлены для учетных данных этой конкретной сессии.
+
+.. important:: Эти переменные среды обычно не передаются от клиента к серверу при запуске приложений YARN. Это означает, что установка переменных среды AWS при запуске приложения не позволит запущенному приложению получить доступ к ресурсам S3. Переменные среды должны каким либо образом быть установлены на хостах/процессах, где выполняется работа.
 
 
+Смена провайдеров аутентификации
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Стандартный способ аутентификации -- с помощью ключа доступа и секретного ключа, используя свойства в файле конфигурации.
+
+Клиент **S3A** придерживается следующей цепочки проверки подлинности:
+
+1. Если данные для входа предоставляются в URI файловой системы, выводится предупреждение, а затем извлекаются имя пользователя и пароль  для ключа и секрета AWS.
+
+2. Файлы *fs.s3a.access.key* и *fs.s3a.secret.key* ищутся в конфигурации Hadoop XML.
+
+3. Затем ищутся `переменные среды AWS <http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-environment>`_.
+
+4. Предпринимается попытка запросить сервис Amazon EC2 Instance Metadata Service для получения учетных данных, опубликованных на виртуальных машинах EC2.
+
+**S3A** можно настроить для получения провайдеров проверки подлинности клиента из классов, которые интегрируются с **AWS SDK**, путем реализации интерфейса *com.amazonaws.auth.AWSCredentialsProvider*. Это делается путем перечисления классов реализации в порядке предпочтения в параметре конфигурации ``fs.s3a.aws.credentials.provider``.
+
+.. important:: AWS Credential Providers отличаются от Hadoop Credential Providers. Как показано далее, Hadoop Credential Providers позволяют хранить и передавать пароли и секреты более безопасно, чем в файлах конфигурации XML. AWS Credential Providers -- это классы, которые могут использоваться Amazon AWS SDK для получения регистрации AWS из другого источника в системе, включая переменные среды, свойства JVM и файлы конфигурации
+
+В JAR ``hadoop-aws`` есть три провайдера учетных данных **AWS**:
+
++ ``org.apache.hadoop.fs.s3a.TemporaryAWSCredentialsProvider`` -- учетные данные сессии;
+
++ ``org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider`` -- имя/секрет;
+
++ ``org.apache.hadoop.fs.s3a.AnonymousAWSCredentialsProvider`` -- анонимный вход.
+
+В **Amazon SDK** также есть много провайдеров и в частности два, автоматически устанавливающихся в цепочке аутентификации:
+
++ ``com.amazonaws.auth.InstanceProfileCredentialsProvider`` -- учетные данные EC2 Metadata;
+
++ ``com.amazonaws.auth.EnvironmentVariableCredentialsProvider`` -- переменные окружения AWS.
+
+
+Аутентификация EC2 IAM Metadata 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Приложения, работающие в **EC2**, могут связать роль *IAM* с виртуальной машиной и запросить у `EC2 Instance Metadata Service <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html>`_ учетные данные для доступа к **S3**. В **AWS SDK** эта функциональность обеспечивается ``InstanceProfileCredentialsProvider``, который применяет внутреннее принудительное использование одноэлементного инстанса для предотвращения проблемы регулирования.
+
+
+Использование учетных данных сессии
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Временные учетные данные безопасности (`Temporary Security Credentials <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html>`_) можно получить в **Amazon Security Token Service**. Они состоят из ключа доступа, секретного ключа и токена сессии.
+
+Для использования аутентификации:
+
+1. Объявить ``org.apache.hadoop.fs.s3a.TemporaryAWSCredentialsProvider`` в качестве провайдера.
+
+2. Установить ключ сессии в свойстве ``fs.s3a.session.token``, а свойства доступа и секретного ключа -- для свойств этой временной сессии.
+
+Пример:
+
+::
+
+ <property>
+   <name>fs.s3a.aws.credentials.provider</name>
+   <value>org.apache.hadoop.fs.s3a.TemporaryAWSCredentialsProvider</value>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.access.key</name>
+   <value>SESSION-ACCESS-KEY</value>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.secret.key</name>
+   <value>SESSION-SECRET-KEY</value>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.session.token</name>
+   <value>SECRET-SESSION-TOKEN</value>
+ </property>
+
+Срок действия учетных данных сессии фиксируется при их выдаче. После истечения этого срока действия приложение больше не может проходить аутентификацию в **AWS**.
+
+
+Анонимный вход
+^^^^^^^^^^^^^^^
+
+Указание ``org.apache.hadoop.fs.s3a.AnonymousAWSCredentialsProvider`` разрешает анонимный доступ к общедоступным сегментам **S3** без каких-либо учетных данных:
+
+::
+
+ <property>
+   <name>fs.s3a.aws.credentials.provider</name>
+   <value>org.apache.hadoop.fs.s3a.AnonymousAWSCredentialsProvider</value>
+ </property>
+
+Как только это будет сделано, пропадает необходимость указывать какие-либо учетные данные в конфигурации **Hadoop** или через переменные среды.
+
+Эту опцию можно использовать для проверки того, что хранилище объектов не разрешает доступ без аутентификации: то есть, если попытка составить список сегментов осуществляется с использованием анонимного входа, то она должна завершиться неудачей (в том случае, если сегменты явно не открыты для широкого доступа).
+
+::
+
+ hadoop fs -ls \
+  -D fs.s3a.aws.credentials.provider=org.apache.hadoop.fs.s3a.AnonymousAWSCredentialsProvider \
+  s3a://landsat-pds/
+
+
+.. important:: Разрешение анонимного доступа к сегменту S3 ставит под угрозу безопасность и поэтому не подходит для большинства случаев использования
+
+Если список провайдеров учетных данных указан в ``fs.s3a.aws.credentials.provider``, то *Anonymous Credential provider* должен стоять последним в перечне. В противном случае провайдеры учетных данных, перечисленные после него, игнорируются.
+
+-----------
+
+``SimpleAWSCredentialsProvider`` -- это стандартный провайдер учетных данных, который поддерживает значения секретного ключа в ``fs.s3a.access.key`` и токена в ``fs.s3a.secret.key``. Он не поддерживает аутентификацию с учетными данными, указанными в URL-адресах.
+
+::
+
+ <property>
+   <name>fs.s3a.aws.credentials.provider</name>
+   <value>org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider</value>
+ </property>
+
+
+Помимо отсутствия поддержки пользователя, сведения о пароле включаются в URL файловой системы (опасная практика, которая настоятельно не рекомендуется), этот провайдер действует точно в соответствии с базовым аутентификатором, используемым в цепочке аутентификации по умолчанию.
+
+Это означает, что цепочка аутентификации **S3A** по умолчанию может быть определена как:
+
+::
+
+ <property>
+   <name>fs.s3a.aws.credentials.provider</name>
+   <value>
+   org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider,
+   com.amazonaws.auth.EnvironmentVariableCredentialsProvider,
+   com.amazonaws.auth.InstanceProfileCredentialsProvider
+   </value>
+ </property>
 
 
 Protecting the AWS Credentials
+-------------------------------
+
+
+
+
+
+
 Storing secrets with Hadoop Credential Providers
 General S3A Client configuration
 Retry and Recovery
