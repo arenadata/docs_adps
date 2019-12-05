@@ -110,12 +110,10 @@ JAR **hadoop-aws** не декларирует никаких зависимос
 
 **Amazon S3** является примером "хранилища объектов". Чтобы добиться масштабируемости и особенно высокой доступности, **S3**, как и многие другие хранилища облачных объектов, ослабил некоторые ограничения, которые обещают классические файловые системы "POSIX".
 
-Функция *S3Guard* пытается решить некоторые из них, но она не может сделать это полностью. 
+Функция *S3Guard* пытается решить некоторые из них, но не обеспечивает этого полностью. 
 
-#1: Согласованность модели
+#1: Несогласованность модели
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Несогласованность модели:
 
 1. Файлы, созданные из API-интерфейсов файловой системы Hadoop, могут быть не сразу видны.
 
@@ -171,15 +169,104 @@ JAR **hadoop-aws** не декларирует никаких зависимос
 
 **S3A** на самом деле не применяет никаких проверок авторизации для этих заглушек. Пользователи проходят аутентификацию в S3-bucket, используя учетные данные **AWS**. Возможно, что объектные списки ACL определены для обеспечения авторизации на стороне **S3**, но это происходит полностью внутри сервиса **S3**, а не в реализации **S3A**.
 
-#4: Your AWS credentials are very, very valuable
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#4: Ценность данных 
+^^^^^^^^^^^^^^^^^^^^
+
+Учетные данные **AWS** не только оплачивают сервисы, но и предоставляют доступ для чтения и записи данных. Любой пользователь с учетными данными может не только читать наборы данных, но и удалять их.
+
+Крайне не рекомендуется распространять учетные данные целенаправленно или непреднамеренно через такие средства, как:
+
++ Регистрация в SCM любых секретных файлов конфигурации;
++ Логгирование секретных файлов конфигурации в консоли, поскольку они всегда в конечном итоге видны;
++ Определение URI файловой системы с учетными данными в URL-адресе, таком как *s3a://AK0010:secret@landsat-pds/*. В итоге все оказывается в журналах и сообщениях об ошибках.
+
+.. important:: Если какое-либо действие было допущено, следует немедленно изменить учетные данные
+
+
+Аутентификация S3
+------------------
+
+За исключением случаев взаимодействия с общедоступными сегментами **S3**, клиенту **S3A** требуются учетные данные.
+
+Клиент поддерживает несколько механизмов аутентификации и может быть настроен относительно применяемых механизмов и их порядка использования. Также можно сконфигурировать индивидуальные реализации *com.amazonaws.auth.AWSCredentialsProvider*.
+
+Свойства аутентификации:
+
+::
+
+ <property>
+   <name>fs.s3a.access.key</name>
+   <description>AWS access key ID.
+    Omit for IAM role-based or provider-based authentication.</description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.secret.key</name>
+   <description>AWS secret key.
+    Omit for IAM role-based or provider-based authentication.</description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.aws.credentials.provider</name>
+   <description>
+     Comma-separated class names of credential provider classes which implement
+     com.amazonaws.auth.AWSCredentialsProvider.
+ 
+     These are loaded and queried in sequence for a valid set of credentials.
+     Each listed class must implement one of the following means of
+     construction, which are attempted in order:
+     1. a public constructor accepting java.net.URI and
+         org.apache.hadoop.conf.Configuration,
+     2. a public static method named getInstance that accepts no
+        arguments and returns an instance of
+        com.amazonaws.auth.AWSCredentialsProvider, or
+     3. a public default constructor.
+ 
+     Specifying org.apache.hadoop.fs.s3a.AnonymousAWSCredentialsProvider allows
+     anonymous access to a publicly accessible S3 bucket without any credentials.
+     Please note that allowing anonymous access to an S3 bucket compromises
+     security and therefore is unsuitable for most use cases. It can be useful
+     for accessing public data sets without requiring AWS credentials.
+ 
+     If unspecified, then the default list of credential provider classes,
+     queried in sequence, is:
+     1. org.apache.hadoop.fs.s3a.BasicAWSCredentialsProvider: supports
+         static configuration of AWS access key ID and secret access key.
+         See also fs.s3a.access.key and fs.s3a.secret.key.
+     2. com.amazonaws.auth.EnvironmentVariableCredentialsProvider: supports
+         configuration of AWS access key ID and secret access key in
+         environment variables named AWS_ACCESS_KEY_ID and
+         AWS_SECRET_ACCESS_KEY, as documented in the AWS SDK.
+     3. com.amazonaws.auth.InstanceProfileCredentialsProvider: supports use
+         of instance profile credentials if running in an EC2 VM.
+   </description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.session.token</name>
+   <description>
+     Session token, when using org.apache.hadoop.fs.s3a.TemporaryAWSCredentialsProvider
+     as one of the providers.
+   </description>
+ </property>
+
+
+Аутентификация через переменные среды AWS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**S3A** поддерживает настройку через `стандартные переменные среды AWS <http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-environment>`_.
+
+Основные переменные среды предназначены для ключа доступа и связанного секрета:
+
+::
+
+ export AWS_ACCESS_KEY_ID=my.aws.key
+ export AWS_SECRET_ACCESS_KEY=my.secret.key
 
 
 
 
 
-
-Authenticating with S3
 Protecting the AWS Credentials
 Storing secrets with Hadoop Credential Providers
 General S3A Client configuration
