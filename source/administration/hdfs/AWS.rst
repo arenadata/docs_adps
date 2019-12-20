@@ -441,13 +441,401 @@ JAR **hadoop-aws** не декларирует никаких зависимос
 Самый безопасный способ сохранить ключи входа в **AWS** в секрете от **Hadoop** -- это использовать учетные данные **Hadoop**.
 
 
-Storing secrets with Hadoop Credential Providers
---------------------------------------------------
+Хранение секретов с помощью Hadoop Credential Providers
+---------------------------------------------------------
+
+**Hadoop Credential Provider Framework** позволяет "провайдерам учетных данных" держать секреты вне файлов конфигурации **Hadoop**, хранить их в зашифрованных файлах локально или в файловой системе **Hadoop**, включая их в запросы.
+
+Параметры конфигурации **S3A** с конфиденциальными данными (*fs.s3a.secret.key*, *fs.s3a.access.key*, *fs.s3a.session.token* и *fs.s3a.server-side-encryption.key*) могут сохранять свои данные в двоичном файле, при этом значения считываются, когда URL-адрес файловой системы **S3A** используется для доступа к данным. Ссылка на этого поставщика учетных данных объявляется в конфигурации *hadoop*.
+
+Следующие параметры конфигурации могут быть сохранены в хранилищах **Hadoop Credential Provider**:
+
+::
+
+ fs.s3a.access.key
+ fs.s3a.secret.key
+ fs.s3a.session.token
+ fs.s3a.server-side-encryption.key
+ fs.s3a.server-side-encryption-algorithm
+
+Первые три предназначены для аутентификации, а последние два -- для шифрования. Из последних только ключ шифрования можно считать "чувствительным". Однако возможность включить алгоритм в учетные данные позволяет файлу *JCEKS* содержать все параметры, необходимые для шифрования новых данных для записи в **S3**.
+
+Шаг 1. Создание файла учетных данных
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Файл учетных данных может быть создан в любой файловой системе **Hadoop**. При создании файла в **HDFS** или **Unix** разрешения  устанавливаются автоматически на сохранение конфиденциальности файла для читателя, хотя, несмотря на то, что права доступа к каталогу не затрагиваются, необходимо проверить, что содержащий файл каталог доступен для чтения только текущему пользователю.
+
+::
+
+ hadoop credential create fs.s3a.access.key -value 123 \
+     -provider jceks://hdfs@nn1.example.com:9001/user/backup/s3.jceks
+ 
+ hadoop credential create fs.s3a.secret.key -value 456 \
+     -provider jceks://hdfs@nn1.example.com:9001/user/backup/s3.jceks
+
+Можно увидеть, какие записи хранятся внутри файла учетных данных:
+
+::
+
+ hadoop credential list -provider jceks://hdfs@nn1.example.com:9001/user/backup/s3.jceks
+ 
+ Listing aliases for CredentialProvider: jceks://hdfs@nn1.example.com:9001/user/backup/s3.jceks
+ fs.s3a.secret.key
+ fs.s3a.access.key
+
+На этом этапе учетные данные готовы к использованию.
+
+
+Шаг 2. Настройка свойства пути
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+URL-адрес провайдера должен быть задан в свойстве конфигурации ``hadoop.security.credential.provider.path`` либо в командной строке, либо в файлах конфигурации XML.
+
+::
+
+ <property>
+   <name>hadoop.security.credential.provider.path</name>
+   <value>jceks://hdfs@nn1.example.com:9001/user/backup/s3.jceks</value>
+   <description>Path to interrogate for protected credentials.</description>
+ </property>
+
+Поскольку это свойство предоставляет только путь к файлу секретов, сам параметр конфигурации не является конфиденциальным элементом.
+
+Свойство ``hadoop.security.credential.provider.path`` является глобальным для всех файловых систем и секретов. Есть еще одно свойство, ``fs.s3a.security.credential.provider.path``, в котором перечислены только провайдеры учетных данных для файловых систем **S3A**. Эти два свойства объединяются в одно со списком провайдеров в *fs.s3a*. Свойство имеет приоритет над списком *hadoop.security *(т.е. они добавляются в общий список).
+
+::
+
+ <property>
+   <name>fs.s3a.security.credential.provider.path</name>
+   <value />
+   <description>
+     Optional comma separated list of credential providers, a list
+     which is prepended to that set in hadoop.security.credential.provider.path
+   </description>
+ </property>
+
+Это было сделано для поддержки привязки различных провайдеров учетных данных для каждого сегмента без добавления альтернативных секретов в список учетных данных. Однако некоторые приложения (например, **Hive**) не позволяют пользователям динамически обновлять список провайдеров. Поскольку теперь поддерживаются секреты для каждого сегмента, лучше включать ключи для каждого сегмента в файлы *JCEKS* и другие источники учетных данных.
+
+
+Использование секретов от провайдеров учетных данных
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Как только провайдер настроен в конфигурации **Hadoop**, команды *hadoop* работают точно так же, как если бы секреты были в файле XML.
+
+::
+
+ hadoop distcp \
+     hdfs://nn1.example.com:9001/user/backup/007020615 s3a://glacier1/
+ 
+ hadoop fs -ls s3a://glacier1/
+
+Путь к провайдеру также можно указать в командной строке:
+
+::
+
+ hadoop distcp \
+     -D hadoop.security.credential.provider.path=jceks://hdfs@nn1.example.com:9001/user/backup/s3.jceks \
+     hdfs://nn1.example.com:9001/user/backup/007020615 s3a://glacier1/
+ 
+ hadoop fs \
+   -D fs.s3a.security.credential.provider.path=jceks://hdfs@nn1.example.com:9001/user/backup/s3.jceks \
+   -ls s3a://glacier1/
+
+Поскольку путь провайдера сам по себе не является конфиденциальным секретом, нет риска декларировать его в командной строке.
+
+
+Общая конфигурация клиента S3A
+-------------------------------
+
+Все параметры клиента **S3A** настроены с префиксом ``fs.s3a``.
+
+Клиент поддерживает конфигурацию для каждого сегмента, чтобы разные сегменты могли переопределять общие параметры. Это обычно используется для изменения конечной точки, механизмов шифрования и аутентификации сегментов, опций *S3Guard* и различных других мелких опций.
+
+::
+
+ <property>
+   <name>fs.s3a.connection.maximum</name>
+   <value>15</value>
+   <description>Controls the maximum number of simultaneous connections to S3.</description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.connection.ssl.enabled</name>
+   <value>true</value>
+   <description>Enables or disables SSL connections to S3.</description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.endpoint</name>
+   <description>AWS S3 endpoint to connect to. An up-to-date list is
+     provided in the AWS Documentation: regions and endpoints. Without this
+     property, the standard region (s3.amazonaws.com) is assumed.
+   </description>
+ </property>
+
+ <property>
+   <name>fs.s3a.path.style.access</name>
+   <value>false</value>
+   <description>Enable S3 path style access ie disabling the default virtual hosting behaviour.
+     Useful for S3A-compliant storage providers as it removes the need to set up DNS for virtual hosting.
+   </description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.proxy.host</name>
+   <description>Hostname of the (optional) proxy server for S3 connections.</description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.proxy.port</name>
+   <description>Proxy server port. If this property is not set
+     but fs.s3a.proxy.host is, port 80 or 443 is assumed (consistent with
+     the value of fs.s3a.connection.ssl.enabled).</description>
+ </property>
+
+ <property>
+   <name>fs.s3a.proxy.username</name>
+   <description>Username for authenticating with proxy server.</description>
+ </property>
+
+ <property>
+   <name>fs.s3a.proxy.password</name>
+   <description>Password for authenticating with proxy server.</description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.proxy.domain</name>
+   <description>Domain for authenticating with proxy server.</description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.proxy.workstation</name>
+   <description>Workstation for authenticating with proxy server.</description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.attempts.maximum</name>
+   <value>20</value>
+   <description>How many times we should retry commands on transient errors.</description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.connection.establish.timeout</name>
+   <value>5000</value>
+   <description>Socket connection setup timeout in milliseconds.</description>
+ </property>
+
+ <property>
+   <name>fs.s3a.connection.timeout</name>
+   <value>200000</value>
+   <description>Socket connection timeout in milliseconds.</description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.paging.maximum</name>
+   <value>5000</value>
+   <description>How many keys to request from S3 when doing
+      directory listings at a time.</description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.threads.max</name>
+   <value>10</value>
+   <description> Maximum number of concurrent active (part)uploads,
+   which each use a thread from the threadpool.</description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.socket.send.buffer</name>
+   <value>8192</value>
+   <description>Socket send buffer hint to amazon connector. Represented in bytes.</description>
+ </property>
+
+ <property>
+   <name>fs.s3a.socket.recv.buffer</name>
+   <value>8192</value>
+   <description>Socket receive buffer hint to amazon connector. Represented in bytes.</description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.threads.keepalivetime</name>
+   <value>60</value>
+   <description>Number of seconds a thread can be idle before being
+     terminated.</description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.max.total.tasks</name>
+   <value>5</value>
+   <description>Number of (part)uploads allowed to the queue before
+   blocking additional uploads.</description>
+ </property>
+
+ <property>
+   <name>fs.s3a.multipart.size</name>
+   <value>100M</value>
+   <description>How big (in bytes) to split upload or copy operations up into.
+     A suffix from the set {K,M,G,T,P} may be used to scale the numeric value.
+   </description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.multipart.threshold</name>
+   <value>2147483647</value>
+   <description>How big (in bytes) to split upload or copy operations up into.
+     This also controls the partition size in renamed files, as rename() involves
+     copying the source file(s).
+     A suffix from the set {K,M,G,T,P} may be used to scale the numeric value.
+   </description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.multiobjectdelete.enable</name>
+   <value>true</value>
+   <description>When enabled, multiple single-object delete requests are replaced by
+     a single 'delete multiple objects'-request, reducing the number of requests.
+     Beware: legacy S3-compatible object stores might not support this request.
+   </description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.acl.default</name>
+   <description>Set a canned ACL for newly created and copied objects. Value may be Private,
+     PublicRead, PublicReadWrite, AuthenticatedRead, LogDeliveryWrite, BucketOwnerRead,
+     or BucketOwnerFullControl.</description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.multipart.purge</name>
+   <value>false</value>
+   <description>True if you want to purge existing multipart uploads that may not have been
+      completed/aborted correctly</description>
+ </property>
+
+ <property>
+   <name>fs.s3a.multipart.purge.age</name>
+   <value>86400</value>
+   <description>Minimum age in seconds of multipart uploads to purge</description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.signing-algorithm</name>
+   <description>Override the default signing algorithm so legacy
+     implementations can still be used</description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.server-side-encryption-algorithm</name>
+   <description>Specify a server-side encryption algorithm for s3a: file system.
+     Unset by default. It supports the following values: 'AES256' (for SSE-S3), 'SSE-KMS'
+      and 'SSE-C'
+   </description>
+ </property>
+
+ <property>
+     <name>fs.s3a.server-side-encryption.key</name>
+     <description>Specific encryption key to use if fs.s3a.server-side-encryption-algorithm
+     has been set to 'SSE-KMS' or 'SSE-C'. In the case of SSE-C, the value of this property
+     should be the Base64 encoded key. If you are using SSE-KMS and leave this property empty,
+     you'll be using your default's S3 KMS key, otherwise you should set this property to
+     the specific KMS key id.</description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.buffer.dir</name>
+   <value>${hadoop.tmp.dir}/s3a</value>
+   <description>Comma separated list of directories that will be used to buffer file
+     uploads to.</description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.block.size</name>
+   <value>32M</value>
+   <description>Block size to use when reading files using s3a: file system.
+   </description>
+ </property>
+
+ <property>
+   <name>fs.s3a.user.agent.prefix</name>
+   <value></value>
+   <description>
+     Sets a custom value that will be prepended to the User-Agent header sent in
+     HTTP requests to the S3 back-end by S3AFileSystem.  The User-Agent header
+     always includes the Hadoop version number followed by a string generated by
+     the AWS SDK.  An example is "User-Agent: Hadoop 2.8.0, aws-sdk-java/1.10.6".
+     If this optional property is set, then its value is prepended to create a
+     customized User-Agent.  For example, if this configuration property was set
+     to "MyApp", then an example of the resulting User-Agent would be
+     "User-Agent: MyApp, Hadoop 2.8.0, aws-sdk-java/1.10.6".
+   </description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.impl</name>
+   <value>org.apache.hadoop.fs.s3a.S3AFileSystem</value>
+   <description>The implementation class of the S3A Filesystem</description>
+ </property>
+ 
+ <property>
+   <name>fs.AbstractFileSystem.s3a.impl</name>
+   <value>org.apache.hadoop.fs.s3a.S3A</value>
+   <description>The implementation class of the S3A AbstractFileSystem.</description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.readahead.range</name>
+   <value>64K</value>
+   <description>Bytes to read ahead during a seek() before closing and
+   re-opening the S3 HTTP connection. This option will be overridden if
+   any call to setReadahead() is made to an open stream.</description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.list.version</name>
+   <value>2</value>
+   <description>Select which version of the S3 SDK's List Objects API to use.
+   Currently support 2 (default) and 1 (older API).</description>
+ </property>
+
+
+Повтор и восстановление
+------------------------
+
+Клиент **S3A** прилагает все усилия для восстановления после сбоев сети.
+
+**S3A** разделяет исключения, возвращаемые **AWS SDK**, на различные категории и выбирает другую политику повторных попыток в зависимости от их типа и того, является ли сбойная операция идемпотентной.
+
+
+Неустранимые проблемы: Fail Fast
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Следующие проблемы считаются неустранимыми, **S3A** не пытается восстановить их:
+
++ Нет объекта/сегмента: ``FileNotFoundException``;
++ Нет прав доступа: ``AccessDeniedException``;
++ Неисправные сетевые ошибки (``UnknownHostException``, ``NoRouteToHostException``, ``AWSRedirectException``);
++ Прерывания: ``InterruptedIOException``, ``InterruptedException``;
++ Отклоненные HTTP-запросы: ``InvalidRequestException``.
+
+
+Возможные проблемы восстановления: повторная попытка
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
++ Время соединения вышло: ``ConnectTimeoutException``. Время ожидания перед настройкой соединения с конечной точкой S3 (или прокси-сервером);
++ Код состояния ответа HTTP 400, "Bad Request".
+
+Код состояния 400, "Bad Request" обычно означает, что запрос не подлежит восстановлению. Но иногда восстановление возможно, поэтому проблема относится к данной категории, а не к неисправимым сбоям.
+
+Сбои повторяются с фиксированным интервалом ожидания, установленным в ``fs.s3a.retry.interval``, до предела, установленного в ``fs.s3a.retry.limit``.
+
+
+Only retriable on idempotent operations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 
-General S3A Client configuration
-Retry and Recovery
+
+
 Configuring different S3 buckets with Per-Bucket Configuration
 How S3A writes data to S3
 Metrics
