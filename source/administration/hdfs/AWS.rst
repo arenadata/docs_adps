@@ -911,7 +911,7 @@ URL-адрес провайдера должен быть задан в свой
 
 Доступ к различным сегментам **S3** возможен с различными конфигурациями клиента **S3A**. Это позволяет использовать разные конечные точки, стратегии чтения и записи данных, а также данные для входа в систему.
 
-1. Все параметры ``fs.s3a``, кроме небольшого набора неизменяемых значений (в настоящее время ``fs.s3a.impl``), могут быть установлены для каждого сегмента.8
+1. Все параметры ``fs.s3a``, кроме небольшого набора неизменяемых значений (в настоящее время ``fs.s3a.impl``), могут быть установлены для каждого сегмента.
 2. Опция для конкретного сегмента задается путем замены ``fs.s3a.`` префиксом опции ``fs.s3a.bucket.BUCKETNAME.``, где *BUCKETNAME* -- имя сегмента.
 3. При подключении к сегменту все явно заданные параметры переопределяют базовые значения ``fs.s3a.``.
 
@@ -960,12 +960,250 @@ URL-адрес провайдера должен быть задан в свой
  </property>
 
 
-Customizing S3A secrets held in credential files
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Настройка секретов S3A, хранящихся в файлах учетных данных
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Секреты в файлах *JCEKS* или предоставленные другими провайдерами учетных данных **Hadoop** могут быть настроены для каждого отдельного сегмента. Клиент **S3A** смотрит секреты на каждом сегменте.
+
+Например, файл *JCEKS* с шестью ключами:
+
+::
+
+ fs.s3a.access.key
+ fs.s3a.secret.key
+ fs.s3a.server-side-encryption-algorithm
+ fs.s3a.bucket.nightly.access.key
+ fs.s3a.bucket.nightly.secret.key
+ fs.s3a.bucket.nightly.session.token
+ fs.s3a.bucket.nightly.server-side-encryption.key
+ fs.s3a.bucket.nightly.server-side-encryption-algorithm
+
+При доступе к сегменту *s3a://nightly/* используются параметры конфигурации для каждого сегмента, в приведенном примере -- ключи доступа и токен, включая алгоритм шифрования и ключ.
 
 
+Использование Per-Bucket Configuration для доступа к данным
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Сегменты **S3** находятся в разных "регионах" (по умолчанию *US-East*). Клиент **S3A** обращается к этим регионам по умолчанию, отправляя HTTP-запросы на сервер *s3.amazonaws.com*.
+
+**S3A** может работать с сегментами из любого региона. Каждый регион имеет свою собственную конечную точку **S3**, описание которых приведено в документации `Amazon <http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region>`_.
+
+1. Приложения, работающие в инфраструктуре EC2, не платят за ввод-вывод в/из локальных сегментов S3. Им выставляется счет за доступ к удаленным сегментам. Рекомендуется использовать локальные сегменты и локальные копии данных везде, где это возможно.
+2. Конечная точка S3 по умолчанию может поддерживать ввод-вывод данных с любым сегментом, при условии использования протокола подписи запроса V1.
+3. Когда применяется протокол подписи V4, AWS требует использования явной конечной точки региона, поэтому S3A должен быть сконфигурирован для использования конкретной конечной точки. Это делается в параметре конфигурации *fs.s3a.endpoint*.
+4. Все конечные точки, кроме точки по умолчанию, поддерживают взаимодействие только с локальными для данного экземпляра S3 сегментами.
+
+Хотя, как правило, проще использовать конечную точку по умолчанию, работая с регионами *V4-signing-only* (*Frankfurt*, *Seoul*) требуется идентификация конечной точки. Лучшая производительность предполагается от прямых подключений -- *traceroute* может дать некоторое представление об этом.
+
+В случае если используется неверная конечная точка, запрос может завершиться сбоем. И тогда об этом сообщается как ошибка *301/redirect* или *400 Bad Request*: следует принять их как подсказки для проверки настройки конечной точки сегмента.
+
+Далее приведен список свойств, определяющих все регионы **AWS S3**, по состоянию на июнь 2017 года:
+
+::
+
+ <!--
+  This is the default endpoint, which can be used to interact
+  with any v2 region.
+  -->
+ <property>
+   <name>central.endpoint</name>
+   <value>s3.amazonaws.com</value>
+ </property>
+ 
+ <property>
+   <name>canada.endpoint</name>
+   <value>s3.ca-central-1.amazonaws.com</value>
+ </property>
+ 
+ <property>
+   <name>frankfurt.endpoint</name>
+   <value>s3.eu-central-1.amazonaws.com</value>
+ </property>
+ 
+ <property>
+   <name>ireland.endpoint</name>
+   <value>s3-eu-west-1.amazonaws.com</value>
+ </property>
+ 
+ <property>
+   <name>london.endpoint</name>
+   <value>s3.eu-west-2.amazonaws.com</value>
+ </property>
+ 
+ <property>
+   <name>mumbai.endpoint</name>
+   <value>s3.ap-south-1.amazonaws.com</value>
+ </property>
+ 
+ <property>
+   <name>ohio.endpoint</name>
+   <value>s3.us-east-2.amazonaws.com</value>
+ </property>
+ 
+ <property>
+   <name>oregon.endpoint</name>
+   <value>s3-us-west-2.amazonaws.com</value>
+ </property>
+ 
+ <property>
+   <name>sao-paolo.endpoint</name>
+   <value>s3-sa-east-1.amazonaws.com</value>
+ </property>
+ 
+ <property>
+   <name>seoul.endpoint</name>
+   <value>s3.ap-northeast-2.amazonaws.com</value>
+ </property>
+ 
+ <property>
+   <name>singapore.endpoint</name>
+   <value>s3-ap-southeast-1.amazonaws.com</value>
+ </property>
+ 
+ <property>
+   <name>sydney.endpoint</name>
+   <value>s3-ap-southeast-2.amazonaws.com</value>
+ </property>
+ 
+ <property>
+   <name>tokyo.endpoint</name>
+   <value>s3-ap-northeast-1.amazonaws.com</value>
+ </property>
+ 
+ <property>
+   <name>virginia.endpoint</name>
+   <value>${central.endpoint}</value>
+ </property>
+ 
+Этот список может использоваться для указания конечной точки отдельных сегментов, например, для сегментов в *центральной* и в *EU/Ireland* конечных точках.
+
+::
+
+ <property>
+   <name>fs.s3a.bucket.landsat-pds.endpoint</name>
+   <value>${central.endpoint}</value>
+   <description>The endpoint for s3a://landsat-pds URLs</description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.bucket.eu-dataset.endpoint</name>
+   <value>${ireland.endpoint}</value>
+   <description>The endpoint for s3a://eu-dataset URLs</description>
+ </property>
+
+Зачем явно объявлять сегмент, привязанный к *центральной* конечной точке? Это гарантирует, что если конечная точка по умолчанию будет изменена на новый регион, хранилище данных *US-east* все равно будет доступно.
 
 
-How S3A writes data to S3
+Как S3A записывает данные в S3
+--------------------------------
+
+Оригинальный клиент **S3A** реализовал запись в файл путем буферизации всех данных на диск, как они были записаны в *OutputStream*. Загрузка при этом начинается только при вызове метода потока ``close()``. В результате это делало вывод медленным, особенно при больших загрузках, и даже могло заполнять дисковое пространство небольших (виртуальных) дисков.
+
+В **Hadoop 2.7** была добавлена альтернатива *S3AFastOutputStream*, которую в последствии **Hadoop 2.8** расширил. Теперь он считается стабильным и полностью заменил оригинальный *S3AOutputStream*, который больше не поставляется в **Hadoop**.
+
+"Быстрый" выходной поток:
+
+1. Загружает большие файлы в виде блоков с установленным размером в *fs.s3a.multipart.size*. То есть имеется предел, с которого начинается многочастная загрузка с идентичным размером каждой загрузки.
+2. Буферизует блоки на диске (по умолчанию) или в оперативной памяти или вне нее.
+3. Загружает блоки параллельно в фоновых потоках.
+4. Начинает загрузку блоков, как только буферизованные данные превышают размер партиции.
+5. При буферизации данных на диск используется каталог/каталоги, перечисленные в *fs.s3a.buffer.dir*. Размер данных, которые можно буферизовать, ограничен доступным дисковым пространством.
+6. Генерирует выходную статистику в виде метрик в файловой системе, включая статистику активных и ожидающих загрузку блоков.
+7. Время закрытия ``close()`` задается количеством оставшихся данных для загрузки, а не общим размером файла.
+
+Поскольку загрузка начинается во время записи данных, она дает значительные преимущества при генерации очень больших объемов данных. Механизмы буферизации в памяти могут также обеспечивать ускорение при работе рядом с конечными точками **S3**, поскольку диски не используются для промежуточного хранения данных.
+
+::
+
+ <property>
+   <name>fs.s3a.fast.upload.buffer</name>
+   <value>disk</value>
+   <description>
+     The buffering mechanism to use.
+     Values: disk, array, bytebuffer.
+ 
+     "disk" will use the directories listed in fs.s3a.buffer.dir as
+     the location(s) to save data prior to being uploaded.
+ 
+     "array" uses arrays in the JVM heap
+ 
+     "bytebuffer" uses off-heap memory within the JVM.
+ 
+     Both "array" and "bytebuffer" will consume memory in a single stream up to the number
+     of blocks set by:
+ 
+         fs.s3a.multipart.size * fs.s3a.fast.upload.active.blocks.
+ 
+     If using either of these mechanisms, keep this value low
+ 
+     The total number of threads performing work across all threads is set by
+     fs.s3a.threads.max, with fs.s3a.max.total.tasks values setting the number of queued
+     work items.
+   </description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.multipart.size</name>
+   <value>100M</value>
+   <description>How big (in bytes) to split upload or copy operations up into.
+     A suffix from the set {K,M,G,T,P} may be used to scale the numeric value.
+   </description>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.fast.upload.active.blocks</name>
+   <value>8</value>
+   <description>
+     Maximum Number of blocks a single output stream can have
+     active (uploading, or queued to the central FileSystem
+     instance's pool of queued operations.
+ 
+     This stops a single stream overloading the shared thread pool.
+   </description>
+ </property>
+
+Примечания:
+
++ Если объем данных, записываемых в поток, меньше установленного в *fs.s3a.multipart.size*, загрузка выполняется в операции ``OutputStream.close()`` -- как и в оригинальном выходном потоке;
+
++ Монитор метрик Hadoop включает в себя длину очереди в реальном времени и количество операций загрузки, что позволяет определить, когда имеется отставание в работе / несоответствие между скоростью генерации данных и пропускной способностью сети. Статистика по каждому потоку также может быть записана с помощью вызова ``toString()`` в текущем потоке.
+
++ Записываемые файлы остаются невидимыми до тех пор, пока запись не завершится в вызове ``close()``, блокирующемся до завершения загрузки.
+
+
+Буферизация загружаемых данных на диск
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Когда *fs.s3a.fast.upload.buffer* установлен на ``disk``, все данные перед загрузкой буферизуются на локальные жесткие диски. Это сводит к минимуму объем потребляемой памяти и, таким образом, исключает размер кучи как ограничивающий фактор при загрузке в очереди -- точно так же, как и оригинальная буферизация "direct to disk".
+
+::
+
+ <property>
+   <name>fs.s3a.fast.upload.buffer</name>
+   <value>disk</value>
+ </property>
+ 
+ <property>
+   <name>fs.s3a.buffer.dir</name>
+   <value>${hadoop.tmp.dir}/s3a</value>
+   <description>Comma separated list of directories that will be used to buffer file
+     uploads to.</description>
+ </property>
+
+Это буферный механизм по умолчанию. Объем данных, которые могут быть буферизованы, ограничен объемом доступного дискового пространства.
+
+
+Buffering upload data in ByteBuffers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
 Metrics
+---------
+
+
+
 Other Topics
+-------------
+
+
+
