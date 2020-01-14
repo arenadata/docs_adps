@@ -1324,20 +1324,74 @@ URL-адрес провайдера должен быть задан в свой
 Клиент файловой системы **S3A** поддерживает понятие политик ввода, аналогичное понятию вызова API Posix ``fadvise()``. Настраивает поведение клиента **S3A** для оптимизации запросов HTTP GET для различных вариантов использования.
 
 
-Metrics
+Метрики
 ---------
 
+Метрики **S3A** можно отслеживать с помощью Hadoop-платформы **metrics2**. **S3A** создает свою собственную систему метрик **s3a-file-system**, и каждый экземпляр клиента создает собственный источник метрик, именуемый уникальным числовым идентификатором **JVM**.
+
+В качестве простого примера в ``hadoop-metrics2.properties`` можно добавить следующее свойство для записи всех метрик **S3A** в файл журнала каждые *10* секунд:
+
+::
+
+ s3a-file-system.sink.my-metrics-config.class=org.apache.hadoop.metrics2.sink.FileSink
+ s3a-file-system.sink.my-metrics-config.filename=/var/log/hadoop-yarn/s3a-metrics.out
+ *.period=10
+
+Тогда строки в этом файле будут структурированы следующим образом:
+
+::
+
+ 1511208770680 s3aFileSystem.s3aFileSystem: Context=s3aFileSystem, s3aFileSystemId=892b02bb-7b30-4ffe-80ca-3a9935e1d96e, bucket=bucket,
+ Hostname=hostname-1.hadoop.apache.com, files_created=1, files_copied=2, files_copied_bytes=10000, files_deleted=5, fake_directories_deleted=3,
+ directories_created=3, directories_deleted=0, ignored_errors=0, op_copy_from_local_file=0, op_exists=0, op_get_file_status=15, op_glob_status=0,
+ op_is_directory=0, op_is_file=0, op_list_files=0, op_list_located_status=0, op_list_status=3, op_mkdirs=1, op_rename=2, object_copy_requests=0,
+ object_delete_requests=6, object_list_requests=23, object_continue_list_requests=0, object_metadata_requests=46, object_multipart_aborted=0,
+ object_put_bytes=0, object_put_requests=4, object_put_requests_completed=4, stream_write_failures=0, stream_write_block_uploads=0,
+ stream_write_block_uploads_committed=0, stream_write_block_uploads_aborted=0, stream_write_total_time=0, stream_write_total_data=0,
+ s3guard_metadatastore_put_path_request=10, s3guard_metadatastore_initialization=0, object_put_requests_active=0, object_put_bytes_pending=0,
+ stream_write_block_uploads_active=0, stream_write_block_uploads_pending=0, stream_write_block_uploads_data_pending=0,
+ S3guard_metadatastore_put_path_latencyNumOps=0, S3guard_metadatastore_put_path_latency50thPercentileLatency=0,
+ S3guard_metadatastore_put_path_latency75thPercentileLatency=0, S3guard_metadatastore_put_path_latency90thPercentileLatency=0,
+ S3guard_metadatastore_put_path_latency95thPercentileLatency=0, S3guard_metadatastore_put_path_latency99thPercentileLatency=0
+
+В зависимости от конфигураций, метрик из других систем, контекстов и т.д. могут быть, например, следующие записи:
+
+::
+
+ 1511208770680 metricssystem.MetricsSystem: Context=metricssystem, Hostname=s3a-metrics-4.gce.cloudera.com, NumActiveSources=1, NumAllSources=1,
+ NumActiveSinks=1, NumAllSinks=0, Sink_fileNumOps=2, Sink_fileAvgTime=1.0, Sink_fileDropped=0, Sink_fileQsize=0, SnapshotNumOps=5,
+ SnapshotAvgTime=0.0, PublishNumOps=2, PublishAvgTime=0.0, DroppedPubAll=0
+
+Важно обратить внимание, что низкоуровневые метрики из самого **AWS SDK** в настоящее время не включены в данные метрики.
 
 
+Копирование данных с distcp
+----------------------------
 
+Инструмент ``distcp`` **Hadoop** часто используется для копирования данных между кластером **Hadoop** и **Amazon S3**.
 
+Команда ``distcp update`` пытается выполнять инкрементное обновление данных. Нетрудно проверить, когда файлы не совпадают или имеют разную длину, но не в случаях, когда они имеют одинаковый размер. Инструмент ``distcp`` решает эту проблему путем сравнения контрольных сумм файлов в исходной и целевой файловых системах, что он и пытается выполнить, даже если файловые системы имеют несовместимые алгоритмы контрольных сумм.
 
+Коннектор **S3A** может предоставить заголовок HTTP etag вызывающей стороне в качестве контрольной суммы загруженного файла, но это приводит к разрыву операций ``distcp`` между *hdfs* и *s3a*. По этой причине функция ``etag-as-checkum`` отключена по умолчанию.
 
+::
 
+ <property>
+   <name>fs.s3a.etag.checksum.enabled</name>
+   <value>false</value>
+   <description>
+     Should calls to getFileChecksum() return the etag value of the remote
+     object.
+     WARNING: if enabled, distcp operations between HDFS and S3 will fail unless
+     -skipcrccheck is set.
+   </description>
+ </property>
 
+Когда параметр включен, ``distcp`` может использовать контрольную сумму для сравнения объектов между двумя сегментами **S3**. Тогда в случае если каждый из сегментов загружен как один файл *PUT*, или, если он состоит из нескольких частей *PUT* -- в блоках одинакового размера, сконфигурированного значением ``fs.s3a.multipart.size`` -- контрольные суммы сегментов должны быть идентичными.
 
-Other Topics
--------------
+Для отключения проверки контрольной суммы в ``distcp`` следует использовать опцию ``-skipcrccheck``:
 
+::
 
+ hadoop distcp -update -skipcrccheck /user/alice/datasets s3a://alice-backup/datasets
 
