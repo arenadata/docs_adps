@@ -16,6 +16,7 @@
    ErasureCoding
    Quotas
    Snapshots
+   AWS
    ACLonHDFS
    Archiv
    Cache
