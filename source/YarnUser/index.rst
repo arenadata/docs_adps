@@ -13,7 +13,7 @@ ApplicationMaster для каждого приложения, по сути, я�
 
 .. _yarn_architecture:
 
-.. figure:: imgs/yarn_architecture.png
+.. figure:: ../imgs/yarn_architecture.png
    :align: center
 
    Архитектура YARN
