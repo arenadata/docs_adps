@@ -9,3 +9,4 @@
 
    nodemanager_resizing
    resourcemanager_ha_and_resizing
+   CapacityScheduler
