@@ -426,7 +426,7 @@ ACL имеет форму *user1,user2 space group1,group2*. Особое зна
 
 ``yarn.scheduler.configuration.leveldb-store.path`` -- путь к хранилищу конфигурации при использовании leveldb. Значением по умолчанию является *${hadoop.tmp.dir}/yarn/system/confstore*;
 
-``yarn.scheduler.configuration.leveldb-store.compaction-interval-secs`` -- интервал сжатия конфигурации при использовании leveldb, в секундах. Значение по умолчанию *86400* (один день);
+``yarn.scheduler.configuration.leveldb-store.compaction-interval-secs`` -- интервал сжатия конфигурации при использовании leveldb (в секундах). Значение по умолчанию *86400* (один день);
 
 ``yarn.scheduler.configuration.zk-store.parent-path`` -- путь к root-узлу zookeeper для хранения связанной с конфигурацией информации при использовании zookeeper. Значением по умолчанию является */confstore*.
 
@@ -445,7 +445,7 @@ ACL имеет форму *user1,user2 space group1,group2*. Особое зна
 
 + Resource Update: когда Application Master может запросить Resource Manager обновить ресурсный размер контейнера. Например: изменить контейнер *2GB, 2 vcore* на контейнер *4GB, 2 vcore*.
 
-+ ExecutionType Update: когда Application Master может запросить Resource Manager обновить ExecutionType контейнера. Например: изменить тип выполнения с GUARANTEED на OPPORTUNISTIC или наоборот.
++ ExecutionType Update: когда Application Master может запросить Resource Manager обновить ExecutionType контейнера. Например: изменить тип выполнения с *GUARANTEED* на *OPPORTUNISTIC* или наоборот.
 
 Этому способствует **Application Master**, заполняющий поле *updated_containers*, представляющее собой список типа *UpdateContainerRequestProto* в *AllocateRequestProto*. Master может сделать несколько запросов на обновление контейнера в одном вызове.
 
@@ -473,7 +473,7 @@ ACL имеет форму *user1,user2 space group1,group2*. Особое зна
  }
 
 
-В соответствии с приведенным перечислением планировщик в настоящее время поддерживает изменение типа обновлений контейнера в одном запросе либо Resource Update, либо ExecutionType Update.
+В соответствии с приведенным перечислением планировщик в настоящее время поддерживает изменение типа обновлений контейнера Resource Update либо ExecutionType Update в одном запросе.
 
 **Application Master** также должен предоставить последнюю версию *ContainerProto*, полученную от **Resource Manager** -- это контейнер, который Manager запрашивает на обновление.
 
