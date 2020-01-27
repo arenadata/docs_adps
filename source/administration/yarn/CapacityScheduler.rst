@@ -400,11 +400,99 @@ ACL имеет форму *user1,user2 space group1,group2*. Особое зна
 
 
 
-Changing Queue Configuration
+Изменение конфигурации очереди
 ------------------------------
 
+Изменение конфигурации очереди через файл осуществляется путем редактирования *conf/capacity-scheduler.xml* и запуска ``yarn rmadmin -refreshQueues``:
+
+::
+
+ $ vi $HADOOP_CONF_DIR/capacity-scheduler.xml
+ $ $HADOOP_YARN_HOME/bin/yarn rmadmin -refreshQueues
+
+Удаление очереди через файл реализуется в два шага:
+
++ Остановка очереди: перед удалением leaf-очереди она не должна иметь запущенных/ожидающих приложений и должна быть в статусе STOPPED путем изменения ``yarn.scheduler.capacity.<queue-path>.state`` (`Администрирование и разрешения очереди`_). Перед удалением родительской очереди все ее дочерние очереди не должны иметь запущенных/ожидающих приложений и должны быть в статусе STOPPED. Родительская очередь также должна быть STOPPED;
+
++ Удаление очереди: удалить конфигурации очереди из файла и запустить обновление.
+
+Изменение конфигурации очереди через API осуществляется путем использования резервного хранилища для конфигурации планировщика. Для этого могут быть настроены параметры в *yarn-site.xml*:
+
+``yarn.scheduler.configuration.store.class`` -- тип используемого резервного хранилища;
+
+``yarn.scheduler.configuration.mutation.acl-policy.class`` -- политика ACL может быть настроена для ограничения того, какие пользователи могут изменять какие очереди. Значением по умолчанию является *org.apache.hadoop.yarn.server.resourcemanager.scheduler.DefaultConfigurationMutationACLPolicy*, что позволяет только YARN-администраторам вносить изменения в конфигурацию. Другим значением является *org.apache.hadoop.yarn.server.resourcemanager.scheduler.capacity.conf.QueueAdminConfigurationMutationACLPolicy*, что позволяет вносить изменения очереди только в том случае, если вызывающий объект является администратором очереди;
+
+``yarn.scheduler.configuration.store.max-logs`` -- изменения конфигурации регистрируются в бэк-хранилище, если используется leveldb или zookeeper. Эта конфигурация контролирует максимальное количество журналов аудита для хранения, удаляя старые журналы при превышении значения. По умолчанию *1000*;
+
+``yarn.scheduler.configuration.leveldb-store.path`` -- путь к хранилищу конфигурации при использовании leveldb. Значением по умолчанию является *${hadoop.tmp.dir}/yarn/system/confstore*;
+
+``yarn.scheduler.configuration.leveldb-store.compaction-interval-secs`` -- интервал сжатия конфигурации при использовании leveldb, в секундах. Значение по умолчанию *86400* (один день);
+
+``yarn.scheduler.configuration.zk-store.parent-path`` -- путь к root-узлу zookeeper для хранения связанной с конфигурацией информации при использовании zookeeper. Значением по умолчанию является */confstore*.
+
+При включении конфигурации планировщика через ``yarn.scheduler.configuration.store.class``, отключается *yarn rmadmin -refreshQueues*, то есть исключается возможность обновления конфигурации через файл.
+
+.. important:: Функция изменения конфигурации очереди через API находится в альфа-фазе и может быть изменена
 
 
 
-Updating a Container (Experimental - API may change in the future)
---------------------------------------------------------------------
+Обновление контейнера
+-----------------------
+
+*Экспериментально. API может измениться в будущем*
+
+Как только **Application Master** получает контейнер от **Resource Manager**, Master может запросить у Manager обновить некоторые атрибуты контейнера. В настоящее время поддерживаются только два типа обновлений контейнера:
+
++ Resource Update: когда Application Master может запросить Resource Manager обновить ресурсный размер контейнера. Например: изменить контейнер *2GB, 2 vcore* на контейнер *4GB, 2 vcore*.
+
++ ExecutionType Update: когда Application Master может запросить Resource Manager обновить ExecutionType контейнера. Например: изменить тип выполнения с GUARANTEED на OPPORTUNISTIC или наоборот.
+
+Этому способствует **Application Master**, заполняющий поле *updated_containers*, представляющее собой список типа *UpdateContainerRequestProto* в *AllocateRequestProto*. Master может сделать несколько запросов на обновление контейнера в одном вызове.
+
+Схема *UpdateContainerRequestProto* выглядит следующим образом:
+
+::
+
+ message UpdateContainerRequestProto {
+   required int32 container_version = 1;
+   required ContainerIdProto container_id = 2;
+   required ContainerUpdateTypeProto update_type = 3;
+   optional ResourceProto capability = 4;
+   optional ExecutionTypeProto execution_type = 5;
+ }
+
+*ContainerUpdateTypeProto* является перечислением:
+
+::
+
+ enum ContainerUpdateTypeProto {
+   INCREASE_RESOURCE = 0;
+   DECREASE_RESOURCE = 1;
+   PROMOTE_EXECUTION_TYPE = 2;
+   DEMOTE_EXECUTION_TYPE = 3;
+ }
+
+
+В соответствии с приведенным перечислением планировщик в настоящее время поддерживает изменение типа обновлений контейнера в одном запросе либо Resource Update, либо ExecutionType Update.
+
+**Application Master** также должен предоставить последнюю версию *ContainerProto*, полученную от **Resource Manager** -- это контейнер, который Manager запрашивает на обновление.
+
+Если **Resource Manager** может обновить запрошенный контейнер, то тогда обновленный контейнер возвращается в поле списка *updated_containers* типа *UpdatedContainerProto* в возвращаемом значении *AllocateResponseProto* того же самого вызова или одного из последующих.
+
+Схема *UpdatedContainerProto* выглядит следующим образом:
+
+::
+
+ message UpdatedContainerProto {
+   required ContainerUpdateTypeProto update_type = 1;
+   required ContainerProto container = 2;
+ }
+
+
+Здесь указывается тип выполненного обновления для контейнера и объект обновленного контейнера, содержащий обновленный токен.
+
+Затем токен контейнера может использоваться **Application Master** для запроса соответствующего **NodeManager** либо запуска контейнера, если он еще не запущен, либо для обновления контейнера с использованием обновленного токена.
+
+Обновления контейнера *DECREASE_RESOURCE* и *DEMOTE_EXECUTION_TYPE* выполняются автоматически -- **Application Master** не должен явно запрашивать **NodeManager**, чтобы уменьшить ресурсы контейнера. Другие типы обновлений требуют, чтобы Master явно запрашивал об обновлении.
+
+Если для параметра конфигурации ``yarn.resourcemanager.auto-update.containers`` задано значение *true* (по умолчанию *false*), **Resource Manager** обеспечивает автоматическое обновление всех контейнеров.
