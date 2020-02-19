@@ -27,7 +27,7 @@ from string import Template
 # -- General configuration ------------------------------------------------
 now = datetime.datetime.now()
 # branch = subprocess.check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD']).decode('utf-8')
-branch = "v2.1.0"
+branch = "v2.1.2"
 
 title = Template(r"""
             \pagenumbering{Roman} %%% to avoid page 1 conflict with actual page 1
