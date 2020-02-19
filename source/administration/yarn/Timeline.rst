@@ -378,7 +378,7 @@ Timeline-читатели -- это отделенные от timeline-колл�
 
 ::
 
- amRMClient.registerTimelineV2Client(timelineClient);
+ amRMClient.registerTimelineV2Client(timelineClient)
 
 
 Еще один адрес должен быть извлечен из распределенного отклика от **Application Master** и должен быть явно установлен в timeline-клиенте:
