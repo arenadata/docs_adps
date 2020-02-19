@@ -145,8 +145,8 @@ Timeline-читатели -- это отделенные от timeline-колл�
 
 ``yarn.timeline-service.read.allowed.users`` -- разделенный запятыми список пользователей и после пробела разделенный запятыми список групп. Функция позволяет введенному списку пользователей и групп читать данные и отклонять остальных пользователей и группы. По умолчанию установлено значение *none*. Если авторизация включена, то данный параметр обязателен.
 
-Конфигурация. Включение поддержки CORS
----------------------------------------
+Включение поддержки CORS
+--------------------------
 
 Для включения поддержки совместного использования ресурсов (Cross-origin resource sharing, CORS) в **Timeline Service v.2** необходимо установить следующие параметры конфигурации:
 
@@ -302,8 +302,8 @@ Timeline-читатели -- это отделенные от timeline-колл�
  $ yarn-daemon.sh start timelinereader
 
 
-Включение MapReduce для записи в Timeline Service v.2
--------------------------------------------------------
+Включение MapReduce
+--------------------
 
 Для записи данных **MapReduce** в **Timeline Service v.2** необходимо включить следующую конфигурацию в *mapred-site.xml*:
 
@@ -466,17 +466,17 @@ Root path:
 
 Далее описываются поддерживаемые запросы в REST API:
 
-+ `Query Flows`
-+ `Query Flow Runs`
-+ `Query Flow Run`
-+ `Query Apps for a flow`
-+ `Query Apps for a flow run`
-+ `Query app`
-+ `Query generic entities with in the scope of Application`
-+ `Query generic entities`
-+ `Query generic entity with in the scope of Application`
-+ `Query generic entity`
-+ `Query generic entity types`
++ `Query Flows`_
++ `Query Flow Runs`_
++ `Query Flow Run`_
++ `Query Apps for a flow`_
++ `Query Apps for a flow run`_
++ `Query app`_
++ `Query generic entities with in the scope of Application`_
++ `Query generic entities`_
++ `Query generic entity with in the scope of Application`_
++ `Query generic entity`_
++ `Query generic entity types`_
 
 
 Query Flows
