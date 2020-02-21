@@ -52,7 +52,7 @@ Release notes
 |       |                  +--------------------------+                                |
 |       |                  | Task Manager             |                                |
 +-------+------------------+--------------------------+--------------------------------+
-| 9     | Apache Airflow   | Web Server               | `1.10.4 <airflow_version_>`_   |
+| 9     | Apache Airflow   | Web Server               | `1.10.6 <airflow_version_>`_   |
 |       |                  +--------------------------+                                |
 |       |                  | Scheduler                |                                |
 +-------+------------------+--------------------------+--------------------------------+
@@ -73,7 +73,7 @@ Release notes
 .. _zeppelin_version: https://zeppelin.apache.org/releases/zeppelin-release-0.8.1.html
 .. _zookeeper_version: https://zookeeper.apache.org/doc/r3.4.14/releasenotes.html
 .. _flink_version: https://flink.apache.org/news/2019/07/02/release-1.8.1.html
-.. _airflow_version: https://airflow.apache.org/docs/stable/changelog.html#airflow-1-10-4-2019-08-06
+.. _airflow_version: https://airflow.apache.org/docs/1.10.6/changelog.html#airflow-1-10-4-2019-08-06
 .. _solr_version: https://lucene.apache.org/solr/8_2_0/changes/Changes.html
 
 .. important:: Контактная информация службы поддержки -- e-mail: info@arenadata.io
