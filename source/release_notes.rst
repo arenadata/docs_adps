@@ -48,7 +48,12 @@ Release notes
 +-------+------------------+--------------------------+--------------------------------+
 | 7     | Apache Zookeeper | Server                   | `3.4.14 <zookeeper_version_>`_ |
 +-------+------------------+--------------------------+--------------------------------+
-
+| 8     | Apache Flink     | Server                   | `1.8.1 <flink_version_>`_      |
++-------+------------------+--------------------------+--------------------------------+
+| 9     | Apache Airflow   | Server                   | `1.10.4 <airflow_version_>`_   |
++-------+------------------+--------------------------+--------------------------------+
+| 10    | Apache Solr      | Server                   | `8.2.0 <solr_version_>`_       |
++-------+------------------+--------------------------+--------------------------------+
 **Arenadata** оставляет за собой право добавления необходимых изменений и патчей для обеспечения стабильного функционирования компонентов и их интеграции.
 
 .. 2.0.5 RN is for whole 2.0 line
@@ -63,5 +68,8 @@ Release notes
 .. _yarn_version: https://hadoop.apache.org/docs/r3.1.2/hadoop-project-dist/hadoop-common/release/3.1.2/RELEASENOTES.3.1.2.html
 .. _zeppelin_version: https://zeppelin.apache.org/releases/zeppelin-release-0.8.1.html
 .. _zookeeper_version: https://zookeeper.apache.org/doc/r3.4.14/releasenotes.html
+.. _flink_version: https://flink.apache.org/news/2019/07/02/release-1.8.1.html
+.. _airflow_version: https://airflow.apache.org/docs/stable/changelog.html#airflow-1-10-4-2019-08-06
+.. _solr_version: https://lucene.apache.org/solr/8_2_0/changes/Changes.html
 
 .. important:: Контактная информация службы поддержки -- e-mail: info@arenadata.io
