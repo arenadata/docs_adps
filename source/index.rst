@@ -55,8 +55,7 @@
 
    install/index
    administration/index
-   HdfsUser/index
-   YarnUser/index
+   userguide/index
    release_notes
    glossary
 
