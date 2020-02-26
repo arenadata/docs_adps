@@ -11,5 +11,5 @@
    :maxdepth: 1
    :caption: Оглавление:
 
-   memory
    tez
+   memory
