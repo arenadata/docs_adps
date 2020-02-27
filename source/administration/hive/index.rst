@@ -13,3 +13,4 @@
 
    tez
    memory
+   acid
