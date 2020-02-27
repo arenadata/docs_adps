@@ -10,5 +10,5 @@ The Fair Scheduler не поддерживает Dominant Resource Calculator. �
 
 .. _gpu_switch:
 
-.. figure:: ../../imgs/administration/yarn/yarn_gpu_switch.png
+.. figure:: ../imgs/administration/yarn/yarn_gpu_switch.png
    :align: center
