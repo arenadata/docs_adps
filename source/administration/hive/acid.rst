@@ -8,7 +8,7 @@ Hive ACID
 
 .. _acid_switch:
 
-.. figure:: ../imgs/administration/yarn/hive_acid_switch.png
+.. figure:: ../imgs/administration/hive/hive_acid_switch.png
    :align: center
 
 .. important:: В Hive 3 вы не можете отключить транзакции.
