@@ -58,56 +58,231 @@ AMRMProxy
 
 + Маскировка нескольких YARN Resource Manager в кластере и прозрачный допуск Application Master к распределению по субкластерам. Все распределения контейнеров выполняются инфраструктурой YARN Resource Manager, которая состоит из AMRMProxy, выходящего в домашний и другие субкластера Resource Manager;
 
++ Перехват всех запросов, поэтому может принудительно применять квоты приложений, которые не могут быть выполнены субкластером Resource Manager (поскольку каждый из них видит только часть запросов Application Master);
 
-
++ Может применять политики балансировки нагрузки / переполнения.
 
 
 Global Policy Generator
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+*Global Policy Generator* (*GPG*) контролирует всю Federation и гарантирует, что система все время настроена должным образом. Ключевым моментом идеи является то, что доступность кластера не зависит от постоянно включенного *GPG*. При этом *GPG* работает непрерывно, но вне зоны действия всех операций кластера, и предоставляет уникальную точку обзора, которая позволяет применять глобальные инварианты, влиять на балансировку нагрузки, инициировать дренаж субкластеров, которые будут подвергаться техническому обслуживанию, и т.д. *GPG* точнее обновляет маппинг распределения пропускной способности пользователя субкластеру и реже меняет политики, выполняющиеся в Routers, *AMRMProxy* (и возможных **Resource Manager**).
+
+В случае если *GPG* недоступен, операции кластера продолжаются с момента последней публикации политик *GPG*, и хотя долгосрочная недоступность может означать, что некоторые из желательных свойств баланса, оптимального использования кластера и глобальных инвариантов могут исчезнуть, вычисления и доступ к данным не будут скомпрометированы.
+
+В текущей реализации *Global Policy Generator* представляет собой процесс ручной настройки, представленный через CLI (YARN-3657).
+
+Эта часть системы Federation является частью будущей работы в `YARN-5597 <https://issues.apache.org/jira/browse/YARN-5597>`_.
+
 
 Federation State-Store
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+*Federation State* определяет дополнительное состояние, которое необходимо поддерживать для свободного объединения нескольких отдельных субкластеров в один большой кластер Federation. Включает в себя:
 
 **Sub-cluster Membership**
 
+Члены **YARN Resource Manager** непрерывно передают heartbeat-сообщения в State Store для keep-alive и публикации своих текущих мощностях/загрузке. Эта информация используется *GPG* для принятия необходимых политических решений. Также эта информация может использоваться маршрутизаторами для выбора лучшего "домашнего" субдкластера. Этот механизм позволяет динамически увеличивать/уменьшать "кластерный парк", добавляя или удаляя субкластеры, а также позволяет легко обслуживать каждый из них. Это новая функциональность, которую необходимо добавить в **YARN Resource Manager**, при этом механизмы между собой хорошо понятны, поскольку функциональность аналогична индивидуальной высокой доступности (HA) **YARN Resource Manager**.
+
 **Application’s Home Sub-cluster**
+
+Субкластер, в котором выполняется **Application Master**, называется "домашним" субкластером приложения (home sub-cluster). При этом **Application Master** не ограничивается ресурсами только домашнего субкластера и может запрашивать ресурсы из других, называемых "вторичными" (secondary sub-clusters). Среда Federation настраивается и периодически налаживается таким образом, чтобы при размещении **Application Master** в субкластере, он мог найти большую часть ресурсов в домашнем субкластере и только в определенных случаях ему следует запрашивать ресурсы у других субкластеров.
 
 
 Federation Policy Store
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+Federation Policy Store -- это логически отдельное хранилище (хотя оно может поддерживаться одним и тем же физическим компонентом), которое содержит информацию о том, как приложения и запросы ресурсов направляются в разные субкластеры. Текущая реализация предоставляет несколько политик -- от случайных/ хэширующих/ циклических/ приоритетных до более сложных, которые учитывают нагрузку субкластера и запрашивают потребности в локальности.
 
-Running Applications across Sub-Clusters
-------------------------------------------
+
+Запуск приложений через субкластеры
+-------------------------------------
+
+При отправке приложения система определяет наиболее подходящий субкластер для его запуска, и он становится "домашним" субкластером. Все коммуникации от **Application Master** к **Resource Manager** осуществляются через *AMRMProxy*, работающий локально на машине **Application Master**. *AMRMProxy* предоставляет ту же конечную точку протокола *ApplicationMasterService*, что и **YARN Resource Manager**. **Application Master** может запрашивать контейнеры, используя информацию о местоположении, предоставляемую уровнем хранения. В идеальном случае приложение размещается в субкластере, где доступны все ему необходимые ресурсы и данные, но если ему нужны контейнеры на узлах в других субкластерах, *AMRMProxy* прозрачно согласовывает с их **Resource Manager** и предоставляет ресурсы, что позволяет приложению рассматривать всю среду Federation как один массивный кластер **YARN**. *AMRMProxy*, *Global Policy Generator* и *Router* работают вместе для бесшовной реализации (:numref:`Рис.%s.<federation_sequence_diagram>`).
+
+.. _federation_sequence_diagram:
+
+.. figure:: ../../imgs/administration/yarn/federation_sequence_diagram.png
+   :align: center
+
+   Диаграмма последовательности
+
+На рисунке показана диаграмма последовательности для следующего потока выполнения задания:
+
+1. Router получает запрос на отправку приложения, являющийся жалобой на YARN Application Client Protocol.
+
+2. Маршрутизатор опрашивает таблицу/политику маршрутизации, чтобы выбрать "домашний" Resource Manager для задания (конфигурация политики принимается из State Store по heartbeat-сообщению).
+
+3. Маршрутизатор запрашивает состояние membership, чтобы определить конечную точку "домашнего" Resource Manager.
+
+4. Затем маршрутизатор перенаправляет запрос на отправку приложения в "домашний" Resource Manager.
+
+5. Маршрутизатор обновляет состояние приложения с помощью идентификатора "домашнего" субкластера.
+
+6. Как только приложение отправляется в "домашний" Resource Manager, запускается поток YARN, то есть приложение добавляется в очередь планировщика, и его Application Master запускается в "домашнем" субкластере в первом NodeManager с доступными ресурсами. 
+
++ Во время этого процесса среда Application Master изменяется, указывая адрес AMRMProxy в качестве YARN Resource Manager для связи;
+
++ Токены безопасности также изменяются NodeManager при запуске Application Master, так что Application Master может общаться только с AMRMProxy. Любые дальнейшие коммуникации от Application Master до YARN Resource Manager осуществляются посредством AMRMProxy.
+
+7. Затем Application Master запрашивает контейнеры, используя информацию о местонахождении, предоставляемую HDFS.
+
+8. На основе политики AMRMProxy может олицетворять Application Master в других субкластерах, отправляя Unmanaged Application Master и перенаправляя heartbeats-сообщения Application Master соответствующим субкластерам. 
+
++ Federation поддерживает несколько попыток приложения с помощью AMRMProxy HA. Контейнеры Application Master имеют разные идентификаторы попыток в "домашнем" субкластере, но один и тот же Unmanaged Application Master во "вторичных";
+
++ Когда AMRMProxy HA включен, токен Unmanaged Application Master хранится в Yarn Registry. При вызове ``registerApplicationMaster`` от каждой попытки приложения AMRMProxy извлекает существующие токены Unmanaged Application Master из реестра (если таковые имеются) и повторно подключается к существующим Unmanaged Application Master.
+
+9. AMRMProxy использует как информацию о местонахождении, так и подключаемую политику, настроенную в State Store, чтобы решить, следует ли перенаправлять полученные от Application Master запросы ресурсов в "домашний" Resource Manager или во "вторичный" (один или более). На рисунке отображен случай, когда AMRMProxy решает переслать запрос на "вторичный" Resource Manager.
+
+10. "Вторичный" Resource Manager предоставляет AMRMProxy актуальные токены контейнера для запуска нового контейнера на узле в его субкластере. Такой механизм гарантирует, что каждый субкластер использует свои собственные токены безопасности и избегает необходимости общего секрета кластера для создания токенов.
+
+11. AMRMProxy пересылает ответ распределения обратно в Application Master.
+
+12. Application Master запускает контейнер на целевом NodeManager (в субкластере 2), используя стандартные протоколы YARN.
 
 
 Configuration
 ---------------
 
+Настройка **YARN** для использования Federation осуществляется через ряд свойств в файле *conf/yarn-site.xml*.
 
-EVERYWHERE:
-^^^^^^^^^^^^
+Общие для всех
+^^^^^^^^^^^^^^^
 
-**State-Store:**
+``yarn.federation.enabled`` -- включена Federation или нет. Пример значения:
+
+::
+
+ true
+ 
+``yarn.resourcemanager.cluster-id`` -- уникальный идентификатор субкластера для данного Resource Manager (такой же, что используется для HA). Пример значения:
+
+::
+
+ <unique-subcluster-id> 
+
+
+**State Store:**
+
+В настоящее время поддерживается реализации State Store на основе **ZooKeeper** и **SQL**.
+
+Обязательные настройки **ZooKeeper** для **Hadoop**:
+
+``yarn.federation.state-store.class`` -- тип State Store. Пример значения:
+
+::
+
+ org.apache.hadoop.yarn.server.federation.store.impl.ZookeeperFederationStateStore
+ 
+``hadoop.zk.address`` -- адрес для ансамбля ZooKeeper. Пример значения:
+
+::
+
+ host:port
+
+
+Обязательные параметры **SQL**:
+
+``yarn.federation.state-store.class`` -- тип State Store. Пример значения:
+
+::
+
+ org.apache.hadoop.yarn.server.federation.store.impl.SQLFederationStateStore
+
+``yarn.federation.state-store.sql.url`` -- имя базы данных для SQLFederationStateStore, в которой хранится состояние. Пример значения:
+
+::
+
+ jdbc:mysql://<host>:<port>/FederationStateStore
+
+``yarn.federation.state-store.sql.jdbc-class`` -- используемый класс jdbc для SQLFederationStateStore. Пример значения:
+
+::
+
+ com.mysql.jdbc.jdbc2.optional.MysqlDataSource
+
+``yarn.federation.state-store.sql.username`` -- имя пользователя для соединения с БД для SQLFederationStateStore. Пример значения:
+
+::
+
+ <dbuser>
+
+``yarn.federation.state-store.sql.password`` -- пароль для подключения к БД для SQLFederationStateStore. Пример значения:
+
+::
+
+ <dbpass>
+
+
+Для **MySQL** и **Microsoft SQL Server** предоставляются скрипты.
+
+Для **MySQL** необходимо загрузить последнюю версию *jar 5.x* из `MVN Repository <https://mvnrepository.com/artifact/mysql/mysql-connector-java>`_ и добавить ее в *CLASSPATH*. Затем схема БД создается путем выполнения следующих скриптов SQL в базе данных:
+
++ sbin/FederationStateStore/MySQL/FederationStateStoreDatabase.sql
++ sbin/FederationStateStore/MySQL/FederationStateStoreUser.sql
++ sbin/FederationStateStore/MySQL/FederationStateStoreTables.sql
++ sbin/FederationStateStore/MySQL/FederationStateStoreStoredProcs.sql
+
+В том же каталоге предоставляются скрипты для удаления хранимых процедур, таблиц, пользователя и базы данных.
+
+.. important:: FederationStateStoreUser.sql определяет для БД пользователя/пароль по умолчанию, для которого настоятельно рекомендуется установить собственный надежный пароль
+
+Для SQL-сервера процесс аналогичен, но драйвер *jdbc* уже включен. Скрипты SQL-сервера находятся в каталоге *sbin/FederationStateStore/SQLServer/*.
 
 
 **Optional:**
 
+``yarn.federation.failover.enabled`` -- следует ли повторить попытку, учитывая отказоустойчивость Resource Manager в каждом субкластере. Пример значения:
 
-ON RMs:
+::
+
+ true
+
+``yarn.federation.blacklist-subclusters`` -- список черных списков субкластеров, используемых для отключения субкластера. Пример значения:
+
+::
+
+ <subcluster-id>
+
+``yarn.federation.policy-manager`` -- выбор диспетчера политик, определяющий как Applications и ResourceRequests маршрутизируются через систему. Пример значения:
+
+::
+
+ org.apache.hadoop.yarn.server.federation.policies.manager.WeightedLocalityPolicyManager
+
+``yarn.federation.policy-manager-params`` -- полезная нагрузка, которая настраивает политику. В примере набор весов для политик маршрутизатора и AMRMProxy. Обычно генерируется путем сериализации policymanager, который был сконфигурирован программно, или путем заполнения State Store его сериализованной формой ``.json``. Пример значения:
+
+::
+
+ <binary>
+
+``yarn.federation.subcluster-resolver.class`` -- класс, используемый для определения, к какому субкластеру принадлежит узел, и к какому субкластеру(ам) принадлежит стойка. Пример значения:
+
+::
+
+ org.apache.hadoop.yarn.server.federation.resolver.DefaultSubClusterResolverImpl
+
+``yarn.federation.machine-list`` -- путь к файлу со списком машин, используемых SubClusterResolver. Каждая строка файла представляет собой узел с информацией о субкластере и стойке(например: node1, subcluster1, rack1 / node2, subcluster2, rack1 / node3, subcluster3, rack2 / node4, subcluster3, rack2). Пример значения:
+
+::
+
+ <path of machine-list file>
+
+
+Resource Manager
+^^^^^^^^^^^^^^^^
+
+
+Router
 ^^^^^^^^
 
 
-ON ROUTER:
-^^^^^^^^^^^
-
-
-ON NMs:
-^^^^^^^^
+NodeManager
+^^^^^^^^^^^^
 
 
 Running a Sample Job
 ----------------------
 
+ 
