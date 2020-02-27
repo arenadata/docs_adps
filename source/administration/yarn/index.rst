@@ -12,3 +12,4 @@
    CapacityScheduler
    FairScheduler
    Timeline
+   gpu
