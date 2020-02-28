@@ -5,9 +5,9 @@ YARN on GPU
 
 .. important:: На данный момент YARN поддерживает только графические процессоры Nvidia. На все YARN NodeManagers должны быть предварительно установлены драйверы Nvidia. В случае использования Docker, необходимо установить nvidia-docker 1.0.
 
-**The Fair Scheduler** не поддерживает **Dominant Resource Calculator**. Политика *fairshare*, которую использует **Fair Scheduler**, учитывает только память для расчета *fairShare* и *minShare*, поэтому устройства GPU выделя.ncz из общего пула.
+**The Fair Scheduler** не поддерживает **Dominant Resource Calculator**. Политика *fairshare*, которую использует **Fair Scheduler**, учитывает только память для расчета *fairShare* и *minShare*, поэтому устройства **GPU** выделяются из общего пула.
 
-Для включения поддержки **GPU** необходимо активировать раздел *advanced* и в нем параметр ``GPU on YARN`` (:numref:`Рис.%s.<gpu_switch>`).:
+Для включения поддержки **GPU** необходимо активировать раздел *advanced* и в нем параметр ``GPU on YARN`` (:numref:`Рис.%s.<gpu_switch>`).
 
 .. _gpu_switch:
 
