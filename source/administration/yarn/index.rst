@@ -12,4 +12,5 @@
    CapacityScheduler
    FairScheduler
    Timeline
+   Federation
    gpu
