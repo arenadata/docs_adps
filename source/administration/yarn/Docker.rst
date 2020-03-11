@@ -360,10 +360,127 @@ Bind mounting
 SSSD
 ^^^^^^
 
-Альтернативным подходом, позволяющим централизованно управлять пользователями и группами, является SSSD -- System Security Services Daemon, предоставляет доступ к различным поставщикам аутентификации, таким как LDAP или Active Directory.
+Альтернативным подходом, позволяющим централизованно управлять пользователями и группами, является SSSD -- System Security Services Daemon, предоставляющий доступ к различным поставщикам аутентификации, таким как **LDAP** и **Active Directory**.
 
+Традиционная схема для аутентификации **Linux**:
 
+::
 
+ application -> libpam -> pam_authenticate -> pam_unix.so -> /etc/passwd
+
+При использовании SSSD для user-lookup схема принимает вид:
+
+::
+
+ application -> libpam -> pam_authenticate -> pam_sss.so -> SSSD -> pam_unix.so -> /etc/passwd
+
+Можно выполнить bind-mount UNIX-сокетов к контейнеру через SSSD коммуникации. Это позволяет библиотекам на стороне клиента SSSD проходить аутентификацию на SSSD, запущенном на хосте. В результате пользовательская информация не должна существовать в */etc/passwd* Docker-образа, а вместо этого обслуживается SSSD.
+
+Пошаговая настройка хоста и контейнера:
+
+1. Конфигурация хоста:
+
++ Установка пакетов:
+
+::
+
+ # yum -y install sssd-common sssd-proxy
+
++ Создание PAM-сервиса для контейнера:
+
+::
+
+ # cat /etc/pam.d/sss_proxy
+ auth required pam_unix.so
+ account required pam_unix.so
+ password required pam_unix.so
+ session required pam_unix.so
+
++ Создание концигурационного файла SSSD */etc/sssd/sssd.conf*. Важно обратить внимание, что разрешения должны быть *0600*, а файл должен принадлежать пользователю *root:root*:
+
+::
+
+ # cat /etc/sssd/sssd/conf
+ [sssd]
+ services = nss,pam
+ config_file_version = 2
+ domains = proxy
+ [nss]
+ [pam]
+ [domain/proxy]
+ id_provider = proxy
+ proxy_lib_name = files
+ proxy_pam_target = sss_proxy
+
++ Запуск SSSD:
+
+::
+ 
+ # systemctl start sssd
+
++ Проверка, что пользователь может быть извлечен с помощью SSSD:
+
+::
+
+ # getent passwd -s sss localuser
+
+2. Настройка контейнера. Важно выполнить bind-mount каталога */var/lib/sss/pipes* от хоста к контейнеру, так как SSSD UNIX сокеты находятся там:
+
+::
+
+ -v /var/lib/sss/pipes:/var/lib/sss/pipes:rw
+
+3. Конфигурация контейнера. Все шаги выполнются на самом контейнере:
+
++ Установка только клиентских библиотек sss:
+
+::
+
+ # yum -y install sssd-client
+
++ Проверка, что sss настроена для баз данных *passwd* и *group*:
+
+::
+
+ /etc/nsswitch.conf
+
++ Настройка PAM-сервиса, используемого приложением для вызова в SSSD:
+
+::
+
+ # cat /etc/pam.d/system-auth
+ #%PAM-1.0
+ # This file is auto-generated.
+ # User changes will be destroyed the next time authconfig is run.
+ auth        required      pam_env.so
+ auth        sufficient    pam_unix.so try_first_pass nullok
+ auth        sufficient    pam_sss.so forward_pass
+ auth        required      pam_deny.so
+ 
+ account     required      pam_unix.so
+ account     [default=bad success=ok user_unknown=ignore] pam_sss.so
+ account     required      pam_permit.so
+ 
+ password    requisite     pam_pwquality.so try_first_pass local_users_only retry=3 authtok_type=
+ password    sufficient    pam_unix.so try_first_pass use_authtok nullok sha512 shadow
+ password    sufficient    pam_sss.so use_authtok
+ password    required      pam_deny.so
+ 
+ session     optional      pam_keyinit.so revoke
+ session     required      pam_limits.so
+ -session     optional      pam_systemd.so
+ session     [success=1 default=ignore] pam_succeed_if.so service in crond quiet use_uid
+ session     required      pam_unix.so
+ session     optional      pam_sss.so
+
++ Сохранение Docker-образа и последущее использование его в качестве базового образа ваших приложений.
+
++ Тестирование Docker-образа, запущенного в среде YARN:
+
+::
+
+ $ id
+ uid=5000(localuser) gid=5000(localuser) groups=5000(localuser),1337(hadoop)
 
 
 
