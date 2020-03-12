@@ -13,4 +13,5 @@
    FairScheduler
    Timeline
    Federation
+   Docker
    gpu
