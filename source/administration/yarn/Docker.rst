@@ -589,9 +589,25 @@ Docker-контейнер Privileged может взаимодействоват
 
 
 
-Docker Container ENTRYPOINT Support
-------------------------------------
+Поддержка ENTRYPOINT Docker-контейнера
+---------------------------------------
+
+В **Hadoop 2.x** введена поддержка Docker, платформа разработана для запуска существующих программ **Hadoop** внутри docker-контейнера, перенаправление журнала и настройка среды интегрированы с **Node Manager**. В **Hadoop 3.x** поддержка  Docker выходит за рамки выполнения рабочей нагрузки **Hadoop** и поддерживает Docker-контейнер в собственной форме Docker, используя *ENTRYPOINT* из *dockerfile*. Приложение может принять поддержку режима *YARN* или режима *Docker* по умолчанию, задав переменную среды ``YARN_CONTAINER_RUNTIME_DOCKER_RUN_OVERRIDE_DISABLE``. Системный администратор также может установить для кластера настройку по умолчанию, чтобы сделать *ENTRY_POINT* в качестве режима работы по умолчанию.
+
+В *yarn-site.xml* необходимо добавить ``YARN_CONTAINER_RUNTIME_DOCKER_RUN_OVERRIDE_DISABLE`` в белый список среды **Node Manager**:
+
+::
+
+ <property>
+        <name>yarn.nodemanager.env-whitelist</name>
+         <value>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,HADOOP_YARN_HOME,HADOOP_MAPRED_HOME,YARN_CONTAINER_RUNTIME_DOCKER_RUN_OVERRIDE_DISABLE</value>
+ </property>
 
 
+В *yarn-env.sh* определить:
+
+::
+
+ export YARN_CONTAINER_RUNTIME_DOCKER_RUN_OVERRIDE_DISABLE=true
 
 
