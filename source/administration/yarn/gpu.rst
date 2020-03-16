@@ -5,7 +5,7 @@ YARN on GPU
 
 .. important:: На данный момент YARN поддерживает только графические процессоры Nvidia. На все YARN NodeManagers должны быть предварительно установлены драйверы Nvidia. В случае использования Docker, необходимо установить nvidia-docker 1.0.
 
-**The Fair Scheduler** не поддерживает **Dominant Resource Calculator**. Политика *fairshare*, которую использует **Fair Scheduler**, учитывает только память для расчета *fairShare* и *minShare*, поэтому устройства **GPU** выделяются из общего пула.
+**Fair Scheduler** не поддерживает **Dominant Resource Calculator**. Политика *fairshare*, которую использует **Fair Scheduler**, учитывает только память для расчета *fairShare* и *minShare*, поэтому устройства **GPU** выделяются из общего пула.
 
 Для включения поддержки **GPU** необходимо активировать раздел *advanced* и в нем параметр ``GPU on YARN`` (:numref:`Рис.%s.<gpu_switch>`).
 
@@ -66,13 +66,13 @@ GPU Isolation
 
 Когда минорные номера задаются вручную, администратор должен также включать индекс графических процессоров: ``index:minor_number[,index:minor_number...]``. Например: ``0:0,1:1,2:2,3:4`` -- позволяет **YARN NodeManager** управлять устройствами **GPU** с индексами 0/1/2/3 и минорными номерами 0/1/2/4.
 
-2. Исполняемый файл для обнаружения GPU
+2. Исполняемый файл для обнаружения GPU.
 
 + ``yarn.nodemanager.resource-plugins.gpu.path-to-discovery-executables``, значение */absolute/path/to/nvidia-smi*.
 
 Когда указано ``yarn.nodemanager.resource-plugins.gpu.allowed-gpu-devices=auto``, **YARN NodeManager** должен запустить бинарный файл обнаружения **GPU** (поддерживает только *nvidia-smi*), чтобы получить связанную с **GPU** информацию. Когда значение параметра пустое (по умолчанию), **YARN NodeManager** самостоятельно пытается найти исполняемый файл обнаружения. Пример значения конфигурации: */usr/local/bin/nvidia-smi*.
 
-3. Подключаемые модули Docker
+3. Подключаемые модули Docker.
 
 Следующие конфигурации могут быть настроены, когда пользователю необходимо запустить приложения **GPU** внутри Docker-контейнера. Данные действия не требуются, если администратор следует установке и настройке *nvidia-docker* по умолчанию.
 
@@ -84,11 +84,71 @@ GPU Isolation
 
 Необходимо указать конечную точку *nvidia-docker-plugin* (подробнее в документации `NVIDIA <https://github.com/NVIDIA/nvidia-docker/wiki>`_).
 
-4. CGroups mount
+4. CGroups mount.
 
 **GPU isolation** использует `контроллер устройств CGroup <https://www.kernel.org/doc/Documentation/cgroup-v1/devices.txt>`_ для выполнения изоляции устройства для каждого графического процессора. Следующий параметр должен быть добавлен в *yarn-site.xml* для автоматического монтирования подустройств **CGroup**, в противном случае администратору необходимо вручную создать подпапку для устройств, чтобы использовать эту функцию.
 
 + ``yarn.nodemanager.linux-container-executor.cgroups.mount``, значение по умолчанию *true*.
+
+
+-------------
+
+В *container-executor.cfg* для включения модуля GPU isolation должна быть добавлена следующая конфигурация: 
+
+::
+
+ [gpu]
+ module.enabled=true
+
+Когда пользователю необходимо запустить приложения с графическим процессором в среде, отличной от Docker:
+
+::
+
+ [cgroups]
+ # This should be same as yarn.nodemanager.linux-container-executor.cgroups.mount-path inside yarn-site.xml
+ root=/sys/fs/cgroup
+ # This should be same as yarn.nodemanager.linux-container-executor.cgroups.hierarchy inside yarn-site.xml
+ yarn-hierarchy=yarn
+
+
+Когда пользователю необходимо запустить приложения с графическим процессором в среде Docker:
+
++ Добавить связанные с GPU устройства в docker-раздел (разделенные запятой значения, которые можно получить, запустив */dev/nvidia*):
+
+::
+
+ [docker]
+ docker.allowed.devices=/dev/nvidiactl,/dev/nvidia-uvm,/dev/nvidia-uvm-tools,/dev/nvidia1,/dev/nvidia0
+
++ Добавить nvidia-docker в белый список драйверов томов:
+
+::
+
+ [docker]
+ ...
+ docker.allowed.volume-drivers
+
++ Добавить *nvidia_driver_<version>* в белый список монтирования только для чтения:
+
+::
+
+ [docker]
+ ...
+ docker.allowed.ro-mounts=nvidia_driver_375.66
+
++ Если в качестве плагина gpu docker используется *nvidia-docker-v2*, необходимо добавить *nvidia* в белый список выполнения:
+
+::
+
+ [docker]
+ ...
+ docker.allowed.runtimes=nvidia
+
+
+
+
+
+
 
 
 
