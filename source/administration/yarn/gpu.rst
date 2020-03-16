@@ -93,7 +93,7 @@ GPU Isolation
 
 -------------
 
-В *container-executor.cfg* для включения модуля GPU isolation должна быть добавлена следующая конфигурация: 
+В *container-executor.cfg* для включения модуля **GPU isolation** должна быть добавлена следующая конфигурация: 
 
 ::
 
@@ -144,12 +144,59 @@ GPU Isolation
  ...
  docker.allowed.runtimes=nvidia
 
+.. important:: В настоящее время распределенная оболочка поддерживает задание дополнительных типов ресурсов, кроме памяти и vcores
 
 
+Distributed-shell + GPU without Docker
+---------------------------------------
+
+Для запуска распределенной оболочки без использования docker-контейнера (запрашивается 2 задачи, каждая имеет 3 ГБ памяти, 1 vcore, 2  устройства GPU):
+
+::
+
+ yarn jar <path/to/hadoop-yarn-applications-distributedshell.jar> \
+   -jar <path/to/hadoop-yarn-applications-distributedshell.jar> \
+   -shell_command /usr/local/nvidia/bin/nvidia-smi \
+   -container_resources memory-mb=3072,vcores=1,yarn.io/gpu=2 \
+   -num_containers 2
+
+Вывод запущенного контейнера:
+
+::
+
+ Tue Dec  5 22:21:47 2017
+ +-----------------------------------------------------------------------------+
+ | NVIDIA-SMI 375.66                 Driver Version: 375.66                    |
+ |-------------------------------+----------------------+----------------------+
+ | GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+ | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+ |===============================+======================+======================|
+ |   0  Tesla P100-PCIE...  Off  | 0000:04:00.0     Off |                    0 |
+ | N/A   30C    P0    24W / 250W |      0MiB / 12193MiB |      0%      Default |
+ +-------------------------------+----------------------+----------------------+
+ |   1  Tesla P100-PCIE...  Off  | 0000:82:00.0     Off |                    0 |
+ | N/A   34C    P0    25W / 250W |      0MiB / 12193MiB |      0%      Default |
+ +-------------------------------+----------------------+----------------------+
+ 
+ +-----------------------------------------------------------------------------+
+ | Processes:                                                       GPU Memory |
+ |  GPU       PID  Type  Process name                               Usage      |
+ |=============================================================================|
+ |  No running processes found                                                 |
+ +-----------------------------------------------------------------------------+
 
 
+Distributed-shell + GPU with Docker
+------------------------------------
 
+Запуск распределенной оболочки с использованием docker-контейнера. Для этого должны быть заданы параметры ``YARN_CONTAINER_RUNTIME_TYPE`` и ``YARN_CONTAINER_RUNTIME_DOCKER_IMAGE``:
 
+::
 
-
-
+ yarn jar <path/to/hadoop-yarn-applications-distributedshell.jar> \
+        -jar <path/to/hadoop-yarn-applications-distributedshell.jar> \
+        -shell_env YARN_CONTAINER_RUNTIME_TYPE=docker \
+        -shell_env YARN_CONTAINER_RUNTIME_DOCKER_IMAGE=<docker-image-name> \
+        -shell_command nvidia-smi \
+        -container_resources memory-mb=3072,vcores=1,yarn.io/gpu=2 \
+        -num_containers 2
