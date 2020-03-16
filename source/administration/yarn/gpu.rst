@@ -113,14 +113,14 @@ GPU Isolation
 
 Когда пользователю необходимо запустить приложения с графическим процессором в среде Docker:
 
-+ Добавить связанные с GPU устройства в docker-раздел (разделенные запятой значения, которые можно получить, запустив */dev/nvidia*):
+1. Добавить связанные с GPU устройства в docker-раздел (разделенные запятой значения, которые можно получить, запустив */dev/nvidia*):
 
 ::
 
  [docker]
  docker.allowed.devices=/dev/nvidiactl,/dev/nvidia-uvm,/dev/nvidia-uvm-tools,/dev/nvidia1,/dev/nvidia0
 
-+ Добавить nvidia-docker в белый список драйверов томов:
+2. Добавить nvidia-docker в белый список драйверов томов:
 
 ::
 
@@ -128,7 +128,7 @@ GPU Isolation
  ...
  docker.allowed.volume-drivers
 
-+ Добавить *nvidia_driver_<version>* в белый список монтирования только для чтения:
+3. Добавить *nvidia_driver_<version>* в белый список монтирования только для чтения:
 
 ::
 
@@ -136,7 +136,7 @@ GPU Isolation
  ...
  docker.allowed.ro-mounts=nvidia_driver_375.66
 
-+ Если в качестве плагина gpu docker используется *nvidia-docker-v2*, необходимо добавить *nvidia* в белый список выполнения:
+4. Если в качестве плагина gpu docker используется *nvidia-docker-v2*, необходимо добавить *nvidia* в белый список выполнения:
 
 ::
 
