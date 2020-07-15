@@ -9,3 +9,4 @@
 
    HdfsUser/index
    YarnUser/index
+   Zeppelin/index
