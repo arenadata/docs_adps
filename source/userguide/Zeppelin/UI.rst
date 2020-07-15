@@ -13,7 +13,7 @@
 
 .. _zeppelin_ui_main-home:
 
-.. figure:: ../imgs/zeppelin_ui_main-home.*
+.. figure:: ../../imgs/zeppelin_ui_main-home.*
    :align: center
 
    Главная страница Apache Zeppelin
@@ -27,7 +27,7 @@
 
 .. _zeppelin_ui_import-note:
 
-.. figure:: ../imgs/zeppelin_ui_import-note.*
+.. figure:: ../../imgs/zeppelin_ui_import-note.*
    :align: center
 
    Импорт новой заметки
@@ -45,7 +45,7 @@
 
 .. _zeppelin_ui_notebook:
 
-.. figure:: ../imgs/zeppelin_ui_notebook.*
+.. figure:: ../../imgs/zeppelin_ui_notebook.*
    :align: center
 
    Панель меню Notebook
@@ -55,7 +55,7 @@
 
 .. _zeppelin_ui_settings:
 
-.. figure:: ../imgs/zeppelin_ui_settings.*
+.. figure:: ../../imgs/zeppelin_ui_settings.*
    :align: center
 
    Меню настроек
@@ -65,7 +65,7 @@
 
 .. _zeppelin_ui_about:
 
-.. figure:: ../imgs/zeppelin_ui_about.*
+.. figure:: ../../imgs/zeppelin_ui_about.*
    :align: center
 
    About Zeppelin
@@ -79,7 +79,7 @@
 
 .. _zeppelin_ui_interpreters:
 
-.. figure:: ../imgs/zeppelin_ui_interpreters.*
+.. figure:: ../../imgs/zeppelin_ui_interpreters.*
    :align: center
 
    Управление интерпретаторами
@@ -90,7 +90,7 @@
 
 .. _zeppelin_ui_credentials:
 
-.. figure:: ../imgs/zeppelin_ui_credentials.*
+.. figure:: ../../imgs/zeppelin_ui_credentials.*
    :align: center
 
    Учетные данные
@@ -101,7 +101,7 @@
 
 .. _zeppelin_ui_configurations:
 
-.. figure:: ../imgs/zeppelin_ui_configurations.*
+.. figure:: ../../imgs/zeppelin_ui_configurations.*
    :align: center
 
    Конфигурация Apache Zeppelin
@@ -116,7 +116,7 @@
 
 .. _zeppelin_ui_layout:
 
-.. figure:: ../imgs/zeppelin_ui_layout.*
+.. figure:: ../../imgs/zeppelin_ui_layout.*
    :align: center
 
    Шаблон блокнота 
@@ -126,7 +126,7 @@
 
 .. _zeppelin_ui_paragraph:
 
-.. figure:: ../imgs/zeppelin_ui_paragraph.*
+.. figure:: ../../imgs/zeppelin_ui_paragraph.*
    :align: center
 
    Разделы параграфа
@@ -143,7 +143,7 @@
 
 .. _zeppelin_ui_configure-paragraph:
 
-.. figure:: ../imgs/zeppelin_ui_configure-paragraph.*
+.. figure:: ../../imgs/zeppelin_ui_configure-paragraph.*
    :align: center
 
    Контекстное меню настроек параграфа

@@ -24,7 +24,7 @@
 
 .. _zeppelin_interpreters_create-interpreter:
 
-.. figure:: ../imgs/zeppelin_interpreters_create-interpreter.*
+.. figure:: ../../imgs/zeppelin_interpreters_create-interpreter.*
    :align: center
 
    Создать новый интерпретатор
@@ -37,7 +37,7 @@
 
 .. _zeppelin_interpreters_properties:
 
-.. figure:: ../imgs/zeppelin_interpreters_properties.*
+.. figure:: ../../imgs/zeppelin_interpreters_properties.*
    :align: center
 
    Свойства интерпретатора
@@ -49,7 +49,7 @@
 
 .. _zeppelin_interpreters_settings:
 
-.. figure:: ../imgs/zeppelin_interpreters_settings.*
+.. figure:: ../../imgs/zeppelin_interpreters_settings.*
    :align: center
 
    Настройки интерпретатора
@@ -64,7 +64,7 @@
 
 .. _zeppelin_interpreters_properties-group:
 
-.. figure:: ../imgs/zeppelin_interpreters_properties-group.*
+.. figure:: ../../imgs/zeppelin_interpreters_properties-group.*
    :align: center
 
    Свойства групп интерпретатора
@@ -77,7 +77,7 @@
 
 .. _zeppelin_interpreters_binding-mode:
 
-.. figure:: ../imgs/zeppelin_interpreters_binding-mode.*
+.. figure:: ../../imgs/zeppelin_interpreters_binding-mode.*
    :align: center
 
    Режимы привязки интерпретатора
@@ -98,7 +98,7 @@
 
 .. _zeppelin_interpreters_connecting:
 
-.. figure:: ../imgs/zeppelin_interpreters_connecting.*
+.. figure:: ../../imgs/zeppelin_interpreters_connecting.*
    :align: center
 
    Подключение к удаленному интерпретатору

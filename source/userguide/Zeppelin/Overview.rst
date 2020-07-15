@@ -7,7 +7,7 @@
 
 .. _zeppelin_overview_dashboard:
 
-.. figure:: ../imgs/zeppelin_overview_dashboard.*
+.. figure:: ../../imgs/zeppelin_overview_dashboard.*
    :align: center
 
    Apache Zeppelin
@@ -27,7 +27,7 @@
 
 .. _zeppelin_overview_interpreters:
 
-.. figure:: ../imgs/zeppelin_overview_interpreters.*
+.. figure:: ../../imgs/zeppelin_overview_interpreters.*
    :align: center
 
    Интерпретаторы
@@ -37,7 +37,7 @@
 
 .. _zeppelin_overview_charts:
 
-.. figure:: ../imgs/zeppelin_overview_charts.*
+.. figure:: ../../imgs/zeppelin_overview_charts.*
    :align: center
 
    Визуализация данных
@@ -47,7 +47,7 @@
 
 .. _zeppelin_overview_pivot-chart:
 
-.. figure:: ../imgs/zeppelin_overview_pivot-chart.*
+.. figure:: ../../imgs/zeppelin_overview_pivot-chart.*
    :align: center
 
    Сводная диаграмма
@@ -57,7 +57,7 @@
 
 .. _zeppelin_overview_input-form:
 
-.. figure:: ../imgs/zeppelin_overview_input-form.*
+.. figure:: ../../imgs/zeppelin_overview_input-form.*
    :align: center
 
    Формы ввода в блокноте
@@ -69,7 +69,7 @@ URL-адресом блокнота можно поделиться между �
 
 .. _zeppelin_overview_report:
 
-.. figure:: ../imgs/zeppelin_overview_report.*
+.. figure:: ../../imgs/zeppelin_overview_report.*
    :align: center
 
    Отчет о работе в Apache Zeppelin

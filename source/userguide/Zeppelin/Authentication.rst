@@ -58,7 +58,7 @@
 
 .. _zeppelin_authentication_login:
 
-.. figure:: ../imgs/zeppelin_authentication_login.*
+.. figure:: ../../imgs/zeppelin_authentication_login.*
    :align: center
 
    Авторизация в Apache Zeppelin
