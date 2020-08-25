@@ -23,7 +23,7 @@ YARN on GPU
 GPU scheduling
 ^^^^^^^^^^^^^^^
 
-В *resource-types.xml* необходимо добавить следующие совйства:
+В *resource-types.xml* необходимо добавить следующие свойства:
 
 ::
 
