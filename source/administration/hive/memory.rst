@@ -1,7 +1,7 @@
 Настройка памяти для Hive/Tez
 =============================
 
-Для корректной работы Hive/Tez, требуется задать соотетствующие значения для tez.am.resource.memory.mb, hive.tez.container.size, hive.tez.java.opts.
+Для корректной работы Hive/Tez, требуется задать соответствующие значения для tez.am.resource.memory.mb, hive.tez.container.size, hive.tez.java.opts.
 
 * ``tez.am.resource.memory.mb`` -- должно быть равно yarn.scheduler.minimum-allocation-mb
 * ``hive.tez.container.size`` -- 1x или 2x yarn.scheduler.minimum-allocation-mb, но не более yarn.scheduler.maximum-allocation-mb
