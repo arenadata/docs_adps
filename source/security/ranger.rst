@@ -290,11 +290,16 @@ ranger-ugsync-site.xml
 Включение плагинов Ranger
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Плагины **Ranger** могут быть включены для нескольких сервисов **ADH**. По соображениям производительности рекомендуется хранить аудиты в **Solr** и **HDFS**, а не в базе данных.
+Плагины **Ranger** могут быть включены для нескольких сервисов **ADH**. По соображениям производительности рекомендуется хранить аудиты в **Solr**, а не в базе данных.
 
-При использовании кластера с поддержкой **Kerberos** необходимо выполнить ряд дополнительных шагов, чтобы убедиться в возможности использования подключаемых плагинов **Ranger** в кластере **Kerberos** (`HDFS в кластере с поддержкой Kerberos`_).
+Доступны следующие плагины **Ranger**: `HDFS`_, **Hive**, **HBase**, **YARN**, **Sqoop**.
 
-Доступны следующие плагины **Ranger**: `HDFS`_, **Hive**, **HBase**, **Kafka**, **Knox**, **YARN**, **Storm**, **Atlas**.
+.. important:: Перед включением плагинов необходимо сделать import в том кластере, который будет интегрирован с ADPS
+
+.. _security_import:
+
+.. figure:: ../imgs/security_import.*
+   :align: center
 
 
 HDFS
@@ -302,100 +307,7 @@ HDFS
 
 Для включения плагина **Ranger HDFS** необходимо выполнить следующие действия:
 
-1. На странице "Ranger Configs" выбрать вкладку "Ranger Plugin" (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Ranger-Plugin>`).
-
-.. _security_authorizationHadoop_InstallingRanger_Ranger-Plugin:
-
-.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Ranger-Plugin.*
-   :align: center
-
-   Ranger Plugin
-
-2. В поле "HDFS Ranger Plugin" активировать кнопку *On* и сохранить действие.
-
-3. При этом появляется всплывающее окно "Save Configuration". Необходимо ввести примечание с описанием только что внесенных изменений и сохранить кнопкой *Save* (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Save-Config>`).
-
-.. _security_authorizationHadoop_InstallingRanger_Save-Config:
-
-.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Save-Config.*
-   :align: center
-
-   Save Configuration
-
-4. При этом появляется всплывающее окно "Dependent Configuration". Для подтверждения обновлений конфигурации необходимо нажать кнопку *OK* (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Dependent-Config>`).
-
-.. _security_authorizationHadoop_InstallingRanger_Dependent-Config:
-
-.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Dependent-Config.*
-   :align: center
-
-   Dependent Configuration
-
-5. Нажать кнопку *OK* во всплывающем окне сохранения настроек "Save Configuration Changes" (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Save-Config-Changes>`).
-
-.. _security_authorizationHadoop_InstallingRanger_Save-Config-Changes:
-
-.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Save-Config-Changes.*
-   :align: center
-
-   Save Configuration Changes
-
-6. Перейти в меню навигации на пункт "HDFS", затем выбрать "Restart > Restart All Affected" для перезапуска сервиса HDFS и загрузки новой конфигурации (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Restart>`).
-
-.. _security_authorizationHadoop_InstallingRanger_Restart:
-
-.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Restart.*
-   :align: center
-
-   Restart All Affected
-
-7. Нажать *Confirm Restart All* во всплывающем окне "Confirmation" для подтверждения перезапуска HDFS (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_Confirm>`).
-
-.. _security_authorizationHadoop_InstallingRanger_Confirm:
-
-.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_Confirm.*
-   :align: center
-
-   Confirm Restart All
-
-8. После перезапуска HDFS плагин Ranger для HDFS будет включен. Другие компоненты могут также потребовать перезагрузки.
-
-
-HDFS в кластере с поддержкой Kerberos
-`````````````````````````````````````
-
-Для включения плагина **Ranger HDFS** в кластере с поддержкой **Kerberos** необходимо выполнить следующие действия:
-
-1. Создать пользователя системы *rangerhdfslookup*. Убедиться, что пользователь синхронизирован с *Ranger Admin* (на вкладке "Settings > Users/Groups" в интерфейсе "Ranger Admin User Interface");
-
-2. Создать принципала Kerberos для *rangerhdfslookup*, введя следующую команду (один пользователь/принципал, например, *rangerrepouser*, может быть создан и использован в разных сервисах):
-
-  ::
-
-   kadmin.local -q 'addprinc -pw rangerhdfslookup rangerhdfslookup@example.com
-
-3. Перейти в разделе сервиса "HDFS" на вкладку "Config";
-
-4. В блоке "Advanced ranger-hdfs-plugin-properties" обновить свойства, перечисленные в таблице под рисунком (:numref:`Рис.%s.<security_authorizationHadoop_InstallingRanger_HDFS-Config>`).
-
-.. _security_authorizationHadoop_InstallingRanger_HDFS-Config:
-
-.. figure:: ../imgs/security_authorizationHadoop_InstallingRanger_HDFS-Config.*
-   :align: center
-
-   Advanced ranger-hdfs-plugin-properties
-
-
-.. csv-table:: Свойства HDFS Plugin
-   :header: "Свойство конфигурации", "Значение"
-   :widths: 50, 50
-
-   "Ranger repository config user", "rangerhdfslookup@example.com"
-   "Ranger repository config password", "rangerhdfslookup"
-   "common.name.for.certificate", "blank"
-
-5. После обновления свойств нажать кнопку *Save* и перезапустить сервис HDFS.
-
+На странице сервиса HDFS кластера ADH в разделе "Run action", выбрать Enable Ranger Plugin. После чего запустится процесс активации плагина и создание дефолтной политике на стороне Ranger.
 
 
 HDFS Policy

@@ -18,6 +18,4 @@
    :caption: Оглавление:
 
    features
-   authorization
-   InstallingRanger
-   PolicyHDFS
+   ranger
