@@ -1,6 +1,6 @@
 .. _ADH_index_logo:
 
-.. figure:: imgs/ADH_index_logo.png
+.. figure:: imgs/ADPS_index_logo.png
    :align: left
 
 
