@@ -16,6 +16,7 @@ Arenadata Platform Security
 
 Далее в документации приведена инструкция по планированию и установке **ADPS**, руководство администратора по работе с кластером, с **HDFS**, с **YARN** и с **Hive**, настройка авторизации и безопасности, а так же Release Notes.
 
+.. important:: Данная версия Arenadata Platform Security поддерживается только для Arenadata Hadoop 2.1.3.0
 
 .. important:: Контактная информация службы поддержки -- e-mail: info@arenadata.io
 
