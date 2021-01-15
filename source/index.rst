@@ -24,6 +24,7 @@ Arenadata Platform Security
    :maxdepth: 2
    :caption: Оглавление:
 
+   features
    security/index
 
 .. toctree::

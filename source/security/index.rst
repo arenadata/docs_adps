@@ -17,5 +17,7 @@
    :maxdepth: 2
    :caption: Оглавление:
 
-   features
-   ranger
+   intro
+   requisites
+   installing
+   plugins
