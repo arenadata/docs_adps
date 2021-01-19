@@ -21,3 +21,4 @@
    requisites
    installing
    plugins
+   audit
