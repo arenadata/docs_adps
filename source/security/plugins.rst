@@ -18,7 +18,29 @@ HDFS
 
 Для включения плагина **Ranger HDFS** необходимо выполнить следующие действия:
 
-На странице сервиса HDFS кластера ADH в разделе "Run action", выбрать Enable Ranger Plugin. После чего запустится процесс активации плагина и создание дефолтной политике на стороне Ranger.
+На странице сервиса HDFS кластера ADH в разделе "Run action", выбрать Manager Ranger Plugin.
+
+.. _manager_ranger_hdfs:
+
+.. figure:: ../imgs/manager_ranger_hdfs.*
+   :align: center
+
+Выберите необходимое состояние (Enabled/Disabled):
+
+.. _manage_ranger_enabled:
+
+.. figure:: ../imgs/manage_ranger_enabled.*
+   :align: center
+
+
+После чего запустится процесс активации плагина и создание дефолтной политике на стороне Ranger.
+
+В статусе должно отображаться успешное выполнение.
+
+.. _manage_ranger_status:
+
+.. figure:: ../imgs/manage_ranger_status.*
+   :align: center
 
 
 HDFS Policy
