@@ -20,9 +20,9 @@ HDFS
 
 На странице сервиса HDFS кластера ADH в разделе "Run action", выбрать Manager Ranger Plugin.
 
-.. _manager_ranger_hdfs:
+.. _manage_ranger_hdfs:
 
-.. figure:: ../imgs/manager_ranger_hdfs.*
+.. figure:: ../imgs/manage_ranger_hdfs.*
    :align: center
 
 Выберите необходимое состояние (Enabled/Disabled):
