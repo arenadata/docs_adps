@@ -110,3 +110,93 @@ Ranger для авторизации в Hadoop
 3. Для добавления дополнительных условий можно использовать символ плюс "+". Условия оцениваются в порядке, указанном в списке -- сначала применяется условие в верхней части списка, затем второе, третье и так далее;
 
 4. Нажать кнопку *Add* для сохранения новой политики.
+
+
+YARN
+`````
+
+Для включения плагина **Ranger YARN** необходимо выполнить следующие действия:
+
+На странице сервиса YARN кластера ADH в разделе "Run action", выбрать Manager Ranger Plugin.
+
+.. _manage_ranger_hdfs:
+
+.. figure:: ../imgs/manage_ranger_hdfs.*
+   :align: center
+
+Выберите необходимое состояние (Enabled/Disabled):
+
+.. _manage_ranger_enabled:
+
+.. figure:: ../imgs/manage_ranger_enabled.*
+   :align: center
+
+
+После чего запустится процесс активации плагина и создание дефолтной политике на стороне Ranger.
+
+В статусе должно отображаться успешное выполнение.
+
+.. _manage_ranger_status:
+
+.. figure:: ../imgs/manage_ranger_status.*
+   :align: center
+
+
+Hive
+`````
+
+Для включения плагина **Ranger Hive** необходимо выполнить следующие действия:
+
+На странице сервиса Hive кластера ADH в разделе "Run action", выбрать Manager Ranger Plugin.
+
+.. _manage_ranger_hdfs:
+
+.. figure:: ../imgs/manage_ranger_hdfs.*
+   :align: center
+
+Выберите необходимое состояние (Enabled/Disabled):
+
+.. _manage_ranger_enabled:
+
+.. figure:: ../imgs/manage_ranger_enabled.*
+   :align: center
+
+
+После чего запустится процесс активации плагина и создание дефолтной политике на стороне Ranger.
+
+В статусе должно отображаться успешное выполнение.
+
+.. _manage_ranger_status:
+
+.. figure:: ../imgs/manage_ranger_status.*
+   :align: center
+
+
+HBase
+`````
+
+Для включения плагина **Ranger HBase** необходимо выполнить следующие действия:
+
+На странице сервиса HBase кластера ADH в разделе "Run action", выбрать Manager Ranger Plugin.
+
+.. _manage_ranger_hdfs:
+
+.. figure:: ../imgs/manage_ranger_hdfs.*
+   :align: center
+
+Выберите необходимое состояние (Enabled/Disabled):
+
+.. _manage_ranger_enabled:
+
+.. figure:: ../imgs/manage_ranger_enabled.*
+   :align: center
+
+
+После чего запустится процесс активации плагина и создание дефолтной политике на стороне Ranger.
+
+В статусе должно отображаться успешное выполнение.
+
+.. _manage_ranger_status:
+
+.. figure:: ../imgs/manage_ranger_status.*
+   :align: center
