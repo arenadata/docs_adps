@@ -18,6 +18,8 @@ Arenadata Platform Security
 
 .. important:: Данная версия Arenadata Platform Security поддерживается только для Arenadata Hadoop 2.1.3.0
 
+.. important:: !ВНИМАНИЕ! Установка компонентов Arenadata Platform Security предполагает наличие выделенных серверов или виртуальных машин.
+
 .. important:: Контактная информация службы поддержки -- e-mail: info@arenadata.io
 
 .. toctree::
