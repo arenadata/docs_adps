@@ -26,6 +26,7 @@ Arenadata Platform Security
 
    features
    security/index
+   release_notes
 
 .. toctree::
    :hidden:
