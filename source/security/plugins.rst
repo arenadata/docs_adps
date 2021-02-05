@@ -119,9 +119,9 @@ YARN
 
 На странице сервиса YARN кластера ADH в разделе "Run action", выбрать Manager Ranger Plugin.
 
-.. _manage_ranger_hdfs:
+.. _manage_ranger_yarn:
 
-.. figure:: ../imgs/manage_ranger_hdfs.*
+.. figure:: ../imgs/manage_ranger_yarn.*
    :align: center
 
 Выберите необходимое состояние (Enabled/Disabled):
@@ -149,9 +149,9 @@ Hive
 
 На странице сервиса Hive кластера ADH в разделе "Run action", выбрать Manager Ranger Plugin.
 
-.. _manage_ranger_hdfs:
+.. _manage_ranger_hive:
 
-.. figure:: ../imgs/manage_ranger_hdfs.*
+.. figure:: ../imgs/manage_ranger_hive.*
    :align: center
 
 Выберите необходимое состояние (Enabled/Disabled):
@@ -179,9 +179,9 @@ HBase
 
 На странице сервиса HBase кластера ADH в разделе "Run action", выбрать Manager Ranger Plugin.
 
-.. _manage_ranger_hdfs:
+.. _manage_ranger_hbase:
 
-.. figure:: ../imgs/manage_ranger_hdfs.*
+.. figure:: ../imgs/manage_ranger_hbase.*
    :align: center
 
 Выберите необходимое состояние (Enabled/Disabled):
